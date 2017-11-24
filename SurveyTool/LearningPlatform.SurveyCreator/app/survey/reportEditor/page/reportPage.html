@@ -1,0 +1,126 @@
+﻿
+<div id="{{'surveyPage-' + pageIndex}}" class="report">
+    <div class="page-collapse">
+        <i class="collapse-page-down fa fa-caret-down" ng-show="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0" ng-click="reportPageCtrl.toggleCollapsePage(reportPageCtrl.currentPage.id)"></i>
+        <i class="collapse-page-right fa fa-caret-right" ng-show="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) >= 0" ng-click="reportPageCtrl.toggleCollapsePage(reportPageCtrl.currentPage.id)"></i>
+        <span><label id="page-title" ng-show="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) >= 0">Page {{pageIndex + 1}}</label></span>
+    </div>
+
+    <div id="{{'page-wrap-' + pageIndex}}"
+         ng-class="{expand: reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0,
+                    moving: reportPageCtrl.showedMarginPage.id === reportPageCtrl.currentPage.id}" class="page-wrap">
+
+        <div class="page-operations icon-remove" ng-show="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0">
+            <span class="glyphicon icon--delete" ng-click="reportPageCtrl.onDeletePage($event)" title="Delete page" ng-hide="reportPageCtrl.pages.data.length <= reportPageCtrl.minNumberOfPages"></span>
+        </div>
+
+        <div class="btn-group button-top" ng-if="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0">
+            <button type="button" class="btn btn-default" data-ng-click="reportPageCtrl.onAddPage()">&emsp;Add&emsp;</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a data-ng-click="reportPageCtrl.onAddChart()" href=""><span class="glyphicon icon--add-report-chart"></span>&nbsp;Chart</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddTable()" href=""><span class="glyphicon icon--add-report-table"></span>&nbsp;Table</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddFreeText()" href=""><span class="glyphicon glyphicon-font"></span>&nbsp;Text</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddPage()" href=""><span class="fa fa-paste"></span>&nbsp;New Page</a></li>
+            </ul>
+        </div>
+        <div class="page-content-helper">
+            <div class="page-content" ng-show="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0"
+                 ng-class="{moving: reportPageCtrl.showedMarginPage.id === reportPageCtrl.currentPage.id}">
+                <div class="report-element"
+                     id="report-element-{{reportQuestion.id}}"
+                     ng-repeat="reportQuestion in reportPageCtrl.currentPage.reportElementDefinitions"
+                     element-interactome page-data="reportPageCtrl.currentPage"
+                     question-data="reportQuestion"
+                     ng-class="{'report-element--default': reportQuestion.$type !== reportPageCtrl.elementType.text,
+                               'selected': reportQuestion.id === reportPageCtrl.workingElementIds.selected}">
+
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-left"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-top"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-right"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-bottom"></div>
+
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-top-left"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-bottom-left"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-top-right"></div>
+                    <div ng-show="reportQuestion.id === reportPageCtrl.workingElementIds.selected" class="resize resize-bottom-right"></div>
+
+                    <div class="report-element-item">
+                        <div class="col-xs-12 element-header" ng-if="reportQuestion.$type !== reportPageCtrl.elementType.text">
+                            <div class="col-xs-9 question-title"
+                                 ng-if="reportQuestion.chartType === reportPageCtrl.tableChartType && !reportPageCtrl.isNoData">
+                                <editable-label label="reportQuestion.editableLabels.questionName" />
+                            </div>
+                            <div class="col-xs-3 element-commands" ng-if="reportQuestion.id === reportPageCtrl.workingElementIds.selected">
+                                <span class="glyphicon icon--edit" title="Edit element" ng-click="reportPageCtrl.onEditElement(reportQuestion)"></span>
+                                <span class="glyphicon icon--delete" title="Delete element" ng-click="reportPageCtrl.onDeleteElement($event, reportQuestion)"></span>
+                            </div>
+                        </div>
+
+                        <!-- chart -->
+                        <div ng-if="reportQuestion.$type === reportPageCtrl.elementType.chart && !reportPageCtrl.isNoData">
+                            <div ng-if="reportQuestion.question && !reportQuestion.isEmptyPieChart">
+                                <highchart config="reportQuestion.data" class="chart-responsive"></highchart>
+                            </div>
+                            <div ng-if="reportQuestion.question && reportQuestion.isEmptyPieChart">
+                                <p class="element-no-data">No data for question: {{reportQuestion.question.name | htmlToPlainTextFilter}}</p>
+                                <br />
+                            </div>
+                            <div ng-if="!reportQuestion.question">
+                                <p class="element-no-data">Invalid question for chart</p>
+                                <br />
+                            </div>
+                        </div>
+
+                        <!-- table -->
+                        <div ng-if="reportQuestion.$type === reportPageCtrl.elementType.table && !reportPageCtrl.isNoData">
+                            <report-table ng-if="reportQuestion.question"
+                                          question-type="{{reportQuestion.question.type}}"
+                                          aggregated-question="reportQuestion.data"
+                                          show="true"
+                                          editable-labels="reportQuestion.editableLabels"></report-table>
+                            <div ng-if="!reportQuestion.question">
+                                <p class="element-no-data">Invalid question for table</p>
+                                <br />
+                            </div>
+                        </div>
+
+                        <!-- free text-->
+                        <div ng-if="reportQuestion.$type === reportPageCtrl.elementType.text">
+                            <div class="element-commands text-element-commands" ng-if="reportQuestion.id === reportPageCtrl.workingElementIds.selected">
+                                <span class="glyphicon icon--edit" title="Edit element" ng-click="reportPageCtrl.onEditElement(reportQuestion)"></span>
+                                <span class="glyphicon icon--delete" title="Delete element" ng-click="reportPageCtrl.onDeleteElement($event, reportQuestion)"></span>
+                            </div>
+                            <div class="free-text-element" ng-bind-html="reportQuestion.text | trustAsHtmlFilter"></div>
+                        </div>
+
+                        <!-- no data-->
+                        <div ng-if="reportPageCtrl.isNoData && reportQuestion.$type !== reportPageCtrl.elementType.text" class="element-no-data">
+                            No data for question: {{reportQuestion.question.name | htmlToPlainTextFilter}}
+                        </div>
+
+                        <div class="report-element--overlay" ng-if="reportQuestion.id !== reportPageCtrl.workingElementIds.selected"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="btn-group button-bottom" ng-if="reportPageCtrl.collapsedPageIds.indexOf(reportPageCtrl.currentPage.id) < 0">
+            <button type="button" class="btn btn-default" data-ng-click="reportPageCtrl.onAddPage()">&emsp;Add&emsp;</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a data-ng-click="reportPageCtrl.onAddChart()"><span class="glyphicon icon--add-report-chart"></span>&nbsp;Chart</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddTable()"><span class="glyphicon icon--add-report-table"></span>&nbsp;Table</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddFreeText()"><span class="glyphicon glyphicon-font"></span>&nbsp;Text</a></li>
+                <li><a data-ng-click="reportPageCtrl.onAddPage()"><span class="fa fa-paste"></span>&nbsp;New Page</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

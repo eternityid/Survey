@@ -1,0 +1,48 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="onCancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{modalTitle}}</h4>
+</div>
+<div class="modal-body">
+    <div class="file-library-picker-uploader" ng-if="vm.libraries">
+        <div class="form-group col-xs-3">
+            <select class="form-control" ng-model="vm.selectedLibrary"
+                    ng-options="library.name for library in vm.libraries | libraryByDisplayModeFilter:vm.displayMode"
+                    ng-change="vm.onLibraryChange()"></select>
+        </div>
+        <ul class="file-library-picker-uploader__nav">
+            <li>
+                <a href="" ng-click="vm.onSwitchTab(vm.displayModes.fromLibrary)"
+                   ng-class="{'active': vm.displayMode === vm.displayModes.fromLibrary}">From Library</a>
+            </li>
+            <li>
+                <a href="" ng-click="vm.onSwitchTab(vm.displayModes.fromHardDrive)"
+                   ng-class="{'active': vm.displayMode === vm.displayModes.fromHardDrive}">From Hard Drive</a>
+            </li>
+            <li>
+                <a href="" ng-click="vm.onSwitchTab(vm.displayModes.fromInternet)"
+                   ng-class="{'active': vm.displayMode === vm.displayModes.fromInternet}">From The Web</a>
+            </li>
+        </ul>
+        <div class="file-library-picker-uploader__content">
+            <div ng-if="vm.libraries">
+                <file-library-picker ng-if="vm.displayMode === vm.displayModes.fromLibrary"
+                                     library="vm.selectedLibrary"
+                                     config="vm.fileConfig"
+                                     selected-image-url="vm.imageUrl"
+                                     model="vm.model.fromLibrary"
+                                     on-cancel="onCancel()" on-save="onSelectFileFromLibrary()"></file-library-picker>
+                <file-library-hard-disk-uploader ng-if="vm.displayMode === vm.displayModes.fromHardDrive"
+                                                 library="vm.selectedLibrary"
+                                                 config="vm.fileConfig"
+                                                 data="hardDriveUploaderFormData"
+                                                 model="vm.model.fromHardDrive"
+                                                 on-cancel="onCancel()" on-save="onUploadFileFromHardDrive()"></file-library-hard-disk-uploader>
+                <file-library-web-uploader ng-if="vm.displayMode === vm.displayModes.fromInternet"
+                                           library="vm.selectedLibrary"
+                                           config="vm.fileConfig" data="webUploaderFormData"
+                                           model="vm.model.fromWeb"
+                                           on-cancel="onCancel()" on-save="onUploadFileFromInternet()"></file-library-web-uploader>
+            </div>
+        </div>
+    </div>
+</div>

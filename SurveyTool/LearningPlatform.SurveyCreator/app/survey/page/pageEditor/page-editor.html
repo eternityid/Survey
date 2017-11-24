@@ -1,0 +1,77 @@
+﻿<div class="col-xs-12 page-editor-container" id="page-editor-segment">
+    <form class="pageEditor highlight-selection col-xs-5" role="form">
+        <tabset active="active" class="form-tabs">
+            <tab class="action-menu__item action-menu__item--active">
+                <tab-heading>
+                    <span class="action-menu__icon">
+                        <i class="glyphicon icon--configure"></i>
+                    </span>
+                    <span class="action-menu__label">Page Settings</span>
+                </tab-heading>
+                <div class="tab-content col-xs-12">
+                    <div class="form-horizontal" id="gs">
+                        <h4>Page Settings</h4>
+                        <div class="form-group editor">
+                            <label class="col-xs-12 control-label">Page Title</label>
+                            <div class="col-xs-12">
+                                <div id="page-name-text" contenteditable="true" rich-text-input="vm.ckeditorConfig" ng-change="vm.onPageTitleChange()" ng-model="vm.page.title.items[0].text"
+                                     class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="form-group editor">
+                            <label class="col-xs-12 control-label">Description</label>
+                            <div class="col-xs-12">
+                                <div id="page-description-text" contenteditable="true" rich-text-input="vm.ckeditorConfig" ng-change="vm.onPageDescriptionChange()"
+                                     ng-model="vm.page.description.items[0].text" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="form-group editor">
+                            <div class="col-xs-6">
+                                <label class="control-label">Navigation Button Settings</label>
+                                <div>
+                                    <select data-ng-model="vm.page.navigationButtonSettings" ng-change="vm.onNavigationBtnSettingChange()" class="form-control" data-ng-options="value.code as value.name for value in vm.navigationButtonSettings"></select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="control-label">Question Order</label>
+                                <div>
+                                    <select data-ng-model="vm.page.orderType" class="form-control" data-ng-options="value.code as value.name for value in vm.questionOrders"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <div class="checkbox" ng-if="!vm.isThankYouPage">
+                                <label>
+                                    <input type="checkbox" data-ng-model="vm.page.isFixedPosition" ng-checked="vm.page.isFixedPosition" />
+                                    &nbsp;Keep fixed position
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab class="action-menu__item action-menu__item--active">
+                <tab-heading>
+                    <span class="action-menu__icon">
+                        <i class="glyphicon icon--look-and-feel"></i>
+                    </span>
+                    <span class="action-menu__label">Look and Feel</span>
+                </tab-heading>
+                <div class="tab-content col-xs-12">
+                    <div class="laf-theming" id="laf">
+                        <look-and-feel-settings page="vm.page" handle-after-save="vm.handleAfterEditLookAndFeel()"></look-and-feel-settings>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+        <div class="col-xs-12">
+            <div class="pull-right svt-button-group">
+                <button id="page-editor-cancel" class="btn svt-button--cancel" ng-click="vm.close()">Cancel</button>
+                <button id="page-editor-done" class="btn svt-button--done" ng-click="vm.save()">Done</button>
+            </div>
+        </div>
+    </form>
+    <div class="col-xs-7 page-preview pull-right">
+        <look-and-feel-previewer class="hidden-xs hidden-sm col-md-7 clear-padding look-and-feel-by-page__previewer-container"></look-and-feel-previewer>
+    </div>
+</div>

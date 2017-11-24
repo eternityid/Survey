@@ -1,0 +1,22 @@
+﻿<div class="report col-xs-12">
+    <div class="col-xs-10 question-title">{{aggregatedQuestion.questionText | htmlToPlainTextFilter}}</div>
+</div>
+<div class="col-xs-12 number-table-content">
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <td>Average</td>
+                <td ng-bind="vm.avgSelections"></td>
+            </tr>
+            <tr>
+                <td>Min</td>
+                <td ng-bind="vm.minSelections"></td>
+            </tr>
+            <tr>
+                <td>Max</td>
+                <td ng-bind="vm.maxSelections"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br/>

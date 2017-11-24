@@ -1,0 +1,75 @@
+﻿<div>
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active">
+            <a ng-click="vm.openUserCreatorDialog()" title="Create new user">
+                <div class="action-menu__icon"><span class="glyphicon icon--add"></span></div><label class="action-menu__label">Create</label>
+            </a>
+        </div>
+        <div class="action-menu__item"
+             ng-class="vm.selectedList.deactivableList.length ? 'action-menu__item--active' : 'action-menu__item--inactive'">
+            <a ng-click="vm.deactivateUsers()" title="Deactivate user(s)">
+                <div class="action-menu__icon"><span class="glyphicon glyphicon-unchecked"></span></div><label class="action-menu__label">Deactivate</label>
+            </a>
+        </div>
+        <div class="action-menu__item"
+             ng-class="vm.selectedList.activableList.length ? 'action-menu__item--active' : 'action-menu__item--inactive'">
+            <a ng-click="vm.activateUsers()" title="Activate user(s)">
+                <div class="action-menu__icon"><span class="glyphicon glyphicon-check"></span></div><label class="action-menu__label">Activate</label>
+            </a>
+        </div>
+        <div class="action-menu__item"
+             ng-class="vm.selectedList.removableList.length ? 'action-menu__item--active' : 'action-menu__item--inactive'">
+            <a ng-click="vm.deleteUsers()" title="Delete user(s)">
+                <div class="action-menu__icon"><span class="glyphicon icon--delete"></span></div><label class="action-menu__label">Delete</label>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="svt-grid__header svt-grid__row">
+                        <th>
+                            <label>
+                                <input class="checkbox-list" id="masterCheckbox" type="checkbox"
+                                       ng-model="vm.master"
+                                       ng-click="vm.masterChange()"> All
+                            </label>
+                        </th>
+                        <th>NO</th>
+                        <th>USERNAME</th>
+                        <th>FULL NAME</th>
+                        <th>EMAIL</th>
+                        <th>COMPANY</th>
+                        <th>CREATED</th>
+                        <th>ROLE</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in vm.users" class="svt-grid__row">
+                        <td class="ng-binding">
+                            <input class="checkbox-list" type="checkbox"
+                                   ng-hide="user.isAdminUser"
+                                   ng-model="user.isSelected"
+                                   ng-change="vm.checkboxChange()">
+                        </td>
+                        <td> {{$index + 1}}</td>
+                        <td class="breakword"><a ng-click="vm.openUserEditorDialog(user)">{{user.username}}</a> </td>
+                        <td class="breakword">{{user.firstName}}&nbsp;{{user.lastName}}</td>
+                        <td class="breakword">{{user.emailAddress}}</td>
+                        <td class="breakword">
+                            <a href="" ng-click="vm.openEditCompanyDialog(user)">
+                                <span>{{user.companyName}}</span>
+                                <span ng-if="user.companyName === null && !user.isAdminUser">Add</span>
+                            </a>
+                        </td>
+                        <td>{{user.createdDate | dateTimeFormatFilter}}</td>
+                        <td class="ng-binding" ng-class="">{{user.role}}</td>
+                        <td class="ng-binding" ng-class="">{{user.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

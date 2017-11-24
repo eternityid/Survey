@@ -1,0 +1,51 @@
+﻿div[id^='surveyPage-'] > .btn-group a:hover {
+    cursor: pointer;
+}
+
+.highlight-selection {
+    border: 1px solid #e6e6e6;
+    background-color: #cee7f8 !important;
+
+    &.pageEditor {
+        border: none;
+        background-color: none;
+        padding: 0;
+        position: relative;
+
+        > div.form-horizontal {
+            padding: 20px;
+            background-color: #dcf0fa !important;
+        }
+    }
+}
+
+.page-preview {
+    padding: 0;
+    position: relative;
+
+    .look-and-feel-by-page__previewer-container {
+        height: 100%;
+
+        #lookAndFeelPreviewer {
+            height: 100%;
+        }
+    }
+}
+
+.highlight-selection__page-container.page-container {
+    &:hover::before,
+    &::before {
+        content: '';
+        width: 5px;
+        height: 100%;
+        background-color: #B6CFF6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+}
+
+div[id^='surveyPage-']:hover .collapse-page-down {
+    visibility: visible;
+}

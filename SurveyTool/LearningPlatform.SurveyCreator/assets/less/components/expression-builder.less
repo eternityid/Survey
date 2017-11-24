@@ -1,0 +1,196 @@
+﻿@import "mixins/expression-builder.less";
+@import (reference) "../theme/default/variables.less";
+
+.icon-edit-group {
+    width: 22px;
+    height: 24px;
+    display: inline-block;
+}
+
+.icon-edit-group--add {
+    .icon-edit-group;
+    background: url('/assets/images/sprite_icons.png') no-repeat;
+    background-position: -5px -90px;
+}
+
+.icon-edit-group--duplicate {
+    .icon-edit-group;
+    background: url('/assets/images/sprite_icons.png') no-repeat;
+    background-position: -65px -155px;
+}
+
+.icon-edit-group--remove {
+    .icon-edit-group;
+    background: url('/assets/images/sprite_icons.png') no-repeat;
+    background-position: -35px -90px;
+}
+
+.icon-edit-group--export {
+    .icon-edit-group;
+    background: url(../../assets/images/sprite_icons.png) no-repeat;
+    background-position: -35px -119px;
+}
+
+.icon-edit-group--library {
+    .icon-edit-group;
+    background: url(../../assets/images/sprite_icons.png) no-repeat;
+    background-position: -124px -180px;
+}
+
+.expression-builder {
+    color: #555;
+    background-image: none;
+    border-radius: 4px;
+    padding-bottom: 5px;
+}
+
+.expression__formater--group-item() {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background-color: #fff;
+
+    & .form-control{
+        margin-left: 10px;
+        height: 30px;
+    }
+
+    &.form-group{
+        margin-bottom: 0;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+}
+
+.expression-group {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid #ccc;
+
+    .expression__formater--group-item();
+
+    &:first-child {
+        border-top: none;
+    }
+
+    &__required {
+        display: block;
+        position: absolute;
+        right: -35px;
+        top: 20px;
+        color: #ff0000;
+        font-weight: bold;
+    }
+
+    &__button {
+        margin-bottom: 42px;
+
+        &-add-remove {
+            position: absolute;
+            right: -40px;
+            width: 50px;
+        }
+    }
+}
+
+.expression__dropdown-logical-operator-for-group {
+    padding-left: 30px;
+    border-left: 1px solid #d9edf7;
+    border-right: 1px solid #d9edf7;
+    margin-left: -1px;
+    margin-right: -1px;
+
+    &--before-after {
+        & .svt-dropdown-logical-operator::before {
+            content: "";
+            border-radius:0 10px 10px 0;
+            background-color: none;
+            height: 32px;
+            width: 5px;
+            float:left;
+            color: #fff;
+            border: 1px solid #cccccc;
+            border-left:0;
+        }
+
+        & .svt-dropdown-logical-operator::after {
+            content: "";
+            border-radius:10px 0 0 10px;
+            background-color: none;
+            height: 32px;
+            width: 5px;
+            float:right;
+            color: #fff;
+            border: 1px solid #cccccc;
+            border-right:0;
+        }
+    }
+}
+
+.expression-item {
+    .expression__formater--group-item();
+
+    &__direction {
+        float: left;
+        padding: 0;
+
+        &--left {
+            float: left;
+            padding-left: 15px;
+            padding-bottom: 30px;
+        }
+    }
+
+    &__block-operator {
+        display: inline-block;
+    }
+
+    &__logical-operator-text {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+
+        padding-left: 15px;
+        padding-right: 15px;
+        top: 5px;
+        color: #787878;
+        font-weight: bold;
+    }
+
+    &__button {
+        position: absolute;
+        right: 30px;
+        margin-top: 8px;
+
+        &--plus {
+            width: 22px;
+            height: 24px;
+            display: inline-block;
+            background: url('/assets/images/sprite_icons.png') no-repeat;
+            background-position: -185px -126px;
+        }
+
+        &--remove {
+            width: 22px;
+            height: 24px;
+            display: inline-block;
+            background: url('/assets/images/sprite_icons.png') no-repeat;
+            background-position: -215px -96px;
+        }
+
+        &--general {
+            color: #787878;
+            cursor: pointer;
+
+            &:hover {
+                color: #333;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__border--bottom {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom: 1px solid #ccc;
+    }
+}

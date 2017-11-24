@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B7D6105-52F2-4DB7-A348-818AB4C23128}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.Data.MongoDb</RootNamespace>
+    <AssemblyName>LearningPlatform.Data.MongoDb</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.4.1.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.1\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.4.1.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.4.1\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.4.1.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.4.1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DemoData\AlphabeticalOptionOrderingSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\CarryOverOptionsSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\ComplexSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\ConditionSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\CustomNavigationTextSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\E2eSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\LanguageSelectionSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\LoopSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\NestedLoopSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\OptionGroupSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\QuestionExpressionMaskDemo.cs" />
+    <Compile Include="DemoData\RegexValidationSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\SimpleSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\SkipSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\TextListSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\UITestKeyboardSurveyDefinitionDemo.cs" />
+    <Compile Include="Mappings\CompanyMap.cs" />
+    <Compile Include="Mappings\ExpressionMap.cs" />
+    <Compile Include="Mappings\LanguageStringMap.cs" />
+    <Compile Include="Mappings\LayoutMap.cs" />
+    <Compile Include="Mappings\LibraryMap.cs" />
+    <Compile Include="Mappings\OptionListMap.cs" />
+    <Compile Include="Mappings\QuestionDefinitionMap.cs" />
+    <Compile Include="Mappings\BsonClassMapExtensions.cs" />
+    <Compile Include="Mappings\QuestionValidationMap.cs" />
+    <Compile Include="Mappings\ThemeMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="MongoDbDataSeeder.cs" />
+    <Compile Include="MongoDbDataModule.cs" />
+    <Compile Include="Mappings\NodeMap.cs" />
+    <Compile Include="Mappings\SurveyMap.cs" />
+    <Compile Include="MongoDbMappings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\LibraryNodeRepository.cs" />
+    <Compile Include="Repositories\LibraryQuestionRepository.cs" />
+    <Compile Include="Repositories\LibraryRepository.cs" />
+    <Compile Include="Repositories\LibrarySurveyRepository.cs" />
+    <Compile Include="Repositories\NodeRepository.cs" />
+    <Compile Include="Repositories\Old\ExpressionRepository.cs" />
+    <Compile Include="Repositories\OptionListRepository.cs" />
+    <Compile Include="Repositories\Old\PageDefinitionRepository.cs" />
+    <Compile Include="Repositories\QuestionDefinitionRepository.cs" />
+    <Compile Include="Repositories\Old\ReportDefinitionRepository.cs" />
+    <Compile Include="Repositories\Old\ReportEditedLabelDefinitionRepository.cs" />
+    <Compile Include="Repositories\Old\ReportElementDefinitionRepository.cs" />
+    <Compile Include="Repositories\Old\ReportPageDefinitionRepository.cs" />
+    <Compile Include="Repositories\Old\ResourceStringRepository.cs" />
+    <Compile Include="Repositories\Old\SkipCommandRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\LayoutRepository.cs" />
+    <Compile Include="Repositories\SurveyQueryExtensions.cs" />
+    <Compile Include="Repositories\SurveyRepository.cs" />
+    <Compile Include="Repositories\Old\SurveyVersionRepository.cs" />
+    <Compile Include="Repositories\ThemeRepository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWorkFactory.cs" />
+    <Compile Include="MongoDbContext.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LearningPlatform.Domain\LearningPlatform.Domain.csproj">
+      <Project>{87d97e61-b3ca-4457-8c1a-2061edcc24ea}</Project>
+      <Name>LearningPlatform.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

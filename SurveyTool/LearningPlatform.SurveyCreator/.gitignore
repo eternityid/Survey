@@ -1,0 +1,16 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+temp
+dest
+coverage/
+karma-test-results.xml
+cpdreport.xml
+assets/less/*.map
+assets/less/**/*.map
+assets/*.css
+assets/**/*.css
+karmaresults/
+protractorresults/

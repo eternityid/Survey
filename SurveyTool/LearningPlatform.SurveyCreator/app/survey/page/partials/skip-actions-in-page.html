@@ -1,0 +1,42 @@
+﻿<div class="page-container-item">
+    <div ng-repeat="skipCommand in pageCtrl.skipCommands" id="skip-{{skipCommand.clientId}}"
+         class="drag-handle skip-command-view-container"
+         ng-class="pageCtrl.getSkipCommandContainerClasses(skipCommand)">
+        <div class="form-container"
+             ng-class="pageCtrl.getSkipCommandContentClasses(skipCommand)"
+             ng-click="pageCtrl.selectQuestionByStep(skipCommand)"
+             ng-hide="pageCtrl.skipCommandEditor.id === skipCommand.clientId" title="Edit skip action">
+            <div>
+                <div class="question-collapse">
+                    <div class="collapse-icon">
+                        <i class="fa fa-caret-down" ng-show="pageCtrl.collapsedQuestionIds.indexOf(skipCommand.clientId) < 0"
+                           ng-click="pageCtrl.toggleCollapseQuestion(skipCommand.clientId)" svt-stop-event
+                           title="Collapse"></i>
+                        <i class="fa fa-caret-right" ng-show="pageCtrl.collapsedQuestionIds.indexOf(skipCommand.clientId) >= 0"
+                           ng-click="pageCtrl.toggleCollapseQuestion(skipCommand.clientId)" svt-stop-event
+                           title="Expand"></i>
+                    </div>
+
+                    <div class="question-content">
+                        <div class="question-header">
+                            <div class="skip-command-view__icon">
+                                <div class="icon--skip-command">&nbsp;</div>
+                            </div>
+                            <div class="skip-command-view__title">
+                                <skip-command skip-command="skipCommand" expanded="pageCtrl.collapsedQuestionIds.indexOf(skipCommand.clientId) < 0"></skip-command>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="skip-button-command" ng-if="pageCtrl.isSelectingQuestion(skipCommand.clientId)">
+                <span class="glyphicon icon--edit" title="Edit skip action"
+                      ng-click="pageCtrl.getReadyToEditSkipAction(skipCommand)"></span>
+                <span class="glyphicon icon--delete" title="Delete skip action"
+                      ng-click="pageCtrl.removeSkipAction($event, $index)" svt-stop-event></span>
+            </div>
+        </div>
+        <div id="edit-skip-command-container-{{skipCommand.clientId}}"></div>
+    </div>
+</div>

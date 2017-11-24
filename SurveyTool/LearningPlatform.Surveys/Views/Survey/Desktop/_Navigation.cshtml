@@ -1,0 +1,23 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Page
+
+
+<div class="page-navigation">
+    @if (Model.DisplayPrevious)
+    {
+        <input class="btn btn-default previous" type="submit" name="back" value="@Model.PreviousButtonText" />
+    }
+    @if (Model.DisplayNext)
+    {
+        <input class="btn btn-primary next" type="submit" name="forward" value="@Model.NextButtonText.ToString()" />
+    }
+    @if (Model.DisplayFinish)
+    {
+        <input class="btn btn-primary next" type="submit" name="forward" value="@Model.FinishButtonText.ToString()" />
+    }
+
+    @if (ViewBag.PreviewLookAndFeel != null && ViewBag.PreviewLookAndFeel == true)
+    {
+        <input class="btn btn-default previous" type="button" value="Back" />
+        <input class="btn btn-primary next" type="button" value="Next" />
+    }
+</div>

@@ -1,0 +1,48 @@
+﻿<table class="table table-striped library-survey-list__table" ng-if="vm.surveys.length">
+    <thead>
+        <tr class="svt-grid__row">
+            <th class="">TITLE</th>
+            <th class="">PAGES</th>
+            <th class="">QUESTIONS</th>
+            <th class="">LAST MODIFIED</th>
+            <th class="">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="survey in vm.surveys" class="svt-grid__row">
+            <td class="text--middle survey-title-column library-survey-list__truncate-survey-title-cell">
+                <a title="{{survey.title}}" ng-click="vm.openSurveyEditor(survey)">{{survey.title}}</a>
+            </td>
+            <td class="text--middle survey-pages-column">
+                {{survey.numberOfPages}}
+            </td>
+            <td class="text--middle survey-questions-column">
+                {{survey.numberOfQuestions}}
+            </td>
+            <td class="text--middle survey-last-modified-column">{{survey.lastModifiedDateTime | dateTimeFormatFilter}}</td>
+            <td class="text-center text--middle survey-action-menu-column">
+                <div class="btn-group">
+                    <span class="btn btn-default survey-list__action-button" data-toggle="dropdown" title="Action menu"></span>
+                    <ul class="dropdown-menu survey-list__dropdown-menu" role="menu">
+                        <li>
+                            <a ng-click="vm.openSurveyEditor(survey)" title="Edit Survey"><span class="glyphicon icon--edit survey-list__action-button-icon"></span>Edit</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.duplicateSurvey(survey)" title="Duplicate Survey"><span class="glyphicon icon--duplicate survey-list__action-button-icon"></span>Duplicate</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.deleteSurvey(survey, $index)" title="Delete Survey"><span class="glyphicon icon--delete survey-list__action-button-icon"></span>Delete</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="survey-library-management__paging-row">
+    <span>{{vm.totalSurveys}} survey(s) found. </span>
+    <span ng-show="vm.totalSurveys">
+        Displaying {{vm.surveys.length}}/{{vm.totalSurveys}} survey(s). <a href="" class="svt-grid__load-more" ng-click="vm.loadMoreSurveys()" ng-if="vm.totalSurveys && vm.surveys.length < vm.totalSurveys">Load more</a>
+    </span>
+</p>

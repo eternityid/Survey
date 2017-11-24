@@ -1,0 +1,888 @@
+---
+## This file should be opened in Swagger Editor: http://editor.swagger.io/#!/
+## Use File, Import file. 
+swagger: '2.0'
+info:
+  version: v1
+  title: ResponsiveInsight API
+  description: |
+    This API will be used both internally for the application, and externally for integration. 
+    
+    Each path below will have ETAGs. The /surveys/ and /surveydefintions/ will have different ETAGS. 
+    
+host: api-surveytool.orientsoftware.asia
+basePath: /api
+schemes:
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+
+tags:
+  - name: surveys
+  - name: folder
+  - name: page
+  - name: question
+  - name: option list
+  - name: survey info
+  - name: layouts and themes
+  - name: reports
+  - name: survey execution
+  - name: respondents
+  - name: result
+  - name: upload file
+
+parameters:
+  surveyId:
+    name: surveyId
+    in: path
+    description: The survey identifier
+    type: string
+    required: true
+  folderId:
+    name: folderId
+    in: path
+    description: The folder identifier
+    type: string
+    required: true
+  pageId:
+    name: pageId
+    in: path
+    description: The page identifier
+    type: string
+    required: true
+  questionId:
+    name: questionId
+    in: path
+    description: The question identifier
+    type: string
+    required: true
+  optionListId:
+    name: optionListId
+    in: path
+    description: The option list identifier
+    type: string
+    required: true
+  respondentId:
+    name: respondentId
+    in: path
+    description: the respondent identifier
+    type: integer
+    required: true
+  reportId:
+    name: reportId
+    in: path
+    description: the report identifier
+    type: integer
+    required: true
+  reportElementId:
+    name: reportElementId
+    in: path
+    description: the report element identifier
+    type: integer
+    required: true
+  reportEditedLabelId:
+    name: reportEditedLabelId
+    in: path
+    description: the report edited label identifier
+    type: integer
+    required: true
+  elementId:
+    name: elementId
+    in: path
+    description: the element identifier
+    type: integer
+    required: true
+  themeId:
+    name: themeId
+    in: path
+    description: the theme identifier
+    type: string
+    required: true
+  
+paths:
+  /surveys/:
+    get:
+      description: Get the survey list.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      description: Create a new survey
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/search/:
+    post:
+      description: Get surveys based on filters.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get the shallow survey object (not including survey settings). It will include the surveydefinition etag. The polling for changes should call this resource. If modified, the code will check if the surveydefinition etag matches the survey definition etag in the model. If not match, the code will fetch the survey definition. 
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    put:
+      description: update survey.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/delete/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    put:
+      description: soft delete a survey follow id.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/restore/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    put:
+      description: restore a survey follow id.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/publish/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      description: publish a survey follow id.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/file/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/export/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      description: export a survey to json file follow id.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/import/:
+    post:
+      description: import survey from json file.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/duplicate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: duplicate a survey follow id.
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/lookandfeel/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    put:
+      tags: [surveys]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+    post:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    put:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/move/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/split/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/merge/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      tags: [page]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+      
+  /surveys/{surveyId}/pages/{pageId}/questions/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+    get:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    get:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    put:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/duplicate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    post:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/move/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    post:
+      tags: [question]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/search/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/{respondentId}/detail/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/respondentId'
+    get:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/delete/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/importcontacts/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/send/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/respondents/launch/email/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/responses/generate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/responses/export/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    post:
+      tags: [respondents]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/result/aggregated-respondents/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [result]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/result/open-responses/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [result]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/result/settings/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    patch:
+      tags: [result]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/result/element-settings/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    put:
+      tags: [result]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/dashboard/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [result]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/surveyinfo/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [survey info]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/surveyinfo/status/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    patch:
+      tags: [survey info]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/surveyinfo/publicity/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    patch:
+      tags: [survey info]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveys/{surveyId}/surveyinfo/latest-version/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [survey info]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+
+  /layouts/:
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+
+  /themes/:
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    put:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+  
+  /themes/{themeId}/:
+    parameters:
+      - $ref: '#/parameters/themeId'
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+
+  /themes/{themeId}/survey/:
+    parameters:
+      - $ref: '#/parameters/themeId'
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /themes/types/system/:
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /themes/types/system-user/:
+    get:
+      tags: [layouts and themes]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/:
+    post:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+  
+  /reports/{reportId}/definition/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+    get:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    put:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/pages/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+    get:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/pages/{pageId}/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/pageId'
+    delete:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/pages/move/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+    patch:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/pages/questions/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+    get:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/elements/{reportElementId}/definition/editedlabels/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/reportElementId'
+    get:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/elements/{reportElementId}/definition/editedlabels/{reportEditedLabelId}/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/reportElementId'
+      - $ref: '#/parameters/reportEditedLabelId'
+    delete:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/elements/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+    put:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/elements/{elementId}/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/elementId'
+    delete:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/elements/{elementId}/position/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/elementId'
+    patch:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/elements/{elementId}/positions/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/elementId'
+    patch:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /reports/{reportId}/definition/elements/{elementId}/size/:
+    parameters:
+      - $ref: '#/parameters/reportId'
+      - $ref: '#/parameters/elementId'
+    patch:
+      tags: [reports]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveyexecution/{surveyId}/respondent/{respondentId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/respondentId'
+    get:
+      tags: [survey execution]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /surveyexecution/{surveyId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      tags: [survey execution]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [survey execution]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          
+  /upload/file/:
+    post:
+      tags: [upload file]
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+  

@@ -1,0 +1,41 @@
+﻿@using LearningPlatform.Domain.Common
+@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@model MultipleSelectionQuestion
+
+@functions {
+    readonly Reference<OptionGroup> _currentGroup = new Reference<OptionGroup>(null);
+
+    private string GetOptionClass(Option option)
+    {
+        if (option.IsExclusive) return "exclusive";
+        if (option.IsNotApplicable) return "na";
+        return "";
+    }
+}
+
+@helper RenderUserInputAreaVertical()
+{
+    <div id="@Model.Alias-multi-selection-vertical" class="multi-selection-container">
+        @foreach (Option option in Model.Options)
+        {
+            @OptionGroupRenderer.RenderGroup(option, _currentGroup)
+            <label class="multi-selection  @(option.OtherQuestion != null ? "other" : "") @(Model.IsChecked(option) ? "selected" : "")">
+                <span class="multi-selection-option @GetOptionClass(option)">
+                    @Html.CheckBox(Model.GetFieldName(option), Model.IsChecked(option))
+                    <span class="selection-option-title" title-id="@(Model.Alias + option.Id)">@Html.Raw(option.Text)</span>
+                </span>
+                @if (option.OtherQuestion != null)
+                {
+                    @Html.Partial(
+                        string.Format("~/Views/Survey/Mobile/_Other{0}Renderer.cshtml", option.OtherQuestion.GetType().Name),
+                        option.OtherQuestion, ViewData)
+                }
+            </label>
+            <br/>
+        }
+        @OptionGroupRenderer.RenderGroupClosingTag(_currentGroup)
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputAreaVertical())

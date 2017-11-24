@@ -1,0 +1,128 @@
+﻿<div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12" ng-if="vm.testModeSettings.isActive">
+            <div class="test-mode__message">
+                <test-mode-button test-mode-settings="vm.testModeSettings" is-default="true"></test-mode-button>
+            </div>
+        </div>
+        <div class="result-title-and-status">
+            <div class="result-title-and-status--left">
+                <div class="result-title-and-status--left-next">
+                    <survey-title-and-status survey-id="vm.surveyId"></survey-title-and-status>
+                </div>
+                <div class="result-title-and-status--left-next">
+                    <result-status-summary survey-id="vm.surveyId" total-responses="vm.totalRespondents"></result-status-summary>
+                </div>
+            </div>
+            <div class="result-title-and-status--right hidden-print action-menu">
+                <div class="action-menu__item action-menu__item--active">
+                    <result-settings survey-id="vm.surveyId" data="vm.result"></result-settings>
+                </div>
+                <div class="action-menu__item action-menu__item--active">
+                    <a class="print-report-button" ng-click="vm.printReport()">
+                        <span class="action-menu__icon">
+                            <span class="glyphicon icon--print"></span>
+                        </span>
+                        <label class="action-menu__label">Print</label>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 result-chart__container hidden-print view-area">
+            <div ng-repeat="response in vm.responsesReport" class="result-chart__item"
+                 ng-class="vm.getCssByColumnWidth(response.questionSetting.columnWidth)">
+                <div class="result-chart__item-inner">
+                    <div ng-if="response.questionType === vm.questionTypes.OpenEndedShortTextQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.OpenEndedLongTextQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.DateQuestionDefinition.code">
+                        <rs-open-text-question survey-id="{{vm.surveyId}}" question-key="{{response.questionName}}"
+                                               report-page-id="vm.result.reportPageId" column-width="response.questionSetting.columnWidth"
+                                               aggregated-question="response"></rs-open-text-question>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.SingleSelectionQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.MultipleSelectionQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       column-width="response.questionSetting.columnWidth"
+                                                       chart-question-group="vm.chartQuestionGroups.selection"
+                                                       chart-title-size="vm.chartTitleSize.view"></rs-chart-applicable-questions>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.NumericQuestionDefinition.code">
+                        <rs-numeric-question aggregated-question="response"></rs-numeric-question>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.ScaleQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.RatingQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.NetPromoterScoreQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       column-width="response.questionSetting.columnWidth"
+                                                       chart-question-group="vm.chartQuestionGroups.likert"
+                                                       chart-title-size="vm.chartTitleSize.view"></rs-chart-applicable-questions>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.SingleSelectionGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.MultipleSelectionGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.RatingGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.ScaleGridQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       column-width="response.questionSetting.columnWidth"
+                                                       chart-question-group="vm.chartQuestionGroups.gridSelection"
+                                                       chart-title-size="vm.chartTitleSize.view"></rs-chart-applicable-questions>
+                    </div>
+                    <div class="result-chart__splitter"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Print area -->
+        <div class="col-xs-12 result-chart__container print-area" ng-if="isPrintReport">
+            <div ng-repeat="response in vm.responsesReport" class="result-chart__item" style="width: 1000px;">
+                <div class="result-chart__item-inner">
+                    <div ng-if="response.questionType === vm.questionTypes.OpenEndedShortTextQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.OpenEndedLongTextQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.DateQuestionDefinition.code">
+                        <rs-open-text-question survey-id="{{vm.surveyId}}" question-key="{{response.questionName}}"
+                                               report-page-id="vm.result.reportPageId"
+                                               aggregated-question="response" limit="all"></rs-open-text-question>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.SingleSelectionQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.MultipleSelectionQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       chart-question-group="vm.chartQuestionGroups.selection"
+                                                       chart-title-size="vm.chartTitleSize.print"></rs-chart-applicable-questions>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.NumericQuestionDefinition.code">
+                        <rs-numeric-question aggregated-question="response"></rs-numeric-question>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.ScaleQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.RatingQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.NetPromoterScoreQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       chart-question-group="vm.chartQuestionGroups.likert"
+                                                       chart-title-size="vm.chartTitleSize.print"></rs-chart-applicable-questions>
+                    </div>
+                    <div ng-if="response.questionType === vm.questionTypes.SingleSelectionGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.MultipleSelectionGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.RatingGridQuestionDefinition.code ||
+                         response.questionType === vm.questionTypes.ScaleGridQuestionDefinition.code">
+                        <rs-chart-applicable-questions aggregated-question="response"
+                                                       report-page-id="vm.result.reportPageId"
+                                                       survey-id="{{vm.surveyId}}"
+                                                       chart-question-group="vm.chartQuestionGroups.gridSelection"
+                                                       chart-title-size="vm.chartTitleSize.print"></rs-chart-applicable-questions>
+                    </div>
+                    <div class="result-chart__splitter"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

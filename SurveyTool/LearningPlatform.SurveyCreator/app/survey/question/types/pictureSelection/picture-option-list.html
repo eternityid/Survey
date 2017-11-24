@@ -1,0 +1,23 @@
+﻿<div class="question-editor__question-label">
+    <label>Options</label>
+</div>
+
+<div as-sortable="vm.sortableOptions" ng-model="vm.options" class="form-group container-options">
+    <div class="drag-handle" data-ng-repeat="option in vm.options" as-sortable-item>
+        <i class="fa icon--drag-drop option__drag-icon" as-sortable-item-handle title="Click, drag and drop me to move option"></i>
+        <div class="container-options_body">
+            <picture-option index="{{$index}}"
+                            openning-option="openningOption"
+                            question="question"
+                            options="vm.options"
+                            on-key-down-on-option-alias-field="vm.onKeyDownOnOptionAliasField($event, optionIndex)"></picture-option>
+        </div>
+    </div>
+</div>
+<div class="form-group add-single-selection-question" ng-if="!vm.isOverloadedOptions()">
+    <div class="form-group addoption__container picture">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default addoption__item" ng-click="vm.addOption()">Add Option</button>
+        </div>
+    </div>
+</div>

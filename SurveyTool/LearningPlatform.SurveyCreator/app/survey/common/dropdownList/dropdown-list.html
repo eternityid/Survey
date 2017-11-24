@@ -1,0 +1,12 @@
+﻿<div class="btn-group {{defaultClass}}">
+    <button type="button" class="btn btn-default dropdown-toggle {{defaultClass}}__button" ng-class="{'disabled': dropdownListDisabled === true}"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{vm.selectedItemText || vm.defaultText | htmlToPlainTextFilter | truncateFilter:40}}"
+            ng-click="onClick && onClick()">
+        {{vm.selectedItemText || vm.defaultText | htmlToPlainTextFilter | truncateFilter:40}}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li ng-repeat="item in items track by $index">
+            <a class="{{defaultClass}}__link" ng-click="vm.onItemChanged(item)">{{vm.getItemTitle(item) | truncateFilter:100:"..."}}</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,51 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="vm.cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Edit page</h4>
+</div>
+<div class="modal-body edit-library-page-body">
+    <div class="form-section">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-3 label-required" for="editPageFormDataTitle">Title</label>
+                <div class="col-xs-9 svt-label--word-wrap">
+                    <div id="editPageFormDataTitle"
+                         contenteditable="true"
+                         rich-text-input="vm.ckeditorConfig"
+                         ng-change="vm.onPageTitleChange()"
+                         ng-model="vm.page.title"
+                         class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3" for="editPageFormDataDescription">Description</label>
+                <div class="col-xs-9">
+                    <div id="editPageFormDataDescription"
+                         contenteditable="true"
+                         rich-text-input="vm.ckeditorConfig"
+                         ng-change="vm.onPageDescriptionChange()"
+                         ng-model="vm.page.description"
+                         class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3">Questions</label>
+                <div class="col-xs-9">
+                    <span>{{vm.page.numberOfQuestions}}</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button type="button" class="btn btn-primary pull-right" ng-disabled="!vm.page.title" ng-click="vm.saveLibraryPage()">
+                    Save
+                </button>
+                <button type="button" class="btn btn-default cancel-button pull-right" ng-click="vm.cancel()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="preview-section">
+        <iframe id="lookAndFeelPreviewer" ng-src="{{vm.iframePreviewerSrc}}" frameborder="0" noresize="noresize" class="modal__body-framesize"></iframe>
+    </div>
+</div>

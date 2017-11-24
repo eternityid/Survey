@@ -1,0 +1,8 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<div class="col-xs-3" ng-show="!vm.isLongText()">
+    <input type="text" class="form-control" disabled />
+</div>
+<div class="col-xs-6" ng-show="vm.isLongText()">
+    <textarea class="form-control" disabled cols="{{question.cols}}" row="{{question.rows}}"></textarea>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,178 @@
+﻿<div class="advance-setting-body">
+    <div class="panel-body">
+        <div class="form-group" ng-if="question.advancedSettings.isShowKeepFixedPosition">
+            <div class="checkbox none-margin-top-bottom">
+                <label>
+                    <input type="checkbox" data-ng-model="question.isFixedPosition"
+                           ng-disabled="question.isAlwaysHidden" />
+                    <strong>Keep Fixed Position</strong>
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-if="question.advancedSettings.isShowRenderOptionAsButton">
+            <div class="checkbox none-margin-top-bottom">
+                <label ng-if="question.$type !== vm.questionTypes.scaleGrid">
+                    <input type="checkbox" data-ng-model="question.renderOptionByButton"
+                           ng-change="vm.onRenderOptionAsButtonChange()" ng-disabled="question.isAlwaysHidden" />
+                    <strong>Display As Button</strong>
+                </label>
+                <label ng-if="question.$type === vm.questionTypes.scaleGrid">
+                    <input type="checkbox" data-ng-model="question.subQuestionDefinition.renderOptionByButton"
+                           ng-change="vm.onRenderOptionAsButtonChange()" ng-disabled="question.isAlwaysHidden" />
+                    <strong>Display As Button</strong>
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-if="question.advancedSettings.isShowTransposed">
+            <div class="checkbox none-margin-top-bottom">
+                <label>
+                    <input type="checkbox" data-ng-model="question.transposed" ng-change="vm.onTransposedChange();"
+                           ng-disabled="question.isAlwaysHidden" /> <strong>Transposed (switches rows and columns)</strong>
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-if="question.advancedSettings.isShowAlwaysHidden">
+            <div class="checkbox none-margin-top-bottom">
+                <label>
+                    <input type="checkbox" data-ng-model="question.isAlwaysHidden"
+                           ng-change="vm.onAlwaysHiddenChange()" /> <strong>Always Hidden</strong>
+                </label>
+            </div>
+        </div>
+        <div class="form-group row" ng-if="vm.isShowQuestionMask()">
+            <div class="col-xs-6">
+                <div class="checkbox none-margin-top-bottom">
+                    <label>
+                        <input type="checkbox" data-ng-model="question.advancedSettings.isUseQuestionMask"
+                               ng-change="vm.onCheckDisplayLogic()"
+                               ng-disabled="question.isAlwaysHidden" /> <strong>Conditionally Display</strong>
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-4" ng-if="question.advancedSettings.isUseQuestionMask && !question.isAlwaysHidden">
+                <span ng-click="vm.showEditConditionDialog()" class="glyphicon icon--edit" title="Edit conditionally display"></span>
+            </div>
+        </div>
+        <div class="form-group skip-command-view" ng-if="vm.isShowQuestionMask() && question.advancedSettings.isUseQuestionMask">
+            <div ng-repeat="item in question.displayedExpressionItems track by $index" class="expression-message-item" ng-class="{'expression-message-item--start-group' : item.positionInGroup == 0}">
+                <div class="group-condition-item">{{item.positionInGroup == 0 ? item.parent.message : ''}}</div>
+                <div class="condition-item" ng-bind-html="item.indent !== 0 ? item.message : ''"></div>
+            </div>
+        </div>
+        <div ng-if="question.advancedSettings.isShowOptionSection">
+            <div class="form-group row">
+                <div class="col-xs-6">
+                    <label class="control-label svt-label__ontop">Render</label>
+                    <div>
+                        <select ng-if="question.$type === vm.questionTypes.multipleSelection"
+                                data-ng-model="question.displayOrientation" class="form-control dropdown"
+                                data-ng-options="value.code as value.name for value in vm.multipleDisplayOrientationList"
+                                ng-change="vm.onDisplayOrientationChange()"
+                                title="Choose render" ng-disabled="question.isAlwaysHidden"></select>
+                        <select ng-if="question.$type === vm.questionTypes.singleSelection"
+                                data-ng-model="question.displayOrientation" class="form-control dropdown"
+                                data-ng-options="value.code as value.name for value in vm.singleDisplayOrientationList"
+                                ng-change="vm.onDisplayOrientationChange()"
+                                title="Choose render" ng-disabled="question.isAlwaysHidden"></select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <label class="control-label svt-label__ontop">Options Order</label>
+                    <select data-ng-model="question.orderType" class="form-control dropdown"
+                            data-ng-options="value.code as value.name for value in vm.questionOrders"
+                            ng-change="vm.onOptionsOrderChange();"
+                            title="Choose option order" ng-disabled="question.isAlwaysHidden"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox none-margin-top-bottom">
+                    <label>
+                        <input title="Check to use option mask" type="checkbox"
+                               ng-change="vm.onCheckOptionsMask()"
+                               data-ng-model="question.advancedSettings.isUseOptionMask" ng-disabled="question.isAlwaysHidden" /> <strong>Options Mask</strong>
+                    </label>
+                </div>
+            </div>
+            <div ng-if="question.advancedSettings.isUseOptionMask && !question.isAlwaysHidden">
+                <div class="form-group row">
+                    <div class="col-xs-2 from-question">
+                        <label class="control-label">Display</label>
+                    </div>
+                    <div class="col-xs-4 option-mask-type">
+                        <dropdown-list selected-value="question.optionsMask.optionsMaskType"
+                                       items="vm.optionsMaskTypes" column-value="code" column-name="name"
+                                       default-class="svt-dropdown-option-mask-display" default-text="Choose option mask type"
+                                       on-item-changed="vm.onOptionsMaskChange()" ng-disabled="question.isAlwaysHidden"></dropdown-list>
+                    </div>
+                </div>
+
+                <div class="form-group row" ng-if="!vm.isUseCustomOptionsMask()">
+                    <div class="col-xs-2 from-question">
+                        <label class="control-label">From</label>
+                    </div>
+                    <div class="col-xs-5 option-mask-question">
+                        <dropdown-list selected-value="question.optionsMask.questionId"
+                                       items="questionsWithOptions" column-value="id" column-name="title"
+                                       default-class="svt-dropdown-option-mask-from" default-text="Select question"
+                                       on-item-changed="vm.onOptionsMaskChange()" ng-disabled="question.isAlwaysHidden"></dropdown-list>
+                    </div>
+                </div>
+                <div class="form-group row" ng-if="vm.isUseCustomOptionsMask()">
+                    <div class="col-xs-2 from-question"></div>
+                    <div class="col-xs-7 option-mask-custom-text">
+                        <input type="text" class="form-control" data-ng-model="question.optionsMask.customOptionsMask"
+                               title="Enter option mask here" />
+                    </div>
+                </div>
+                <div ng-if="vm.isQuestionUsingErrorOptionsMask()">
+                    <span class="question-view__content--error">Options mask refers to {{vm.optionsMaskError.message}}</span>
+                </div>
+            </div>
+        </div>
+        <div ng-if="question.advancedSettings.isShowSizeValidation" class="row">
+            <div class="form-group col-xs-6">
+                <label class="control-label svt-label__ontop">Rows</label>
+                <input type="number" class="form-control" data-ng-model="question.rows" title="Enter Rows here" ng-disabled="question.isAlwaysHidden"
+                       ng-if="question.$type !== vm.questionTypes.longTextList" ng-change="vm.onLongTextAdvancedSettingsChange()" />
+                <input type="number" class="form-control" data-ng-model="question.subQuestionDefinition.rows" title="Enter Rows here" ng-disabled="question.isAlwaysHidden"
+                       ng-if="question.$type === vm.questionTypes.longTextList" ng-change="vm.onSubLongTextQuestionSizeChange()" />
+            </div>
+        </div>
+        <div ng-show="question.advancedSettings.isShowPictureSetting">
+            <div class="form-group">
+                <label class="control-label svt-label__ontop">Options Order</label>
+                <div class="width-50">
+                    <select data-ng-model="question.orderType" class="form-control dropdown"
+                            data-ng-options="value.code as value.name for value in vm.questionOrders"
+                            title="Choose option order" ng-disabled="question.isAlwaysHidden"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox none-margin-top-bottom none-margin-top-bottom">
+                    <label>
+                        <input type="checkbox" data-ng-model="question.isPictureShowLabel" ng-change="vm.onIsPictureShowLabelChange()"
+                               ng-disabled="question.isAlwaysHidden" /> <strong>Show Label For Picture</strong>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label svt-label__ontop">Maximum Grid Columns</label>
+                <div class="width-50">
+                    <select data-ng-model="question.maxPicturesInGrid" class="form-control dropdown"
+                            data-ng-options="option.value as option.text for option in question.advancedSettings.maxPictureOptions"
+                            ng-change="vm.onMaxPicturesInGridChange();"
+                            title="Choose maximum grid columns" ng-disabled="question.isAlwaysHidden"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox none-margin-top-bottom none-margin-top-bottom">
+                    <label>
+                        <input type="checkbox" data-ng-model="question.isScalePictureToFitContainer" ng-change="vm.onIsScalePictureToFitContainerChange();"
+                               ng-disabled="question.isAlwaysHidden" /><strong>Scale Picture To Fit Container</strong>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

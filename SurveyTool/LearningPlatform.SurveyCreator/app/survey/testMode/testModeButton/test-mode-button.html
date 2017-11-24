@@ -1,0 +1,19 @@
+﻿<div class="pull-right" ng-if="!isDefault">
+    <ul class="nav navbar-nav navbar-right test-mode__navbar">
+        <li class="test-mode__text">Test Mode</li>
+        <li>
+            <div class="svt-toogle-button svt-toogle-button--on" ng-if="vm.testModeSettings.isActive" ng-click="vm.toggleTestMode();">
+                <div class="svt-toogle-button__sub-button--on"></div>
+                <div class="svt-toogle-button__sub-button-text--on">ON</div>
+            </div>
+            <div class="svt-toogle-button svt-toogle-button--off" ng-if="!vm.testModeSettings.isActive" ng-click="vm.toggleTestMode();">
+                <div class="svt-toogle-button__sub-button--off"></div>
+                <div id="testmodebtn" class="svt-toogle-button__sub-button-text--off">OFF</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="pull-left alert alert-warning test-mode__link" ng-if="isDefault">
+    This page shows test data only. <a ng-click="vm.toggleTestMode();" class="alert-link">Click here to turn off test mode.</a>
+</div>

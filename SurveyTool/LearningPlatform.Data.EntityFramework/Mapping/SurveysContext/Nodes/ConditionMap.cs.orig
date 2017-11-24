@@ -1,0 +1,28 @@
+﻿using System.Data.Entity.ModelConfiguration;
+using LearningPlatform.Domain.SurveyDesign;
+
+namespace LearningPlatform.Data.Mapping.SurveysContext
+{
+    internal class ConditionMap : EntityTypeConfiguration<Condition>
+    {
+        public ConditionMap()
+        {
+<<<<<<< HEAD:LearningPlatform.Data/Mapping/SurveysContext/Nodes/ConditionMap.cs
+            Property(p => p.Expression)
+                .HasColumnName("Code");
+
+=======
+            Property(p => p.ScriptCodeExpression).HasColumnName("ScriptCode");
+>>>>>>> Expressions 80% done:LearningPlatform.Data/Mapping/SurveysContext/ConditionMap.cs
+            HasOptional(t => t.TrueFolder)
+                .WithMany()
+                .Map(m => m.MapKey("TrueFolderId"));
+
+            HasOptional(t => t.FalseFolder)
+                .WithMany()
+                .Map(m => m.MapKey("FalseFolderId"));
+
+            ToTable("Nodes");
+        }
+    }
+}

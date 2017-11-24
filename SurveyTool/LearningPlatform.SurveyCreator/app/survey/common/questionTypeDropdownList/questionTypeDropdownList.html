@@ -1,0 +1,133 @@
+<div class="btn-group svt-dropdown-option-mask-from dropdown-select-question-type">
+    <button type="button" class="btn btn-default dropdown-toggle svt-dropdown-option-mask-display__button" ng-class="{'disabled': isDisabled === true}"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="vm.isDisabled">
+        {{vm.getQuestionTypeText(vm.itemSeleted) || vm.defaultText | truncateFilter: vm.displayedCharacterNumber}}<span class="caret-dropdown caret"></span>
+    </button>
+    <div class="dropdown-menu multiple-column dropdown-select-question-type__items" role="menu">
+        <div class="column-dropdown-title">
+            Standard Questions
+        </div>
+        <div class="separated-line"></div>
+        <div class="row">
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.singleSelection)">
+                        <span class="glyphicon glyphicon-record"></span>&nbsp;Single Selection
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.multipleSelection)">
+                        <span class="glyphicon glyphicon-check"></span>&nbsp;Multiple Selection
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.rating)">
+                        <span class="glyphicon glyphicon-star"></span>&nbsp;Rating
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.scale)">
+                        <span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;Scale
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.netPromoterScore)">
+                        <span class="glyphicon icon--net-promoter-score-question"></span>&nbsp;Net Promoter Score
+                        &reg;
+                    </a>
+                </li>
+            </ul>
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.numeric)">
+                        <span class="glyphicon icon--numeric-question"></span>&nbsp;Numeric
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.shortText)">
+                        <span class="glyphicon glyphicon-font"></span>&nbsp;Short Text
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.longText)">
+                        <span class="glyphicon icon--long-text-question"></span>&nbsp;Long Text
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.date)">
+                        <span class="glyphicon icon--date-question"></span>&nbsp;Date
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.shortTextList)">
+                        <span class="glyphicon icon--short-text-list-question"></span>&nbsp;Short Text List
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.longTextList)">
+                        <span class="glyphicon icon--long-text-list-question"></span>&nbsp;Long Text List
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="column-dropdown-title">
+            Grid Questions
+        </div>
+        <div class="separated-line"></div>
+        <div class="row">
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.singleSelectionGrid)">
+                        <span class="glyphicon icon--single-selection-grid-question"></span>&nbsp;Single Selection
+                        Grid
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.multipleSelectionGrid)">
+                        <span class="glyphicon icon--multiple-selection-grid-question"></span>&nbsp;Multiple Selection
+                        Grid
+                    </a>
+                </li>
+            </ul>
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.ratingGrid)">
+                        <span class="glyphicon icon--rating-grid-question"></span>&nbsp;Rating Grid
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.scaleGrid)">
+                        <span class="glyphicon icon--scale-grid-question"></span>&nbsp;Scale Grid
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="column-dropdown-title">
+            Other
+        </div>
+        <div class="separated-line"></div>
+        <div class="row">
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.pictureSingleSelection)">
+                        <span class="glyphicon icon--single-selection-picture-question"></span>&nbsp;Picture Single
+                        Selection
+                    </a>
+                </li>
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.pictureMultipleSelection)">
+                        <span class="glyphicon icon--multiple-selection-picture-question"></span>&nbsp;Picture Multiple
+                        Selection
+                    </a>
+                </li>
+            </ul>
+            <ul class="multiple-column-dropdown col-sm-6 column">
+                <li>
+                    <a data-ng-click="vm.onItemChanged(vm.questionTypes.information)">
+                        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Information
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

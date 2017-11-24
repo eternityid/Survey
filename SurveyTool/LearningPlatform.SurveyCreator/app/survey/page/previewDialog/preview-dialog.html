@@ -1,0 +1,7 @@
+﻿<div class="modal-header modal__header--no-border">
+    <button id="close-button" type="button" class="close" ng-click="closeMe()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{modalTitle}}</h4>
+</div>
+<div class="modal-body modal__body-size">
+    <iframe id="preview-frame" ng-src="{{getIframeSrc}}" frameborder="0" noresize="noresize" class="modal__body-framesize"></iframe>
+</div>

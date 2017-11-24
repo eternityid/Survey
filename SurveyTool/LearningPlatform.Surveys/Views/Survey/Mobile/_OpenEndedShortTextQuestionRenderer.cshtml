@@ -1,0 +1,10 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.OpenEndedShortTextQuestion
+
+@helper RenderUserInputArea()
+{
+    <div class="short-text">
+        <input type="text" class="form-control" autocomplete="off" id="@Model.Alias" name="@Model.Alias" value="@Model.Answer" />
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

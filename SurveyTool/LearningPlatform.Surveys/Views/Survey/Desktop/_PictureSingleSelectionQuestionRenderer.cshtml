@@ -1,0 +1,4 @@
+﻿@using LearningPlatform.Domain.SurveyExecution.Questions
+@model PictureSingleSelectionQuestion
+
+@QuestionRenderer.RenderQuestion(Html, Model, PictureSelectionRenderer.RenderUserInputArea(Html, Model))

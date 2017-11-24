@@ -1,0 +1,79 @@
+@using System.Web.Mvc.Html
+@using LearningPlatform.Domain.SurveyLayout
+@using LearningPlatform.Helpers
+@using System.Text.RegularExpressions
+@helper RenderErrorPageArea(System.Web.Mvc.HtmlHelper html, dynamic errors, dynamic layoutItems, dynamic errorTemplateItems)
+{
+    if (errors.Count == 0)
+    {
+        return;
+    }
+
+    foreach (var element in layoutItems)
+    {
+        if (element.ItemType == ItemType.Errors)
+        {
+            @RenderPageError(html, errors, errorTemplateItems)
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+            @HtmlHelperExtensions.EvaluateString(html, element.Html)
+        }
+    }
+}
+
+
+@helper RenderPageError(System.Web.Mvc.HtmlHelper html, dynamic errors, dynamic errorTemplates)
+{
+    foreach (var element in errorTemplates)
+    {
+        if (element.ItemType == ItemType.Error)
+        {
+            string message = "There are errors in this page";
+            @html.Label(message, WebUtility.HtmlDecode(message))
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+            @HtmlHelperExtensions.EvaluateString(html, element.Html)
+        }
+    }
+}
+
+@helper RenderErrorQuestionArea(System.Web.Mvc.HtmlHelper html, dynamic errors, dynamic layoutItems, dynamic errorTemplateItems)
+{
+    if (errors.Count == 0)
+    {
+        return;
+    }
+
+    foreach (var element in layoutItems)
+    {
+        if (element.ItemType == ItemType.Errors)
+        {
+                @RenderQuestionError(html, errors, errorTemplateItems)
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+                @HtmlHelperExtensions.EvaluateString(html, element.Html)
+        }
+    }
+}
+
+@helper RenderQuestionError(System.Web.Mvc.HtmlHelper html, dynamic errors, dynamic errorTemplates)
+{
+    foreach (var element in errorTemplates)
+    {
+        if (element.ItemType == ItemType.Error)
+        {
+            foreach (string error in errors)
+            {
+                string errorMessage = WebUtility.HtmlDecode(Regex.Replace(error, @"<[^>]*>", string.Empty).Trim());
+                    @html.Label(errorMessage, WebUtility.HtmlDecode(errorMessage))
+            }
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+                @HtmlHelperExtensions.EvaluateString(html, element.Html)
+        }
+    }
+}

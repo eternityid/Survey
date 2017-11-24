@@ -1,0 +1,47 @@
+﻿﻿<div class="col-xs-12 col-sm-12 col-md-12 table-summary">
+    <table class="table table-responsive table-content">
+        <thead>
+            <tr class="info">
+                <th>Topic</th>
+                <th>Response</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="table-body-content" colspan="4">
+                    <table class="table-content__inner">
+                        <tbody ng-repeat="row in vm.table.rows">
+                            <tr class="table-content__inner--row">
+                                <td rowspan="{{row.subRows.length + 3}}">{{row.questionText | htmlToPlainTextFilter}}</td>
+                            </tr>
+                            <tr ng-repeat="subRow in row.subRows" class="table-content__inner--row">
+                                <td>{{subRow.optionText | htmlToPlainTextFilter}}</td>
+                                <td ng-bind="subRow.count"></td>
+                                <td ng-bind-template="{{subRow.percentage}}%"></td>
+                            </tr>
+                            <tr class="table-content__inner--row">
+                                <td ng-bind="row.numberOfRespondents.title"></td>
+                                <td ng-bind="row.numberOfRespondents.value" colspan="2"></td>
+                            </tr>
+                            <tr class="table-content__inner--row">
+                                <td ng-bind="row.numberOfResponses.title"></td>
+                                <td ng-bind="row.numberOfResponses.value" colspan="2"></td>
+                            </tr>
+                        </tbody>
+                        <tbody class="table-content__body-summary">
+                            <tr class="table-content__inner--row">
+                                <td ng-bind="vm.table.numberOfRespondents.title" colspan="2"></td>
+                                <td ng-bind="vm.table.numberOfRespondents.value" colspan="2"></td>
+                            </tr>
+                            <tr class="table-content__inner--row">
+                                <td ng-bind="vm.table.numberOfResponses.title" colspan="2"></td>
+                                <td ng-bind="vm.table.numberOfResponses.value" colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

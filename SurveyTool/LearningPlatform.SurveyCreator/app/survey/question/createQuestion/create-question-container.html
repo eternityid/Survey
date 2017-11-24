@@ -1,0 +1,29 @@
+﻿<div class="row question-editor" id="create-question-segment">
+    <div class="col-xs-12 col-md-5 question-editor__content-panel">
+        <tabset justified="true">
+            <tab heading="General">
+                <general-setting mode="create" question="createQuestionCtrl.question" html-container-id="{{htmlContainerId}}" page-id="{{createQuestionCtrl.pageId}}" question-type="{{questionType}}" position="{{position}}"></general-setting>
+            </tab>
+            <tab heading="Display">
+                <question-display-settings questions-with-options="createQuestionCtrl.questionsWithOptions"
+                                           question="createQuestionCtrl.question"
+                                           ng-hide="createQuestionCtrl.isThankYouPage">
+                </question-display-settings>
+            </tab>
+            <tab heading="Validation" ng-show="createQuestionCtrl.isShowValidationSetting()">
+                <validation-setting question="createQuestionCtrl.question"></validation-setting>
+            </tab>
+        </tabset>
+
+        <div class="pull-right form-group svt-button-group">
+            <button id="createquestion-editor-cancel-button" type="button" class="btn svt-button--cancel"
+                    ng-click="createQuestionCtrl.cancelAddQuestion()" title="Cancel">Cancel</button>
+            <button id="createquestion-editor-done-button" type="submit" class="btn btn-primary"
+                    ng-click="createQuestionCtrl.createNewQuestion()"
+                    title="Done adding new question">Save</button>
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm col-md-7 question-editor__preview-panel">
+        <question-previewer></question-previewer>
+    </div>
+</div>

@@ -1,0 +1,283 @@
+﻿<div ng-if="!vm.dataLoading" id="look-and-feel-settings-part">
+    <div class="form-group">
+        <div class="svt-push-down__form-heading">
+            <h4>Look And Feel Settings</h4>
+        </div>
+    </div>
+    <div class="form-group" ng-if="page != null">
+        <label class="checkbox-inline svt-label__ontop">
+            <input type="checkbox" ng-model="vm.permitOverridden" /> <strong>Override Look and Feel for this page</strong>
+        </label>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 laf-accordion">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <h5 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral" target="_self" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="laf-accordion__header-caret-position fa fa-caret-right"></i>
+                                <span>General</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseGeneral" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.layoutId}">Layout</label>
+                                    <select id="lookandfeel-layout-dropdown" data-ng-model="vm.model.layoutId" class="form-control"
+                                            data-ng-options="layout.id as layout.name for layout in vm.model.layouts"
+                                            ng-disabled="!vm.permitOverridden" title="Choose layout" ng-change="vm.onLayoutChange()"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.themeId}">Theme</label>
+                                    <select id="lookandfeel-theme-dropdown" data-ng-model="vm.model.themeId" class="form-control"
+                                            data-ng-options="theme.id as theme.name for theme in vm.model.themes"
+                                            ng-disabled="!vm.permitOverridden" title="Choose theme" ng-change="vm.onChangeTheme()"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="checkbox-inline svt-label__ontop">
+                                        <input ng-disabled="!vm.permitOverridden" type="checkbox" name="saveCurrentTheme" id="saveNewTheme" ng-model="vm.model.newTheme.permitSave" /> Save current theme as
+                                    </label>
+                                    <input type="text" name="themeName" class="form-control" id="newThemeName" ng-model="vm.model.newTheme.name" ng-keypress="vm.onThemeNameKeyPress($event)" placeholder="{{vm.placeHolders.themeName.value}}"
+                                           ng-class="{'input-required': !vm.placeHolders.themeName.valid}"
+                                           ng-disabled="!vm.model.newTheme.permitSave" required />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.logo}">Logo</label>
+                                    <div class="uploader__file-action-info-group">
+                                        <div class="uploader__file-action">
+                                            <input type="button" class="btn btn-default" ng-click="vm.pickLogoImage()" value="..." />
+                                        </div>
+                                        <div class="uploader__file-info" ng-if="vm.model.theme.logo">
+                                            <div class="uploader__file-name">{{vm.model.theme.logo | fileNameFilter:17:'...'}}</div>
+                                        </div>
+                                        <div class="uploader__file-info" ng-if="!vm.model.theme.logo">
+                                            <div class="uploader__file-name">No file chosen</div>
+                                        </div>
+                                        <div class="uploader__delete-file-command" ng-if="vm.model.theme.logo">
+                                            <i class="glyphicon icon--remove-option uploader__delete-file"
+                                               ng-click="vm.onChangeLogo('')" title="Remove this logo image"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="vm.canShowInactiveSlider" class="look-and-feel__row-element">
+                                <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.inactiveOpacity}">Inactive Opacity</label>
+                                <rzslider id="lookandfeel-inactive-opacity-slider"
+                                          rz-slider-model="vm.model.theme.inactiveOpacity"
+                                          rz-slider-floor="vm.model.inactiveOpacity.min"
+                                          rz-slider-change="vm.onThemeContentChange()"
+                                          rz-slider-ceil="vm.model.inactiveOpacity.max"
+                                          rz-slider-step="0.01"
+                                          rz-slider-precision="2"
+                                          ng-class="{'look-and-feel__control--disabled': !vm.permitOverridden}"></rzslider>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <h5 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFont" target="_self" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="laf-accordion__header-caret-position fa fa-caret-right"></i>
+                                <span>Font</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseFont" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.font}">General Font</label>
+                                    <font-selector ng-model="vm.model.fontSelectorData" on-font-change="vm.onFontChanged()"
+                                                   ng-class="{'look-and-feel__control--disabled': !vm.permitOverridden}"></font-selector>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <h5 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseBackground" target="_self" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="laf-accordion__header-caret-position fa fa-caret-right"></i>
+                                <span>Background</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseBackground" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body" id="background-segment">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.backgroundImage}">Background Image</label>
+                                    <div class="uploader__file-action-info-group">
+                                        <div class="uploader__file-action">
+                                            <input type="button" class="btn btn-default" ng-click="vm.pickBackgroundImage()" value="..." />
+                                        </div>
+                                        <div class="uploader__file-info" ng-if="vm.model.theme.backgroundImage">
+                                            <div class="uploader__file-name" title="">{{vm.model.theme.backgroundImage | fileNameFilter:17:'...'}}</div>
+                                        </div>
+                                        <div class="uploader__file-info" ng-if="!vm.model.theme.backgroundImage">
+                                            <div class="uploader__file-name">No file chosen</div>
+                                        </div>
+                                        <div class="uploader__delete-file-command" ng-if="vm.model.theme.backgroundImage">
+                                            <i class="glyphicon icon--remove-option uploader__delete-file"
+                                               ng-click="vm.onChangeBackgroundImage('')" title="Remove this background image"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.backgroundStyle}">Background Image Mode</label>
+                                    <select name="singleSelect" ng-model="vm.model.theme.backgroundStyle" ng-change="vm.onThemeContentChange()"
+                                            class="form-control" ng-disabled="!vm.permitOverridden">
+                                        <option value="repeat">Repeat</option>
+                                        <option value="cover">Cover</option>
+                                        <option value="contain">Contain</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-if="canShowBackgroundSlider" class="look-and-feel__row-element">
+                                <label class="svt-label__ontop" ng-class="{'look-and-feel__label--changed': vm.trackingChanges.pageContainerBackgroundOpacity}">Background Opacity</label>
+                                <rzslider id="lookandfeel-page-container-opacity-slider"
+                                          rz-slider-model="vm.model.theme.pageContainerBackgroundOpacity"
+                                          rz-slider-floor="vm.model.backgroundOpacity.min"
+                                          rz-slider-change="vm.onThemeContentChange()"
+                                          rz-slider-ceil="vm.model.backgroundOpacity.max"
+                                          rz-slider-step="0.01"
+                                          rz-slider-precision="2"
+                                          ng-class="{'look-and-feel__control--disabled': !vm.permitOverridden}"></rzslider>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab">
+                        <h5 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseColor" target="_self" aria-expanded="false" aria-controls="collapseFour">
+                                <i class="laf-accordion__header-caret-position fa fa-caret-right"></i>
+                                <span>Colors</span>
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseColor" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.backgroundColor}">Background</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="backgroundColor" ng-style="{'background-color': vm.model.theme.backgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" ng-model="vm.model.theme.backgroundColor" id="backgroundColor" class="form-control" type="text"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.errorBackgroundColor}">Error Background</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="errorBackgroundColor" ng-style="{'background-color': vm.model.theme.errorBackgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.errorBackgroundColor" id="errorBackgroundColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" ng-blur="vm.onErrorBackgroundColorBlur()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.errorColor}">Error Text</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="errorColor" ng-style="{'background-color': vm.model.theme.errorColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.errorColor" id="errorColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.questionTitleColor}">Question Title</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="questionTitleColor" ng-style="{'background-color': vm.model.theme.questionTitleColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.questionTitleColor" id="questionTitleColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.questionDescriptionColor}">Question Description</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="questionDescriptionColor" ng-style="{'background-color': vm.model.theme.questionDescriptionColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.questionDescriptionColor" id="questionDescriptionColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.questionContentColor}">Question Content</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="questionContentColor" ng-style="{'background-color': vm.model.theme.questionContentColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.questionContentColor" id="questionContentColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.inputFieldBackgroundColor}">Input Field Background</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="inputFieldBackgroundColor" ng-style="{'background-color': vm.model.theme.inputFieldBackgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.inputFieldBackgroundColor" id="inputFieldBackgroundColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" ng-blur="vm.onInputFieldBackgroundColorBlur()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.inputFieldColor}">Input Field</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="inputFieldColor" ng-style="{'background-color': vm.model.theme.inputFieldColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.inputFieldColor" id="inputFieldColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.primaryButtonBackgroundColor}">Primary Button Background</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="primaryButtonBackgroundColor" ng-style="{'background-color': vm.model.theme.primaryButtonBackgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.primaryButtonBackgroundColor" id="primaryButtonBackgroundColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.primaryButtonColor}">Primary Button</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="primaryColor" ng-style="{'background-color': vm.model.theme.primaryButtonColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.primaryButtonColor" id="primaryColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.defaultButtonBackgroundColor}">Secondary Button Background</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="defaultButtonBackgroundColor" ng-style="{'background-color': vm.model.theme.defaultButtonBackgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.defaultButtonBackgroundColor" id="defaultButtonBackgroundColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.defaultButtonColor}">Secondary Button</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="defaultColor" ng-style="{'background-color': vm.model.theme.defaultButtonColor}"></label>
+                                        <input colorpicker colorpicker-size="150" class="form-control" type="text" ng-model="vm.model.theme.defaultButtonColor" id="defaultColor"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div ng-class="{'look-and-feel__label--changed': vm.trackingChanges.pageContainerBackgroundColor}">Overlay Color</div>
+                                    <div class="input-group svt-color-picker__container">
+                                        <label class="input-group-addon svt-color-picker__swatch" for="pageContainerBackgroundColor" ng-style="{'background-color': vm.model.theme.pageContainerBackgroundColor}"></label>
+                                        <input colorpicker colorpicker-size="150" case="upper" ng-model="vm.model.theme.pageContainerBackgroundColor" id="pageContainerBackgroundColor" class="form-control" type="text"
+                                               ng-disabled="!vm.permitOverridden" ng-change="vm.onThemeContentChange()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

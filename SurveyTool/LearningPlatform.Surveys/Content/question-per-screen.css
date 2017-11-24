@@ -1,0 +1,1165 @@
+﻿@media screen and (max-width: 767px) {
+    body.container {
+        padding: 15px;
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: fixed;
+        top: -1px;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden;
+    }
+
+    .data-container {
+        padding: 0 15px;
+        width: 100vw;
+    }
+
+    .data-container .row {
+        margin: 0;
+    }
+
+    .container .logo {
+        padding: 15px;
+    }
+
+    .container .question .inputArea {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .container.one-question-per-page {
+        height: 100%;
+    }
+
+    #one-question-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding: 15px 15px 0 15px;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    #one-question-container.show {
+        visibility: visible;
+        animation: show-one-question-per-page 1s linear;
+    }
+
+    @keyframes show-one-question-per-page {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    body .row {
+        margin: 0;
+    }
+
+    .hotkeys {
+        display: none;
+    }
+
+    .pass-btn {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .data-container {
+        padding: 0 15px;
+        width: 100vw;
+    }
+
+    .data-container .row {
+        margin: 0;
+    }
+
+    .rating-index {
+        border: 1px solid #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .rating-symbol--large {
+        font-size: 2.5em;
+        left: 0;
+    }
+
+    .rating-symbol--medium {
+        font-size: 2.0em;
+        left: 0;
+    }
+
+    .rating-symbol--small {
+        font-size: 1.3em;
+        left: 0;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-index {
+        position: absolute;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-symbol--large .rating-index {
+        left: 8px;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-symbol--medium .rating-index  {
+        left: 4px;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-symbol--small .rating-index {
+        left: -1px;
+    }
+
+    .rating-symbol--small .rating-index {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+        line-height: 17px;
+    }
+
+    .rating-number {
+        line-height: 18px;
+    }
+
+    .rating-symbol--large .rating-number {
+        margin-top: -4px;
+    }
+
+    .rating-symbol--small .rating-number {
+        margin-top: 2px;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-number--large::after {
+        top: 0px;
+        left: 15px;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-number--medium::after {
+        top: 0px;
+        left: 3px;
+    }
+
+    .question-settings[question-type=RatingQuestion] .rating-number--small::after {
+        top: -1px;
+        left: 0px;
+    }
+
+    .question-settings[question-type=RatingGridQuestion] .rating-number--large::after {
+        top: 0px;
+        left: 7px;
+    }
+
+    .question-settings[question-type=RatingGridQuestion] .rating-number--medium::after {
+        top: 0px;
+        left: 3px;
+    }
+
+    .question-settings[question-type=RatingGridQuestion] .rating-number--small::after {
+        top: -1px;
+        left: 0px;
+    }
+
+    .date {
+        width: 100%;
+    }
+
+    /*======= Rating Start======*/
+    .rating-symbol {
+        padding-right: 0;
+        width: auto !important;
+    }
+
+    /*======= Rating End======*/
+    /*======= Single/Multi Selection Container Start======*/
+    .single-selection-container,
+    .multi-selection-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    [question-type="SingleSelectionGridQuestion"] .single-selection-container:not(:last-child),
+    [question-type="MultipleSelectionGridQuestion"] .multi-selection-container:not(:last-child) {
+        margin-bottom: 30px;
+    }
+
+    .single-selection-container {
+        padding-bottom: 0;
+    }
+
+    .container .inputArea .single-selection,
+    .container .inputArea .multi-selection {
+        padding: 0;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        border-radius: 5px;
+        min-height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .container .inputArea .multi-selection:not(:last-of-type) {
+        margin-bottom: 8px;
+    }
+
+    .container .inputArea .single-selection:not(:last-child) {
+        margin-bottom: 8px;
+    }
+
+    .container .inputArea .single-selection-container label.single-selection {
+        float: left;
+    }
+
+    .question-settings[question-type="SingleSelectionGridQuestion"] .inputArea .single-selection-container label.single-selection {
+        float: none;
+        height: 40px;
+    }
+    /*======= Single/Multi Selection Container End======*/
+    /*======= Single/Multi Selection Option Group Start======*/
+    .single-selection-container .grouped-options,
+    .multi-selection-container .grouped-options {
+        float: left;
+        width: 100%;
+    }
+
+    .single-selection-container .grouped-options::after,
+    .multi-selection-container .grouped-options::after {
+        clear: both;
+    }
+
+    .single-selection-container label.option-group,
+    .multi-selection-container label.option-group {
+        padding-top: 5px;
+        float: left;
+    }
+
+    .single-selection-container .option-group-break-line-container,
+    .multi-selection-container .option-group-break-line-container {
+        float: left;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /*======= Single/Multi Selection Option Group End======*/
+    /*======= Likert Start======*/
+    .container .inputArea .liker.single-selection {
+        border: unset;
+        display: flex;
+        justify-content: space-between;
+    }
+    .container .inputArea .liker.single-selection .single-selection-option {
+        border: unset;
+    }
+    .container .inputArea .liker.single-selection .single-selection-option input[type="radio"]:checked+span {
+        border-width: 0;
+        border-style: none;
+    }
+    .container .horizontal .liker.single-selection .single-selection-option .selection-option-title {
+        left: 50%;
+        width: 20px;
+        transform: translateX(-50%);
+    }
+
+    /*======= Likert End======*/
+    /*======= Single/Multi Selection Start======*/
+    .container .inputArea .single-selection.selected,
+    .container .inputArea .multi-selection.selected {
+        border: 2px solid rgba(255, 255, 255, 1);
+    }
+    .container .inputArea .single-selection-other.selected {
+        border: 2px solid rgba(255, 255, 255, 1);
+    }
+
+    .container .inputArea .single-selection .single-selection-option:not(.cell),
+    .container .inputArea .multi-selection .multi-selection-option:not(.cell) {
+        padding: 7px 15px 7px 45px;
+        width: 100%;
+    }
+
+    .container .inputArea .hrow.single-selection .single-selection-option {
+        height: 30px;
+        width: 20px;
+    }
+
+    .container .inputArea .hrow.multi-selection .multi-selection-option {
+        padding: 7px 15px 7px 23px;
+        width: 100%;
+    }
+
+    .question-settings[question-type="MultipleSelectionGridQuestion"] .inputArea .multi-selection .multi-selection-option {
+        float: none;
+        display: block;
+    }
+
+    [question-type=MultipleSelectionQuestion] .inputArea .multi-selection:not(.other) .multi-selection-option,
+    [question-type=SingleSelectionQuestion] .inputArea .single-selection .single-selection-option {
+        float: none;
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    [question-type=MultipleSelectionQuestion] .inputArea .multi-selection.other .multi-selection-option,
+    [question-type=SingleSelectionQuestion] .inputArea .single-selection.other .single-selection-option {
+        padding: 0;
+        height: 100%;
+    }
+
+    [question-type=SingleSelectionQuestion] .inputArea {
+        margin-bottom: 20px;
+    }
+
+    [question-type=MultipleSelectionQuestion] .inputArea .multi-selection.other .multi-selection-option .selection-option-title {
+        height: 100%;
+    }
+
+    [question-type=MultipleSelectionQuestion] .inputArea .multi-selection.other .multi-selection-option .selection-option-title::before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .container .single-selection-container .single-selection-option span:before,
+    .container .multi-selection-container .multi-selection-option span:before {
+        border-width: 2px;
+        background-color: transparent;
+    }
+
+    .container .inputArea .single-selection .single-selection-option input[type="radio"]:checked+span::before,
+    .multi-selection-container .multi-selection-option input[type="checkbox"]:checked + input[type="hidden"] + span::before {
+        border: 1px solid #fff;
+    }
+
+    .single-selection-container .single-selection-option > input[type="radio"],
+    .multi-selection-container .multi-selection-option > input[type="checkbox"] {
+        display: none;
+    }
+
+    .single-selection-container .single-selection-option span:before {
+        width: 20px;
+        height: 20px;
+        top: 4px;
+        left: 15px;
+        border-radius: 10px;
+        background-color: transparent;
+    }
+    .multi-selection-container .multi-selection-option span:before {
+        width: 20px;
+        height: 20px;
+        left: 15px;
+        margin-top: 0;
+        border-radius: 5px;
+        background-color: transparent;
+    }
+
+    .container .inputArea .liker.single-selection .single-selection-option input[type="radio"]:checked+span::after {
+        top: 10px;
+        left: 9px;
+    }
+    .container .inputArea .nps-question-container .liker.single-selection .single-selection-option input[type="radio"]:checked+span::after {
+        top: 10px;
+        left: 9px;
+    }
+
+    .nps-question-container .hrow .heading {
+        width: auto;
+    }
+
+    .container .inputArea .hrow.liker.single-selection .single-selection-option input[type="radio"]:checked+span::after {
+        top: 10px;
+        left: 4px;
+    }
+
+    .container .inputArea .hrow.single-selection .single-selection-option input[type="radio"]:checked+span::after {
+        top: 10px;
+        left: calc(50% - 6px);
+    }
+
+    .container .inputArea .single-selection .single-selection-option input[type="radio"]:checked+span::after {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 19px;
+        width: 12px;
+        height: 6px;
+        transform: rotate(-45deg);
+    }
+
+    .multi-selection-container .multi-selection-option input[type="checkbox"]:checked + input[type="hidden"] + span::after {
+        content: "";
+        position: absolute;
+        top: 13px;
+        left: 19px;
+        width: 12px;
+        height: 6px;
+        transform: rotate(-45deg);
+    }
+
+    .container .inputArea .single-selection-other,
+    .container .inputArea .multi-selection.other {
+        float: left;
+        width: 100%;
+    }
+
+    .container .inputArea .single-selection-other .other-text {
+        position: absolute;
+        left: 45px;
+        width: calc(100% - 50px);
+        line-height: 30px;
+        z-index: 999;
+        padding-left: 0;
+    }
+    .container .inputArea .multi-selection.other .other-text {
+        position: absolute;
+        left: 45px;
+        width: calc(100% - 50px);
+        line-height: 30px;
+        z-index: 999;
+        padding-left: 0;
+        margin-top: -1px;
+    }
+    .container .inputArea .single-selection-other .other-text input[type="text"],
+    .container .inputArea .multi-selection.other .other-text input[type="text"] {
+        line-height: 30px;
+        border: transparent;
+        background-color: transparent;
+        box-shadow: none;
+        padding-left: 2px;
+        font-weight: bold;
+    }
+    .container .inputArea .single-selection-other .other-text input[type="text"]::placeholder,
+    .container .inputArea .multi-selection.other .other-text input[type="text"]::placeholder {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .container .inputArea .single-selection-other .single-selection-option .selection-option-title,
+    .container .inputArea .multi-selection.other .multi-selection-option .selection-option-title {
+        float: left;
+        color: transparent;
+    }
+
+    /*======= Single/Multi Selection End======*/
+    /*======= Single/Multi Selection Picture Start======*/
+    .picture-single-selection .picture-row,
+    .picture-multiple-selection .picture-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .picture-multiple-selection {
+        margin-bottom: 0;
+    }
+    .picture-single-selection .picture-row .picture-option,
+    .picture-multiple-selection .picture-container .picture-option {
+        display: flex;
+        margin: 10px 0;
+        flex-wrap: wrap;
+        padding: 0 5px 0 10px;
+    }
+
+    .picture-single-selection .picture-row .picture-option.odd,
+    .picture-multiple-selection .picture-container .picture-option.odd {
+        padding: 0 10px 0 5px;
+    }
+
+    .picture-single-selection .thumbnail,
+    .picture-multiple-selection .thumbnail {
+        width: 100%;
+        height: auto;
+        border-style: solid;
+        border-width: 1px;
+        margin-bottom: 0;
+        padding: 5px;
+    }
+
+    .picture-single-selection .thumbnail .picture-wrapper,
+    .picture-multiple-selection .thumbnail .picture-wrapper {
+        height: 135px;
+        display: flex;
+        align-items: center;
+    }
+    .picture-single-selection .thumbnail img,
+    .picture-multiple-selection .thumbnail img {
+        max-width: 100%;
+        margin: 0 auto;
+        max-height: 135px !important;
+    }
+
+    .picture-single-selection .thumbnail .caption,
+    .picture-multiple-selection .thumbnail .caption {
+        padding: 20px 0 15px;
+        height: unset;
+        position: unset;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .picture-single-selection .thumbnail .caption .picture-hot-key,
+    .picture-multiple-selection .thumbnail .caption .picture-hot-key {
+        display: none;
+    }
+
+    .picture-single-selection .thumbnail .caption.no-picture-label,
+    .picture-multiple-selection .thumbnail .caption.no-picture-label {
+        text-align: center;
+    }
+
+    .picture-single-selection .thumbnail span.glyphicon,
+    .picture-multiple-selection .thumbnail span.glyphicon {
+        padding: 0 10px;
+        height: 20px;
+        display: block;
+    }
+
+    .picture-single-selection .thumbnail span.selection-option-title,
+    .picture-multiple-selection .thumbnail span.selection-option-title {
+        white-space: nowrap;
+        padding-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
+
+    .picture-single-selection .thumbnail span.glyphicon::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 2px solid #fff;
+        border-radius: 10px;
+        background-color: transparent;
+    }
+
+    .picture-multiple-selection .thumbnail span.glyphicon::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        background-color: transparent;
+    }
+
+    .picture-single-selection .thumbnail input[type="radio"]:checked + div.picture-wrapper + div.caption span.glyphicon::after,
+    .picture-multiple-selection .thumbnail input[type="checkbox"]:checked + input[type="hidden"] + div.picture-wrapper + div.caption span.glyphicon::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 4px;
+        width: 12px;
+        height: 6px;
+
+        transform: rotate(-45deg);
+    }
+
+    .picture-single-selection .thumbnail input[type="radio"]:checked + div.picture-wrapper + div.caption span.glyphicon::before,
+    .picture-multiple-selection .thumbnail input[type="checkbox"]:checked + input[type="hidden"] + div.picture-wrapper + div.caption span.glyphicon::before {
+        background-color: #fff;
+    }
+
+    /*======= Single/Multi Selection Picture End======*/
+
+
+    .page-navigation-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .previous-page.page-navigation-container {
+        height: auto;
+    }
+
+    .previous-page.active {
+        display: block;
+    }
+
+    .container .question-settings.deactive {
+        visibility: hidden;
+    }
+
+    .previous-page.active.page-navigation-container {
+        animation-name: height-grow;
+        animation-duration: 0.2s;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes height-grow {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height: 100%;
+        }
+    }
+
+    .survey-progess-container {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        z-index: 2;
+    }
+    .survey-progess-container .progress-label {
+        display: none;
+    }
+    .survey-progess-container:after {
+        content: '';
+        width: 100%;
+        color: #ff0000;
+        height: 30px;
+        position: absolute;
+        top: 0;
+        opacity: 0.9;
+        z-index: -1;
+    }
+    .page-navigation__progress-bar {
+        display: flex;
+        width: calc(100vw - 70px);
+        margin-left: 15px;
+        align-items: center;
+        height: 30px;
+    }
+    .survey-progess-container .progress {
+        height: 6px;
+        background-color: #c2c1c1;
+        border-radius: 4px;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .survey-progess-container .progress-bar {
+        text-indent: 1000px;
+    }
+    .survey-progess-container .progress-bar:after {
+        content: attr(title);
+        position: absolute;
+        top: 0;
+        right: 15px;
+        color: #085f64;
+        font-size: 14px;
+        text-align: right;
+        display: block;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .page-navigation__button {
+        width: 100%;
+        left: 0;
+        bottom: 15px;
+    }
+
+    .page-navigation-container .page-navigation {
+        width: 100%;
+        text-align: center;
+        margin-top: unset;
+        margin-bottom: unset;
+        align-self: center;
+    }
+
+    .page-navigation-container .page-navigation .btn-default {
+        margin-left: 15px;
+    }
+
+    .page-navigation-container .page-navigation .btn-primary {
+        margin-right: 15px;
+    }
+
+    .page-navigation-container .page-navigation .btn {
+        width: 43%;
+        height: 45px;
+        display: none;
+    }
+
+    .page-navigation-container .page-navigation .btn.previous {
+        display: none;
+    }
+
+    .previous-page.page-navigation-container .page-navigation .btn.previous {
+        display: none;
+        margin: 0 auto;
+        float: none;
+    }
+
+    .page-navigation-container .page-navigation .btn[value=Finish] {
+        display: inline-block;
+    }
+
+    .container .inputArea {
+        margin: 0;
+    }
+
+    .container .question-settings {
+        margin-top: 0;
+        flex-wrap: wrap;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container .question-settings.active-trail {
+        animation-name: show-question;
+        animation-duration: 0.5s;
+        animation-direction: normal;
+    }
+
+    @keyframes show-question {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .container .question-settings .question {
+        width: 100%;
+        padding: 15px 0;
+        margin-bottom: 0;
+    }
+
+    .active-option {
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .ok-button {
+        position: relative;
+        top: 0;
+        text-align: right;
+        visibility: hidden;
+        display: block;
+    }
+
+    .ok-button button {
+        font-size: 16px;
+    }
+
+    .ok-button.show {
+        visibility: visible;
+    }
+
+    .ok-button-text {
+        display: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+
+    .question-settings .container-previous-button {
+        width: 100%;
+        align-self: center;
+    }
+
+    .question-settings .btn.previous {
+        float: none;
+    }
+
+    .inputArea label.selected {
+        -webkit-animation-name: pulse;
+        animation-name: pulse;
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        animation-direction: alternate;
+    }
+
+    @-webkit-keyframes pulse {
+        from {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+        }
+
+        to {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+
+    @keyframes pulse {
+        from {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+        }
+
+        to {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+
+    .question-settings .inputArea .short-text,
+    .question-settings[question-type=OpenEndedLongTextQuestion] .inputArea .long-text,
+    .question-settings .inputArea .numeric-text,
+    .question-settings .inputArea .grid-selection {
+        margin-bottom: 20px;
+    }
+
+    [question-type="LongTextListQuestion"] .inputArea .long-text-list tr .long-text {
+        margin-bottom: 30px;
+    }
+
+    [question-type="LongTextListQuestion"] .inputArea .long-text-list tr:last-child .long-text {
+        margin-bottom: 0;
+    }
+
+    .question-settings .inputArea .grid-selection.rating-table {
+        margin-bottom: 0;
+    }
+
+    .question-settings .inputArea .grid-selection.likert-table {
+        margin-bottom: 0;
+    }
+
+    [question-alias=thankyou] + div {
+        /*display: none;*/
+    }
+
+    .well.pickmeup-twitter-bootstrap {
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 100;
+        border: none;
+        border-radius: 0;
+        width: 100%;
+        height: 100vh;
+        display:flex;
+        align-items: center;
+    }
+
+    .well.pickmeup-twitter-bootstrap.pmu-hidden {
+        display: none;
+    }
+
+    .well.pickmeup-twitter-bootstrap .pmu-instance {
+        width: 100%;
+        border: none;
+    }
+
+    .date-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        color: rgb(101, 184, 187);
+    }
+
+    .page-navigation-container .finish {
+        display: none;
+    }
+
+    .container .question-settings.last-survey-question .question {
+        align-self: flex-end;
+        margin: 0;
+        padding-bottom: 80px;
+    }
+
+    .container .question-settings.last-survey-question .question .ok-button {
+        display: none;
+    }
+
+    .last-survey-question.active-trail .page-navigation {
+        position: fixed;
+        bottom: 0;
+        padding: 5px 0 35px;
+        width: calc(100vw - 30px);
+        margin: 0;
+    }
+
+    .last-survey-question.active-trail .page-navigation__button-container:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -15px;
+        opacity: 0.7;
+        width: calc(100vw);
+        height: 100%;
+        z-index: -1;
+    }
+
+    .last-survey-question .page-navigation .btn-primary {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .last-survey-question .page-navigation .previous {
+        display: none;
+    }
+
+    .alert.alert-warning {
+        display: none;
+    }
+
+    .alert-info {
+        position: relative;
+        padding: 10px;
+        margin: 20px 0 5px 0;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .alert-info::after {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-width: 5px;
+        border-style: solid;
+        display: block;
+        content: '';
+        bottom: -10px;
+    }
+
+    .alert-info label {
+        margin: 0;
+    }
+
+    .container .inputArea input[type=text],
+    .container .inputArea input[type=number],
+    .container .inputArea textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .container .question-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .container .question-description {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .topic-option-grid {
+        margin-bottom: 10px;
+    }
+
+    .topic-option-grid__title {
+        font-size: 18px;
+    }
+
+    [question-type=Information] .ok-button {
+        top: -20px;
+    }
+
+    div.inputArea table.grid-selection tr[row-index='0'] {
+        display: none;
+    }
+
+    [question-type=ScaleGridQuestion] .inputArea td {
+        border: 1px solid transparent !important;
+    }
+
+    .inputArea .grid-selection.likert-table tr {
+        display: grid;
+        grid-template: auto auto auto / auto;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .inputArea .grid-selection.likert-table tr:last-child {
+        margin-bottom: 5px;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr {
+        padding-bottom: 60px;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr:last-child {
+        margin-bottom: 30px;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr th:first-child {
+        grid-column: 1 / 10;
+        grid-row: 1 / 2;
+        margin-bottom: 10px;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td {
+        position: absolute;
+        margin-bottom: 0;
+        grid-row: 3 / auto;
+        width: 20px;
+        padding: 0;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td input {
+        display: none;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td label {
+        position: relative;
+        border: none !important;
+        padding: 0;
+        display: block;
+        min-width: 20px;
+        max-width: 30px;
+        margin: 0 auto;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td label input[type=radio] + span::before {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        content: "";
+        left: 0;
+        top: 25px;
+        border-radius: 10px;
+        margin-top: 4px;
+        box-sizing: border-box;
+        border-width: 2px;
+        border-style: solid;
+        background-color: transparent;
+    }
+
+    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td label input[type=radio]:checked + span::after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 4px;
+        width: 12px;
+        height: 6px;
+        transform: rotate(-45deg);
+        border-left-style: solid;
+        border-left-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+    }
+
+    .inputArea .grid-selection.render-as-button tr,
+    .inputArea .grid-selection.rating-table tr,
+    .inputArea .grid-selection.short-text-list tr,
+    .inputArea .grid-selection.long-text-list tr {
+        display: flex;
+        flex-direction: column;
+        width: calc(100vw - 30px);
+    }
+
+    [question-type="ShortTextListQuestion"] .inputArea tr:not(:last-child) .short-text {
+        margin-bottom: 30px;
+    }
+
+    [question-type="ShortTextListQuestion"] .inputArea tr:last-child .short-text {
+        margin-bottom: 0;
+    }
+
+    .container .inputArea .grid-selection td {
+        padding: 0;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .container .inputArea .grid-selection th {
+        font-size: 18px;
+        padding: 0;
+    }
+
+    .container .inputArea .grid-selection th > div {
+        padding: 0;
+    }
+
+    .container .inputArea .rating-table th {
+        margin-bottom: 10px;
+        padding: 0;
+    }
+
+    .rating-table tbody tr:nth-child(2) th:first-child {
+        padding-top: unset;
+    }
+
+    .likert-table thead {
+        display: none;
+    }
+
+    .likert-table tbody td > div {
+        padding: 0;
+    }
+
+    .container .inputArea .grid-selection tr .likert-table__likert-text-container {
+        font-size: 14px;
+        font-weight: normal;
+        padding: 0;
+        grid-row: 2 / 3;
+        width: 100%;
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .container .horizontal .liker-heading .heading {
+        max-width: 30px;
+        height: 100%;
+    }
+
+    .container .grid-selection.render-as-button .horizontal,
+    .container .horizontal.scale-question-container.render-as-button,
+    .container .horizontal.nps-question-container.render-as-button {
+        table-layout: auto;
+    }
+
+    .inputArea .grid-selection .ratings.active-option {
+        border: none;
+    }
+
+    input.form-control {
+        height: 40px;
+    }
+
+    [question-type=ScaleGridQuestion] .inputArea td label {
+        width: 100%;
+    }
+
+    .hrow.liker {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .hrow.liker .heading {
+        width: 20px;
+    }
+
+    .render-as-button .hrow.liker {
+        display: table-row;
+    }
+
+    .ratings > span {
+        display: flex;
+        justify-content: space-between;
+    }
+}

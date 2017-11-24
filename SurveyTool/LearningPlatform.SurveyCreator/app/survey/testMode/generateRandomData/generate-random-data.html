@@ -1,0 +1,27 @@
+﻿<form class="svt-push-down__form">
+    <div class="form-group">
+        <div class="svt-push-down__form-heading">
+            <h4>Generate random data</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label class="control-label svt-label__ontop">Number Of Test Responses</label>
+            <div>
+                <select data-ng-model="vm.numberOfTestResponses" class="form-control"
+                        ng-init="vm.numberOfTestResponses = vm.numberOfTestResponsesOptions[0]"
+                        data-ng-options="item as item for item in vm.numberOfTestResponsesOptions"
+                        title="Choose number of test responses"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="pull-right form-group svt-button-group">
+                <button type="button" class="btn svt-button--cancel" ng-click="vm.close()" title="Cancel">Cancel</button>
+                <button type="button" class="btn svt-button--done" ng-click="vm.generateRandomData()" title="Generate random data">Generate</button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</form>

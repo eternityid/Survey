@@ -1,0 +1,151 @@
+﻿.report .page-header {
+    padding-left: 15px;
+    height: 50px;
+    margin: 0;
+}
+
+.report .page-header-left {
+    float: left;
+    padding-left: 15px;
+}
+
+.report .page-header-right {
+    float: right;
+    padding-right: 15px;
+}
+
+.report .page-content-helper {
+    height: 1063px;
+    width: 100%;
+    position: relative;
+    padding: 22px 56px 60px 56px;
+}
+
+.report .page-content-helper .page-content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.report .page-content-helper .page-content.moving {
+    background-color: white;
+}
+
+.report .page-content-helper .page-content.moving:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    border: 2px #9CAAB9 dashed;
+}
+
+.report .page-footer {
+    height: 50px;
+}
+
+.report-page {
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.report-page__dragHandle {
+    position: relative;
+    min-height: 30px;
+
+    &:hover {
+        cursor: auto !important;
+
+        & .collapse-page-down, & .dragIcon, & .report .page-operations {
+            visibility: visible;
+            display: block;
+        }
+    }
+
+    & > span {
+        position: absolute;
+        left: 48%;
+        top: 0;
+        padding: 5px 10px;
+    }
+
+    & > span:hover {
+        cursor: move !important;
+    }
+}
+
+.form-configure-chart {
+    background-color: #fff;
+    padding: 15px;
+    margin-top: 65px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    position: absolute;
+    min-width: 600px;
+    width: 100%;
+    float: left;
+}
+
+.a4 {
+    width: 794px;
+    border: 1px solid gray;
+    margin: 20px auto;
+    clear: both;
+}
+
+.page-wrap {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.5s;
+    -moz-transition: height 0.5s;
+    transition: height 0.5s;
+}
+
+.page-wrap.expand {
+    width: 100%;
+    height: 1093px;
+}
+
+.page-wrap.expand.moving {
+    background-color: #E0E0E0;
+}
+
+.close-button {
+    position: relative;
+    top: -20px;
+    float: right;
+}
+
+.close-button .btn {
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.button-position-control-in-reportpage {
+    text-align: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.button-position-control-in-reportpage .btn {
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.button-position-control-in-reportpage--free-text {
+    position: absolute;
+    right: 0;
+}
+
+.button-position-control-in-reportpage--free-text .btn {
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 5px;
+}

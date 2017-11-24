@@ -1,0 +1,32 @@
+﻿<div class="row question-editor__question-value">
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">Steps</label>
+            <div class="">
+                <select data-ng-model="vm.numberOfSteps" class="form-control dropdown"
+                        data-ng-options="item.value as item.displayName for item in vm.steps"
+                        ng-change="vm.onStepChange()"
+                        title="Choose step"></select>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">Shape</label>
+            <div class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="{{vm.question.shapeName}}-empty"></span>&nbsp;{{vm.getDisplayNameShape()}}
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="shape in vm.shapes">
+                        <a ng-click="vm.onShapeChange(shape)">
+                            <span class="{{shape.value}}-empty"></span>&nbsp;{{shape.displayName}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="row library-search">
+            <div class="col-xs-6" ng-if="isImportedPage">
+                <input type="text" ng-model="vm.pageFilterValue" class="form-control"
+                       placeholder="Page title or description" ng-change="vm.sortLibraryPages()" />
+            </div>
+            <div class="col-xs-6" ng-if="!isImportedPage">
+                <input type="text" ng-model="vm.questionFilterValue" class="form-control"
+                       placeholder="Question title or description" ng-change="vm.sortLibraryQuestions()" />
+            </div>
+            <div class="col-xs-6 library-search-type">
+                <label class="control-label library-search-type__label">Library Type</label>
+                <label class="radio-inline">
+                    <input type="radio" name="optLibraryType" ng-model="vm.libraryType" value="pages"
+                           ng-change="vm.changeLibraryType()" />
+                    Pages
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="optLibraryType" ng-model="vm.libraryType" value="questions"
+                           ng-change="vm.changeLibraryType()" />
+                    Questions
+                </label>
+            </div>
+        </div>
+        <div class="library-content" ng-if="isImportedPage">
+            <div class="row library-content__page-row"
+                 ng-class="{'active': libraryPage.isChecked}"
+                 ng-repeat="libraryPage in vm.libraryPages | pageTitleDescriptionFilter:vm.pageFilterValue">
+                <div class="col-xs-11">
+                    <label>
+                        <span class="col-xs-1">
+                            <input type="checkbox" ng-model="libraryPage.isChecked"
+                                   ng-change="vm.toggleLibraryPage(libraryPage)" />
+                        </span>
+                        <span class="col-xs-10">
+                            <span class="library-content__page-title"
+                                ng-bind-html="libraryPage.title | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+                            <span class="library-content__page-total-questions">
+                                <data-ng-pluralize count="libraryPage.totalQuestions"
+                                                   when="{'0': '(0 Question)',
+                                                    'one': '(1 Question)',
+                                                    'other': '({} Questions)'}">
+                                </data-ng-pluralize>
+                            </span>
+                        </span>
+                        <span class="col-xs-offset-1 col-xs-10 library-content__page-description"
+                              ng-bind-html="libraryPage.description | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+                    </label>
+                </div>
+                <div class="col-xs-1">
+                    <label>
+                        <span class="page__icon--preview icon--preview"
+                              ng-click="vm.showPagePreviewDialog(libraryPage)"
+                              title="Preview page" svt-stop-event=""></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" ng-if="vm.libraryPages.length <= 0">
+                <div class="col-xs-12 library-content__page-none">There is no page in library</div>
+            </div>
+        </div>
+
+        <div class="library-content" ng-if="!isImportedPage">
+            <div class="row library-content__question-row" ng-class="{'active': libraryQuestion.isChecked}"
+                 ng-repeat="libraryQuestion in vm.libraryQuestions | questionTitleDescriptionFilter:vm.questionFilterValue">
+                <div class="col-xs-11">
+                    <label>
+                        <span class="col-xs-1">
+                            <input type="checkbox"
+                                   ng-model="libraryQuestion.isChecked"
+                                   ng-change="vm.toggleLibraryQuestion(libraryQuestion)" />
+                        </span>
+                        <span class="col-xs-2">
+                            <span class="question-header__alias">{{libraryQuestion.alias}}</span>
+                        </span>
+                        <span class="col-xs-6 library-content__question-title"
+                              ng-bind-html="libraryQuestion.title.items[0].text | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+
+                        <span class="col-xs-3 library-content__question-type">{{ vm.getQuestionTypeName(libraryQuestion.$type) }}</span>
+
+                        <span class="col-xs-offset-3 col-xs-9 library-content__question-description"
+                              ng-bind-html="libraryQuestion.description.items[0].text | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+                    </label>
+                </div>
+                <div class="col-xs-1">
+                    <label>
+                        <span class="page__icon--preview icon--preview"
+                              ng-click="vm.showQuestionPreviewDialog(libraryQuestion)"
+                              title="Preview question" svt-stop-event=""></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" ng-if="vm.libraryQuestions.length <= 0">
+                <div class="col-xs-12 library-content__question-none">There is no question in library</div>
+            </div>
+        </div>
+    </div>
+</div>

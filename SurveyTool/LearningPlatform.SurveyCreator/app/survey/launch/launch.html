@@ -1,0 +1,101 @@
+﻿<div class="row launch">
+    <survey-title-and-status survey-id="vm.surveyId" class="launch-page__survey-title-and-status"></survey-title-and-status>
+
+    <div class="col-xs-7">
+        <div class="row frame-box">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Survey Link</label>
+                    <div ng-if="vm.survey.lastPublished">
+                        <div class="btn survey-link-wrapper">
+                            <a class="survey-link" ng-href="{{vm.surveyLinkPrefix + vm.survey.id}}" target="_blank">{{vm.surveyLinkPrefix + vm.survey.id}}</a>
+                            <a class="glyphicon glyphicon-link survey-link-icon" clipboard text="vm.surveyLink" title="Copy link"></a>
+                        </div>
+                    </div>
+                    <span class="help-block h6" ng-if="!vm.survey.lastPublished">(Survey link just appear after survey had been published)</span>
+
+                </div>
+                <div class="form-group">
+                    <label>Survey Access</label>
+                    <div class="radio">
+                        <label>
+                            <input id="open-access-survey" type="radio" name="optionsRadios" ng-model="vm.surveyAccessMode" value="{{vm.accessMode.open.value}}" ng-change="vm.onAccessModeChanged()" />{{vm.accessMode.open.name}}
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="invitation-only-survey" type="radio" name="optionsRadios" ng-model="vm.surveyAccessMode" value="{{vm.accessMode.invitationOnly.value}}" ng-change="vm.onAccessModeChanged()" />{{vm.accessMode.invitationOnly.name}}
+                        </label>
+                    </div>
+                    <!-- Hide temporary, we will display if SSO feature implemented -->
+                    <div class="radio" style="display: none;">
+                        <label>
+                            <input id="sso-survey" type="radio" name="optionsRadios" ng-model="vm.surveyAccessMode" value="{{vm.accessMode.sso.value}}" ng-change="vm.onAccessModeChanged()" />{{vm.accessMode.sso.name}}
+                        </label>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-if="vm.survey.isUserHaveFullPermission">
+                    <label>Email Invitation</label>
+                    <div class="checkbox">
+                        <label>
+                            <input id="invite-respondents" type="checkbox" ng-model="vm.inviteRespondents">Invite Respondents
+                        </label>
+                        <div class="svt-helper-text">
+                            If you want to email just to specific respondents, go to the Respondents tab after publishing
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="vm.survey.isUserHaveFullPermission && vm.inviteRespondents">
+                    <form class="form-horizontal respondent-email-form">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"></label>
+                            <label class="col-xs-10">Compose Message</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label label-required">Send To:</label>
+                            <div class="col-xs-10" id="email-addresses">
+                                <ui-select multiple tagging tagging-label="" tagging-tokens="'ENTER'" ng-model="vm.respondent.emailTo"
+                                           theme="bootstrap" sortable="true" search-enabled="false" title="Input email address">
+                                    <ui-select-match placeholder="Email Address (Ex: anyone@example.com)">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="email in vm.respondent.availableEmailAddresses | filter:$select.search">
+                                        {{email}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label label-required">Subject:</label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" ng-model="vm.respondent.subject" placeholder="Email subject" />
+                            </div>
+                        </div>
+                        <div class="form-group respondent-email-form__last-element">
+                            <label class="col-xs-2 control-label label-required">Message:</label>
+                            <div class="col-xs-10">
+                                <div id="email-content-cke" placeholder="Email content" svt-ckeditor="vm.svtCkeditorConfig" ng-model="vm.respondent.body"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-if="vm.survey.isUserHaveFullPermission && vm.survey.status !== vm.surveyStatus.CLOSED && vm.survey.status !== vm.surveyStatus.TEMPORARILY_CLOSED">
+                    <span class="pull-right svt-button-group">
+                        <a id="close_survey_button" class="btn btn-warning" ng-if="vm.survey.status === vm.surveyStatus.OPEN" ng-click="vm.closeSurvey()">Close Survey</a>
+                        <button id="publish_button" type="button" class="btn svt-button--done" ng-if="!vm.survey.lastPublished" ng-click="vm.publish('Publishing')">Publish</button>
+                        <button id="republish_button" type="button" class="btn svt-button--done" ng-if="vm.survey.lastPublished" ng-disabled="vm.survey.modified < vm.survey.lastPublished" ng-click="vm.publish('Republishing')">Re-Publish</button>
+                    </span>
+                    <div>
+                        <span class="svt-helper-text pull-right" ng-if="vm.survey.lastPublished && vm.survey.modified > vm.survey.lastPublished">
+                            There are unpublished edits in the survey. Click Re-Publish to publish a new version of this survey
+                        </span>
+                    </div>
+                </div>
+                <div ng-if="vm.survey.isUserHaveFullPermission && vm.survey.status === vm.surveyStatus.CLOSED || vm.survey.status === vm.surveyStatus.TEMPORARILY_CLOSED"
+                     class="pull-right svt-button-group">
+                    <a id="reopen_survey_button" class="btn svt-button--done" ng-click="vm.reopenSurvey()">Reopen Survey</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

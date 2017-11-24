@@ -1,0 +1,12 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<div>
+    <ul class="question-options">
+        <li class="rating-options-option" ng-repeat="item in question.optionList.options">
+            <ul>
+                <li><span class="{{question.shapeName}}-empty"></span></li>
+                <li><span>{{item.text.items[0].text}}</span></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="clean"></div>

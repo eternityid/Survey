@@ -1,0 +1,25 @@
+﻿<div class="page__icon-toggle">
+    <i class="page__header-caret-position fa fa-caret-down" ng-click="pageCtrl.toggleCollapsePage(pageCtrl.page.id)"
+       title="Collapse page"></i>
+</div>
+<div class="page__header-content-column">
+    <div class="page__header-page-number-group">
+        <div class="page__header-page-number-collapsed">
+            <em>page <b>{{index + 1}}</b> of <b>{{pageCtrl.pages.length}}</b></em>
+        </div>
+        <div ng-show="pageCtrl.page.orderType === 1" class="page--randomizes">
+            <span class="icon--randomizes"></span>
+            <span class="text--randomizes"><em>Randomized</em></span>
+        </div>
+        <span class="page__icon--preview icon--preview" ng-click="pageCtrl.showPreviewDialog($event);"
+              title="Preview page" svt-stop-event></span>
+        <outlining-button collapse-questions="pageCtrl.collapseQuestions()"
+                          expand-questions="pageCtrl.expandQuestions()"></outlining-button>
+    </div>
+    <div class="page__header-content-title" role="form" title="Edit page">
+        <div>
+            <h2 class="page-title" ng-bind-html="pageTitle | trustAsHtmlFilter"></h2>
+            <h2 class="page-description" ng-bind-html="pageDescription | trustAsHtmlFilter"></h2>
+        </div>
+    </div>
+</div>

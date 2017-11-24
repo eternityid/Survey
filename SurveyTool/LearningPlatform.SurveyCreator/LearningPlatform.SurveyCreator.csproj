@@ -1,0 +1,1357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props" Condition="Exists('..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EE014CF6-D640-4C9F-A2F8-832EBF8FCB54}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.SurveyCreator</RootNamespace>
+    <AssemblyName>LearningPlatform.SurveyCreator</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IdentityServer3, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityServer3.2.5.4\lib\net45\IdentityServer3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.0.0.127, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.0.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.3.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.3.308261200\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.0.0.127, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.0.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.3.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.30826.1200, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.3.308261200\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\index.html" />
+    <Content Include="app\survey\common\constants\reportConst.js" />
+    <Content Include="app\survey\common\constants\libraryConst.js" />
+    <Content Include="app\survey\common\constants\surveyErrorConst.js" />
+    <Content Include="app\survey\common\fileBase\fileBase.js" />
+    <Content Include="app\survey\common\fileBase\fileBaseValidation.js" />
+    <Content Include="app\survey\common\filters\byteToKbFilter.js" />
+    <Content Include="app\survey\common\filters\byteToMbKbFilter.js" />
+    <Content Include="app\survey\common\filters\byteToMbFilter.js" />
+    <Content Include="app\survey\common\filters\fileNameFilter.js" />
+    <Content Include="app\survey\common\services\colorUtilSvc.js" />
+    <Content Include="app\survey\common\services\urlUtilSvc.js" />
+    <Content Include="app\survey\common\svtDatetime\svt-datetime.html" />
+    <Content Include="app\survey\common\svtDatetime\svt-datetime.js" />
+    <Content Include="app\survey\common\svtDatetime\svtDatetimeCtrl.js" />
+    <Content Include="app\survey\common\deleteGroupHeaderDialog\deleteGroupHeaderDialog.html" />
+    <Content Include="app\survey\common\deleteGroupHeaderDialog\deleteGroupHeaderDialogCtrl.js" />
+    <Content Include="app\survey\common\filters\dateTimeFormatFilter.js" />
+    <Content Include="app\survey\common\filters\dateFormatFilter.js" />
+    <Content Include="app\survey\common\keyCode.js" />
+    <Content Include="app\survey\common\errorCode.js" />
+    <Content Include="app\survey\common\numberRangeSelector\number-range-selector.html" />
+    <Content Include="app\survey\common\numberRangeSelector\number-range-selector.js" />
+    <Content Include="app\survey\common\numberRangeSelector\numberRangeSelectorCtrl.js" />
+    <Content Include="app\survey\common\questionTypeDropdownList\questionTypeDropdownList.html" />
+    <Content Include="app\survey\common\questionTypeDropdownList\questionTypeDropdownList.js" />
+    <Content Include="app\survey\common\questionTypeDropdownList\questionTypeDropdownList.spec.js" />
+    <Content Include="app\survey\common\questionTypeDropdownList\questionTypeDropdownListCtrl.js" />
+    <Content Include="app\survey\common\rzslider\rzslider.js" />
+    <Content Include="app\survey\common\svtCkeditor\svt-ckeditor.js" />
+    <Content Include="app\survey\common\constants\navigationRouteConst.js" />
+    <Content Include="app\survey\common\services\dateUtilSvc.js" />
+    <Content Include="app\survey\common\services\dialogSvc.js" />
+    <Content Include="app\survey\common\svtStopEvent\svtStopEvent.js" />
+    <Content Include="app\survey\dashboard\survey-dashboard.js" />
+    <Content Include="app\survey\deletedSurveyValidator\deleted-survey-validator.html" />
+    <Content Include="app\survey\deletedSurveyValidator\deletedSurveyValidatorCtrl.js" />
+    <Content Include="app\survey\fileLibraryManagement\createDirectoryModal\create-directory-modal.html" />
+    <Content Include="app\survey\fileLibraryManagement\createDirectoryModal\createDirectoryModalCtrl.js" />
+    <Content Include="app\survey\fileLibraryManagement\editBlobModal\edit-blob-modal.html" />
+    <Content Include="app\survey\fileLibraryManagement\editBlobModal\editBlobModalCtrl.js" />
+    <Content Include="app\survey\fileLibraryManagement\file-library-management.html" />
+    <Content Include="app\survey\fileLibraryManagement\fileLibraryManagementCtrl.js" />
+    <Content Include="app\survey\fileLibraryManagement\fileLibraryManagementSvc.js" />
+    <Content Include="app\survey\fileLibrary\fileLibraryConstants.js" />
+    <Content Include="app\survey\fileLibrary\fileLibrarySvc.js" />
+    <Content Include="app\survey\fileLibrary\filters\libraryByDisplayModeFilter.js" />
+    <Content Include="app\survey\fileLibrary\filters\directoryContainFileFilter.js" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\hard-disk-uploader.js" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\hard-disk-uploader.html" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\file-library-hard-disk-uploader.html" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\file-library-hard-disk-uploader.js" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\hardDiskUploaderCtrl.js" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\fileLibraryHardDiskUploaderSvc.js" />
+    <Content Include="app\survey\fileLibrary\hardDiskUploader\fileLibraryHardDiskUploaderCtrl.js" />
+    <Content Include="app\survey\fileLibrary\libraryImagePreviewer\libraryImagePreviewerSvc.spec.js" />
+    <Content Include="app\survey\fileLibrary\libraryImagePreviewer\libraryImagePreviewerSvc.js" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\fileLibraryPickerUploaderDialogSvc.js" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\pickerUploaderDialogCtrl.js" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\picker-uploader-dialog.html" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\fileLibraryPickerUploaderDialogSvc.spec.js" />
+    <Content Include="app\survey\fileLibrary\picker\file-library-picker.html" />
+    <Content Include="app\survey\fileLibrary\picker\file-library-picker.js" />
+    <Content Include="app\survey\fileLibrary\picker\fileLibraryPickerCtrl.js" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\file-library-picker-uploader-dialog.html" />
+    <Content Include="app\survey\fileLibrary\fileLibraryDataSvc.js" />
+    <Content Include="app\survey\fileLibrary\pickerUploader\fileLibraryPickerUploaderDialogCtrl.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\web-uploader.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\web-uploader.html" />
+    <Content Include="app\survey\fileLibrary\libraryImagePreviewer\library-image-previewer.js" />
+    <Content Include="app\survey\fileLibrary\libraryImagePreviewer\library-image-previewer.html" />
+    <Content Include="app\survey\fileLibrary\libraryImagePreviewer\libraryImagePreviewerCtrl.js" />
+    <Content Include="app\survey\fileLibrary\picker\fileLibraryPickerSvc.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\file-library-web-uploader.html" />
+    <Content Include="app\survey\fileLibrary\webUploader\file-library-web-uploader.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\webUploaderCtrl.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\fileLibraryWebUploaderCtrl.js" />
+    <Content Include="app\survey\fileLibrary\webUploader\fileLibraryWebUploaderSvc.js" />
+    <Content Include="app\survey\launch\launch.js" />
+    <Content Include="app\survey\question\types\numeric\numericEditorSvc.spec.js" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibraryQuestionModal\edit-library-question-modal.html" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibraryQuestionModal\editLibraryQuestionModalCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibrarySurveyModal\edit-library-survey-modal.html" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibrarySurveyModal\editLibrarySurveyModalCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\filters\rawTextInListCellFilter.js" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryPageList\library-page-list.html" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryPageList\library-page-list.js" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryPageList\libraryPageListCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryQuestionList\library-question-list.html" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryQuestionList\library-question-list.js" />
+    <Content Include="app\survey\surveyLibraryManagement\libraryQuestionList\libraryQuestionListCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\librarySurveyList\library-survey-list.html" />
+    <Content Include="app\survey\surveyLibraryManagement\librarySurveyList\library-survey-list.js" />
+    <Content Include="app\survey\surveyLibraryManagement\librarySurveyList\librarySurveyListCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibraryPageModal\edit-library-page-modal.html" />
+    <Content Include="app\survey\surveyLibraryManagement\editLibraryPageModal\editLibraryPageModalCtrl.js" />
+    <Content Include="app\survey\surveyLibraryManagement\survey-library-management.html" />
+    <Content Include="app\survey\surveyLibraryManagement\surveyLibraryManagementSvc.js" />
+    <Content Include="app\survey\surveyLibraryManagement\surveyLibraryManagementCtrl.js" />
+    <Content Include="app\survey\surveyLibrary\filters\pageTitleDescriptionFilter.js" />
+    <Content Include="app\survey\surveyLibrary\filters\questionTitleDescriptionFilter.js" />
+    <Content Include="app\survey\surveyLibrary\libraryDataSvc.js" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\from-library-dialog.html" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\fromLibraryDialogCtrl.js" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\from-library.html" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\from-library.js" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\fromLibraryCtrl.js" />
+    <Content Include="app\survey\surveyLibrary\fromLibrary\fromLibraryDataSvc.js" />
+    <Content Include="app\survey\page\addButton\add-button.html" />
+    <Content Include="app\survey\page\addButton\add-button.js" />
+    <Content Include="app\survey\page\errorPage\errorPage.html" />
+    <Content Include="app\survey\page\errorPage\errorPageCtrl.js" />
+    <Content Include="app\survey\page\movePageSvc.js" />
+    <Content Include="app\survey\page\outliningButton\outlining-button.html" />
+    <Content Include="app\survey\page\outliningButton\outlining-button.js" />
+    <Content Include="app\survey\page\previewDialog\preview-dialog.js" />
+    <Content Include="app\survey\question\editQuestion\editQuestionSvc.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionItemSvc.js" />
+    <Content Include="app\survey\question\moveQuestionSvc.js" />
+    <Content Include="app\survey\question\serverValidationSvc.js" />
+    <Content Include="app\survey\question\questionAdvanceSettingSvc.js" />
+    <Content Include="app\survey\question\questionAdvanceSettingSvc.spec.js" />
+    <Content Include="app\survey\question\generalSetting\general-setting.html" />
+    <Content Include="app\survey\question\generalSetting\general-setting.js" />
+    <Content Include="app\survey\question\generalSetting\generalSettingCtrl.js" />
+    <Content Include="app\survey\question\generalSetting\generalSettingCtrl.spec.js" />
+    <Content Include="app\survey\question\displaySetting\question-display-setting.html" />
+    <Content Include="app\survey\question\displaySetting\question-display-setting.js" />
+    <Content Include="app\survey\question\displaySetting\questionDisplaySettingCtrl.js" />
+    <Content Include="app\survey\question\displaySetting\questionDisplaySettingCtrl.spec.js" />
+    <Content Include="app\survey\question\types\date\date-editor.html" />
+    <Content Include="app\survey\question\types\date\date-editor.js" />
+    <Content Include="app\survey\question\types\date\date-question.html" />
+    <Content Include="app\survey\question\types\date\date-question.js" />
+    <Content Include="app\survey\question\types\date\date-question.spec.js" />
+    <Content Include="app\survey\question\types\date\dateEditorCtrl.js" />
+    <Content Include="app\survey\question\types\date\dateQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\numeric\numericEditorSvc.js" />
+    <Content Include="app\survey\question\types\selection\deleteOptionAndGroupSvc.js" />
+    <Content Include="app\survey\question\types\selection\header-option.html" />
+    <Content Include="app\survey\question\types\selection\header-option.js" />
+    <Content Include="app\survey\question\types\selection\moveGroupHeaderSvc.js" />
+    <Content Include="app\survey\question\types\selection\moveOptionAndGroupSvc.js" />
+    <Content Include="app\survey\question\types\selection\moveOptionSvc.js" />
+    <Content Include="app\survey\question\types\selection\multiple\multipleSelectionQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\selection\selection-option-group-list.html" />
+    <Content Include="app\survey\question\types\selection\selection-option-group.html" />
+    <Content Include="app\survey\question\types\selection\selection-option-item.html" />
+    <Content Include="app\survey\question\types\selection\selectionEditorSvc.js" />
+    <Content Include="app\survey\question\types\selection\single\singleSelectionQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\validationSetting\validation-setting.html" />
+    <Content Include="app\survey\question\validationSetting\validation-Setting.js" />
+    <Content Include="app\survey\question\validationSetting\validationSettingCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scale-grid-editor.html" />
+    <Content Include="app\survey\question\types\scale\scale-grid-editor.js" />
+    <Content Include="app\survey\question\types\scale\scale-grid-question.html" />
+    <Content Include="app\survey\question\types\scale\scale-grid-question.js" />
+    <Content Include="app\survey\question\types\scale\scaleGridEditorCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scaleGridEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\scale\scaleGridQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scaleGridQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\rating\rating-grid-editor.html" />
+    <Content Include="app\survey\question\types\rating\rating-grid-editor.js" />
+    <Content Include="app\survey\question\types\rating\rating-grid-question.html" />
+    <Content Include="app\survey\question\types\rating\rating-grid-question.js" />
+    <Content Include="app\survey\question\types\rating\ratingGridEditorCtrl.js" />
+    <Content Include="app\survey\question\types\rating\ratingGridEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\rating\ratingGridQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\rating\ratingGridQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\textList\textListQuestionSvc.spec.js" />
+    <Content Include="app\survey\question\types\textList\textListQuestionCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\report-editor.js" />
+    <Content Include="app\survey\respondentList\respondent-list.js" />
+    <Content Include="app\survey\result\report\report.js" />
+    <Content Include="app\survey\result\resultSettings\result-settings.html" />
+    <Content Include="app\survey\result\resultSettings\result-settings.js" />
+    <Content Include="app\survey\result\resultSettings\resultSettingsCtrl.js" />
+    <Content Include="app\survey\common\selectTwo\selectTwoCtrl.js" />
+    <Content Include="app\survey\common\selectTwo\select-two.html" />
+    <Content Include="app\survey\common\selectTwo\select-two.js" />
+    <Content Include="app\survey\surveyEditor\accessRights\access-rights.html" />
+    <Content Include="app\survey\surveyEditor\accessRights\access-rights.js" />
+    <Content Include="app\survey\surveyEditor\accessRights\accessRightsCtrl.js" />
+    <Content Include="app\survey\surveyEditor\accessRights\accessRightsSvc.js" />
+    <Content Include="app\survey\surveyEditor\accessRights\accessRightsDataSvc.js" />
+    <Content Include="app\survey\surveyEditor\expression\expressionOperatorSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\settings\pageLookAndFeelSettingsSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\settings\surveyLookAndFeelSettingsSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\surveySettingsCtrl.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\surveySettingsCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\surveySettingsSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\surveySettingsSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\survey-settings.js" />
+    <Content Include="app\survey\surveyEditor\surveySettings\survey-settings.html" />
+    <Content Include="app\survey\surveyEditor\validation\surveyContentValidation.js" />
+    <Content Include="app\survey\surveyEditor\validation\surveyContentValidationHelperSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel-previewer.html" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel-previewer.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel-settings.html" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel-settings.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSettingsCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelPreviewerCtrl.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelPreviewerSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSettingsCtrl.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSettingsSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSettingsSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\survey-editor.js" />
+    <Content Include="app\survey\result\resultStatusSummary\result-status-summary.html" />
+    <Content Include="app\survey\result\resultStatusSummary\result-status-summary.js" />
+    <Content Include="app\survey\surveyErrorList\survey-error-list.html" />
+    <Content Include="app\survey\surveyErrorList\survey-error-list.js" />
+    <Content Include="app\survey\surveyErrorList\surveyErrorListCtrl.js" />
+    <Content Include="app\survey\surveyErrorList\surveyErrorListSvc.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\emptySurvey\new-empty-survey.html" />
+    <Content Include="app\survey\surveyList\createNewSurvey\emptySurvey\new-empty-survey.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\create-new-survey.html" />
+    <Content Include="app\survey\surveyList\createNewSurvey\create-new-survey.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\createNewSurveyCtrl.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\createNewSurveySvc.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\emptySurvey\newEmptySurveyCtrl.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\existingSurvey\new-existing-survey.html" />
+    <Content Include="app\survey\surveyList\createNewSurvey\existingSurvey\new-existing-survey.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\existingSurvey\newExistingSurveyCtrl.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\librarySurvey\new-library-survey.html" />
+    <Content Include="app\survey\surveyList\createNewSurvey\librarySurvey\new-library-survey.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\librarySurvey\newLibrarySurveyCtrl.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\createNewSurveySvc.spec.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\previewSurvey\preview-survey.html" />
+    <Content Include="app\survey\surveyList\createNewSurvey\previewSurvey\preview-survey.js" />
+    <Content Include="app\survey\surveyList\createNewSurvey\previewSurvey\previewSurveyCtrl.js" />
+    <Content Include="app\survey\surveyMenuSvc.js" />
+    <Content Include="app\survey\testMode\test-mode-editor.js" />
+    <Content Include="app\survey\user\user-editor-company-dialog.html" />
+    <Content Include="app\survey\user\user-editor-dialog.html" />
+    <Content Include="app\survey\user\userEditorCompanyDialogCtrl.js" />
+    <Content Include="app\survey\user\userEditorDialogCtrl.js" />
+    <Content Include="app\survey\user\userDataSvc.js" />
+    <Content Include="app\survey\user\companyDataSvc.js" />
+    <Content Include="app\survey\user\userSvc.js" />
+    <Content Include="app\welcomeCtrl.js" />
+    <Content Include="app\indexCtrl.js" />
+    <Content Include="app\indexCtrl.spec.js" />
+    <Content Include="app\indexSvc.js" />
+    <Content Include="app\silent_renew.html" />
+    <Content Include="app\survey\account\change-password.html" />
+    <Content Include="app\survey\account\changePasswordCtrl.js" />
+    <Content Include="app\survey\account\changePasswordDataSvc.js" />
+    <Content Include="app\survey\auth\authInterceptorSvc.spec.js" />
+    <Content Include="app\survey\common\constants\questionConst.js" />
+    <Content Include="app\survey\common\dropdownList\dropdown-list.html" />
+    <Content Include="app\survey\common\dropdownList\dropdown-list.js" />
+    <Content Include="app\survey\common\dropdownList\dropdownListCtrl.js" />
+    <Content Include="app\survey\common\dropdownList\dropdownListCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\filters\getPageOnlyFilter.js" />
+    <Content Include="app\survey\common\filters\truncateFilter.js" />
+    <Content Include="app\survey\common\filters\htmlToPlainTextFilter.spec.js" />
+    <Content Include="app\survey\common\fontSelector\font-selector.html" />
+    <Content Include="app\survey\common\fontSelector\font-selector.js" />
+    <Content Include="app\survey\common\fontSelector\fontSelectorCtrl.js" />
+    <Content Include="app\survey\common\fontSelector\fontSelectorSvc.js" />
+    <Content Include="app\survey\common\fontSelector\fontSelectorSvc.spec.js" />
+    <Content Include="app\survey\common\customValidators\svt-match-with.js" />
+    <Content Include="app\survey\common\richTextInput\rich-text-input.js" />
+    <Content Include="app\survey\common\services\animateSvc.js" />
+    <Content Include="app\survey\common\services\animateSvc.spec.js" />
+    <Content Include="app\survey\common\services\domUtilSvc.js" />
+    <Content Include="app\survey\common\services\fileUtilSvc.js" />
+    <Content Include="app\survey\page\pageEditor\pageEditorCtrl.spec.js" />
+    <Content Include="app\survey\page\pageValidationSvc.js" />
+    <Content Include="app\survey\page\pageValidationSvc.spec.js" />
+    <Content Include="app\survey\page\partials\collapsed-page-info.html" />
+    <Content Include="app\survey\page\partials\expanded-page-info.html" />
+    <Content Include="app\survey\page\pageEditor\page-editor.js" />
+    <Content Include="app\survey\page\pageEditor\page-editor.html" />
+    <Content Include="app\survey\page\pageEditor\pageEditorCtrl.js" />
+    <Content Include="app\survey\page\partials\questions-in-page.html" />
+    <Content Include="app\survey\page\partials\skip-actions-in-page.html" />
+    <Content Include="app\survey\page\previewDialog\preview-dialog.html" />
+    <Content Include="app\survey\page\previewDialog\previewDialogCtrl.js" />
+    <Content Include="app\survey\page\previewDialog\previewDialogCtrl.spec.js" />
+    <Content Include="app\survey\pushDown\pushDownCtrl.spec.js" />
+    <Content Include="app\survey\pushDown\pushDownSvc.spec.js" />
+    <Content Include="app\survey\question\conditionallyDisplay\conditionally-display.html" />
+    <Content Include="app\survey\question\conditionallyDisplay\conditionally-display.js" />
+    <Content Include="app\survey\question\conditionallyDisplay\conditionallyDisplayCtrl.js" />
+    <Content Include="app\survey\question\conditionallyDisplay\conditionallyDisplayCtrl.spec.js" />
+    <Content Include="app\survey\question\createQuestion\create-question-container.html" />
+    <Content Include="app\survey\question\editConditionDialog\editConditionDialogCtrl.spec.js" />
+    <Content Include="app\survey\question\editQuestion\edit-question-container.html" />
+    <Content Include="app\survey\question\editConditionDialog\edit-condition-dialog.html" />
+    <Content Include="app\survey\question\editConditionDialog\editConditionDialogCtrl.js" />
+    <Content Include="app\survey\question\questionHistoryManagerSvc.spec.js" />
+    <Content Include="app\survey\question\questionPreviewer\question-previewer.js" />
+    <Content Include="app\survey\question\questionPreviewer\question-previewer.html" />
+    <Content Include="app\survey\question\questionPreviewer\questionPreviewerDataSvc.js" />
+    <Content Include="app\survey\question\questionPreviewer\questionPreviewerCtrl.js" />
+    <Content Include="app\survey\question\questionPreviewer\questionPreviewerSvc.js" />
+    <Content Include="app\survey\question\questionEditorSvc.js" />
+    <Content Include="app\survey\question\questionEditorSvc.spec.js" />
+    <Content Include="app\survey\question\questionCarryOverSvc.js" />
+    <Content Include="app\survey\question\questionCarryOverSvc.spec.js" />
+    <Content Include="app\survey\question\questionHistoryManagerSvc.js" />
+    <Content Include="app\survey\question\questionPreviewer\questionPreviewerSvc.spec.js" />
+    <Content Include="app\survey\question\questionValidationSvc.spec.js" />
+    <Content Include="app\survey\question\questionTypeSvc.js" />
+    <Content Include="app\survey\question\questionTypeSvc.spec.js" />
+    <Content Include="app\survey\question\questionValidationSvc.js" />
+    <Content Include="app\survey\question\types\information\information-editor.js" />
+    <Content Include="app\survey\question\types\information\informationEditorCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scaleQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scaleQuestionSvc.spec.js" />
+    <Content Include="app\survey\question\types\numeric\numeric-editor.js" />
+    <Content Include="app\survey\question\types\numeric\numericEditorCtrl.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionListSvc.spec.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureSelectionEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\questionWithOptionsSvc.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-selection-editor.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-selection-editor.html" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureSelectionEditorCtrl.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selection-grid-editor.html" />
+    <Content Include="app\survey\question\types\selectionGrid\selection-grid-editor.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridEditorCtrl.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridQuestionSvc.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridQuestionSvc.spec.js" />
+    <Content Include="app\survey\question\types\selection\multiple\multipleSelectionQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\selection\selection-editor.html" />
+    <Content Include="app\survey\question\types\selection\selectionEditorCtrl.js" />
+    <Content Include="app\survey\question\types\selection\selection-editor.js" />
+    <Content Include="app\survey\question\types\selection\single\singleSelectionQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\textList\text-list-question.html" />
+    <Content Include="app\survey\question\types\textList\text-list-question.js" />
+    <Content Include="app\survey\question\types\textList\text-list-editor.html" />
+    <Content Include="app\survey\question\types\textList\text-list-editor.js" />
+    <Content Include="app\survey\question\types\textList\textListEditorCtrl.js" />
+    <Content Include="app\survey\question\types\textList\textListEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\textList\textListQuestionSvc.js" />
+    <Content Include="app\survey\question\types\text\textQuestionSvc.js" />
+    <Content Include="app\survey\question\types\text\textEditorCtrl.js" />
+    <Content Include="app\survey\question\types\textList\textListQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\text\textQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\text\textQuestionSvc.spec.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\labelEditorDialogCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\editableLabelCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\editedLabelDataSvc.spec.js" />
+    <Content Include="app\survey\reportList\reportListDataSvc.spec.js" />
+    <Content Include="app\survey\respondentDetailDialog\respondentDetailDialogCtrl.spec.js" />
+    <Content Include="app\survey\respondentDetailDialog\respondentDetailDialogDataSvc.spec.js" />
+    <Content Include="app\survey\respondentList\addRespondent\add-respondent.html" />
+    <Content Include="app\survey\respondentList\addRespondent\add-respondent.js" />
+    <Content Include="app\survey\respondentList\addRespondent\addRespondentCtrl.js" />
+    <Content Include="app\survey\respondentList\addRespondent\addRespondentSvc.js" />
+    <Content Include="app\survey\respondentList\addRespondent\addRespondentSvc.spec.js" />
+    <Content Include="app\survey\respondentList\addRespondent\addRespondentCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesDataSvc.spec.js" />
+    <Content Include="app\survey\respondentList\importRespondent\importRespondentSvc.spec.js" />
+    <Content Include="app\survey\respondentDetailDialog\response-detail-dialog.html" />
+    <Content Include="app\survey\respondentDetailDialog\respondentDetailDialogCtrl.js" />
+    <Content Include="app\survey\respondentDetailDialog\respondentDetailDialogDataSvc.js" />
+    <Content Include="app\survey\result\report\reportTableSvc.js" />
+    <Content Include="app\survey\shared\guidUtilSvc.js" />
+    <Content Include="app\survey\shared\languageStringUtilSvc.js" />
+    <Content Include="app\survey\skipCommand\skipCommandEditorSvc.spec.js" />
+    <Content Include="app\survey\skipCommand\skipCommandSvc.spec.js" />
+    <Content Include="app\survey\skipCommand\skipCommandEditorCtrl.spec.js" />
+    <Content Include="app\survey\skipCommand\skipCommandCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelDataSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorMessageSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorPageSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorPageSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorQuestionSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorQuestionSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorValidationSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorValidationSvc.spec.js" />
+    <Content Include="app\survey\surveySvc.spec.js" />
+    <Content Include="app\survey\surveyTitleAndStatus\surveyTitleAndStatusCtrl.spec.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomResponsesDataSvc.spec.js" />
+    <Content Include="app\survey\testMode\testModeEditorCtrl.spec.js" />
+    <Content Include="app\survey\testMode\testModeSvc.spec.js" />
+    <Content Include="app\survey\testMode\testModeButton\testModeButtonCtrl.spec.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomDataSvc.spec.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generate-random-data.html" />
+    <Content Include="app\survey\testMode\generateRandomData\generate-random-data.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomDataCtrl.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomResponsesDataSvc.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomDataSvc.js" />
+    <Content Include="app\survey\testMode\generateRandomData\generateRandomDataCtrl.spec.js" />
+    <Content Include="app\survey\testMode\test-mode-editor.html" />
+    <Content Include="app\survey\testMode\testModeButton\test-mode-button.html" />
+    <Content Include="app\survey\testMode\testModeButton\test-mode-button.js" />
+    <Content Include="app\survey\testMode\testModeEditorCtrl.js" />
+    <Content Include="app\survey\testMode\testModeButton\testModeButtonCtrl.js" />
+    <Content Include="app\survey\testMode\testModeSvc.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionBuilderCtrl.spec.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionBuilderSvc.spec.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionItemCtrl.spec.js" />
+    <Content Include="app\survey\question\questionSvc.spec.js" />
+    <Content Include="app\survey\reportList\createReport\createReportCtrl.spec.js" />
+    <Content Include="app\survey\reportList\createReport\createReportSvc.spec.js" />
+    <Content Include="app\survey\respondentList\importRespondent\importRespondentCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\importRespondent\importRespondentSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\export-survey.html" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\export-survey.js" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\exportSurveySvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\exportSurveySvc.js" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\exportSurveyCtrl.js" />
+    <Content Include="app\survey\surveyEditor\exportSurvey\exportSurveyCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorMessageSvc.js" />
+    <Content Include="app\survey\surveyList\importSurvey\importSurveyCtrl.spec.js" />
+    <Content Include="app\survey\surveyList\importSurvey\importSurveySvc.spec.js" />
+    <Content Include="app\survey\surveyList\importSurvey\import-survey.html" />
+    <Content Include="app\survey\surveyList\importSurvey\import-survey.js" />
+    <Content Include="app\survey\surveyList\importSurvey\importSurveyCtrl.js" />
+    <Content Include="app\survey\surveyList\importSurvey\importSurveySvc.js" />
+    <Content Include="app\survey\common\filters\trustAsHtmlFilter.js" />
+    <Content Include="app\survey\common\getFile\getFile.js" />
+    <Content Include="app\survey\common\filters\htmlToPlainTextFilter.js" />
+    <Content Include="app\survey\common\services\angularScopeUtilSvc.js" />
+    <Content Include="app\survey\auth\oidcTokenManager.js" />
+    <Content Include="app\survey\common\services\arrayUtilSvc.spec.js" />
+    <Content Include="app\survey\common\services\numberUtilSvc.spec.js" />
+    <Content Include="app\survey\common\services\objectUtilSvc.js" />
+    <Content Include="app\survey\common\services\stringUtilSvc.spec.js" />
+    <Content Include="app\survey\common\services\spinnerUtilSvc.js" />
+    <Content Include="app\survey\common\uploadFile\upload.html" />
+    <Content Include="app\survey\common\uploadFile\upload.js" />
+    <Content Include="app\survey\common\uploadFile\uploadFileDataSvc.js" />
+    <Content Include="app\survey\dashboard\surveyDashboardDataSvc.js" />
+    <Content Include="app\survey\dashboard\surveyDashboardSvc.js" />
+    <Content Include="app\survey\dashboard\surveyDashboardSvc.spec.js" />
+    <Content Include="app\survey\dashboard\surveyDashboardDataSvc.spec.js" />
+    <Content Include="app\survey\launch\launchSvc.spec.js" />
+    <Content Include="app\survey\launch\updateSurveyStatusDialog\updateSurveyStatusDialogCtrl.spec.js" />
+    <Content Include="app\survey\launch\updateSurveyStatusDialog\update-survey-status-dialog.html" />
+    <Content Include="app\survey\launch\updateSurveyStatusDialog\updateSurveyStatusDialogCtrl.js" />
+    <Content Include="app\survey\common\prototypes.js" />
+    <Content Include="app\survey\common\exceptionHandler.js" />
+    <Content Include="app\survey\common\services\arrayUtilSvc.js" />
+    <Content Include="app\survey\common\services\errorHandlingSvc.js" />
+    <Content Include="app\survey\common\services\numberUtilSvc.js" />
+    <Content Include="app\survey\common\services\stringUtilSvc.js" />
+    <Content Include="app\survey\launch\launch.html" />
+    <Content Include="app\survey\launch\launchCtrl.js" />
+    <Content Include="app\survey\launch\launchCtrl.spec.js" />
+    <Content Include="app\survey\launch\launchDataSvc.js" />
+    <Content Include="app\survey\launch\launchDataSvc.spec.js" />
+    <Content Include="app\survey\launch\launchSvc.js" />
+    <Content Include="app\survey\pushDown\push-down.html" />
+    <Content Include="app\survey\pushDown\push-down.js" />
+    <Content Include="app\survey\pushDown\pushDownCtrl.js" />
+    <Content Include="app\survey\pushDown\pushDownSvc.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionBuilderCtrl.js" />
+    <Content Include="app\survey\question\expressionBuilder\expressionItemCtrl.js" />
+    <Content Include="app\survey\question\expressionBuilder\expression-item.js" />
+    <Content Include="app\survey\question\expressionBuilder\expression-builder.js" />
+    <Content Include="app\survey\question\expressionBuilder\expression-item.html" />
+    <Content Include="app\survey\question\expressionBuilder\expression-builder.html" />
+    <Content Include="app\survey\question\expressionBuilder\expressionBuilderSvc.js" />
+    <Content Include="app\survey\question\types\rating\rating-question.html" />
+    <Content Include="app\survey\question\types\rating\rating-question.js" />
+    <Content Include="app\survey\question\types\rating\rating-editor.html" />
+    <Content Include="app\survey\question\types\rating\rating-editor.js" />
+    <Content Include="app\survey\question\types\rating\ratingEditorCtrl.js" />
+    <Content Include="app\survey\question\types\rating\ratingQuestionSvc.js" />
+    <Content Include="app\survey\question\types\rating\ratingQuestionSvc.spec.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionListCtrl.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-option-list.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionCtrl.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-option.html" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-option.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-option-list.html" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionListCtrl.spec.js" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureSelectionQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionListSvc.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionListCtrl.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionListCtrl.spec.js" />
+    <Content Include="app\survey\question\types\selection\selection-option-list.js" />
+    <Content Include="app\survey\question\types\selection\selection-option-list.html" />
+    <Content Include="app\survey\question\types\selection\selection-option.js" />
+    <Content Include="app\survey\question\types\selection\selection-option.html" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureSelectionQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-selection-question.js" />
+    <Content Include="app\survey\question\types\pictureSelection\picture-selection-question.html" />
+    <Content Include="app\survey\question\types\pictureSelection\pictureOptionListSvc.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selection-grid-question.html" />
+    <Content Include="app\survey\question\types\selectionGrid\selection-grid-question.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridQuestionCtrl.js" />
+    <Content Include="app\survey\question\types\selectionGrid\selectionGridQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\netPromoterScore\netPromoterScoreQuestionSvc.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionCtrl.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionCtrl.spec.js" />
+    <Content Include="app\survey\question\types\scale\scale-question.html" />
+    <Content Include="app\survey\question\types\scale\scale-question.js" />
+    <Content Include="app\survey\question\types\scale\scale-editor.html" />
+    <Content Include="app\survey\question\types\scale\scale-editor.js" />
+    <Content Include="app\survey\question\types\scale\scaleEditorCtrl.js" />
+    <Content Include="app\survey\question\types\scale\scaleEditorCtrl.spec.js" />
+    <Content Include="app\survey\question\types\scale\scaleQuestionSvc.js" />
+    <Content Include="app\survey\question\types\netPromoterScore\net-promoter-score-editor.html" />
+    <Content Include="app\survey\question\types\netPromoterScore\net-promoter-score-editor.js" />
+    <Content Include="app\survey\question\types\netPromoterScore\netPromoterScoreEditorCtrl.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\editedLabelDataSvc.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\editableLabelSvc.js" />
+    <Content Include="app\survey\reportEditor\elementDialog\elementDialogCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\page\elementEditor\element-interactome.js" />
+    <Content Include="app\survey\reportEditor\elementDialog\element-dialog.html" />
+    <Content Include="app\survey\reportEditor\elementDialog\elementDialogCtrl.js" />
+    <Content Include="app\survey\reportEditor\elementDialog\elementDialogSvc.js" />
+    <Content Include="app\survey\question\types\selection\selectionOptionListSvc.spec.js" />
+    <Content Include="app\survey\reportEditor\page\elementEditor\rpElementEditorSvc.js" />
+    <Content Include="app\survey\reportEditor\page\reportPageCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\page\reportPageSvc.spec.js" />
+    <Content Include="app\survey\reportEditor\reportEditorCtrl.spec.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\label-editor-dialog.html" />
+    <Content Include="app\survey\reportEditor\editableLabel\editable-label.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\editable-label.html" />
+    <Content Include="app\survey\reportEditor\editableLabel\editableLabelCtrl.js" />
+    <Content Include="app\survey\reportEditor\editableLabel\labelEditorDialogCtrl.js" />
+    <Content Include="app\survey\reportEditor\reportElementDataSvc.js" />
+    <Content Include="app\survey\reportList\createReport\create-report.html" />
+    <Content Include="app\survey\reportList\createReport\create-report.js" />
+    <Content Include="app\survey\reportList\createReport\createReportCtrl.js" />
+    <Content Include="app\survey\reportList\createReport\createReportSvc.js" />
+    <Content Include="app\survey\reportList\reportListSvc.spec.js" />
+    <Content Include="app\survey\reportList\reports.html" />
+    <Content Include="app\survey\reportList\reportsCtrl.js" />
+    <Content Include="app\survey\reportList\reportListDataSvc.js" />
+    <Content Include="app\survey\reportList\reportListSvc.js" />
+    <Content Include="app\survey\reportEditor\page\reportPage.html" />
+    <Content Include="app\survey\reportEditor\page\reportPage.js" />
+    <Content Include="app\survey\reportEditor\page\reportPageCtrl.js" />
+    <Content Include="app\survey\reportEditor\page\reportPageDataSvc.js" />
+    <Content Include="app\survey\reportEditor\page\reportPageSvc.js" />
+    <Content Include="app\survey\reportEditor\report-editor.html" />
+    <Content Include="app\survey\reportEditor\reportEditorCtrl.js" />
+    <Content Include="app\survey\reportEditor\reportEditorSvc.js" />
+    <Content Include="app\survey\reportList\reportsCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\emailRespondent\email-respondent.js" />
+    <Content Include="app\survey\respondentList\emailRespondent\emailRespondentCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\emailRespondent\email-respondent.html" />
+    <Content Include="app\survey\respondentList\emailRespondent\emailRespondentCtrl.js" />
+    <Content Include="app\survey\common\config.js" />
+    <Content Include="app\survey\common\deleteDialog\delete-dialog.html" />
+    <Content Include="app\survey\common\deleteDialog\deleteDialogCtrl.js" />
+    <Content Include="app\survey\common\deleteDialog\deleteDialogCtrl.spec.js" />
+    <Content Include="app\survey\common\services\constantSvc.js" />
+    <Content Include="app\survey\dashboard\surveyDashboardCtrl.spec.js" />
+    <Content Include="app\survey\layout\layoutDataSvc.js" />
+    <Content Include="app\survey\page\pageCtrl.js" />
+    <Content Include="app\survey\page\pageCtrl.spec.js" />
+    <Content Include="app\survey\page\pageDataSvc.js" />
+    <Content Include="app\survey\page\page-container.html" />
+    <Content Include="app\survey\page\page-container.js" />
+    <Content Include="app\survey\page\pageSvc.js" />
+    <Content Include="app\survey\page\pageDataSvc.spec.js" />
+    <Content Include="app\survey\page\pageSvc.spec.js" />
+    <Content Include="app\survey\question\createQuestion\create-question.js" />
+    <Content Include="app\survey\question\createQuestion\createQuestionCtrl.js" />
+    <Content Include="app\survey\question\editQuestion\editQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\createQuestion\createQuestionCtrl.spec.js" />
+    <Content Include="app\survey\question\questionDataSvc.js" />
+    <Content Include="app\survey\question\editQuestion\edit-question.js" />
+    <Content Include="app\survey\question\editQuestion\editQuestionCtrl.js" />
+    <Content Include="app\survey\question\questionDataSvc.spec.js" />
+    <Content Include="app\survey\question\types\information\information-question.html" />
+    <Content Include="app\survey\question\types\information\information-question.js" />
+    <Content Include="app\survey\question\types\numeric\numeric-question.html" />
+    <Content Include="app\survey\question\types\numeric\numeric-question.js" />
+    <Content Include="app\survey\question\types\selection\multiple\multiple-selection-question.html" />
+    <Content Include="app\survey\question\types\selection\multiple\multiple-selection-question.js" />
+    <Content Include="app\survey\question\types\selection\single\single-selection-question.html" />
+    <Content Include="app\survey\question\types\selection\single\single-selection-question.js" />
+    <Content Include="app\survey\question\types\text\text-question.html" />
+    <Content Include="app\survey\question\types\text\text-question.js" />
+    <Content Include="app\survey\question\types\text\text-editor.html" />
+    <Content Include="app\survey\question\types\text\text-editor.js" />
+    <Content Include="app\survey\question\questionSvc.js" />
+    <Content Include="app\survey\question\types\text\text-question.spec.js" />
+    <Content Include="app\survey\respondentList\emailRespondent\emailRespondentSvc.js" />
+    <Content Include="app\survey\respondentList\emailRespondent\emailRespondentSvc.spec.js" />
+    <Content Include="app\survey\respondentList\exportResponses\export-responses.html" />
+    <Content Include="app\survey\respondentList\exportResponses\export-responses.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesCtrl.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesDataSvc.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesSvc.js" />
+    <Content Include="app\survey\respondentList\exportResponses\exportResponsesSvc.spec.js" />
+    <Content Include="app\survey\respondentList\importRespondent\import-respondent.js" />
+    <Content Include="app\survey\respondentList\respondentListDataSvc.js" />
+    <Content Include="app\survey\respondentList\respondentListDataSvc.spec.js" />
+    <Content Include="app\survey\respondentList\respondent-list.html" />
+    <Content Include="app\survey\respondentList\respondentListCtrl.js" />
+    <Content Include="app\survey\respondentList\respondentListCtrl.spec.js" />
+    <Content Include="app\survey\respondentList\respondentListSvc.js" />
+    <Content Include="app\survey\respondentList\respondentListSvc.spec.js" />
+    <Content Include="app\survey\respondentList\importRespondent\import-respondent.html" />
+    <Content Include="app\survey\respondentList\importRespondent\importRespondentCtrl.js" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rs-chart-applicable-questions.html" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rs-chart-applicable-questions.js" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rsChartApplicableQuestionsCtrl.js" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rsChartApplicableQuestionsSvc.js" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rsChartApplicableQuestionsSvc.spec.js" />
+    <Content Include="app\survey\result\numericQuestion\rsNumericQuestionCtrl.spec.js" />
+    <Content Include="app\survey\result\numericQuestion\rsNumericQuestionSvc.spec.js" />
+    <Content Include="app\survey\result\openTextQuestion\rsOpenTextQuestionCtrl.spec.js" />
+    <Content Include="app\survey\result\openTextQuestion\rsOpenTextQuestionSvc.spec.js" />
+    <Content Include="app\survey\result\report\reportCtrl.spec.js" />
+    <Content Include="app\survey\result\numericQuestion\rs-numeric-question.js" />
+    <Content Include="app\survey\result\numericQuestion\rs-numeric-question.html" />
+    <Content Include="app\survey\result\numericQuestion\rsNumericQuestionCtrl.js" />
+    <Content Include="app\survey\result\numericQuestion\rsNumericQuestionSvc.js" />
+    <Content Include="app\survey\result\report\reportSvc.js" />
+    <Content Include="app\survey\result\report\report-table.html" />
+    <Content Include="app\survey\result\report\report-table.js" />
+    <Content Include="app\survey\result\report\reportTableCtrl.js" />
+    <Content Include="app\survey\result\chartApplicableQuestions\rsChartApplicableQuestionsCtrl.spec.js" />
+    <Content Include="app\survey\result\report\rpSelectionGridQuestionSvc.js" />
+    <Content Include="app\survey\result\report\rpSelectionGridQuestionSvc.spec.js" />
+    <Content Include="app\survey\result\report\rpSelectionQuestionSvc.js" />
+    <Content Include="app\survey\result\report\report.html" />
+    <Content Include="app\survey\result\report\reportCtrl.js" />
+    <Content Include="app\survey\result\report\reportDataSvc.js" />
+    <Content Include="app\survey\result\openTextQuestion\rsOpenTextQuestionSvc.js" />
+    <Content Include="app\survey\result\openTextQuestion\rsOpenTextQuestionCtrl.js" />
+    <Content Include="app\survey\result\openTextQuestion\rs-open-text-question.html" />
+    <Content Include="app\survey\result\openTextQuestion\rs-open-text-question.js" />
+    <Content Include="app\survey\result\report\reportDataSvc.spec.js" />
+    <Content Include="app\survey\result\report\rpSelectionQuestionSvc.spec.js" />
+    <Content Include="app\survey\result\summaryTabular\rs-question-without-sub-questions.html" />
+    <Content Include="app\survey\result\summaryTabular\rs-question-with-sub-questions.html" />
+    <Content Include="app\survey\skipCommand\skip-command.html" />
+    <Content Include="app\survey\skipCommand\skip-command.js" />
+    <Content Include="app\survey\skipCommand\skip-command-editor.html" />
+    <Content Include="app\survey\skipCommand\skip-command-editor.js" />
+    <Content Include="app\survey\skipCommand\skipCommandCtrl.js" />
+    <Content Include="app\survey\skipCommand\skipCommandEditorCtrl.js" />
+    <Content Include="app\survey\skipCommand\skipCommandEditorSvc.js" />
+    <Content Include="app\survey\skipCommand\skipCommandSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel.html" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\look-and-feel.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelCtrl.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\themeDataSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\lookAndFeelDataSvc.js" />
+    <Content Include="app\survey\surveyEditor\lookAndFeel\themeDataSvc.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorCtrl.spec.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorDataSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorSvc.spec.js" />
+    <Content Include="app\survey\surveyList\surveyListSvc.js" />
+    <Content Include="app\survey\surveyList\surveyListSvc.spec.js" />
+    <Content Include="app\survey\surveySvc.js" />
+    <Content Include="app\survey\surveyTitleAndStatus\survey-title-and-status.html" />
+    <Content Include="app\survey\surveyTitleAndStatus\survey-title-and-status.js" />
+    <Content Include="app\survey\surveyTitleAndStatus\surveyTitleAndStatusCtrl.js" />
+    <Content Include="app\survey\surveyTitleAndStatus\surveyTitleAndStatusSvc.js" />
+    <Content Include="app\survey\surveyEditor\surveyEditorDataSvc.spec.js" />
+    <Content Include="app\survey\surveyList\surveyDataSvc.js" />
+    <Content Include="app\survey\surveyList\surveyDataSvc.spec.js" />
+    <Content Include="app\survey\surveyList\surveysCtrl.spec.js" />
+    <Content Include="app\survey\surveyModule.js" />
+    <Content Include="app\survey\surveyEditor\survey-editor.html" />
+    <Content Include="app\survey\surveyEditor\surveyEditorCtrl.js" />
+    <Content Include="app\survey\dashboard\survey-dashboard.html" />
+    <Content Include="app\survey\dashboard\surveyDashboardCtrl.js" />
+    <Content Include="app\survey\surveyList\surveys.html" />
+    <Content Include="app\survey\surveyList\surveysCtrl.js" />
+    <Content Include="app\survey\auth\authInterceptorSvc.js" />
+    <Content Include="app\survey\auth\authSvc.js" />
+    <Content Include="app\survey\testSurvey\test-survey.html" />
+    <Content Include="app\survey\testSurvey\testSurveyCtrl.js" />
+    <Content Include="app\survey\testSurvey\testSurveyCtrl.spec.js" />
+    <Content Include="app\survey\user\user-creator-dialog.html" />
+    <Content Include="app\survey\user\userCreatorDialogCtrl.js" />
+    <Content Include="app\survey\user\createUserSvc.js" />
+    <Content Include="app\survey\auth\login.html" />
+    <Content Include="app\survey\auth\loginCtrl.js" />
+    <Content Include="app\survey\auth\loginCtrl.spec.js" />
+    <Content Include="app\survey\user\createUserSvc.spec.js" />
+    <Content Include="app\survey\user\userManagementDataSvc.js" />
+    <Content Include="app\survey\user\userManagementSvc.spec.js" />
+    <Content Include="app\survey\user\users.html" />
+    <Content Include="app\survey\user\usersCtrl.js" />
+    <Content Include="app\survey\user\usersCtrl.spec.js" />
+    <Content Include="app\welcome.html" />
+    <Content Include="assets\images\empty-folder.png" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\image-placeholder.png" />
+    <Content Include="assets\images\image_icon.png" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\logo-survey.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\mainbg.jpg" />
+    <Content Include="assets\images\sprite_icons.png" />
+    <Content Include="assets\images\stacked_chart.png" />
+    <Content Include="assets\images\survey-header-background.jpg" />
+    <Content Include="assets\less\components\dashboard.less" />
+    <Content Include="assets\less\custom\rzslider-custom.less" />
+    <Content Include="assets\less\custom\bootstrap-custom.less" />
+    <Content Include="assets\less\components\action-menu.less" />
+    <Content Include="assets\less\components\svt-toogle-button.less" />
+    <None Include="assets\less\components\datepicker.less" />
+    <Content Include="assets\css\index.css" />
+    <Content Include="assets\less\base.less" />
+    <Content Include="assets\less\components\uploader.less" />
+    <Content Include="assets\less\components\mixins\datepicker.less" />
+    <Content Include="assets\less\components\form.less" />
+    <Content Include="assets\less\components\option.less" />
+    <Content Include="assets\less\components\user.less" />
+    <Content Include="assets\less\components\report\report-chart.less" />
+    <Content Include="assets\less\components\mixins\expression-builder.less" />
+    <Content Include="assets\less\components\expression-builder.less" />
+    <Content Include="assets\less\components\highcharts.less" />
+    <Content Include="assets\less\components\login.less" />
+    <Content Include="assets\less\components\survey\survey-search.less" />
+    <Content Include="assets\less\components\survey\survey-preview.less" />
+    <Content Include="assets\less\components\navigation.less" />
+    <Content Include="assets\less\components\glyphicon.less" />
+    <Content Include="assets\less\components\respondent\respondent-list.less" />
+    <Content Include="assets\less\components\respondent\respondent-search.less" />
+    <Content Include="assets\less\components\survey\survey-editor.less" />
+    <Content Include="assets\less\components\font-awesome.less" />
+    <Content Include="assets\less\components\respondent\respondent-email.less" />
+    <Content Include="assets\less\components\look-and-feel.less" />
+    <Content Include="assets\less\components\launch.less" />
+    <Content Include="assets\less\components\respondent\respondent-detail.less" />
+    <Content Include="assets\less\components\report\report-list.less" />
+    <Content Include="assets\less\components\report\report-creator.less" />
+    <Content Include="assets\less\components\survey\survey-page-view.less" />
+    <Content Include="assets\less\components\survey\survey-page-editor.less" />
+    <Content Include="assets\less\components\result.less" />
+    <Content Include="assets\less\components\result-chart.less" />
+    <Content Include="assets\less\components\question\question-view.less" />
+    <Content Include="assets\less\components\question\question-editor.less" />
+    <Content Include="assets\less\components\question\question-open-text.less" />
+    <Content Include="assets\less\components\question\question-selection.less" />
+    <Content Include="assets\less\components\question\question-advanced-setting.less" />
+    <Content Include="assets\less\components\question\question-likert.less" />
+    <Content Include="assets\less\components\question\question-rating.less" />
+    <Content Include="assets\less\components\question\question-selection-picture.less" />
+    <Content Include="assets\less\components\question\question-skip-action.less" />
+    <Content Include="assets\images\analyse.png" />
+    <Content Include="assets\images\calendar-icon.png" />
+    <Content Include="assets\images\logout.png" />
+    <Content Include="assets\images\question_type_icon.png" />
+    <Content Include="assets\images\setting.png" />
+    <Content Include="assets\images\sprite_icons_hover.png" />
+    <Content Include="e2e-tests\pages\app\survey\common\composeMessageDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\closeSurveyConfirmDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\deleteDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\editReportDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\lookAndFeelDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\importContactDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\dashboardPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\common\editSurveyDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\launchPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\pageContainerPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\question\createQuestionDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\question\editQuestionDialog.js" />
+    <Content Include="e2e-tests\pages\app\survey\reportelement\editReportElement.js" />
+    <Content Include="e2e-tests\pages\app\survey\reportPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\respondentsPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\resultPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\surveyEditorPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\surveyListPage.js" />
+    <Content Include="e2e-tests\pages\app\survey\surveyExecutionPage.js" />
+    <Content Include="e2e-tests\pages\common\basePage.js" />
+    <Content Include="e2e-tests\protractor.conf.js" />
+    <Content Include="e2e-tests\readMe.txt" />
+    <Content Include="e2e-tests\tests\app\survey\smoketest.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\SurveyDesigner\page.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\SurveyDesigner\lookAndFeel.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\SurveyDesigner\question.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\SurveyDesigner\surveySettings.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyEditor.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyLaunch.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyReport.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyResult.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyExecution.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyRespondent.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\surveyList.spec.js" />
+    <Content Include="e2e-tests\tests\app\survey\warmup.spec.js" />
+    <Content Include="e2e-tests\utils\waitingUtil.js" />
+    <Content Include="gulpfile.js" />
+    <Content Include="karma.conf.js" />
+    <Content Include="scripts\ckeditor\ckeditorConfigPath.js" />
+    <Content Include="scripts\ckeditor\plugins\svtinserthelper\icons\svtinserthelper.png" />
+    <Content Include="scripts\ckeditor\plugins\svtinserthelper\icons\svtsurveylink.png" />
+    <Content Include="scripts\ckeditor\plugins\svtinserthelper\plugin.js" />
+    <Content Include="scripts\ckeditor\plugins\svtrespondentplaceholder\dialogs\placeholder.js" />
+    <Content Include="scripts\ckeditor\plugins\svtrespondentplaceholder\plugin.js" />
+    <Content Include="scripts\ckeditor\plugins\svtinsertfromfilelibrary\plugin.js" />
+    <Content Include="scripts\ckeditor\plugins\svtsurveylink\icons\svtsurveylink.png" />
+    <Content Include="scripts\ckeditor\plugins\svtsurveylink\plugin.js" />
+    <Content Include="scripts\ckeditor\plugins\svtquestionplaceholder\dialogs\placeholder.js" />
+    <Content Include="scripts\ckeditor\plugins\svtinserthelper\icons\svtplaceholder.png" />
+    <Content Include="scripts\ckeditor\plugins\svtquestionplaceholder\plugin.js" />
+    <Content Include="thirdParties\ckeditor\adapters\jquery.js" />
+    <Content Include="thirdParties\ckeditor\build-config.js" />
+    <Content Include="thirdParties\ckeditor\ckeditor.js" />
+    <Content Include="thirdParties\ckeditor\config.js" />
+    <Content Include="thirdParties\ckeditor\contents.css" />
+    <Content Include="thirdParties\ckeditor\lang\en.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\oc.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="thirdParties\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="thirdParties\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="thirdParties\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="thirdParties\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="thirdParties\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="thirdParties\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="thirdParties\ckeditor\plugins\icons.png" />
+    <Content Include="thirdParties\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="thirdParties\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="thirdParties\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="thirdParties\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="thirdParties\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="thirdParties\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="thirdParties\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="thirdParties\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="thirdParties\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="thirdParties\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="thirdParties\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="thirdParties\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\skins\moono-lisa\scayt.css" />
+    <Content Include="thirdParties\ckeditor\plugins\sourcedialog\dialogs\sourcedialog.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\oc.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="thirdParties\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="thirdParties\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="thirdParties\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="thirdParties\ckeditor\plugins\widget\images\handle.png" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\skins\moono-lisa\wsc.css" />
+    <Content Include="thirdParties\ckeditor\samples\css\samples.css" />
+    <Content Include="thirdParties\ckeditor\samples\img\github-top.png" />
+    <Content Include="thirdParties\ckeditor\samples\img\header-bg.png" />
+    <Content Include="thirdParties\ckeditor\samples\img\header-separator.png" />
+    <Content Include="thirdParties\ckeditor\samples\img\logo.png" />
+    <Content Include="thirdParties\ckeditor\samples\img\navigation-tip.png" />
+    <Content Include="thirdParties\ckeditor\samples\index.html" />
+    <Content Include="thirdParties\ckeditor\samples\js\sample.js" />
+    <Content Include="thirdParties\ckeditor\samples\js\sf.js" />
+    <Content Include="thirdParties\ckeditor\samples\old\ajax.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\api.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\appendto.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\assets\inlineall\logo.png" />
+    <Content Include="thirdParties\ckeditor\samples\old\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="thirdParties\ckeditor\samples\old\assets\sample.jpg" />
+    <Content Include="thirdParties\ckeditor\samples\old\assets\uilanguages\languages.js" />
+    <Content Include="thirdParties\ckeditor\samples\old\datafiltering.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\dialog\assets\my_dialog.js" />
+    <Content Include="thirdParties\ckeditor\samples\old\dialog\dialog.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\divreplace.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\enterkey\enterkey.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="thirdParties\ckeditor\samples\old\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="thirdParties\ckeditor\samples\old\htmlwriter\outputforflash.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\htmlwriter\outputhtml.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\index.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\inlineall.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\inlinebycode.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\inlinetextarea.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\jquery.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\magicline\magicline.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\readonly.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\replacebyclass.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\replacebycode.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\sample.css" />
+    <Content Include="thirdParties\ckeditor\samples\old\sample.js" />
+    <Content Include="thirdParties\ckeditor\samples\old\sourcedialog\sourcedialog.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\tabindex.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\toolbar\toolbar.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\uicolor.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\uilanguages.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\wysiwygarea\fullpage.html" />
+    <Content Include="thirdParties\ckeditor\samples\old\xhtmlstyle.html" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\css\fontello.css" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\fontello.svg" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\LICENSE.txt" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\index.html" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\js\fulltoolbareditor.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\js\toolbarmodifier.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\js\toolbartextmodifier.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\neo.css" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor_ie.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\icons.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\arrow.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\close.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\lock.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\images\refresh.png" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="thirdParties\ckeditor\styles.js" />
+    <Content Include="unitTestInit.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
+    <Content Include="e2e-tests\package.json" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="e2e-tests\sample-files\cvs.csv" />
+    <Content Include="app\survey\question\types\netPromoterScore\netPromoterScoreEditorCtrl.spec.js" />
+    <Content Include="assets\less\components\report\report-editor.less" />
+    <Content Include="assets\less\components\report\report-page.less" />
+    <Content Include="assets\less\components\report\report-element.less" />
+    <Content Include="assets\less\components\report\report-table.less" />
+    <Content Include="assets\less\components\svt-grid.less" />
+    <Content Include="assets\less\components\survey\survey-status.less" />
+    <Content Include="assets\less\components\survey\survey-info.less" />
+    <Content Include="assets\less\components\respondent\response-status.less" />
+    <Content Include="assets\less\components\svt-label.less" />
+    <Content Include="assets\less\components\svt-push-down.less" />
+    <Content Include="assets\less\components\font-selector.less" />
+    <Content Include="assets\less\components\svt-helper.less" />
+    <Content Include="assets\less\components\icon.less" />
+    <Content Include="assets\less\components\modal.less" />
+    <Content Include="assets\less\components\test-mode.less" />
+    <Content Include="assets\less\components\svt-dropdown.less" />
+    <Content Include="assets\less\components\dropdown-menu.less" />
+    <Content Include="assets\less\components\question\question-condition-expression.less" />
+    <Content Include="assets\less\components\rich-text-input.less" />
+    <Content Include="assets\less\components\survey\survey-list.less" />
+    <Content Include="assets\less\components\question\question-text-list.less" />
+    <Content Include="assets\less\components\svt-placeholder.less" />
+    <Content Include="assets\less\components\welcome.less" />
+    <Content Include="assets\less\components\error-page.less" />
+    <Content Include="assets\less\components\survey\filter-surveys.less" />
+    <Content Include="assets\less\components\question\question-selection-grid.less" />
+    <Content Include="assets\less\components\outlining.less" />
+    <Content Include="assets\less\components\survey\survey-error-list.less" />
+    <Content Include="assets\less\components\surveyLibrary\import-page-question.less" />
+    <Content Include="assets\less\components\select2\select2.less" />
+    <Content Include="assets\less\components\accessRights\access-rights.less" />
+    <Content Include="assets\less\components\survey\survey-creator.less" />
+    <Content Include="assets\less\components\fileLibrary\picker-uploader.less" />
+    <Content Include="assets\less\components\fileLibrary\picker.less" />
+    <Content Include="assets\less\components\library\file-library-management.less" />
+    <Content Include="assets\less\components\library\edit-blob-modal.less" />
+    <Content Include="assets\less\components\library\create-directory-modal.less" />
+    <Content Include="assets\less\components\library\survey-library-management.less" />
+    <Content Include="assets\less\components\library\library-survey-list.less" />
+    <Content Include="assets\less\components\library\library-page-list.less" />
+    <Content Include="assets\less\components\survey\create-survey.less" />
+    <Content Include="assets\less\components\library\library-question-list.less" />
+    <Content Include="assets\less\components\question\question-scale.less" />
+    <Content Include="assets\less\components\library\edit-survey-library-modal.less" />
+    <None Include="assets\less\index.less" />
+    <Content Include="assets\less\theme\default\variables.less" />
+    <Content Include="assets\less\components\svt-button.less" />
+    <Content Include="packages.config" />
+    <Content Include="assets\less\custom\ng-sortable-custom.less" />
+    <Content Include="thirdParties\ckeditor\CHANGES.md" />
+    <Content Include="thirdParties\ckeditor\LICENSE.md" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="thirdParties\ckeditor\plugins\scayt\README.md" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="thirdParties\ckeditor\plugins\wsc\README.md" />
+    <Content Include="thirdParties\ckeditor\README.md" />
+    <Content Include="thirdParties\ckeditor\samples\old\assets\posteddata.php" />
+    <Content Include="thirdParties\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="thirdParties\ckeditor\samples\old\sample_posteddata.php" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="thirdParties\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\readme.md" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="thirdParties\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="thirdParties\README.md" />
+    <Content Include="assets\less\application.less" />
+    <Content Include="assets\less\custom\modal-custom.less" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bower_components\" />
+    <Folder Include="scripts\ckeditor\plugins\svtinserthelper\icons\hidpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\survey\question\types\rating\ratingEditorCtrl.spec.js" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53438</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44301/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="TransformWebConfigDevelopment" DependsOnTargets="Build">
+    <MakeDir Directories="dest" />
+    <TransformXml Source="Web.config" Transform="Web.Development.config" Destination="dest\Web.config" />
+  </Target>
+  <Target Name="TransformWebConfigE2E" DependsOnTargets="Build">
+    <MakeDir Directories="dest" />
+    <TransformXml Source="Web.config" Transform="Web.e2e.config" Destination="dest\Web.config" />
+  </Target>
+  <Target Name="TransformWebConfigProduction" DependsOnTargets="Build">
+    <MakeDir Directories="dest" />
+    <TransformXml Source="Web.config" Transform="Web.Deploy.config" Destination="dest\Web.config" />
+  </Target>
+  <ItemGroup>
+    <BinariesToCopy Include="bin\**\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Target Name="CopyBinariesToDest" DependsOnTargets="Build">
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFiles="@(BinariesToCopy->'dest\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

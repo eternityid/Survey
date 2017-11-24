@@ -1,0 +1,45 @@
+﻿<div class="file-library-picker__scale-image-container">
+    <div class="col-xs-12 scrollable-image"
+         ng-class="{'file-library-picker__scale-image-container--enable': vm.enableScaleImageDimension,
+                    'file-library-picker__scale-image-container--disable': !vm.enableScaleImageDimension}">
+        <img ng-if="imageUrl && vm.formDataSourceUriValid"
+             style="width: {{imageSize.width}}px; height: {{imageSize.height}}px"
+             ng-src="{{imageUrl}}" />
+        <img ng-if="!imageUrl || !vm.formDataSourceUriValid" class="file-library-picker-uploader__image-placeholder" />
+    </div>
+</div>
+<div class="file-library-picker__scale-image-setting-container">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-6 slider" ng-class="{'disable-slider': !vm.enableScaleImageDimension}">
+                <rzslider id="dimension-rotate-slider"
+                          rz-slider-model="vm.dimension.scale"
+                          rz-slider-floor="vm.scale.min"
+                          rz-slider-change="vm.onChangeScale()"
+                          rz-slider-ceil="vm.scale.max"
+                          rz-slider-step="0.05"
+                          rz-slider-precision="2"></rzslider>
+
+            </div>
+            <div class="col-xs-3 dimension">
+                <div class="form-group">
+                    <label for="dimension-width">W</label>
+                    <input type="number" class="form-control" id="dimension-width" ng-model="imageSize.width"
+                           ng-disabled="!vm.enableScaleImageDimension" step="1" ng-blur="vm.onChangeWidth()">
+                </div>
+            </div>
+            <div class="col-xs-3 dimension">
+                <div class="form-group">
+                    <label for="dimension-height">H</label>
+                    <input type="number" class="form-control" id="dimension-height" ng-model="imageSize.height"
+                           ng-disabled="!vm.enableScaleImageDimension" step="1" ng-blur="vm.onChangeHeight()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

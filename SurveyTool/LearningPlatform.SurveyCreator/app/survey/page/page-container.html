@@ -1,0 +1,71 @@
+﻿<div id="{{'surveyPage-' + index}}" class="page-container"
+     ng-class="pageCtrl.getPageContainerClasses()">
+    <page-editor ng-if="pageCtrl.isEditingPage"
+                 page-obj="pageCtrl.page"
+                 block-id="{{pageCtrl.topFolder.id}}"
+                 navigation-button-settings="pageCtrl.navigationButtonSettings"
+                 question-orders="pageCtrl.questionOrders"></page-editor>
+
+    <div class="page--collapsed" ng-if="pageCtrl.isCollapsedPage && !pageCtrl.isEditingPage"
+         ng-class="{'highlight-selection__page-info': pageCtrl.isSelectedPage && pageCtrl.isCollapsedPage }"
+         ng-mouseover="pageCtrl.isHightlightPage = true" ng-mouseleave="pageCtrl.isHightlightPage = false"
+         ng-click="pageCtrl.selectPageByStep(pageCtrl.currentPage)">
+        <ng-include src="'survey/page/partials/collapsed-page-info.html'"></ng-include>
+    </div>
+
+    <div id="{{'page-wrap-' + index}}" ng-if="!pageCtrl.isCollapsedPage">
+        <div ng-if="!pageCtrl.isEditingPage" class="pageHeader"
+             ng-class="{'highlight-selection__page-info': pageCtrl.isSelectedPage }"
+             ng-mouseover="pageCtrl.isHightlightPage = true" ng-mouseleave="pageCtrl.isHightlightPage = false"
+             ng-click="pageCtrl.selectPageByStep(pageCtrl.currentPage)">
+            <ng-include src="'survey/page/partials/expanded-page-info.html'"></ng-include>
+        </div>
+        <div class="clearfix"> </div>
+        <ng-include src="'survey/page/partials/questions-in-page.html'"></ng-include>
+
+        <ng-include src="'survey/page/partials/skip-actions-in-page.html'"></ng-include>
+
+        <div id="create-question-container-{{pageObj.id}}" ng-if="!pageCtrl.isThankYouPage" class="create-question-container">
+        </div>
+
+        <div id="create-skip-command-container-{{pageObj.id}}" ng-if="!pageCtrl.isThankYouPage" class="create-skip-command-container">
+        </div>
+
+        <add-button id='add-button-for-page-block' page-obj="pageObj" page-ctrl="pageCtrl"
+                    ng-click="pageCtrl.selectPageByStep(pageCtrl.currentPage)"
+                    ng-mouseover="pageCtrl.isHightlightPage = true" ng-mouseleave="pageCtrl.isHightlightPage = false"></add-button>
+        <div class="pageFooter" ng-click="pageCtrl.selectPageByStep(pageCtrl.currentPage)"
+             ng-mouseover="pageCtrl.isHightlightPage = true" ng-mouseleave="pageCtrl.isHightlightPage = false">
+        </div>
+    </div>
+
+    <div class="page-operations" ng-if="pageCtrl.isSelectedPage || pageCtrl.isCollapsedPage">
+        <span class="glyphicon icon--edit" ng-click="pageCtrl.getReadyToEditPage(pageCtrl.currentPage.id);"
+              title="Edit page" ng-show="pageCtrl.isSelectedPage"></span>
+        <span class="glyphicon icon--move-up" title="Move page up"
+              ng-click="pageCtrl.movePageUp(pageCtrl.currentPage, index);"
+              ng-if="pageCtrl.canClickToMovePageUp() && (pageCtrl.isSelectedPage || pageCtrl.isCollapsedAllPage())"></span>
+        <span class="glyphicon icon--move-up disable-icon"
+              ng-if="!pageCtrl.canClickToMovePageUp() && !pageCtrl.isThankYouPage && (pageCtrl.isSelectedPage || pageCtrl.isCollapsedAllPage())"></span>
+        <span class="glyphicon icon--move-down" title="Move page down"
+              ng-click="pageCtrl.movePageDown(pageCtrl.currentPage, index);"
+              ng-if="pageCtrl.canClickToMovePageDown() && (pageCtrl.isSelectedPage || pageCtrl.isCollapsedAllPage())"></span>
+        <span class="glyphicon icon--move-down disable-icon"
+              ng-if="!pageCtrl.canClickToMovePageDown() && !pageCtrl.isThankYouPage && (pageCtrl.isSelectedPage || pageCtrl.isCollapsedAllPage())"></span>
+        <span class="btn btn-default page-operations__action-button" data-toggle="dropdown"></span>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a ng-click="pageCtrl.addPageToLibrary()" href="" title="Add page to library">
+                    <span class="glyphicon glyphicon-copy page-operations__action-button-icon"></span>
+                    Add page to library
+                </a>
+            </li>
+            <li ng-if="pageCtrl.canClickToDeletePage();" ng-show="pageCtrl.isSelectedPage">
+                <a ng-click="pageCtrl.onDeletePage($event)" href="" title="Delete page" svt-stop-event>
+                    <span class="glyphicon icon--delete"></span>
+                    Delete
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

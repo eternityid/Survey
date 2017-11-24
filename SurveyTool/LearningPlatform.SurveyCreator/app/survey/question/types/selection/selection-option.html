@@ -1,0 +1,159 @@
+﻿<div class="clear-padding" ng-class="vm.isOpenning()? 'option-editor__container' : 'option-editor__container--transparent'">
+    <div class="option-editor__head clearfix" ng-class="vm.isOpenning()? 'option-editor__head--expanded' : 'option-editor__head--collapsed'">
+        <div class="toogle-icon-helper">
+            <ng-include src="'survey/question/types/selection/selection-option-group.html'"></ng-include>
+            <ng-include src="'survey/question/types/selection/selection-option-item.html'"></ng-include>
+        </div>
+        <section ng-if="vm.isOpenning()
+        && (question.$type === 'SingleSelectionQuestionDefinition' || question.$type === 'MultipleSelectionQuestionDefinition') ">
+            <div class="panel-body none-padding-top-bottom option-editor__condition-panel">
+                <form class="form-horizontal" ng-if="!vm.option.isCarryOverOption">
+                    <div class="form-group" novalidate ng-form name="optionSettingForm" ng-if="!(vm.option.optionsMask.optionsMaskType && vm.option.optionsMask.questionId)">
+                        <div ng-if="vm.option.$type !== 'OptionGroup'">
+                            <span class="col-xs-12">
+                                <label class="control-label svt-label__ontop label-required option-setting__control-label">
+                                    Option Alias
+                                </label>
+                            </span>
+                            <span class="col-xs-12">
+                                <input type="text" name="optionAlias" data-ng-model="vm.option.alias" class="form-control" ng-class="(optionSettingForm.optionAlias.$invalid && !vm.option.displayedAlias.valid) ? 'input-required' : ''"
+                                    ng-change="vm.onOptionAliasChange()" placeholder="{{vm.option.displayedAlias.placeHolder}}"
+                                    maxlength="25" required />
+                            </span>
+                        </div>
+                    </div>
+                    <div ng-if="vm.questionTypes.shortTextList !== question.$type
+                    && vm.questionTypes.longTextList !== question.$type
+                    && vm.questionTypes.ratingGrid !== question.$type
+                    && vm.questionTypes.scaleGrid !== question.$type
+                    && vm.option.$type !== 'OptionGroup'">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isFixedPosition"> Keep fixed position
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkbox" ng-if="false">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isNotApplicable"> Not Applicable Option
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="originalQuestionType !== vm.questionTypes.singleSelectionGrid
+                        && originalQuestionType !== vm.questionTypes.multipleSelectionGrid">
+                            <div class="col-xs-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isOptionHasOtherQuestion" ng-change="vm.onOtherQuestionChange()"> Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkbox" ng-if="false">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isExclusive"> Exclusive Option
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" ng-if="vm.option.isCarryOverOption">
+                    <div class="form-group col-xs-12">
+                        <label class="col-xs-3">Options</label>
+                        <div class="col-xs-9">
+                            <dropdown-list selected-value="vm.option.optionsMask.optionsMaskType" items="vm.optionsMaskType" column-value="code" column-name="name"
+                                default-class="svt-dropdown-option-mask-display" default-text="Choose Option Type"></dropdown-list>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label class="col-xs-3">From</label>
+                        <div class="col-xs-9">
+                            <dropdown-list selected-value="vm.option.optionsMask.questionId" items="vm.availableCarryOverQuestions" column-value="id"
+                                column-name="title" default-class="svt-dropdown-option-mask-from" default-text="Select Question"
+                                on-item-changed="vm.onCarryOverQuestionChange()" on-click="vm.onClickCarryOverFromQuestionDropdownList()"></dropdown-list>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section ng-if="vm.isOpenningNormalOption()
+        && question.$type !== 'SingleSelectionQuestionDefinition'
+        && question.$type !== 'MultipleSelectionQuestionDefinition'">
+            <div class="panel-body none-padding-top-bottom option-editor__condition-panel">
+                <form class="form-horizontal" ng-if="!vm.option.isCarryOverOption">
+                    <div class="form-group" novalidate ng-form name="optionSettingForm" ng-if="!(vm.option.optionsMask.optionsMaskType && vm.option.optionsMask.questionId)">
+                        <span class="col-xs-12">
+                            <label class="control-label svt-label__ontop label-required option-setting__control-label">
+                                Option Alias
+                            </label>
+                        </span>
+                        <span class="col-xs-12">
+                            <input type="text" name="optionAlias" data-ng-model="vm.option.alias" class="form-control" ng-class="(optionSettingForm.optionAlias.$invalid && !vm.option.displayedAlias.valid) ? 'input-required' : ''"
+                                ng-change="vm.onOptionAliasChange()" placeholder="{{vm.option.displayedAlias.placeHolder}}" maxlength="25"
+                                required />
+                        </span>
+                    </div>
+                    <div ng-if="vm.questionTypes.shortTextList !== question.$type && vm.questionTypes.longTextList !== question.$type &&
+                         vm.questionTypes.ratingGrid !== question.$type && vm.questionTypes.scaleGrid !== question.$type">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isFixedPosition"> Keep fixed position
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkbox" ng-if="false">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isNotApplicable"> Not Applicable Option
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="originalQuestionType !== vm.questionTypes.singleSelectionGrid
+                        && originalQuestionType !== vm.questionTypes.multipleSelectionGrid">
+                            <div class="col-xs-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isOptionHasOtherQuestion" ng-change="vm.onOtherQuestionChange()"> Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkbox" ng-if="false">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="vm.option.isExclusive"> Exclusive Option
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" ng-if="vm.option.isCarryOverOption">
+                    <div class="form-group col-xs-12">
+                        <label class="col-xs-3">Options</label>
+                        <div class="col-xs-9">
+                            <dropdown-list selected-value="vm.option.optionsMask.optionsMaskType" items="vm.optionsMaskType" column-value="code" column-name="name"
+                                default-class="svt-dropdown-option-mask-display" default-text="Choose Option Type"></dropdown-list>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label class="col-xs-3">From</label>
+                        <div class="col-xs-9">
+                            <dropdown-list selected-value="vm.option.optionsMask.questionId" items="vm.availableCarryOverQuestions" column-value="id"
+                                column-name="title" default-class="svt-dropdown-option-mask-from" default-text="Select Question"
+                                on-item-changed="vm.onCarryOverQuestionChange()" on-click="vm.onClickCarryOverFromQuestionDropdownList()"></dropdown-list>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

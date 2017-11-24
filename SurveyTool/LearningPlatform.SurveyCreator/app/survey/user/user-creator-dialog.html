@@ -1,0 +1,54 @@
+﻿<form id="createUserForm" name="userCreatorForm" class="form-horizontal" novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create New User</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Username</label>
+            <div class="col-xs-8">
+                <input autofocus name="username" type="text" class="form-control"
+                       ng-class="(userCreatorForm.username.$invalid && userCreatorForm.username.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.username" required placeholder="Enter username" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Password</label>
+            <div class="col-xs-8">
+                <input name="password" type="password" class="form-control"
+                       ng-class="(userCreatorForm.password.$invalid && userCreatorForm.password.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.password" required placeholder="Enter password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">First Name</label>
+            <div class="col-xs-8">
+                <input autofocus type="text" name="firstName" class="form-control"
+                       ng-class="(userCreatorForm.firstName.$invalid && userCreatorForm.firstName.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.firstName" required placeholder="Enter first name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Last Name</label>
+            <div class="col-xs-8">
+                <input autofocus type="text" name="lastName" class="form-control"
+                       ng-class="(userCreatorForm.lastName.$invalid && userCreatorForm.lastName.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.lastName" required placeholder="Enter last name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Email Address</label>
+            <div class="col-xs-8">
+                <input autofocus type="email" name="emailAddress" class="form-control"
+                       ng-class="(userCreatorForm.emailAddress.$invalid && userCreatorForm.emailAddress.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.emailAddress" required placeholder="Enter email address" />
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()" title="Cancel">Cancel</button>
+        <input type="submit" ng-disabled="userCreatorForm.$invalid" ng-click="save()" class="btn btn-primary" title="Save User" value="Save" />
+    </div>
+</form>

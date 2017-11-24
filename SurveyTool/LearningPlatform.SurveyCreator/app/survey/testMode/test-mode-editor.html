@@ -1,0 +1,90 @@
+﻿<div>
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.startNew}">
+            <a id="startnewbtn" ng-click="vm.showStartNew()" title="Manual create response">
+                <div class="action-menu__icon"><span class="fa icon--start"></span></div><label class="action-menu__label">Start New</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.generateRandomData}">
+            <a id="generateBtn" ng-click="vm.showGenerateRandomData()" title="Generate random data">
+                <div class="action-menu__icon"><span class="fa icon--generate"></span></div><label class="action-menu__label">Generate</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--inactive" ng-class="vm.removableRespondentIds.length == 0 ? 'action-menu__item--inactive' : 'action-menu__item--active'">
+            <a id="testmode-deleteBtn" ng-click="(vm.removableRespondentIds.length == 0) || vm.deleteRespondents()" title="Delete respondent(s)">
+                <div class="action-menu__icon"><span class="glyphicon glyphicon-trash"></span></div><label class="action-menu__label">Delete</label>
+            </a>
+        </div>
+        <div class="action-menu__item--test-mode pull-right">
+            <test-mode-button test-mode-settings="vm.testModeSettings"></test-mode-button>
+        </div>
+    </div>
+
+    <div class="row svt-row" ng-if="vm.pushDownSettings.isActive">
+        <push-down>
+            <generate-random-data survey-id="{{vm.surveyId}}" handle-after-save="vm.handleAfterGenerateRandomData()"></generate-random-data>
+        </push-down>
+    </div>
+    <div class="row svt-row">
+        <survey-title-and-status survey-id="vm.surveyId"></survey-title-and-status>
+        <div class="filter-responses clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="svt-grid__header svt-grid__row">
+                            <th class="col-xs-1">
+                                <label>
+                                    <input class="checkbox-list" id="masterCheckbox" type="checkbox"
+                                           ng-model="vm.masterCheckboxStatus"
+                                           ng-change="vm.changeRespondentMasterCheckbox()"> All
+                                </label>
+                            </th>
+                            <th class="col-xs-1">ID </th>
+                            <th class="col-xs-5">EMAIL</th>
+                            <th class="col-xs-3 text-center">RESPONSE STATUS</th>
+                            <th class="col-xs-2 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="respondent in vm.respondents" class="svt-grid__row">
+                            <td class="col-xs-1 text--middle">
+                                <input class="checkbox-list" type="checkbox"
+                                       ng-model="respondent.isSelected"
+                                       ng-change="vm.changeRespondentCheckboxValue(respondent.id)">
+                            </td>
+                            <td class="col-xs-1 respondent-detail__link text--middle">
+                                <span ng-bind="respondent.id"></span>
+                            </td>
+                            <td class="col-xs-4 text--middle">{{respondent.email}}</td>
+                            <td class="col-xs-2 respondent-column-center respondent-status text--middle" ng-class="{'respondent-status--not-taken': respondent.status == 'NotTaken', 'respondent-status--in-progress': respondent.status == 'InProgress', 'respondent-status--completed': respondent.status == 'Completed'}">{{respondent.statusDisplay}}</td>
+                            <td class="text-center text--middle">
+                                <div class="btn-group ng-scope">
+                                    <span class="btn btn-default survey-list__action-button" data-toggle="dropdown">
+
+                                    </span>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a ng-click="vm.showRespondentDetailDialog(respondent.id)" title="Show respondent detail"><span class="glyphicon icon--detail"></span>&nbsp;Details</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="vm.showRetakeDialog(respondent.id)" href="" title="Show retake dialog">
+                                                <span class="glyphicon icon--retake"></span>&nbsp;Retake
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="svt-grid__row">
+                            <td colspan="9">
+                                <span>{{vm.respondentsFound}} respondent(s) found.</span>
+                                <span ng-show="vm.respondentsFound > 0"> Displaying {{vm.respondents.length}}/{{vm.respondentsFound}} respondent(s).</span>
+                                <a ng-show="vm.searchModel.paging.hashNext" class="svt-grid__load-more" ng-click="vm.loadMore()" title="Click to see more respondents">Load More</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+USE [master]
+GO
+
+/****** Object:  Database [Responses]    Script Date: 11/28/2014 10:46:33 AM ******/
+CREATE DATABASE [Responses]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Responses', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\Responses.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'Responses_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\Responses_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+
+ALTER DATABASE [Responses] SET COMPATIBILITY_LEVEL = 110
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Responses].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [Responses] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [Responses] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [Responses] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [Responses] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [Responses] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [Responses] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [Responses] SET AUTO_CREATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [Responses] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [Responses] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [Responses] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [Responses] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [Responses] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [Responses] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [Responses] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [Responses] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [Responses] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [Responses] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [Responses] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [Responses] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [Responses] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [Responses] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [Responses] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [Responses] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [Responses] SET RECOVERY FULL 
+GO
+
+ALTER DATABASE [Responses] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [Responses] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [Responses] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [Responses] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [Responses] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+
+ALTER DATABASE [Responses] SET  READ_WRITE 
+GO
+
+
+USE [Responses]
+GO
+/****** Object:  UserDefinedTableType [dbo].[AnswersType]    Script Date: 11/28/2014 10:48:24 AM ******/
+CREATE TYPE [dbo].[AnswersType] AS TABLE(
+	[SurveyId] [bigint] NOT NULL,
+	[RespondentId] [bigint] NOT NULL,
+	[QuestionId] [varchar](30) NOT NULL,
+	[AnswerType] [smallint] NOT NULL,
+	[Code] [int] NULL,
+	[IntAnswer] [int] NULL,
+	[DateAnswer] [datetime] NULL,
+	[TextAnswer] [nvarchar](max) NULL,
+	[NumberAnswer] [float] NULL
+)
+GO
+/****** Object:  Table [dbo].[Answers]    Script Date: 11/28/2014 10:48:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Answers](
+	[SurveyId] [bigint] NOT NULL,
+	[RespondentId] [bigint] NOT NULL,
+	[QuestionId] [varchar](30) NOT NULL,
+	[AnswerType] [smallint] NOT NULL,
+	[Code] [int] NULL,
+	[IntAnswer] [int] NULL,
+	[DateAnswer] [datetime] NULL,
+	[TextAnswer] [nvarchar](max) NULL,
+	[GeoAnswer] [geography] NULL,
+	[NumberAnswer] [float] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Respondents]    Script Date: 11/28/2014 10:48:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Respondents](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[SurveyId] [bigint] NOT NULL,
+	[LanguageId] [smallint] NULL,
+	[Credential] [varchar](10) NOT NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO

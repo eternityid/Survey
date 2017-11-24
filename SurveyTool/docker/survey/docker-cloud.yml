@@ -1,0 +1,99 @@
+version: '3'
+services:
+  # Elasticsearch, head plugin, and nginx configured for elasticsearch auth
+  elasticsearch:
+    image: elasticsearch:latest
+    ports:
+      - "9300:9300"
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data
+    environment:
+    # This is to allow running with little memory
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    deploy:
+      placement:
+        constraints:
+          - node.hostname  == w2
+  headplugin:
+    image: mobz/elasticsearch-head:5-alpine
+    depends_on:
+      - elasticsearch    
+    deploy:
+      placement:
+        constraints:
+          - node.hostname  == m1  
+  nginx:
+    image: oyvindf/nginx:latest
+    build:
+      context: ./nginx/
+      dockerfile: nginx.dockerfile
+    env_file: ./nginx/nginx.env 
+    depends_on:
+      - elasticsearch
+      - headplugin
+    ports:
+      - "9200:9200"
+    deploy:
+      placement:
+        constraints:
+          - node.hostname  == m1  
+
+  # Mongodb cluster (replica set)
+  # Note! If the containers will not start up, please check that CRLF line endings
+  # is not used for /mongo/initialize.sh
+  mongo1:
+    image: oyvindf/mongo:latest
+    build:
+      context: ./mongo/
+      dockerfile: mongo.dockerfile
+    entrypoint: "./initializeWithReplicas.sh"
+    command:  "mongod --keyFile keyfile.txt --replSet example"
+    deploy:
+      placement:
+        constraints: 
+          - node.hostname == w1
+    ports:
+      - "27017:27017"
+    env_file: mongo/mongo-cloud.env
+    #env_file: mongo/mongo-swarm-local.env 
+    volumes:
+      - mongo1data-db:/data/db
+      - mongo1data-configdb:/data/configdb
+  mongo2:
+    image: oyvindf/mongo:latest
+    ports:
+      - "27018:27018"
+    volumes:
+      - mongo2data-db:/data/db
+      - mongo2data-configdb:/data/configdb
+    entrypoint: "mongod --port 27018 --keyFile keyfile.txt --replSet example"
+    deploy:
+      placement:
+        constraints:
+          - node.hostname  == worker2   
+  mongo3:
+    image: oyvindf/mongo:latest
+    ports:
+      - "27019:27019"
+    volumes:
+      - mongo3data-db:/data/db
+      - mongo3data-configdb:/data/configdb
+    entrypoint: "mongod --port 27019 --keyFile keyfile.txt --replSet example"
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == m1
+
+
+# Define volumes so that if we remove a container, the data will not be removed.
+volumes:
+  mongo1data-db: {}
+  mongo1data-configdb: {}
+  mongo2data-db: {}
+  mongo2data-configdb: {}
+  mongo3data-db: {}
+  mongo3data-configdb: {}
+  elasticsearchdata: {}
+networks:
+  default:
+    driver: overlay # In swarm mode, we need to use overlay network for the containers to see eachother across physical machines.

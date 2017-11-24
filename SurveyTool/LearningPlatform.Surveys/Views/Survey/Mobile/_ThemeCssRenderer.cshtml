@@ -1,0 +1,406 @@
+@helper RenderThemeCss()
+{
+if (ViewBag.ThemeAdvance.HasBackgroundImage)
+{
+        <style>
+            html {
+                height: 100%;
+                min-height: 100%;
+            }
+
+            .container {
+                background-image: url("@ViewBag.ThemeAdvance.BackgroundImageUrl");
+            }
+        </style>
+
+    if (ViewBag.Theme.BackgroundStyleName == "repeat")
+    {
+            <style>
+                .container {
+                    background-repeat: repeat;
+                    background-attachment: inherit;
+                    background-size: auto;
+                }
+            </style>
+    }
+    else if (ViewBag.Theme.BackgroundStyleName == "cover" || ViewBag.Theme.BackgroundStyleName == "contain")
+    {
+            <style>
+                .container {
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: @ViewBag.Theme.BackgroundStyleName;
+                }
+            </style>
+    }
+}
+if (ViewBag.ThemeAdvance.HasBackgroundColor)
+{
+        <style>
+                .container {
+                    background-color:  @ViewBag.Theme.BackgroundColor;
+                }
+        </style>
+}
+if (ViewBag.Theme != null)
+{
+        <style>
+                .data-container .data-content,
+                #full-screen-overlay {
+                    background-color:  @ViewBag.Theme.PageContainerBackgroundColor;
+                    opacity:  @ViewBag.Theme.PageContainerBackgroundOpacity;
+                }
+
+                .container {
+                    font-family: @ViewBag.Theme.Font;
+                }
+                .container .requiredMark {
+                    color: red;
+                }
+                .container .page-title {
+                    color: @ViewBag.Theme.QuestionTitleColor;
+                    padding-top: 5px;
+                    font-size: 32px;
+                }
+
+                .container .page-description {
+                    color: @ViewBag.Theme.QuestionDescriptionColor;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #fff;
+                    margin-bottom: 40px;
+                }
+
+                .container .question-title {
+                    color: @ViewBag.Theme.QuestionTitleColor;
+                }
+
+                .topic-option-grid__title {
+                    color: @ViewBag.Theme.QuestionTitleColor;
+                }
+                .container .question-description {
+                    color: @ViewBag.Theme.QuestionDescriptionColor;
+                }
+
+                .container .question-description-information {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                    font-size: 20px;
+                }
+
+                .container .inputArea .single-selection,
+                .container .inputArea .single-selection-option,
+                .container .inputArea .multi-selection-option,
+                .container .inputArea .grid-selection,
+                .container .inputArea .heading,
+                .container .inputArea .scale-text,
+                .container .inputArea .rating-index,
+                .container .inputArea .hotkeys-hrow,
+                .container .inputArea .short-text,
+                .container .inputArea .long-text,
+                .container .inputArea .numeric-text,
+                .container .inputArea .single-selection .single-selection-option,
+                .container .inputArea .multi-selection .multi-selection-option,
+                .container .inputArea .single-selection-dropdown
+                {
+                   color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .inputArea input[type=number],
+                .container .inputArea textarea {
+                    font-size: 18px;
+                    background-color: @ViewBag.Theme.InputFieldBackgroundColor;
+                }
+
+                .container .inputArea input[type=text] {
+                    background-color: @ViewBag.Theme.InputFieldBackgroundColor;
+                }
+
+                .container .inputArea input,
+                .container .active .inputArea input[type=text],
+                .container .active .inputArea input[type=number],
+                .container .active .inputArea .single-selection-dropdown select,
+                .container .active .inputArea textarea
+                {
+                    background-color: @ViewBag.Theme.InputFieldBackgroundColor;
+                    border-color: @ViewBag.Theme.QuestionContentColor;
+                    color: @ViewBag.Theme.InputFieldColor;
+                    outline: none;
+                }
+
+                .container .active .form-control
+                {
+                   border-color: @ViewBag.Theme.QuestionContentColor;
+                   color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .inputArea .single-selection-dropdown select {
+                     background-color: @ViewBag.Theme.InputFieldBackgroundColor;
+                }
+
+                .container .inputArea .single-selection-dropdown select option {
+                     background-color: @ViewBag.ThemeAdvance.SelectOptionBackgroundColor;
+                     color: @ViewBag.Theme.InputFieldColor;
+                }
+
+                .container .deactive {
+                    opacity: @ViewBag.Theme.InactiveOpacity;
+                }
+
+                .container .page-navigation .btn-primary {
+                     background: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                     color: @ViewBag.Theme.PrimaryButtonColor;
+                     border-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+                .container .page-navigation .btn-primary:hover,
+                .container .page-navigation .btn-primary:active,
+                .container .page-navigation .btn-primary:focus {
+                     background-color: @ViewBag.ThemeAdvance.HoverPrimaryButtonColor;
+                }
+
+                .container .page-navigation .btn-default {
+                     background: @ViewBag.Theme.DefaultButtonBackgroundColor;
+                     color: @ViewBag.Theme.DefaultButtonColor;
+                     float:left;
+                     margin-right:5px;
+                }
+
+                .container .page-navigation .btn-default:hover,
+                .container .page-navigation .btn-default:active,
+                .container .page-navigation .btn-default:focus {
+                     background-color: @ViewBag.ThemeAdvance.HoverDefaultButtonColor;
+                }
+
+                .container .inputArea .grid-selection.short-text-list {
+                    width: calc(100%);
+                }
+
+                .container .horizontal .liker-heading .heading {
+                    background-color: @ViewBag.ThemeAdvance.RenderAsButtonBackgroundColor;
+                }
+                .container .horizontal .liker-heading .heading.selected {
+                    color: @ViewBag.Theme.PrimaryButtonColor;
+                    border-color: @ViewBag.Theme.QuestionContentColor;
+                    background-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+                .container .rating-symbol-background {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                    opacity: 0.3;
+                }
+                .container .rating-symbol-foreground {
+                    color:  @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .thumbnail {
+                   background-color:@ViewBag.Theme.BackgroundColor;
+                   border-color:@ViewBag.ThemeAdvance.LightenBackgroundColor;
+                }
+
+                .container .thumbnail:hover {
+                   background-color:@ViewBag.ThemeAdvance.LightenBackgroundColor;
+                }
+
+                .container .thumbnail.selected {
+                    border-color:@ViewBag.Theme.QuestionContentColor;
+                    background-color:@ViewBag.ThemeAdvance.DarkenBackgroundColor;
+                    box-shadow: inset 0px 0px 0px 1px @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .thumbnail .caption {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .progress-bar {
+                    background-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    color: @ViewBag.Theme.PrimaryButtonColor;
+                }
+
+                .container .single-selection-container .single-selection-option span:before,
+                .container .multi-selection-container .multi-selection-option span:before {
+                    border: 1px solid @ViewBag.Theme.QuestionContentColor;
+                    background-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .ok-button .btn  {
+                     background: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                     color: @ViewBag.Theme.PrimaryButtonColor;
+                }
+
+                .ok-button-text {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .tab-button {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                    background-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+                /*===============================================*/
+                .glyphicon-calendar {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                /*===============================================*/
+                @@media screen and (max-width: 767px) {
+                    .container .inputArea .single-selection.selected,
+                    .container .inputArea .single-selection-other.selected,
+                    .container .inputArea .multi-selection.selected,
+                    .container .inputArea .multi-selection.other.selected {
+                        background-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    }
+
+                    .container .inputArea .hrow.single-selection.selected,
+                    .container .inputArea .hrow.single-selection-other.selected,
+                    .container .inputArea .hrow.multi-selection.selected,
+                    .container .inputArea .hrow.multi-selection.other.selected {
+                        background-color: unset;
+                    }
+
+                    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td label input[type=radio]:checked + span::before {
+                        border-color:  @ViewBag.Theme.QuestionContentColor;
+                        background-color:  @ViewBag.Theme.QuestionContentColor;
+                    }
+
+                    .inputArea .grid-selection.likert-table:not(.render-as-button) tr td label input[type=radio]:checked + span::after {
+                        border-left-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                        border-bottom-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    }
+                }
+
+                .single-selection-container .option-group-break-line,
+                .multi-selection-container .option-group-break-line {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .single-selection-container label.option-group,
+                .multi-selection-container label.option-group {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .inputArea .single-selection .single-selection-option input[type="radio"]:checked+span::before,
+                .multi-selection-container .multi-selection-option input[type="checkbox"]:checked + input[type="hidden"] + span::before {
+                    background-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .single-selection-container .single-selection-option span:before {
+                    border: 2px solid @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .multi-selection-container .multi-selection-option span:before {
+                    border: 2px solid @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .container .inputArea .single-selection .single-selection-option input[type="radio"]:checked+span::after {
+                    border-left: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    border-bottom: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+
+                .multi-selection-container .multi-selection-option input[type="checkbox"]:checked + input[type="hidden"] + span::after {
+                    border-left: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    border-bottom: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+
+                .container .inputArea .single-selection-other .other-text input[type="text"]::placeholder,
+                .container .inputArea .multi-selection.other .other-text input[type="text"]::placeholder {
+                    color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                .picture-single-selection .thumbnail,
+                .picture-multiple-selection .thumbnail {
+                    border-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+
+                .picture-single-selection .thumbnail input[type="radio"]:checked + div.picture-wrapper + div.caption span.glyphicon::after,
+                .picture-multiple-selection .thumbnail input[type="checkbox"]:checked + input[type="hidden"] + div.picture-wrapper + div.caption span.glyphicon::after {
+                    border-left: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                    border-bottom: 2px solid @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+
+                .icon-single-selection-unchecked::before {
+                    border-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                /*===============================================*/
+
+                .container .inputArea .liker.single-selection .single-selection-option input[type="radio"]:checked+span {
+                    border-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                [question-type=SingleSelectionGridQuestion] .inputArea td input[type=radio] + span::before,
+                [question-type=MultipleSelectionGridQuestion] .inputArea td input[type=checkbox] ~ span::before,
+                [question-type=MultipleSelectionQuestion] .inputArea .horizontal input[type=checkbox] ~ span::before,
+                [question-type=ScaleGridQuestion] .inputArea td input[type=radio] + span::before {
+                    background-color: @ViewBag.Theme.QuestionContentColor;
+                }
+
+                [question-type=SingleSelectionGridQuestion] .inputArea td input[type=radio]:checked + span::before,
+                [question-type=MultipleSelectionGridQuestion] .inputArea td input[type=checkbox]:checked ~ span::before,
+                [question-type=MultipleSelectionQuestion] .inputArea .horizontal input[type=checkbox]:checked ~ span::before,
+                [question-type=ScaleGridQuestion] .inputArea td input[type=radio]:checked + span::before {
+                    border-color: @ViewBag.Theme.PrimaryButtonBackgroundColor;
+                }
+
+                @@media screen and (max-width: 767px) {
+                    .container .thumbnail:before {
+                        border-color:@ViewBag.Theme.QuestionContentColor;
+                    }
+
+                    .container .thumbnail.selected:after {
+                        background-color:@ViewBag.Theme.BackgroundColor;
+                    }
+
+                    .last-survey-question.active-trail .page-navigation__button-container:after {
+                        background-color:@ViewBag.Theme.QuestionContentColor;
+                    }
+
+                    .survey-progess-container:after {
+                        background-color:@ViewBag.Theme.QuestionContentColor;
+                    }
+
+                    .container .alert-warning {
+                        color:  @ViewBag.Theme.ErrorColor;
+                        border-color: @ViewBag.Theme.QuestionContentColor;
+                        background-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+                    .container .alert-info {
+                        color:  @ViewBag.Theme.ErrorColor;
+                        background-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+
+                    .container .alert-info::after {
+                        border-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor transparent transparent transparent;
+                    }
+                }
+
+                @@media screen and (min-width: 768px) {
+                    .container .alert-warning {
+                        color:  @ViewBag.Theme.QuestionTitleColor;
+                        border-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+                    .container .alert-info {
+                        color:  @ViewBag.Theme.ErrorColor;
+                        background-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+                    .container .alert-info::after {
+                        border-top-color: @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+
+                    .container #move-first-invalid-question-link {
+                        color:  @ViewBag.ThemeAdvance.ErrorBackgroundColor;
+                    }
+                }
+        </style>
+}
+if (ViewBag.Preview == true)
+{
+        <style>
+            .page-title, .page-description {
+                display: block;
+            }
+
+            .question-settings {
+                margin-top: 0;
+            }
+        </style>
+}
+}
+
+@RenderThemeCss()

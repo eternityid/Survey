@@ -1,0 +1,12 @@
+﻿<base href="@ViewBag.SurveyUrl" />
+<style>
+    .container {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+</style>
+<script type="text/javascript">
+    var surveyCreatorUrl = '@ViewBag.SurveyCreatorUrl';
+    isPreviewMode = true;
+</script>
+@Scripts.Render("~/bundles/question-preview")

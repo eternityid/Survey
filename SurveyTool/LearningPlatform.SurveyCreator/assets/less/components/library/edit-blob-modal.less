@@ -1,0 +1,63 @@
+﻿.edit-blob-modal-body {
+    width: 100%;
+    display: flex;
+    padding: 40px 20px 20px 20px;
+}
+
+.edit-blob-modal-body .preview-image-section {
+    width: 40%;
+    border: 1px solid #e9e9e9;
+    background-color: #f4f4f4;
+    position: relative;
+}
+
+.edit-blob-modal-body .preview-image-section img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.edit-blob-modal-body .form-section {
+    width: 60%;
+    margin-right: 30px;
+}
+
+.edit-blob-modal-body form textarea {
+    resize: none;
+}
+
+.edit-blob-modal-body form .input-group {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.edit-blob-modal-body form .input-group ul{
+    max-height: 250px;
+    overflow: auto;
+}
+
+.edit-blob-modal-body form .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.edit-blob-modal-footer {
+    border: none;
+}
+
+.edit-blob-modal-footer .cancel-button {
+    margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+    .edit-blob-modal .modal-dialog {
+        width: 900px;
+    }
+}

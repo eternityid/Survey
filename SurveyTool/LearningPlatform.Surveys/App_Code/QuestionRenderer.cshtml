@@ -1,0 +1,122 @@
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@using LearningPlatform.Domain.SurveyLayout
+@using LearningPlatform.Helpers
+@using LearningPlatform.Domain.SurveyExecution.Validators
+@using System.Configuration
+
+@helper RenderQuestion(System.Web.Mvc.HtmlHelper html, Question question, HelperResult renderUserInputArea, dynamic itemTemplates=null)
+{
+    if (itemTemplates == null)
+    {
+        itemTemplates = html.ViewBag.Layout.GetDefault<QuestionTemplate>().GetTemplateItems();
+    }
+    foreach (var element in itemTemplates)
+    {
+        if (element.ItemType == ItemType.QuestionErrorArea)
+        {
+            @ErrorRenderer.RenderErrorQuestionArea(html, question.ErrorStrings, html.ViewBag.Layout.GetDefault<QuestionErrorAreaTemplate>().GetTemplateItems(), html.ViewBag.Layout.GetDefault<QuestionErrorTemplate>().GetTemplateItems())
+        }
+        if (element.ItemType == ItemType.Title)
+        {
+            <div>
+                <span class="question-hidden-message"></span>
+            </div>
+            <div class="title">
+                @(new HtmlString(question.Title ?? ""))
+                <span class="requiredMark" style="@(html.ViewBag.Survey.SurveySettings.DisplayRequiredStar && question.IsRequired ? "" : "display: none")">*</span>
+            </div>
+        }
+        else if (element.ItemType == ItemType.Description)
+        {
+            string questionDescriptionClass = (question as Information != null) ? "question-description-information" : "";
+            <span class="question-description @questionDescriptionClass">@(new HtmlString(question.Description ?? ""))</span>
+        }
+        else if (element.ItemType == ItemType.UserInputArea && renderUserInputArea != null)
+        {
+            @renderUserInputArea
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+            @HtmlHelperExtensions.EvaluateString(html, element.Html)
+        }
+    }
+}
+
+@functions{
+    public static string GetCssPictureOptions(int MaxPicturesInGrid)
+    {
+        var gridColumns = "";
+        switch (MaxPicturesInGrid)
+        {
+            case 1:
+                gridColumns = "col-xs-12 col-md-12";
+                break;
+            case 2:
+                gridColumns = "col-xs-6 col-sm-6 col-md-6";
+                break;
+            case 3:
+                gridColumns = "col-xs-4 col-sm-6 col-md-4 col-lg-4";
+                break;
+            case 4:
+                gridColumns = "col-xs-3 col-sm-6 col-md-4 col-lg-3";
+                break;
+            case 6:
+                gridColumns = "col-xs-2 col-sm-6 col-md-3 col-lg-2";
+                break;
+        }
+        return gridColumns;
+    }
+
+    public static string GetPictureUrl(string baseUrl, string surveyId, string questionId, string pictureName, List<string> temporaryPictures)
+    {
+        var DomainStorageFile = ConfigurationManager.AppSettings["DomainStorageFile"].ToString();
+        var ContainerAzureStorage = ConfigurationManager.AppSettings["ContainerAzureStorage"].ToString();
+
+        if (pictureName == null || pictureName.Equals(string.Empty)) return string.Format("{0}{1}/noImage.png", DomainStorageFile, ContainerAzureStorage);
+        return DomainStorageFile + ContainerAzureStorage + "/" + pictureName;
+    }
+
+    public static RangeNumberValidator GetRangeNumberValidator(List<QuestionValidator> validators)
+    {
+        foreach (var validator in validators)
+        {
+            var rangeNumberValidator = validator as RangeNumberValidator;
+            if (rangeNumberValidator != null) return rangeNumberValidator;
+        }
+        return null;
+    }
+
+    public static DecimalPlacesNumberValidator GeDecimalPlacesNumberValidator(List<QuestionValidator> validators)
+    {
+        foreach (var validator in validators)
+        {
+            var decimalPlacesNumberValidator = validator as DecimalPlacesNumberValidator;
+            if (decimalPlacesNumberValidator != null) return decimalPlacesNumberValidator;
+        }
+        return null;
+    }
+
+    public static double GetStepValueByDecimalPlace(List<QuestionValidator> validators, double step) {
+        var decimalPlacesNumberValidator = GeDecimalPlacesNumberValidator(validators);
+        if (decimalPlacesNumberValidator == null) return step;
+        if (decimalPlacesNumberValidator.DecimalPlaces == null) return step;
+
+        var decimalPlace = decimalPlacesNumberValidator.DecimalPlaces;
+        var stepValue = ConvertDecimalPlaceIntoStep(decimalPlace);
+
+        return stepValue;
+    }
+
+    private static double ConvertDecimalPlaceIntoStep(int? decimalPlace) {
+        if (decimalPlace <= 0) return 1;
+
+        var item = "0.";
+        for (var i = 1; i <= decimalPlace; i++)
+        {
+            item += "0";
+        }
+
+        item = item.Substring(0, item.Length - 1) + "1";
+        return Convert.ToDouble(item);
+    }
+}

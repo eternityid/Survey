@@ -1,0 +1,10 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.OpenEndedLongTextQuestion
+
+@helper RenderUserInputArea()
+{
+    <div class="long-text">
+        <textarea class="form-control long-text__text-area" id="@Model.Alias" name="@Model.Alias" rows="@Model.Rows">@Model.Answer</textarea>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

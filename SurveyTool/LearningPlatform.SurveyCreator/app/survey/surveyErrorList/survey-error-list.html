@@ -1,0 +1,8 @@
+﻿<div ng-if="vm.generalErrors && vm.generalErrors.length > 0" class="error-list-container">
+    <div class="alert alert-danger alert-dismissible">
+        <p><strong>You need to resolve the following problems before publishing:</strong></p>
+        <p class="message-item" ng-repeat="error in vm.generalErrors">
+            <a ng-click="vm.goToSourceError(error)">{{vm.getDisplayErrorMessage(error) | htmlToPlainTextFilter}}</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿<div class="report col-xs-12">
+    <div class="col-xs-12 question-title">{{aggregatedQuestion.questionText | htmlToPlainTextFilter}}</div>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button type="button" class="table-report-btn btn btn-default dropdown-toggle hidden-print" data-toggle="dropdown" title="Settings">
+                <span class="glyphicon glyphicon-cog"></span>
+            </button>
+            <ul class="dropdown-menu result-element-settings" style="left: 70%;">
+                <li>
+                    <ul class="result-element-settings__display-type">
+                        <li>Size</li>
+                        <li ng-click="vm.displayReportByWidth(33)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(33), 'disactive-check-box': !vm.checkColumnWidthSelected(33)}"></span>
+                            <span class="fa rs-33-width" />
+                            <a>1/3 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(50)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(50), 'disactive-check-box': !vm.checkColumnWidthSelected(50)}"></span>
+                            <span class="fa rs-50-width" />
+                            <a>1/2 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(66)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(66), 'disactive-check-box': !vm.checkColumnWidthSelected(66)}"></span>
+                            <span class="fa rs-66-width" />
+                            <a>2/3 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(100)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(100), 'disactive-check-box': !vm.checkColumnWidthSelected(100)}"></span>
+                            <span class="fa rs-100-width" />
+                            <a>Full width</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <table class="table table-responsive table-bordered table-striped breakword" result="{{vm.displayedOpenAnswers.length}}">
+        <thead>
+            <tr class="info">
+                <th>No.</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="answer in vm.displayedOpenAnswers">
+                <td class="col-xs-3">{{$index + 1}}</td>
+                <td class="col-xs-9" ng-if="vm.isDateQuestion">{{answer.text | dateFormatFilter}}</td>
+                <td class="col-xs-9" ng-if="!vm.isDateQuestion">{{answer.text}}</td>
+            </tr>
+            <tr>
+                <td class="col-xs-3">Total Respondents</td>
+                <td class="col-xs-9">{{vm.totalRespondents}}</td>
+            </tr>
+            <tr>
+                <td class="col-xs-3">Total Responses</td>
+                <td class="col-xs-9">{{vm.totalResponses}}</td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <span>Displaying {{vm.displayedOpenAnswers.length}} answer(s). </span>
+                    <br />
+                    <span>Display: </span>
+                    <a ng-show="vm.totalResponses > vm.pagingLevel.level1" class="btn btn-link" ng-click="vm.loadResponses(vm.pagingLevel.level2)" title="Click to show {{vm.pagingLevel.level2}} answers" show="{{vm.pagingLevel.level2}}">{{vm.pagingLevel.level2}}</a>
+                    <a ng-show="vm.totalResponses > vm.pagingLevel.level2" class="btn btn-link" ng-click="vm.loadResponses(vm.pagingLevel.level3)" title="Click to show {{vm.pagingLevel.level3}} answers" show="{{vm.pagingLevel.level3}}">{{vm.pagingLevel.level3}}</a>
+                    <a ng-show="vm.totalResponses > vm.pagingLevel.level3" class="btn btn-link" ng-click="vm.loadResponses(vm.pagingLevel.level4)" title="Click to show {{vm.pagingLevel.level4}} answers" show="{{vm.pagingLevel.level4}}">{{vm.pagingLevel.level4}}</a>
+                    <a ng-show="vm.totalResponses > vm.pagingLevel.level0" class="btn btn-link" ng-click="vm.loadResponses(vm.totalResponses)" title="Click to show {{vm.pagingLevel.level5}} answers" show="{{vm.pagingLevel.level5}}">{{vm.pagingLevel.level5}}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

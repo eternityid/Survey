@@ -1,0 +1,20 @@
+﻿using System.Data.Entity.ModelConfiguration;
+using LearningPlatform.Domain.SurveyDesign;
+
+namespace LearningPlatform.Data.Mapping.SurveysContext
+{
+    internal class ScriptMap : EntityTypeConfiguration<Script>
+    {
+        public ScriptMap()
+        {
+<<<<<<< HEAD:LearningPlatform.Data/Mapping/SurveysContext/Nodes/ScriptMap.cs
+            Property(p => p.ScriptCode)
+                .HasColumnName("Code");
+=======
+            Property(p => p.ScriptCode).HasColumnName("ScriptCode");
+>>>>>>> Expressions 80% done:LearningPlatform.Data/Mapping/SurveysContext/ScriptMap.cs
+
+            ToTable("Nodes");
+        }
+    }
+}

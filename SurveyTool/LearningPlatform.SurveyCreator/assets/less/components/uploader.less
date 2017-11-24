@@ -1,0 +1,87 @@
+﻿@import (reference) "../theme/default/variables.less";
+
+.uploader {
+    line-height: 40px;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+
+    > div.ng-scope {
+        display: table-row;
+    }
+
+    &__file-action {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 5px;
+
+        input[type="file"] {
+            display: none;
+        }
+
+        input {
+            vertical-align: top;
+        }
+    }
+
+    &__file-command {
+        display: table-cell;
+        width: 40px;
+        vertical-align: top;
+    }
+
+    &__delete-file-command {
+        display: inline-block;
+        width: 30px;
+        vertical-align: top;
+    }
+
+    &__file-info {
+        display: inline;
+        .truncate;
+    }
+
+    &__delete-file {
+        display: inline;
+        float: right;
+        cursor: pointer;
+    }
+
+    &__message {
+        &--valid {
+            color: @uploader-valid-message-color;
+        }
+
+        &--invalid {
+            position: relative;
+            top: 0;
+            color: @uploader-invalid-message-color;
+        }
+    }
+}
+
+.look-and-feel__control--disabled {
+    .uploader__file-action {
+        .btn-default {
+            background-color: #EEE;
+            opacity: 1;
+        }
+    }
+}
+
+.uploader__file-name, .uploader__message {
+    .truncate;
+    display: inline;
+}
+
+.uploader__file-action-info-group {
+    display: table-cell;
+    line-height: 30px;
+    .truncate;
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

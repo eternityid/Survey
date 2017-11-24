@@ -1,0 +1,64 @@
+﻿@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@model SingleSelectionQuestion
+
+@functions {
+    private string GetOptionId(Option option)
+    {
+        return Model.Alias + "_" + option.Alias;
+    }
+
+}
+
+@helper RenderNpsQuestion()
+{
+    @RenderLikertTexts()
+    @RenderOptionList()
+}
+
+@helper RenderLikertTexts()
+{
+    <div class="horizontal">
+        <div class="hrow">
+            <div class="left scale-text">@Html.Raw(Model.LikertLeftText)</div>
+            <div class="right scale-text">@Html.Raw(Model.LikertRightText)</div>
+        </div>
+    </div>
+}
+
+
+@helper RenderOptionList()
+{
+    <div class="horizontal single-selection-container nps-question-container @(Model.IsRenderOptionByButton ? "render-as-button" : "")">
+        <div class="hrow @(Model.IsRenderOptionByButton ? "liker-heading" : "") liker">
+            @{
+                var optionPosition = 0;
+            }
+            @foreach (var option in Model.Options)
+            {
+                var id = GetOptionId(option);
+                optionPosition++;
+                <div class="heading @(Model.IsChecked(option) ? "selected" : "")" position="@optionPosition">
+                    <label for="@id" title-id="@(Model.Alias + option.Id)">@(new HtmlString(option.Text))</label>
+                </div>
+            }
+        </div>
+        <div class="hrow liker @(Model.IsRenderOptionByButton ? "render-button" : "single-selection")">
+            @{
+                optionPosition = 0;
+            }
+            @foreach (var option in Model.Options)
+            {
+                var id = GetOptionId(option);
+                optionPosition++;
+                <label class="cell single-selection-option @(Model.IsRenderOptionByButton ? "invisible" : "")">
+                    @Html.RadioButton(HttpUtility.HtmlDecode(Model.Alias), option.Alias,
+                        Model.IsChecked(option) ? new { id, position = optionPosition, title = option.Text, @checked = "checked" } : (object)new { id, position = optionPosition, title = option.Text })
+                    <span class="selection-option-title" title-id="@(Model.Alias + option.Id)"></span>
+                </label>
+            }
+        </div>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderNpsQuestion())

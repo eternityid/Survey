@@ -1,0 +1,56 @@
+﻿<div class="file-library-picker-uploader__upload-image-container">
+    <form name="hardDriveUploaderFormData" class="col-lg-7">
+        <div class="form-group">
+            <input type="file" id="hard-drive-uploader-file" name="hardDriveUploaderFile" class="form-control"
+                   ng-model="model.file"
+                   file-base config="config" on-changed-file="vm.onChangeFile" file-list="model.fileList"
+                   accept="{{vm.acceptFileTypes}}" required />
+            <span class="svt-helper-text"><em>The maximum file size of image is {{config.maxFileSize | byteToMbKbFilter}}</em></span>
+        </div>
+        <div class="form-group">
+            <label class="label-required" for="name-no-extension">File name</label>
+            <input type="text" class="form-control" id="name-no-extension" required
+                   placeholder="File name" ng-model="model.fileNameWithoutExtension">
+        </div>
+        <div class="form-group">
+            <label for="hard-disk-select-folder" class="label-required">Folder</label>
+            <div class="input-group">
+                <input type="text" class="form-control"
+                       ng-model="model.directory"
+                       id="hard-disk-select-folder"
+                       name="hardDriveUploaderFolder"
+                       required />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li ng-repeat="folder in vm.selectedLibrary.directories">
+                            <a ng-click="vm.onChangeFolder(folder)">{{folder.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="hard-disk-description">Description</label>
+            <textarea class="form-control" rows="3" id="hard-disk-description"
+                      ng-model="model.description" placeholder="File description"></textarea>
+        </div>
+    </form>
+
+    <div class="file-library-picker__container--preview col-xs-5">
+        <library-image-previewer
+            allow-change-image-dimension="false"
+            image-url="model.file.result"></library-image-previewer>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 text-right svt-button-group">
+        <button type="button" ng-click="onCancel()" class="btn btn-default">Cancel</button>
+        <button type="button" class="btn btn-primary"
+                ng-disabled="hardDriveUploaderFormData.$invalid || model.file === null"
+                ng-click="vm.onAddFile()">Add</button>
+    </div>
+</div>

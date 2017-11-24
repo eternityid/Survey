@@ -1,0 +1,58 @@
+﻿<form name="form" class="form-horizontal svt-push-down__form create-survey col-xs-4">
+    <div class="form-group">
+        <div class="col-xs-12">
+            <div class="radio" ng-class="{'active': vm.createType === 'empty'}">
+                <label>
+                    <input type="radio" name="create-survey" ng-model="vm.createType" value="empty" checked>
+                    <span class="glyphicon glyphicon-create-new"></span>Create empty survey
+                </label>
+            </div>
+            <div ng-if="vm.createType === 'empty'" class="create-survey__item">
+                <new-empty-survey survey-title="defaultTabsValue.empty.title"></new-empty-survey>
+            </div>
+            <div class="radio" ng-class="{'active': vm.createType === 'library'}">
+                <label>
+                    <input type="radio" name="create-survey" ng-model="vm.createType" value="library">
+                    <span class="glyphicon glyphicon-create-from-library"></span>Create from library
+                </label>
+            </div>
+            <div ng-if="vm.createType === 'library'" class="create-survey__item">
+                <new-library-survey selected-survey="defaultTabsValue.library.defaultSurvey"
+                                    library-id="defaultTabsValue.library.libraryId"
+                                    new-survey-current-name="defaultTabsValue.library.title"></new-library-survey>
+            </div>
+            <div class="radio" ng-class="{'active': vm.createType === 'existing'}">
+                <label>
+                    <input type="radio" name="create-survey" ng-model="vm.createType" value="existing">
+                    <span class="glyphicon glyphicon-create-from-existing"></span>Create from existing surveys
+                </label>
+            </div>
+            <div ng-if="vm.createType === 'existing'" class="create-survey__item">
+                <new-existing-survey selected-survey="defaultTabsValue.existing.defaultSurvey"
+                                     new-survey-current-name="defaultTabsValue.existing.title"></new-existing-survey>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12">
+            <div class="pull-right svt-button-group">
+                <button id="survey-edit-cancel" type="button" class="btn svt-button--cancel" title="Cancel"
+                        ng-click="vm.close()">
+                    Cancel
+                </button>
+                <button id="survey-edit-submit" type="submit" ng-click="vm.save()" class="btn svt-button--done"
+                        title="Save">
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</form>
+<div class="create-survey-preview col-xs-8">
+    <preview-survey select-survey-id="defaultTabsValue.existing.defaultSurvey.id"
+                        ng-if="vm.createType === 'existing'"></preview-survey>
+    <preview-survey select-survey-id="defaultTabsValue.library.defaultSurvey.id"
+                        library-id="defaultTabsValue.library.defaultSurvey.libraryId"
+                        ng-if="vm.createType === 'library'"></preview-survey>
+</div>

@@ -1,0 +1,21 @@
+﻿<div class="modal-header modal__header--no-border">
+    <button id="close-button" type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{modalTitle}}</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal skip-command-edit__form" novalidate style="width: 95%;">
+        <div class="form-group editor">
+            <div class="col-xs-12">
+                <expression-builder expression="question.questionMaskExpression" question="question" background-override-color="#FFF"></expression-builder>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button id="cancel-button" type="button" ng-click="cancel()" class="btn btn-default">Cancel</button>
+    <button id="delete-button" type="button" ng-click="doneEditCondition()" class="btn btn-primary">{{okTitle}}</button>
+</div>
+
+
+

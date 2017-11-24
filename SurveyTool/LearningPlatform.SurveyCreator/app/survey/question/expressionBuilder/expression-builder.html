@@ -1,0 +1,10 @@
+﻿<div class="expression-builder">
+    <div ng-repeat="item in builderCtrl.expression.expressionItems">
+        <expression-item
+            item="item"
+            builder="builderCtrl.builder"
+            previous-item="builderCtrl.getPreviousExpressionItem(item.position)"
+            background-override-color="{{backgroundOverrideColor}}">
+        </expression-item>
+    </div>
+</div>

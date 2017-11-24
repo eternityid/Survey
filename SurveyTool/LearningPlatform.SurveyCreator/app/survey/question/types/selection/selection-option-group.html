@@ -1,0 +1,33 @@
+﻿<div ng-if="(question.$type === 'SingleSelectionQuestionDefinition') || (question.$type === 'MultipleSelectionQuestionDefinition')">
+    <span id="expand-icon" class="option-editor__toggle option-editor__toggle--down fa-caret-right"
+          ng-class="{'collapsed': !vm.isOpenning()}"
+          ng-click="vm.onClickToggleIcon()" title="Expand"></span>
+    <span id="collapse-icon" class="option-editor__toggle option-editor__toggle--up fa-caret-down fa-caret-down__icon-color--white"
+          ng-class="{'collapsed': !vm.isOpenning()}"
+          ng-click="vm.onClickToggleIcon()" title="Collapse"></span>
+</div>
+
+<div class="option-editor__title" ng-if="(question.$type === 'SingleSelectionQuestionDefinition') || (question.$type === 'MultipleSelectionQuestionDefinition')">
+    <i class="glyphicon icon--remove-option" title="Remove this option" ng-if="vm.canBeDeleted() && vm.option.$type !== 'OptionGroup'"
+       ng-click="vm.onRemoveOption(option.$$hashKey)"></i>
+
+    <div class="option-editor__title__content">
+        <div class="form-group row" ng-if="!vm.option.isCarryOverOption">
+            <div class="col-xs-12 container-text-option" ng-if="vm.option.$type !== 'OptionGroup'">
+                <div contenteditable="true" id="{{vm.option.guid}}"
+                     ng-model="vm.option.text.items[0].text" class="form-control option-title__ckeditor" one-line-mode
+                     ng-keydown="onKeyDownOnOptionAliasField({ '$event': $event, 'optionIndex': index })"
+                     ng-change="vm.onOptionTitleChange()"
+                     rich-text-input="vm.ckeditorConfig"></div>
+            </div>
+            <div class="addother-pinner">
+                <span ng-if="vm.option.isOptionHasOtherQuestion" class="glyphicon icon--add-other add-other-sign" title="Added Other"></span>
+                <span ng-if="vm.option.isFixedPosition" class="glyphicon icon--keep-position keep-position-sign" title="Position Kept"></span>
+            </div>
+        </div>
+        <div class="carry-over-option-label" ng-if="vm.option.isCarryOverOption">
+            <span class="carry-over-option-label__heading">Carry Over from </span>
+            <span ng-bind="vm.carriedOverQuestionTitle | htmlToPlainTextFilter | truncateFilter:30:'...'"></span>
+        </div>
+    </div>
+</div>

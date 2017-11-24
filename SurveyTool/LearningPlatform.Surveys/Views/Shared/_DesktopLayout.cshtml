@@ -1,0 +1,118 @@
+﻿@using LearningPlatform.Domain.SurveyLayout
+@using LearningPlatform.Helpers
+@using Microsoft.ApplicationInsights.Extensibility
+@model LearningPlatform.Domain.SurveyExecution.Page
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>@ViewBag.Title</title>
+        <script type="text/javascript">
+            var isPreviewMode = false;
+            var onlyPreviewContent = false;
+        </script>
+        @{
+            var isPreview = (ViewBag.Preview != null && ViewBag.Preview == true);
+            var isPreviewingLookAndFeel = ViewBag.PreviewLookAndFeel != null && ViewBag.PreviewLookAndFeel == true;
+            var onlyPreviewContent = ViewBag.OnlyPreviewContent != null && ViewBag.OnlyPreviewContent == true;
+        }
+        @if (isPreview)
+        {
+            Html.RenderPartial("~/Views/Survey/Desktop/_PreviewQuestion.cshtml");
+        }
+
+        @Styles.Render("~/Content/bootstrapcss")
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/desktopstyle")
+        @Scripts.Render("~/bundles/modernizr")
+
+        @if(ViewBag.Layout.Css!=null)
+        {
+            <link href="~/Content/@ViewBag.Layout.Css"  rel="stylesheet" />
+        }
+        @{
+            Html.RenderPartial("~/Views/Survey/Desktop/_ThemeCssRenderer.cshtml");
+        }
+    <script type = 'text/javascript' >
+        var appInsights=window.appInsights||function(config)
+        {
+            function r(config){ t[config] = function(){ var i = arguments; t.queue.push(function(){ t[config].apply(t, i)})} }
+            var t = { config:config},u=document,e=window,o='script',s=u.createElement(o),i,f;for(s.src=config.url||'//az416426.vo.msecnd.net/scripts/a/ai.0.js',u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=['Event','Exception','Metric','PageView','Trace','Ajax'];i.length;)r('track'+i.pop());return r('setAuthenticatedUserContext'),r('clearAuthenticatedUserContext'),config.disableExceptionTracking||(i='onerror',r('_'+i),f=e[i],e[i]=function(config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o),s}),t
+        }({
+            instrumentationKey: "@TelemetryConfiguration.Active.InstrumentationKey"
+        });
+
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+    </head>
+
+    <body class="container">
+        @if (ViewBag.ThemeAdvance.HasLogo && (!isPreview || isPreviewingLookAndFeel))
+        {
+            if (string.IsNullOrEmpty(ViewBag.ThemeAdvance.LogoSizeStyle))
+            {
+                <img class="logo" src="@ViewBag.ThemeAdvance.LogoUrl" />
+            }
+            else
+            {
+                <img class="logo" src="@ViewBag.ThemeAdvance.LogoUrl" style="@ViewBag.ThemeAdvance.LogoSizeStyle" />
+            }
+        }
+        @{
+            if (ViewBag.Layout != null)
+            {
+                foreach (var element in ViewBag.Layout.GetDefault<BodyTemplate>().GetTemplateItems())
+                {
+                    if (element.ItemType == ItemType.Body)
+                    {
+                        @RenderBody()
+                    }
+                    else if (Model.DisplayProgressBar && element.ItemType == ItemType.SurveyProgressArea)
+                    {
+                        @ProgressRenderer.RenderProgress(Html, Model.Progress)
+                    }
+                    else if (element.ItemType == ItemType.Html)
+                    {
+                        @HtmlHelperExtensions.EvaluateString(Html, element.Html)
+                    }
+                }
+            }
+            else
+            {
+                @RenderBody()
+            }
+        }
+        <div id="full-screen-overlay"></div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/extension")
+        <script src="~/Scripts/pickmeup.min.js"></script>
+        <script src="~/Scripts/jquery.pickmeup.twitter-bootstrap.js"></script>
+        @Scripts.Render("~/bundles/global")
+        @Scripts.Render("~/bundles/utils")
+        @Scripts.Render("~/bundles/execution/utils")
+        @Scripts.Render("~/bundles/execution/desktopUtils")
+        @Scripts.Render("~/bundles/execution/generalDesktop")
+        @Scripts.Render("~/bundles/execution/questionTypes")
+        @Scripts.Render("~/bundles/execution/questionTypesDesktop")
+        @Scripts.Render("~/bundles/indexDesktop")
+        @Scripts.Render("~/bundles/execution/validation")
+        @Scripts.Render("~/bundles/execution/questionNavigationDesktop")
+        @if (Model.KeyboardSupport)
+        {
+            @Scripts.Render("~/bundles/execution/keyboardSupportDesktop")
+        }
+        <script type="text/javascript">
+            $(document).ready(function () {
+                onlyPreviewContent = '@onlyPreviewContent'.toLowerCase() === 'true';
+                IndexModule.init();
+            });
+        </script>
+        @Scripts.Render("~/bundles/bootstrap-rating-desktop")
+        @RenderSection("scripts", false)
+    </body>
+</html>

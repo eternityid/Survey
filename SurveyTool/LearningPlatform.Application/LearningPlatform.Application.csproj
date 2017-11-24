@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85FC60A4-0383-4AD2-8F5A-CBCBC07FFC3C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.Application</RootNamespace>
+    <AssemblyName>LearningPlatform.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessControl\CompanyAppService.cs" />
+    <Compile Include="AccessControl\UserAppService.cs" />
+    <Compile Include="ApplicationModule.cs" />
+    <Compile Include="Libraries\Dtos\AddLibraryDirectoryDto.cs" />
+    <Compile Include="Libraries\Dtos\DeleteLibraryBlobDto.cs" />
+    <Compile Include="Libraries\Dtos\FileLibraryDirectoryTreeDto.cs" />
+    <Compile Include="Libraries\Dtos\InsertLibraryPageDto.cs" />
+    <Compile Include="Libraries\Dtos\InsertLibraryQuestionDto.cs" />
+    <Compile Include="Libraries\Dtos\InsertLibrarySurveyDto.cs" />
+    <Compile Include="Libraries\Dtos\LibraryPageDetailsDto.cs" />
+    <Compile Include="Libraries\Dtos\LibrarySurveyDetailsDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibraryPageDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibraryQuestionDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibraryQuestionResultDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibrarySurveyDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibraryPageResultDto.cs" />
+    <Compile Include="Libraries\Dtos\SearchLibrarySurveyResultDto.cs" />
+    <Compile Include="Libraries\Dtos\UpdateLibraryBlobDto.cs" />
+    <Compile Include="Libraries\Dtos\UpdateLibraryPageDto.cs" />
+    <Compile Include="Libraries\Dtos\UpdateLibraryQuestionDto.cs" />
+    <Compile Include="Libraries\Dtos\UpdateLibrarySurveyDto.cs" />
+    <Compile Include="Libraries\Dtos\UploadLibraryBlobDto.cs" />
+    <Compile Include="Libraries\FileLibraryAppService.cs" />
+    <Compile Include="Libraries\LibraryAppService.cs" />
+    <Compile Include="Libraries\LibraryPageAppService.cs" />
+    <Compile Include="Libraries\LibraryQuestionAppService.cs" />
+    <Compile Include="Libraries\LibrarySurveyAppService.cs" />
+    <Compile Include="Models\DictionaryExtension.cs" />
+    <Compile Include="Models\Form.cs" />
+    <Compile Include="Models\NavigationDirection.cs" />
+    <Compile Include="Models\Paging.cs" />
+    <Compile Include="Models\ReportElementPositionAndSizeModel.cs" />
+    <Compile Include="Models\ReportElementPositionModel.cs" />
+    <Compile Include="Models\RespondentSearchResultModel.cs" />
+    <Compile Include="Models\SearchRespondentsModel.cs" />
+    <Compile Include="Models\SendEmailMessageForm.cs" />
+    <Compile Include="Models\SendRespondentForm.cs" />
+    <Compile Include="Models\SurveyInfoVersionModel.cs" />
+    <Compile Include="Models\SurveyResponseMessage.cs" />
+    <Compile Include="Models\SurveySearchForm.cs" />
+    <Compile Include="Models\SurveyStatusModel.cs" />
+    <Compile Include="Models\SurveyStatusSetting.cs" />
+    <Compile Include="Models\UploadRespondentForm.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDesign\Models\ReportOpenTextViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportPageQuestionModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportPageSettingsViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportPagesViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportElementSettingsViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportSearchResultViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportSearchViewModel.cs" />
+    <Compile Include="ReportDesign\Models\ReportViewModel.cs" />
+    <Compile Include="ReportDesign\Models\SystemReportSettingsViewModel.cs" />
+    <Compile Include="ReportDesign\ReportDefintionAppService.cs" />
+    <Compile Include="ReportDesign\ReportPageDefinitionAppService.cs" />
+    <Compile Include="ReportDesign\RespondentsReportingAppService.cs" />
+    <Compile Include="Respondents\RespondentAppService.cs" />
+    <Compile Include="SurveyDesign\Dtos\CreatePageResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\CreateQuestionResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicatePagesDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicatePagesResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicateQuestionDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicateQuestionsFromLibaryResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicateQuestionsFromLibraryDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\DuplicateSurveyDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\FolderWithSurveyEtagDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\InsertPageDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\InsertSurveyDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\MovePageDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\MoveQuestionDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\PageAndThemeDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\SurveyListDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\UploadFileResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\UpsertQuestionDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\MergeTwoPagesDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\MergeTwoPagesResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\MoveQuestionWithSurveyEtagDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\PageAndFolderDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\PageListItemDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\PageWithSurveyEtagDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\QuestionWithSurveyEtagDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\SplitPageDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\SplitPageResultDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\SurveyListItemDto.cs" />
+    <Compile Include="SurveyDesign\Dtos\UpsertThemeDto.cs" />
+    <Compile Include="SurveyDesign\FolderDefinitionAppService.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyAppService.cs" />
+    <Compile Include="SurveyDesign\LookAndFeelAppService.cs" />
+    <Compile Include="SurveyDesign\PageDefinitionAppService.cs" />
+    <Compile Include="SurveyDesign\QuestionDefinitionAppService.cs" />
+    <Compile Include="SurveyDesign\SurveyDefinitionAppService.cs" />
+    <Compile Include="SurveyExecution\LookAndFeelAppService.cs" />
+    <Compile Include="SurveyExecution\Models\LayoutAndThemeModel.cs" />
+    <Compile Include="SurveyExecution\Models\LookAndFeelBindingModel.cs" />
+    <Compile Include="SurveyExecution\Models\LookAndFeelByPageBindingModel.cs" />
+    <Compile Include="SurveyExecution\Models\PagePreviewBindingModel.cs" />
+    <Compile Include="SurveyExecution\Models\DeviceDetectionModel.cs" />
+    <Compile Include="SurveyExecution\PagePreviewAppService.cs" />
+    <Compile Include="SurveyExecution\SurveyAppService.cs" />
+    <Compile Include="SurveyExecution\LibrarySurveyAppService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LearningPlatform.Domain\LearningPlatform.Domain.csproj">
+      <Project>{87d97e61-b3ca-4457-8c1a-2061edcc24ea}</Project>
+      <Name>LearningPlatform.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

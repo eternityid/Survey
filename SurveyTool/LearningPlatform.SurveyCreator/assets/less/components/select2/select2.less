@@ -1,0 +1,47 @@
+﻿.select2 {
+    position: relative;
+
+    &__place-holder {
+        opacity: 0.5;
+    }
+
+    &__selected-item-text {
+        height: 100%;
+        display: inline-block;
+        float: left;
+    }
+
+    &__selected-item-caret {
+        position: absolute;
+        float: right;
+        top: 15px;
+        right: 10px;
+    }
+
+    &__dropdown-toggle {
+        position: relative;
+        width: 100%;
+        background-color: #FFF;
+        border: 1px solid #ccc;
+        height: 34px;
+    }
+
+    &__dropdown-menu {
+        /*width: 100%;*/
+        height: 300px;
+        overflow: auto;
+        margin-top: 0;
+        padding-top:0;
+        left: inherit;
+
+        li:first-child {
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0px;
+        }
+    }
+
+    &__dropdown-item {
+        cursor: pointer;
+    }
+}

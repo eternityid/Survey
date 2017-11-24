@@ -1,0 +1,85 @@
+﻿<div class="question-form container-fluid">
+    <div class="row question-form__header">
+        <div class="col-lg-4 col-md-4 question-form__title">
+            <div ng-if="!vm.isEditMode">
+                <p class="title-question-form">New question</p>
+            </div>
+            <div ng-if="vm.isEditMode">
+                <p ng-if="vm.selectedQuestionType !== vm.questionTypes.information" class="title-question-form">
+                    Question {{question.positionInSurvey}} of {{vm.surveyEditorData.totalQuestions}}
+                </p>
+                <p ng-if="vm.selectedQuestionType === vm.questionTypes.information" class="title-question-form">
+                    Information {{question.positionInSurvey}}
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-8 question-form__type">
+            <question-type-dropdown-list ng-modal="vm.selectedQuestionType"
+                                         is-disabled="false"
+                                         on-item-changed="vm.onQuestionTypeChange()">
+            </question-type-dropdown-list>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <input type="text" class="form-control question-editor__alias-input" data-ng-model="question.alias" title="Enter alias here" maxlength="{{vm.maxlengthQuestionAlias}}" />
+        </div>
+    </div>
+    <form class="create-question-form" novalidate name="createQuestionForm">
+        <div class="form-group editor question-editor__question-title">
+            <label class="control-label svt-label__ontop label-required">Question Title</label>
+            <div name="editorQuestionTitle" contenteditable="true" ng-model="question.title.items[0].text" class="form-control"
+                 rich-text-input="vm.ckeditorConfig.questionTitle"
+                 ng-change="vm.onQuestionTitleChange()"></div>
+        </div>
+        <div class="form-group editor question-editor__question-description">
+            <label class="control-label svt-label__ontop">Description</label>
+            <div name="editorQuestionDescription" contenteditable="true" ng-model="question.description.items[0].text" class="form-control"
+                 ng-change="vm.onQuestionDescriptionChange()"
+                 rich-text-input="vm.ckeditorConfig.questionDescription"></div>
+        </div>
+
+        <div class="showQuestionType">
+            <selection-editor question="question"
+                              ng-if="question.$type === vm.questionTypes.singleSelection"></selection-editor>
+            <selection-editor question="question"
+                              ng-if="question.$type === vm.questionTypes.multipleSelection"></selection-editor>
+            <text-editor question="question"
+                         ng-if="question.$type === vm.questionTypes.shortText"></text-editor>
+            <text-editor question="question"
+                         ng-if="question.$type === vm.questionTypes.longText"></text-editor>
+            <date-editor question="question"
+                         ng-if="question.$type === vm.questionTypes.date"></date-editor>
+            <numeric-editor question="question"
+                            ng-if="question.$type === vm.questionTypes.numeric"></numeric-editor>
+            <information-editor question="question"
+                                ng-if="question.$type === vm.questionTypes.information"></information-editor>
+            <net-promoter-score-editor question="question"
+                                       ng-if="question.$type === vm.questionTypes.netPromoterScore"></net-promoter-score-editor>
+            <scale-editor question="question"
+                                 ng-if="question.$type === vm.questionTypes.scale"></scale-editor>
+            <rating-editor question="question"
+                           ng-if="question.$type === vm.questionTypes.rating"></rating-editor>
+
+            <picture-selection-editor question="question"
+                                      ng-if="question.$type === vm.questionTypes.pictureSingleSelection"></picture-selection-editor>
+            <picture-selection-editor question="question"
+                                      ng-if="question.$type === vm.questionTypes.pictureMultipleSelection"></picture-selection-editor>
+
+            <selection-grid-editor question="question"
+                                   ng-if="question.$type === vm.questionTypes.singleSelectionGrid"
+                                   is-single-selection-grid-question="true"></selection-grid-editor>
+            <selection-grid-editor question="question"
+                                   ng-if="question.$type === vm.questionTypes.multipleSelectionGrid"></selection-grid-editor>
+
+            <text-list-editor question="question"
+                              ng-if="question.$type === vm.questionTypes.shortTextList"></text-list-editor>
+            <text-list-editor question="question"
+                              ng-if="question.$type === vm.questionTypes.longTextList"></text-list-editor>
+
+            <rating-grid-editor question="question"
+                                ng-if="question.$type === vm.questionTypes.ratingGrid"></rating-grid-editor>
+            <scale-grid-editor question="question"
+                                      ng-if="question.$type === vm.questionTypes.scaleGrid"></scale-grid-editor>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>

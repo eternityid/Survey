@@ -1,0 +1,101 @@
+﻿@* ReSharper disable once RedundantNameQualifier *@
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@using LearningPlatform.Domain.SurveyLayout
+@using LearningPlatform.Helpers
+@model LearningPlatform.Domain.SurveyExecution.Page
+
+@{
+    Layout = "~/Views/Shared/_MobileLayout.cshtml";
+    ViewBag.Title = ViewBag.Survey.Name + " - Responsive Insight";
+    ViewBag.TitleSmall = "Responsive Insight";
+}
+
+
+@functions
+{
+    private static string RendererName(Question question)
+    {
+        if (question is GridQuestion) return typeof(GridQuestion).Name;
+        return question.GetType().Name;
+    }
+}
+
+@helper RenderQuestions()
+{
+    foreach (var question in Model.Questions)
+    {
+        @:<div style="@(string.IsNullOrEmpty(question.Title) ? "display: none;" :"")" class="question-settings" isRequired="@question.IsRequired" question-type="@question.GetType().Name" is-transposed="@question.IsTransposed" question-alias="@question.Alias">
+            Html.RenderPartial(string.Format("~/Views/Survey/Mobile/_{0}Renderer.cshtml", RendererName(question)), question, ViewData);
+        @:</div>
+    }
+}
+
+@if (ViewBag.Preview!=true)
+{
+@:<form action="" method="post">
+    <input type="hidden" name="context" value="@Model.Context"/>
+    <input type="hidden" name="$questionPercent" id="questionPercent" value="@ViewBag.QuestionPercent" />
+    <input type="hidden" name="$pageId" value="@Model.GetPageId()" />
+    <input type="hidden" name="$isDynamicPage" value="@Model.IsDynamicPage.ToString()" />
+    <input type="hidden" name="$hasSkipActions" value="@Model.HasSkipActions.ToString()" />
+    <div class="alert alert-warning" role="alert" id="clientError" style="display: none">
+        <label>Error: </label><br/>
+        <div class="clientError__content"></div>
+    </div>
+}
+@if (ViewBag.PreviewLookAndFeel != null && ViewBag.PreviewLookAndFeel == true)
+{
+    <div class="alert alert-warning">
+        <label>Demo error message</label>
+    </div>
+}
+@if (ViewBag.Survey.SurveySettings.DisplayPageTitleAndDescription)
+{
+    <div class="page-title">@(new HtmlString(Model.Title != null ? Model.Title.ToString() : ""))</div>
+    <div class="page-description">@(new HtmlString(Model.Description != null ? Model.Description.ToString() : ""))</div>
+}
+@{
+    foreach (var element in ViewBag.Layout.GetDefault<PageTemplate>().GetTemplateItems())
+    {
+        if (element.ItemType == ItemType.PageErrorArea)
+        {
+            @ErrorRenderer.RenderErrorPageArea(Html, Model.ErrorStrings,
+                ViewBag.Layout.GetDefault<PageErrorAreaTemplate>().GetTemplateItems(),
+                ViewBag.Layout.GetDefault<PageErrorTemplate>().GetTemplateItems())
+        }
+        else if (element.ItemType == ItemType.Questions)
+        {
+            @RenderQuestions()
+        }
+        else if (element.ItemType == ItemType.Navigation)
+        {
+            Html.RenderPartial("~/Views/Survey/Mobile/_Navigation.cshtml");
+        }
+        else if (element.ItemType == ItemType.SurveyProgressArea)
+        {
+            if (Model.DisplayProgressBar)
+            {
+                @ProgressRenderer.RenderProgress(Html, Model.Progress)
+            }
+        }
+        else if (element.ItemType == ItemType.Html)
+        {
+            @HtmlHelperExtensions.EvaluateString(Html, element.Html)
+        }
+        else
+        {
+            throw new NotImplementedException("Unexpected element type");
+        }
+    }
+}
+@if (ViewBag.Preview != true)
+{
+@:</form >
+}
+
+@section scripts
+{
+    <script>
+        window.questions = @Html.Raw(Model.SerializedQuestions);
+    </script>
+}

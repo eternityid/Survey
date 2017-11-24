@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{98A17CF1-21F4-401B-8C69-9526437AE919}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.Specs</RootNamespace>
+    <AssemblyName>LearningPlatform.Specs</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClearScript, Version=5.4.7.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClearScript.V8.5.4.7\lib\net40\ClearScript.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BeforeAndAfter.cs" />
+    <Compile Include="ComponentContext.cs" />
+    <Compile Include="Features\DataCleaning\GivenSurveyWith\ConditionWithScriptBeforeComplete.cs" />
+    <Compile Include="Features\DataCleaning\DataCleaningForQuestionMasking.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataCleaningForQuestionMasking.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\DataCleaning\DataCleaningForSkipping.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataCleaningForSkipping.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ImportExportSurveyDef\SimpleSurveyImportExportDefinition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimpleSurveyImportExportDefinition.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ImportExportSurveyDef\GivenSurveyWith\ExpressionQuestionMasks.cs" />
+    <Compile Include="Features\ImportExportSurveyDef\GivenSurveyWith\SimpleSurvey.cs" />
+    <Compile Include="Features\ImportExportSurveyDef\GivenSurveyWith\SkipLogic.cs" />
+    <Compile Include="Features\ImportExportSurveyDef\ExpressionQuestionMaskSurveyImportExportDefinition.feature.cs">
+      <DependentUpon>ExpressionQuestionMaskSurveyImportExportDefinition.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\ImportExportSurveyDef\SkipSurveyImportExportDefinition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkipSurveyImportExportDefinition.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Progress\ProgressConditionSurvey.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProgressConditionSurvey.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Progress\ProgressLoopSurvey.feature.cs">
+      <DependentUpon>ProgressLoopSurvey.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Progress\ProgressSimpleSurvey.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProgressSimpleSurvey.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\QuestionMasking\ExpressionQuestionMask.feature.cs">
+      <DependentUpon>ExpressionQuestionMask.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Options\CarryOverOptions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarryOverOptions.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Loop\Loop.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Loop.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Loop\LoopWithOptionsMask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoopWithOptionsMask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Options\CustomScriptOptionsMask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomScriptOptionsMask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Options\OptionsOrder.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OptionsOrder.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Condition\Condition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Condition.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\DataCleaning\DataCleaningForConditions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataCleaningForConditions.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\GoToFolder\GoToFolder.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoToFolder.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\QuestionTypes\MultipleSelectionQuestion.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultipleSelectionQuestion.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Options\OptionsOrderFixedPosition.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OptionsOrderFixedPosition.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Options\OtherOption.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OtherOption.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\QuestionMasking\CustomQuestionMask.feature.cs">
+      <DependentUpon>CustomQuestionMask.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\QuestionMasking\GivenSurveyWith\ExpressionQuestionMasks.cs" />
+    <Compile Include="Features\QuestionOrderInPage\QuestionOrderInPage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuestionOrderInPage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\RandomDataGenerator\GivenSurvey\RandomDataGeneratorSurvey.cs" />
+    <Compile Include="Features\RandomDataGenerator\RandomDataGenerator.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RandomDataGenerator.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Resume\ResumeInLoop.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResumeInLoop.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Scripting\Scripting.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scripting.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Options\SharedOptions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SharedOptions.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Loop\GivenSurveyWith\LoopWithOptionsMask.cs" />
+    <Compile Include="Features\Loop\GivenSurveyWith\Loop.cs" />
+    <Compile Include="Features\QuestionTypes\GivenSurveyWith\MultipleSelectionQuestion.cs" />
+    <Compile Include="Features\Navigation\GivenSurveyWith\NestedFolders.cs" />
+    <Compile Include="Features\QuestionMasking\GivenSurveyWith\QuestionMaskAllHiddenInPage.cs" />
+    <Compile Include="Features\QuestionMasking\GivenSurveyWith\CustomQuestionMasks.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\CustomScriptOptionsMasks.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\OtherOption.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\CarryOverOptions.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\SharedOptions.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\QuestionOptionOrderFixedPosition.cs" />
+    <Compile Include="Features\Navigation\GivenSurveyWith\TwoFoldersInsideTheMainFolder.cs" />
+    <Compile Include="Features\DataCleaning\GivenSurveyWith\ConditionsToVerifyDataCleaning.cs" />
+    <Compile Include="Features\Condition\GivenSurveyWith\Condition.cs" />
+    <Compile Include="Features\Navigation\GivenSurveyWith\ConditionAtBeginning.cs" />
+    <Compile Include="Features\PipedText\GivenSurveyWith\PipedTextPointingToSameQuestion.cs" />
+    <Compile Include="Features\PipedText\GivenSurveyWith\PipedText.cs" />
+    <Compile Include="Features\Skip\Skip.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Skip.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Validation\GivenSurveyWith\RequiredQuestion.cs" />
+    <Compile Include="Features\Navigation\GivenSurveyWith\SimplePages.cs" />
+    <Compile Include="InMemoryFileSystem.cs" />
+    <Compile Include="InstanceContext.cs" />
+    <Compile Include="Features\Options\GivenSurveyWith\QuestionOptionOrder.cs" />
+    <Compile Include="Features\QuestionOrderInPage\GivenSurveyWith\PageWithOrderTypeSet.cs" />
+    <Compile Include="Features\GoToFolder\GivenSurveyWith\GoToFolderNode.cs" />
+    <Compile Include="Features\Scripting\GivenSurveyWith\ScriptNode.cs" />
+    <Compile Include="Features\Skip\GivenSurveyWith\SkipLogic.cs" />
+    <Compile Include="SurveyContext.cs" />
+    <Compile Include="Then\ThenSurveyShould.cs" />
+    <Compile Include="Then\ThenFileShould.cs" />
+    <Compile Include="Then\ThenTheDatabaseShould.cs" />
+    <Compile Include="Then\ThenTheProgressShouldBe.cs" />
+    <Compile Include="When\WhenIExportTheSurvey.cs" />
+    <Compile Include="When\WhenIStartRandomDataGenerator.cs" />
+    <Compile Include="Then\ThenSteps.cs" />
+    <Compile Include="PageContext.cs" />
+    <Compile Include="Features\PipedText\PipedText.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PipedText.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Validation\RequiredValidation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequiredValidation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Then\ThenTheNavigationButtonShould.cs" />
+    <Compile Include="Then\ThenTheQuestionShould.cs" />
+    <Compile Include="Transforms.cs" />
+    <Compile Include="When\WhenIHaveAnswered.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Features\Navigation\Navigation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Navigation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="When\WhenINavigate.cs" />
+    <Compile Include="When\WhenResume.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Features\DataCleaning\DataCleaningForQuestionMasking.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DataCleaningForQuestionMasking.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DataCleaning\DataCleaningForSkipping.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DataCleaningForSkipping.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ImportExportSurveyDef\Expected\expressionSurvey.json" />
+    <None Include="Features\ImportExportSurveyDef\Expected\simpleSurvey.json" />
+    <None Include="Features\ImportExportSurveyDef\Expected\skipSurvey.json" />
+    <None Include="Features\ImportExportSurveyDef\SimpleSurveyImportExportDefinition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SimpleSurveyImportExportDefinition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ImportExportSurveyDef\ExpressionQuestionMaskSurveyImportExportDefinition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExpressionQuestionMaskSurveyImportExportDefinition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ImportExportSurveyDef\SkipSurveyImportExportDefinition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SkipSurveyImportExportDefinition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Progress\ProgressConditionSurvey.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProgressConditionSurvey.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Progress\ProgressLoopSurvey.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProgressLoopSurvey.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Progress\ProgressSimpleSurvey.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProgressSimpleSurvey.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\QuestionMasking\ExpressionQuestionMask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExpressionQuestionMask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Loop\LoopWithOptionsMask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>LoopWithOptionsMask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Loop\Loop.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Loop.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\CustomScriptOptionsMask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CustomScriptOptionsMask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\CarryOverOptions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CarryOverOptions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\SharedOptions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SharedOptions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\OptionsOrderFixedPosition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsOrderFixedPosition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\OptionsOrder.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsOrder.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Condition\Condition.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Condition.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DataCleaning\DataCleaningForConditions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DataCleaningForConditions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\GoToFolder\GoToFolder.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GoToFolder.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\QuestionTypes\MultipleSelectionQuestion.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MultipleSelectionQuestion.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Options\OtherOption.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OtherOption.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\QuestionMasking\CustomQuestionMask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CustomQuestionMask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\QuestionOrderInPage\QuestionOrderInPage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>QuestionOrderInPage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\RandomDataGenerator\RandomDataGenerator.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RandomDataGenerator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Resume\ResumeInLoop.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ResumeInLoop.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Scripting\Scripting.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Scripting.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Skip\Skip.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Skip.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Licenses\ClearScript.main.license" />
+    <None Include="Licenses\v8.main.license" />
+    <None Include="Licenses\v8.strongtalk.license" />
+    <None Include="Licenses\v8.v8.license" />
+    <None Include="Licenses\v8.valgrind.license" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\Navigation\Navigation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Navigation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\PipedText\PipedText.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PipedText.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Validation\RequiredValidation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RequiredValidation.feature.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LearningPlatform.Application\LearningPlatform.Application.csproj">
+      <Project>{85fc60a4-0383-4ad2-8f5a-cbcbc07ffc3c}</Project>
+      <Name>LearningPlatform.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningPlatform.Data.Memory\LearningPlatform.Data.Memory.csproj">
+      <Project>{67adb950-6710-4558-a5bb-0ecc7e05e501}</Project>
+      <Name>LearningPlatform.Data.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningPlatform.Domain\LearningPlatform.Domain.csproj">
+      <Project>{87D97E61-B3CA-4457-8C1A-2061EDCC24EA}</Project>
+      <Name>LearningPlatform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningPlatform.SurveyExecution.Data\LearningPlatform.SurveyExecution.Data.csproj">
+      <Project>{f23890ff-fa70-4e4a-a5c7-1d17e4d6d10e}</Project>
+      <Name>LearningPlatform.SurveyExecution.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningPlatform.TestFramework\LearningPlatform.TestFramework.csproj">
+      <Project>{EC7D0FC3-966E-4207-9757-22FB0FC55D30}</Project>
+      <Name>LearningPlatform.TestFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\x86\*.*" "$(TargetDir)"
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\amd64\*.*" "$(TargetDir)"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

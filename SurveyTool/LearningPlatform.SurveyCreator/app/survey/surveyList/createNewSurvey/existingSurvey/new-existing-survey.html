@@ -1,0 +1,27 @@
+﻿<div class="survey-creator">
+    <div class="survey-dropdown">
+        <label class="svt-label__ontop label-required">Existing Survey</label>
+        <div class="btn dropdown-toggle select-survey__dropdown-toggle" type="button" id="existing-survey-dropdown" data-toggle="dropdown">
+            <span class='select-survey__display truncate-string' title="{{vm.existingSurveyName}}">{{vm.existingSurveyName}}</span>
+            &nbsp;<span class="caret select-survey__caret"></span>
+        </div>
+        <ul class="col-xs-11 dropdown-menu select-list__dropdown-menu" role="menu" aria-labelledby="existing-survey-dropdown">
+            <li role="presentation">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                    <input type="search" class="form-control" placeholder="Search" ng-model="vm.existingSurveyFilter" />
+                </div>
+            </li>
+            <li role="presentation" class="survey-dropdown-item" ng-repeat="survey in vm.existingSurveys | filter: {title:vm.existingSurveyFilter}">
+                <a class="truncate-string" title="{{survey.title}}" role="menuitem" ng-click="vm.selectSurvey(survey)">{{survey.title}}</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        ﻿<label for="survey-name" class="svt-label__ontop label-required">Survey Title</label>
+        <input autofocus type="text" name="surveyTitle" id="survey-name" class="form-control"
+               data-ng-model="vm.surveyTitle" placeholder="Untitled" ng-keyup="vm.onEnterTitle()"/>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿<div class="form-group container-options"
+     as-sortable="vm.sortableGroupOptions"
+     ng-model="vm.optionList.optionGroups">
+
+    <div class="clearfix drag-handle option-group selection-option__group-option"
+         ng-class="{'stand-alone-group-option' : optionGroup.alias === null, 'group-end-header' : optionGroup.hideHeading, 'selection-option__null-group-option': vm.isNullOptionGroup(optionGroup)}"
+         ng-repeat="optionGroup in vm.optionList.optionGroups"
+         ng-if="optionGroup.isDisplayed"
+         as-sortable-item>
+        <div ng-if="optionGroup.isDisplayed"></div>
+        <i ng-if="optionGroup.alias && optionGroup.isDisplayed && !optionGroup.hideHeading"
+           class="fa icon--drag-drop option__drag-icon"
+           title="Click, drag and drop me to move option"
+           as-sortable-item-handle></i>
+        <div class="container-options_body"
+             ng-class="optionGroup.isOpened ? 'option-group__setting-border' : ''"
+             ng-if="optionGroup.alias && optionGroup.isDisplayed && !optionGroup.hideHeading ">
+            <header-option on-title-change="vm.onOptionGroupTitleChange()"
+                           editor-config="vm.ckeditorConfig"
+                           on-remove-group-header="vm.onRemoveGroupHeader(optionGroup)"
+                           option="optionGroup"
+                           on-order-option-change="vm.onOrderOptionChange()"
+                           on-toggle="vm.toggleOption(optionGroup, vm.optionList.optionGroups)"
+                           on-option-group-header-change="onOptionGroupHeaderChange()"></header-option>
+        </div>
+        <div firstLabel></div>
+        <div as-sortable="vm.sortableOptions"
+             ng-model="optionGroup.displayedOptions"
+             ng-if="optionGroup.isDisplayed"
+             class="drag-handle__options">
+            <div class="drag-handle selection-option__option-item"
+                 ng-class="{'group-end-alias' : option.hasOwnProperty('renderAsLabel')}"
+                 ng-repeat="option in optionGroup.displayedOptions"
+                 as-sortable-item>
+                <i class="fa icon--drag-drop option__drag-icon"
+                   as-sortable-item-handle title="Click, drag and drop me to move option"></i>
+                <i class="glyphicon icon--remove-option icon--remove-option-group-end" title="Remove this group end"
+                   ng-if="option.hasOwnProperty('renderAsLabel') && option.renderAsLabel"
+                   ng-click="vm.onRemoveGroupEnd(option)"></i>
+                <div ng-if="option.hasOwnProperty('renderAsLabel') && option.renderAsLabel" ng-class="option.isIndent ? 'group-end-option-indent' : 'group-end-option-without-indent'">
+                    {{option.label}}
+                </div>
+                <div class="container-options_body" ng-if="!option.hasOwnProperty('renderAsLabel')">
+                    <selection-option openning-option="openningOption"
+                                      question="question"
+                                      original-question-type="previewQuestion.$type"
+                                      option="option"
+                                      options="vm.optionList.options"
+                                      on-key-down-on-option-alias-field="vm.onKeyDownOnOptionAliasField($event, option)"
+                                      on-option-title-change="onOptionTitleChange()"></selection-option>
+                </div>
+            </div>
+        </div>
+        <div lastLabel></div>
+    </div>
+</div>

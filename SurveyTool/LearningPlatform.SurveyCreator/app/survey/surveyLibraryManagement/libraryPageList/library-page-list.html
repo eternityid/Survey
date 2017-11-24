@@ -1,0 +1,49 @@
+﻿<table class="table table-striped library-page-list__table" ng-if="vm.pages.length">
+    <thead>
+        <tr class="svt-grid__row">
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>QUESTIONS</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="page in vm.pages" class="svt-grid__row">
+            <td class="text--middle page-title-column library-page-list__truncate-page-title-cell">
+                <a title="{{page.title | rawTextInListCellFilter}}"
+                   ng-click="vm.previewPageForEditing(page)"
+                   ng-bind-html="page.title | rawTextInListCellFilter | trustAsHtmlFilter"></a>
+            </td>
+            <td class="text--middle page-description-column library-page-list__truncate-page-description-cell">
+                <span title="{{page.description | rawTextInListCellFilter}}"
+                   ng-bind-html="page.description | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+            </td>
+            <td class="text--middle page-questions-column">
+                {{page.numberOfQuestions}}
+            </td>
+            <td class="text-center text--middle page-action-menu-column">
+                <div class="btn-group">
+                    <span class="btn btn-default survey-list__action-button" data-toggle="dropdown"></span>
+                    <ul class="dropdown-menu survey-list__dropdown-menu" role="menu">
+                        <li>
+                            <a ng-click="vm.previewPageForEditing(page)" title="Edit Page"><span class="glyphicon icon--edit survey-list__action-button-icon"></span>Edit</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.duplicatePage(page)" title="Duplicate Page"><span class="glyphicon icon--duplicate survey-list__action-button-icon"></span>Duplicate</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.deletePage(page, $index)" title="Delete Page"><span class="glyphicon icon--delete survey-list__action-button-icon"></span>Delete</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="survey-library-management__paging-row">
+    <span>{{vm.totalPages}} page(s) found.</span>
+    <span ng-show="vm.totalPages">
+        &nbsp;Displaying {{vm.pages.length}}/{{vm.totalPages}} page(s). <a href="" class="svt-grid__load-more" ng-click="vm.loadMorePages()" ng-if="vm.totalPages && vm.pages.length < vm.totalPages">Load more</a>
+    </span>
+</p>

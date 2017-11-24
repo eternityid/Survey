@@ -1,0 +1,12 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.RatingQuestion
+
+@helper RenderUserInputArea()
+{
+     var icon = Model.ShapeName;
+     var emptyIcon = Model.ShapeName + "-empty";
+    <div class="form-group ratings">
+        <input type="hidden" class="rating" name="@Model.Alias" data-rating-number-position="bottom" data-stop="@Model.Options.Count" data-empty="@emptyIcon" data-filled="@icon" value="@Model.Answer" />
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

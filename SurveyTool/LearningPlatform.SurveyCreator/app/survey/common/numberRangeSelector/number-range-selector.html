@@ -1,0 +1,21 @@
+﻿<div class="form-group">
+    <div class="col-md-4 col-sm-6 col-xs-12 datepicker__control--custom-space">
+        <label for="number-sent" class="svt-label__ontop">{{selectConditionLabel}}</label>
+        <select id="{{elementId}}" class="form-control"
+                data-ng-model="nSelectorModel.conditionOperator"
+                data-ng-options="value.code as value.name for value in vm.numberSentOperatorTypes"
+                ng-change="vm.selectConditionChange()"></select>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 datepicker__control--custom-space">
+        <label ng-if="(nSelectorModel.conditionOperator !== 'BETWEEN')" for="respondent-number-sent" class="svt-label__ontop">&nbsp;</label>
+        <label ng-if="(nSelectorModel.conditionOperator === 'BETWEEN')" for="respondent-number-sent" class="svt-label__ontop">From</label>
+        <input id="{{elementId}}-from" ng-keypress="nTextboxKeyPress({event: $event})" type="text" class="form-control"
+               data-ng-model="nSelectorModel.numberFrom" ng-disabled="!nSelectorModel.conditionOperator">
+    </div>
+    <div class="col-md-4 col-sm-6 pull-right col-xs-12 datepicker__control--custom-space">
+        <label ng-if="(nSelectorModel.conditionOperator !== 'BETWEEN')" for="respondent-number-sent" class="svt-label__ontop">&nbsp;</label>
+        <label ng-if="(nSelectorModel.conditionOperator === 'BETWEEN')" for="respondent-number-sent-to" class="svt-label__ontop">To</label>
+        <input id="{{elementId}}-to" ng-keypress="nTextboxKeyPress({event: $event})" type="text" class="form-control"
+               data-ng-model="nSelectorModel.numberTo" ng-disabled="(nSelectorModel.conditionOperator !== 'BETWEEN')">
+    </div>
+</div>

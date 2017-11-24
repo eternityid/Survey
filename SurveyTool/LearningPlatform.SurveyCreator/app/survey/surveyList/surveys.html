@@ -1,0 +1,157 @@
+﻿<div>
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.createNewSurvey}">
+            <a id="add-survey-button" ng-click="vm.showCreateNewSurvey()" title="Create new survey">
+                <div class="action-menu__icon"><span class="glyphicon icon--add"></span></div><label class="action-menu__label">Create</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.importSurvey}">
+            <a id="import-icon" ng-click="vm.showImportSurvey()" title="Import survey">
+                <div class="action-menu__icon"><span class="glyphicon icon--import"></span></div><label class="action-menu__label">Import</label>
+            </a>
+        </div>
+        <div class="action-menu__clear"></div>
+        <div class="action-menu__search-box">
+            <div class="input-group">
+                <input id="search-survey-input" class="form-control search-survey-input" type="text" placeholder="Survey title"
+                       ng-model="vm.searchModel.searchString" ng-keypress="vm.onSearchKeyPress($event, false)">
+                <div class="search-button">
+                    <button ng-click="vm.doQuickSearch()" title="Search"><span class="fa icon--search"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row svt-row" ng-if="vm.pushDownSettings.isActive">
+        <push-down>
+            <create-new-survey ng-if="vm.pushDownSettings.mode.createNewSurvey" handle-after-save="vm.handleAfterCreateSurvey()"></create-new-survey>
+            <import-survey ng-if="vm.pushDownSettings.mode.importSurvey" handle-after-save="vm.handleAfterImportSurvey()"></import-survey>
+        </push-down>
+    </div>
+    <div class="filter-surveys">
+        <div ng-class="{'filter-surveys__container--transparent': vm.filterSurveyCollapsed, 'filter-surveys__container': !vm.filterSurveyCollapsed}">
+            <div class="filter-surveys__head clearfix" ng-class="{'filter-surveys__head--collapsed': vm.filterSurveyCollapsed, 'filter-surveys__head--expanded': !vm.filterSurveyCollapsed}">
+                <div class="toogle-icon-helper">
+                    <span id="expand-icon" class="filter-surveys__toggle--down fa-caret-right" ng-class="{'collapsed': vm.filterSurveyCollapsed}" ng-click="vm.filterSurveyCollapsed = !vm.filterSurveyCollapsed" title="Search"></span>
+                    <span id="collapse-icon" class="filter-surveys__toggle--up fa-caret-down" ng-class="{'collapsed': vm.filterSurveyCollapsed}" ng-click="vm.filterSurveyCollapsed = !vm.filterSurveyCollapsed" title="Search"></span>
+                    <span class="filter-surveys__title" ng-click="vm.filterSurveyCollapsed = !vm.filterSurveyCollapsed">Filter Surveys </span>
+                </div>
+                <section ng-hide="vm.filterSurveyCollapsed">
+                    <div class="panel-body filter-surveys__condition-panel">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-4 col-sm-4 survey-list__survey-title-filter-form">
+                                    <div class="col-xs-12 row">
+                                        <label for="last-sent-date" class="svt-label__ontop"> Survey Title </label>
+                                        <input class="form-control" type="text" placeholder="Survey title" ng-model="vm.searchModel.searchString"
+                                               ng-keypress="vm.onSearchKeyPress($event, true)">
+                                    </div>
+
+                                    <div class="checkbox col-xs-12 row">
+                                        <label class="filter-surveys__lable-for-checkbox">
+                                            <input type="checkbox" class="filter-surveys__checkbox" ng-model="vm.searchModel.showDeletedSurveys"> Show Deleted Surveys
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8 col-sm-8">
+                                    <svt-datetime class="col-sm-12 clear-padding" label="Created Date" data="vm.searchModel.createdDate" on-key-press="vm.onSearchKeyPress(event, true)"></svt-datetime>
+                                    <svt-datetime class="col-sm-12 clear-padding" label="Modified Date" data="vm.searchModel.modifiedDate" on-key-press="vm.onSearchKeyPress(event, true)"></svt-datetime>
+                                </div>
+
+                            </div>
+                            <div class="filter-surveys-select-status">
+                                <label class="filter-surveys__lable-for-checkbox">
+                                    <input type="checkbox" class="filter-surveys__checkbox"  id="check-all" ng-model="vm.checkAll" ng-click="vm.changeCheckAll()" /> Show All Survey Statuses
+                                </label>
+                                <label class="filter-surveys__lable-for-checkbox">
+                                    <input type="checkbox" class="filter-surveys__checkbox" ng-model="vm.searchModel.status.New" ng-change="vm.changeSelectStatus()" /> New
+                                </label>
+                                <label class="filter-surveys__lable-for-checkbox">
+                                    <input type="checkbox" class="filter-surveys__checkbox" ng-model="vm.searchModel.status.Open" ng-change="vm.changeSelectStatus()" /> Open
+                                </label>
+                                <label class="filter-surveys__lable-for-checkbox">
+                                    <input type="checkbox" class="filter-surveys__checkbox" ng-model="vm.searchModel.status.TemprorarilyClosed" ng-change="vm.changeSelectStatus()" /> Temporarily Closed
+                                </label>
+                                <label class="filter-surveys__lable-for-checkbox">
+                                    <input type="checkbox" class="filter-surveys__checkbox" ng-model="vm.searchModel.status.Closed" ng-change="vm.changeSelectStatus()" /> Closed
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="pull-right svt-button-group">
+                                        <button id="surveys-clear-btn" class="btn svt-button--cancel" ng-click="vm.setDefaultValueForSearchModel()">Clear</button>
+                                        <button id="surveys-search-btn" class="btn svt-button--done" ng-click="vm.doAdvancedSearch()">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="row svt-row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="svt-grid__header svt-grid__row">
+                        <th class="col-md-3">SURVEY TITLE</th>
+                        <th class="col-md-2">CREATED</th>
+                        <th class="col-md-2">MODIFIED</th>
+                        <th class="col-md-2">STATUS</th>
+                        <th class="col-md-2">OWNER</th>
+                        <th class="col-md-1 text-center">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="survey in vm.surveys | filter:{name: searchString}" class="svt-grid__row">
+                        <td class="text--middle beakword">
+                            <a href="#/surveys/{{survey.id}}/dashboard" class="ng-binding title" ng-if="!survey.isDeleted">{{survey.title}}</a>
+                            <span class="survey-list__survey-title--deleted" ng-if="survey.isDeleted">{{survey.title}}</span>
+                        </td>
+                        <td class="text--middle">{{survey.createdDate | dateTimeFormatFilter}}</td>
+                        <td class="text--middle">{{survey.modifiedDate | dateTimeFormatFilter}}</td>
+                        <td class="text--middle survey-status {{vm.getSurveyStatusClass(survey)}}">{{vm.getDisplayedStatus(survey)}}</td>
+                        <td class="text--middle beakword">{{ survey.userFullName }}</td>
+                        <td class="text-center text--middle">
+                            <div class="btn-group ng-scope" id="survey-list-action-btn">
+                                <span class="btn btn-default survey-list__action-button" data-toggle="dropdown">
+                                </span>
+
+                                <ul ng-if="!survey.isDeleted" class="dropdown-menu survey-list__dropdown-menu" role="menu">
+                                    <li>
+                                        <a ng-click="vm.duplicateSurvey(survey.id)" href="" title="Duplicate Survey"><span class="glyphicon icon--duplicate survey-list__action-button-icon"></span>Duplicate</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="vm.addSurveyToLibrary(survey.id)" href="" title="Add survey to library"><span class="glyphicon glyphicon-copy survey-list__action-button-icon"></span>Add survey to library</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="vm.exportSurvey(survey)" href="" title="Export Survey"><span class="glyphicon icon--export survey-list__action-button-icon"></span>Export</a>
+                                    </li>
+                                    <li ng-if="survey.isUserHaveFullPermission">
+                                        <a id="delete-button" ng-click="vm.deleteSurvey(survey)" href="" title="Delete Survey"><span class="glyphicon icon--delete survey-list__action-button-icon"></span>Delete</a>
+                                    </li>
+                                </ul>
+
+                                <ul ng-if="survey.isDeleted && survey.isUserHaveFullPermission" class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a ng-click="vm.restoreSurvey(survey)" href="" title="Restore Survey"><span class="glyphicon icon-edit-group--add survey-list__action-button-icon"></span>Restore</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="svt-grid__row">
+                        <td colspan="9">
+                            <span>{{vm.surveysFound}} survey(s) found.</span>
+                            <span ng-show="vm.surveysFound > 0"> Displaying {{vm.surveys.length}}/{{vm.surveysFound}} survey(s).</span>
+                            <a ng-show="vm.paging.hashNext" class="svt-grid__load-more" ng-click="vm.loadMore()" title="Click to see more surveys">Load More</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

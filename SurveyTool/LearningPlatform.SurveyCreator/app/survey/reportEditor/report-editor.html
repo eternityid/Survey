@@ -1,0 +1,37 @@
+﻿<div ng-mousedown="vm.onMouseDownReportEditorPage($event)">
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.createReport}">
+            <a id="survey-setting-button" ng-click="vm.showReportEditor()" title="Edit report settings">
+                <div class="action-menu__icon"><span class="glyphicon icon--configure"></span></div><label class="action-menu__label">Report Settings</label>
+            </a>
+        </div>
+        <div class="action-menu__item--test-mode pull-right">
+            <test-mode-button test-mode-settings="vm.testModeSettings"></test-mode-button>
+        </div>
+    </div>
+    <div class="row svt-row" ng-if="vm.pushDownSettings.isActive">
+        <push-down>
+            <create-report ng-if="vm.pushDownSettings.mode.createReport"
+                           editor="vm.editor" handle-after-save="vm.handleAfterEditReport()"></create-report>
+        </push-down>
+    </div>
+    <div class="row">
+        <div class="report-title__container">
+            <div class="report-title__text" ng-bind="vm.reportDisplayName"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div as-sortable="vm.sortableOptions" ng-model="vm.pages.data">
+                <main ng-repeat="page in vm.pages.data" as-sortable-item class="report-page a4">
+                    <div class="report-page__dragHandle">
+                        <span class="fa icon--drag-drop dragIcon" as-sortable-item-handle title="Click and hold here to move report page"></span>
+                        <report-page page-index="$index">
+                        </report-page>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+<br />

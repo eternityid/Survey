@@ -1,0 +1,19 @@
+﻿<div class="expression-view-container skip-command-view" ng-if="question.questionMaskExpression" ng-init="isExpansed = true"
+     ng-class="{'expression-view-container--collapse': !isExpansed}">
+    <div class="skip-condition-col" ng-class="{'skip-condition-col--expansed': isExpansed}">
+        <div class="expression-view-container__collapse-icon" ng-click="isExpansed = !isExpansed;"
+             svt-stop-event>
+            <i class="expression-view__arrow-down fa fa-caret-down fa-caret-down__icon-color--white" ng-show="isExpansed" title="Collapse"></i>
+            <i class="expression-view__arrow-right fa fa-caret-right" title="Expand" ng-show="!isExpansed"></i>
+            <span class="expression-view__title">Conditionally display this question</span>
+        </div>
+        <div class="expression-view-container__condition" ng-show="isExpansed"
+             ng-click="clickToEdit(question)" svt-stop-event>
+            <div ng-repeat="item in vm.displayedExpressionItems track by $index" class="expression-message-item"
+                 ng-class="{'expression-message-item--start-group' : item.positionInGroup == 0}">
+                <div class="group-condition-item">{{item.positionInGroup == 0 ? item.parent.message : ''}}</div>
+                <div class="condition-item" ng-bind-html="item.indent !== 0 ? item.message : ''"></div>
+            </div>
+        </div>
+    </div>
+</div>

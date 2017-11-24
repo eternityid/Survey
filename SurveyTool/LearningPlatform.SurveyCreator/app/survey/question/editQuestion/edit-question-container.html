@@ -1,0 +1,29 @@
+﻿<div class="row" ng-class="editCtrl.getEditorClasses()" id="edit-question-segment">
+    <div class="col-xs-12 col-md-5 question-editor__content-panel">
+        <tabset justified="true">
+            <tab heading="General">
+                <general-setting mode="edit" question="editCtrl.question" html-container-id="{{htmlContainerId}}"></general-setting>
+            </tab>
+            <tab heading="Display" ng-show="editCtrl.isShowDisplaySetting()">
+                <question-display-settings questions-with-options="editCtrl.questionsWithOptions"
+                                           question="editCtrl.question"
+                                           page-id="{{pageId}}"
+                                           ng-hide="editCtrl.isThankYouPage">
+                </question-display-settings>
+            </tab>
+            <tab heading="Validation" ng-show="editCtrl.isShowValidationSetting()">
+                <validation-setting question="editCtrl.question"></validation-setting>
+            </tab>
+        </tabset>
+
+        <div class="pull-right form-group svt-button-group">
+            <button id="editquestion-editor-cancel-button" class="btn svt-button--cancel" type="button"
+                    ng-click="editCtrl.cancelEditQuestion(htmlContainerId)" title="Cancel">Cancel</button>
+            <button id="editquestion-editor-done-button" class="btn btn-primary" type="submit"
+                    ng-click="editCtrl.doneEditQuestion()" title="Done Editing Question">Save</button>
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm col-md-7 question-editor__preview-panel">
+        <question-previewer></question-previewer>
+    </div>
+</div>

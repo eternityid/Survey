@@ -1,0 +1,88 @@
+﻿@using LearningPlatform.Domain.Common
+@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@model SingleSelectionQuestion
+
+@functions {
+    private string GetId(Option option)
+    {
+        return Model.Alias + "_" + option.Alias;
+    }
+
+    HelperResult GetRenderUserInputArea(DisplayOrientation displayOrientation)
+    {
+        HelperResult helperResult = null;
+        switch (displayOrientation)
+        {
+            case DisplayOrientation.Vertical:
+            case DisplayOrientation.Horizontal:
+                helperResult = RenderUserInputAreaVertical();
+                break;
+            case DisplayOrientation.Dropdown:
+                helperResult = RenderUserInputAreaDropdown(enableFilter: false);
+                break;
+            case DisplayOrientation.DropdownWithFiltering:
+                helperResult = RenderUserInputAreaDropdown(enableFilter: true);
+                break;
+        }
+        return helperResult;
+    }
+    readonly Reference<OptionGroup> _currentGroup = new Reference<OptionGroup>(null);
+
+}
+
+@helper RenderUserInputAreaVertical()
+{
+    <div id="@Model.Alias-single-selection-vertical" class="single-selection-container">
+        @foreach (Option option in Model.Options)
+        {
+            @OptionGroupRenderer.RenderGroup(option, _currentGroup)
+            if (option.OtherQuestion == null)
+            {
+                <label class="single-selection @(Model.IsChecked(option) ? "selected" : "")">
+                    <span class="single-selection-option">
+
+                        @Html.RadioButton(Model.Alias, option.Alias, (Model.IsChecked(option) ? new { @checked = "checked" } : (object)new { id = GetId(option) }))
+
+                        <span class="selection-option-title" title-id="@(Model.Alias + option.Id)">@Html.Raw(option.Text)</span>
+                    </span>
+                </label>
+            }
+            else
+            {
+                <div class="single-selection-other">
+                    <label class="single-selection @(Model.IsChecked(option) ? "selected" : "")">
+                        <span class="single-selection-option">
+                            @Html.RadioButton(Model.Alias, option.Alias, (Model.IsChecked(option) ? new { @checked = "checked" } : (object)new { id = GetId(option) }))
+                            <span class="selection-option-title" title-id="@(Model.Alias + option.Id)">@Html.Raw(option.Text)</span>
+                        </span>
+                    </label>
+                    <div class="other">
+                        @Html.Partial(
+                            string.Format("~/Views/Survey/Mobile/_Other{0}Renderer.cshtml", option.OtherQuestion.GetType().Name),
+                            option.OtherQuestion, ViewData)
+                    </div>
+                </div>
+
+            }
+        }
+        @OptionGroupRenderer.RenderGroupClosingTag(_currentGroup)
+    </div>
+}
+
+@helper RenderUserInputAreaDropdown(bool enableFilter)
+{
+    var filterClass = enableFilter ? "dropdown-with-filtering" : string.Empty;
+    <div class="form-group single-selection-dropdown @filterClass">
+        <select class="form-control" name="@Model.Alias">
+            <option value=""></option>
+            @foreach (var option in Model.Options)
+            {
+                var selected = Equals(Model.Answer, option.Alias) ? "selected" : "";
+                <option @selected value="@option.Alias" class="selection-option-title" title-id="@(Model.Alias + option.Id)">@option.Text </option>
+            }
+        </select>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, GetRenderUserInputArea(Model.DisplayOrientation))

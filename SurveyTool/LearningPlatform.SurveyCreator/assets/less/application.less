@@ -1,0 +1,170 @@
+﻿/* Note: this file contains rules that are used for whole application */
+@import (reference) "theme/default/variables.less";
+
+@media (max-width: 800px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 960px;
+    }
+}
+
+@media (min-width: @base-page-container-media-min-width) {
+    .container {
+        width: @base-page-container-width;
+    }
+}
+
+main.container {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 0 !important;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.bg-light {
+    background-color: #d9edf7;
+}
+
+.margin-bottom-md { /* TODO rename me */
+    margin-bottom: 10px;
+}
+
+.input-required {
+    background: #f3c5c9 !important;
+
+    &::-webkit-input-placeholder {
+        color: red;
+    }
+
+    &:-moz-placeholder {
+        color: red;
+    }
+
+    &::-moz-placeholder {
+        color: red;
+    }
+
+    &:-ms-input-placeholder {
+        color: red;
+    }
+
+    &.dropdown {
+        color: red;
+    }
+}
+
+.label-required:after {
+    content: " (*)";
+    color: red;
+}
+
+.clean {
+    clear: both;
+}
+
+.clear-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.none-padding-left-right {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.none-padding-top-bottom {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.padding-left-right-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.padding-left-40 {
+    padding-left: 40px;
+}
+
+.none-margin-top-bottom {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.long-word-wrap {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+th .checkbox-list, td .checkbox-list {
+    margin-bottom: 5px;
+}
+
+.loading {
+    display: inline-block !important;
+    background-image: url('../../assets/images/loading.gif');
+    background-repeat: no-repeat;
+    background-position: left;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+    color: transparent;
+    position: relative;
+    top: -3px;
+    height: 35px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.svt-overlay {
+    position: fixed;
+    top: 122px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1100;
+    display: none;
+
+    .spinner {
+        top: 40% !important;
+    }
+}
+
+.overlay-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 12;
+}

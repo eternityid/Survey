@@ -1,0 +1,93 @@
+﻿@import (reference) "../theme/default/variables.less";
+
+.action-menu {
+    height: @action-menu-height;
+}
+
+.action-menu__item--test-mode{
+    cursor: pointer;
+    float: left;
+    height: @action-menu-height;
+    line-height: @action-menu-height;
+}
+
+.action-menu__item {
+    cursor: pointer;
+    float: left;
+    height: @action-menu-height;
+    line-height: @action-menu-height;
+    padding-right: @action-menu-distance-inside-item-width;
+    position: relative;
+
+    &:first-of-type {
+        margin-left: -10px;
+    }
+}
+
+.action-menu__dots {
+    padding-left: 10px;
+    line-height: 30px;
+    float: left;
+    position: relative;
+
+    .dropdown-menu {
+        left: unset;
+        right: -40px;
+        min-width: 215px;
+
+        .action-menu {
+            &__item {
+                float: none;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.action-menu__item a {
+    font-size: 18px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.action-menu__item--active {
+    color: gray;
+    &:hover {
+        background-color: @base-main-link-hover-color;
+        color: white;
+    }
+}
+
+.action-menu__item--inactive {
+    color: gray;
+    opacity: @base-icons-disabled-opacity;
+}
+
+ .action-menu__item--selected {
+    background-color: @base-main-link-hover-color;
+    color: white;
+}
+
+.action-menu__icon {
+    display: inline-block;
+    text-align: center;
+    width: @action-menu-icon-width;
+}
+
+.action-menu__label {
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.action-menu__clear {
+    clear: both;
+    display: inline-block;
+}
+
+.action-menu__search-box {
+    padding: 3px 0;
+    border: solid transparent 1px;
+    float: right;
+}

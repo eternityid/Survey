@@ -1,0 +1,18 @@
+﻿<div class="result-settings">
+    <div class="dropdown">
+        <a class="dropdown-toggle button-setting" data-toggle="dropdown" title="Settings" id="result-setting-button">
+            <span class="action-menu__icon">
+                <span class="glyphicon icon--configure"></span>
+            </span>
+            <label class="action-menu__label">Setting</label>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a ng-click="vm.toogleDataTable()" id="result-toggle-datatable-button">
+                    <span ng-class="{'active-check-box': data.isDisplaySummaryTabular, 'disactive-check-box': !data.isDisplaySummaryTabular}"></span>
+                    <span class="text">Display data table</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

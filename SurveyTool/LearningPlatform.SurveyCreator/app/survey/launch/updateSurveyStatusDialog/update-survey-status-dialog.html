@@ -1,0 +1,26 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body">
+    <p class="alert alert-warning">
+        <i class="glyphicon glyphicon-warning-sign" ng-style="{'font-size': '18px'}"></i>
+        <span>{{message}}</span>
+    </p>
+    <div ng-if="type == 'ClosedSurvey'" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-xs-1"></label>
+            <div class="col-xs-11 checkbox">
+                <label>
+                    <input id="close-temporarily-survey" type="checkbox" data-ng-model="status.isTemporarilyClosed">
+                    Only temporarily close the survey
+                </label>
+                <span class="help-block h6">This will display a message to the respondents that the survey is temporarily closed. Please come back at a later time</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="cancel-close-survey" type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button id="close-survey-confirm" type="button" ng-click="update(true)" class="btn btn-warning" data-dismiss="modal">Close Survey</button>
+</div>

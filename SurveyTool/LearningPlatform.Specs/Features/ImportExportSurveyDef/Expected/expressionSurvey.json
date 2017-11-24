@@ -1,0 +1,256 @@
+﻿{
+  "topFolder": {
+    "alias": "topFolder",
+    "childNodes": [
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "MultipleSelectionQuestionDefinition",
+            "optionList": {
+              "options": [
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "1",
+                  "position": 1,
+                  "optionsMask": {}
+                },
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "2",
+                  "position": 2,
+                  "optionsMask": {}
+                },
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "3",
+                  "position": 3,
+                  "optionsMask": {}
+                }
+              ],
+              "optionGroups":  []
+            },
+            "optionsMask": {},
+            "alias": "q1",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": "q1"
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": "q1"
+                }
+              ]
+            },
+            //"position": 1,
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 1"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page1",
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "MultipleSelectionQuestionDefinition",
+            "optionList": {
+              "options": [
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "1",
+                  "position": 1,
+                  "optionsMask": {}
+                },
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "2",
+                  "position": 2,
+                  "optionsMask": {}
+                },
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": ""
+                      }
+                    ]
+                  },
+                  "alias": "3",
+                  "position": 3,
+                  "optionsMask": {}
+                }
+              ],
+              "optionGroups": []
+            },
+            "optionsMask": {},
+            "alias": "q2",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": "q2"
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": "q2"
+                }
+              ]
+            },
+            "questionMaskExpression": {
+              "expressionItems": [
+                {
+                  "operator": "IsSelected",
+                  "questionAlias": "q1",
+                  "optionAlias": "2"
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 2"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page2",
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "InformationDefinition",
+            "alias": "information",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": "Information"
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 3"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page3",
+        "childNodes": []
+      }
+    ]
+  },
+  "surveySettings": {
+    "surveyTitle": "New Survey",
+    "enableBackButton": true,
+    "keyboardSupport": true,
+    "languages": [
+      "en"
+    ],
+    "defaultLanguage": "en",
+    "displayProgressBar": true,
+    "displayOneQuestionOnScreen": true
+  },
+  "createdDate": "N/A",
+  "modifiedDate": "N/A",
+  "lastPublishedDate": "N/A"
+}

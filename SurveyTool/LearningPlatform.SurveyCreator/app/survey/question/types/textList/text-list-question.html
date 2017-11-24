@@ -1,0 +1,20 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<table class="question-text-list__grid--view-mode">
+    <tbody>
+        <tr ng-repeat="topic in vm.topics">
+            <td ng-class="vm.isLongTextListQuestion ? 'question-long-text-list__topic-label--view-mode' : 'question-short-text-list__topic-label--view-mode'">
+                <span ng-if="!topic.isCarryOver" ng-bind-html="topic.text.items[0].text"></span>
+                <span ng-if="topic.isCarryOver && !topic.isCarryOverError">
+                    Carry Over from <strong>{{topic.carryOverFromQuestionName | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+                <span ng-if="topic.isCarryOver && topic.isCarryOverError" class="question-view__content--error">
+                    Carry Over from <strong>{{topic.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+            </td>
+            <td>
+                <input ng-if="!vm.isLongTextListQuestion" type="text" class="question-short-text-list__text-box--view-mode" disabled title="Short text topic" />
+                <textarea ng-if="vm.isLongTextListQuestion" class="question-long-text-list__text-area--view-mode" rows="2" disabled title="Long text topic"></textarea>
+            </td>
+        </tr>
+    </tbody>
+</table>

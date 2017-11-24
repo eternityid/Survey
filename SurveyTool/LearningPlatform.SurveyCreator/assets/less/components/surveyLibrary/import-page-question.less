@@ -1,0 +1,153 @@
+﻿@import (reference) "../../application.less";
+
+.library-content {
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    background-color: #eee;
+
+    .question-header__alias {
+        word-wrap: break-word;
+    }
+
+    &__page {
+        &-row {
+            border-bottom: 1px dashed #ccc;
+            cursor: pointer;
+
+            &.active,
+            &.active:hover {
+                background-color: #cee7f8;
+            }
+
+            label {
+                padding-bottom: 10px;
+                padding-top: 10px;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                > span {
+                    display: block;
+                }
+            }
+        }
+
+        &-row:hover {
+            background-color: #edf6fc;
+        }
+
+        &-row:after {
+            clear: both;
+        }
+
+        &-title {
+            display: inline-block;
+            float: left;
+            padding-right: 8px;
+            font-weight: bold;
+
+            .long-word-wrap;
+        }
+
+        &-total-questions {
+            display: inline-block;
+            float: left;
+            opacity: 0.6;
+            font-weight: normal;
+        }
+
+        &-description {
+            opacity: 0.6;
+            font-weight: normal;
+
+            .long-word-wrap;
+        }
+    }
+
+    &__question {
+        &-row {
+            border-bottom: 1px dashed #ccc;
+            cursor: pointer;
+
+            &.active,
+            &.active:hover {
+                background-color: #cee7f8;
+            }
+
+            label {
+                padding-bottom: 10px;
+                padding-top: 10px;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                > span {
+                    display: block;
+                }
+            }
+        }
+
+        &-row:hover {
+            background-color: #edf6fc;
+        }
+
+        &-row:after {
+            clear: both;
+        }
+
+        &-truncate-alias {
+            width: 16.67%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &-alias {
+            padding: 5px;
+            background-color: #56c0e0;
+            border-radius: 5px;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        &-title {
+            font-weight: bold;
+
+            .long-word-wrap;
+        }
+
+        &-type {
+            font-weight: normal;
+            opacity: 0.8;
+        }
+
+        &-description {
+            font-weight: normal;
+            opacity: 0.6;
+
+            .long-word-wrap;
+        }
+
+        &-none {
+            font-weight: normal;
+        }
+    }
+}
+
+.library-search {
+    padding-bottom: 20px;
+
+    &-type {
+        padding-top: 8px;
+
+        &__label {
+            padding-right: 15px;
+        }
+    }
+}
+
+
+
+

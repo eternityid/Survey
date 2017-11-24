@@ -1,0 +1,76 @@
+﻿<div class="clear-padding selection-picture" ng-class="vm.isOpenning() ? 'option-editor__container' : 'option-editor__container--transparent'">
+    <div class="option-editor__head clearfix" ng-class="vm.isOpenning() ? 'option-editor__head--expanded' : 'option-editor__head--collapsed'">
+        <div class="toogle-icon-helper">
+            <span id="expand-icon" class="option-editor__toggle option-editor__toggle--down fa-caret-right"
+                  ng-class="{'collapsed': !vm.isOpenning()}"
+                  ng-click="vm.onClickToggleIcon()" title="Expand"></span>
+            <span id="collapse-icon" class="option-editor__toggle option-editor__toggle--up fa-caret-down fa-caret-down__icon-color--white"
+                  ng-class="{'collapsed': !vm.isOpenning()}"
+                  ng-click="vm.onClickToggleIcon()" title="Collapse"></span>
+            <div class="option-editor__title">
+                <div class="row">
+                    <div class="col-xs-6 clear-padding">
+                        <div class="form-group">
+                            <div class="container-text-option">
+                                <div contenteditable="true" id="{{vm.option.guid}}" ng-model="vm.option.text.items[0].text" class="form-control option-title__ckeditor"
+                                     ng-keydown="onKeyDownOnOptionAliasField({ '$event': $event, 'optionIndex': index })"
+                                     rich-text-input="vm.ckeditorConfig"
+                                     ng-change="vm.onOptionTitleChange()"></div>
+                            </div>
+
+                            <div class="selection-picture__keep-fixed-position-pinner" ng-if="vm.option.isFixedPosition">
+                                <span class="glyphicon icon--keep-position keep-position-sign" title="Position Kept"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6 option-editor__picture-container">
+                        <div class="uploader__file-action-info-group">
+                            <div class="uploader__file-action">
+                                <input type="button" class="btn btn-default" ng-click="vm.pickImage()" value="..." />
+                            </div>
+                            <div class="uploader__file-info">
+                                <div class="uploader__file-name" ng-if="vm.option.pictureName"
+                                     title="{{vm.option.pictureName}}">{{vm.option.pictureName | fileNameFilter:17:'...'}}</div>
+                                <div class="uploader__message uploader__message--valid" ng-if="!vm.option.pictureName">No file chosen</div>
+                            </div>
+                            <div class="uploader__delete-file-command" ng-if="vm.canBeDeleted()">
+                                <i class="glyphicon icon--remove-option uploader__delete-file" ng-click="vm.onRemoveOption()" title="Remove this option"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section ng-if="vm.isOpenning()">
+            <div class="panel-body option-editor__condition-panel">
+                <form class="form-horizontal">
+                    <div class="form-group" novalidate ng-form name="optionSettingForm" ng-if="!(vm.option.optionsMask.optionsMaskType && vm.option.optionsMask.questionId)">
+                        <span class="col-xs-12">
+                            <label class="control-label svt-label__ontop label-required option-setting__control-label">
+                                Option Alias
+                            </label>
+                        </span>
+                        <span class="col-xs-12">
+                            <input type="text" name="optionAlias" data-ng-model="vm.option.alias" class="form-control"
+                                   ng-class="(optionSettingForm.optionAlias.$invalid && !vm.option.displayedAlias.valid) ? 'input-required' : ''"
+                                   ng-change="vm.onOptionAliasChange()"
+                                   placeholder="{{vm.option.displayedAlias.placeHolder}}" title="Enter option alias here" maxlength="25" required />
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="vm.option.isFixedPosition"> Keep fixed position
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+    </div>
+</div>

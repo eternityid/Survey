@@ -1,0 +1,269 @@
+﻿.container .inputArea .single-selection:after,
+.container .inputArea .multi-selection:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.container .inputArea .grid-selection .ratings.active-option {
+    border: none;
+}
+
+.container .inputArea .grid-selection.rating-table td.ratings.active-option > span {
+    position: relative;
+}
+
+.container .inputArea .grid-selection.rating-table td.ratings.active-option > span::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: -5px;
+    width: calc(100% + 5px);
+    height: 36px;
+
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.container .inputArea .single-selection-other label.single-selection {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    top: 3px;
+}
+
+.container .inputArea .single-selection-other label.single-selection .single-selection-option {
+    top: 4px;
+}
+
+.container .inputArea .single-selection .single-selection-option,
+.container .inputArea .multi-selection .multi-selection-option {
+    padding: 1px 5px;
+    line-height: 22px;
+    left: -5px;
+}
+
+.container #move-first-invalid-question-link {
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.container #move-first-invalid-question-link:hover {
+    text-decoration: underline;
+}
+
+.container .alert-warning {
+    background-color: transparent;
+}
+
+.container .alert-info {
+    position: relative;
+    display: inline-block;
+    padding: 5px 15px 2px 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+.container .alert-info::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 7px solid;
+}
+
+.question-settings[question-type='OpenEndedShortTextQuestion'] .inputArea .short-text {
+    margin-bottom: 60px;
+    width: 60%;
+}
+.question-settings[question-type='OpenEndedLongTextQuestion'] .inputArea .long-text,
+.question-settings .inputArea .numeric-text,
+.question-settings .inputArea .grid-selection {
+    margin-bottom: 60px;
+}
+.question-settings[question-type='OpenEndedLongTextQuestion'] .inputArea .long-text .form-control{
+    width: 100%;
+}
+
+.rating-table tr:not([row-index='1']) .rating-number {
+    display: none;
+}
+
+.question-settings[question-type='LongTextListQuestion'] .inputArea .long-text {
+    width: 70%;
+    float: left;
+}
+.question-settings[question-type='LongTextListQuestion'] .inputArea .long-text-list {
+    width: 100%;
+}
+.question-settings[question-type='ShortTextListQuestion'] .inputArea .short-text .form-control {
+    padding-right: 20px;
+    width: 100%;
+}
+.question-settings[question-type='LongTextListQuestion'] .inputArea .long-text .form-control {
+    padding-right: 20px;
+}
+
+.inputArea .grid-selection.rating-table tr td {
+    text-align: left;
+    border: none;
+}
+
+.likert-table.some {
+    width: auto;
+}
+
+.likert-table.some td {
+    min-width: 100px;
+}
+
+.likert-table.some th:first-child,
+.likert-table.some td:first-child {
+    width: auto;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.inputArea th:first-child, .inputArea td:first-child {
+    padding-right: 20px;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.inputArea td:nth-child(6) ~ th:first-child {
+    width: auto;
+    white-space: normal;
+}
+
+.single-selection-container .single-selection-option .selection-option-title {
+    padding-left: 5px;
+}
+
+.single-selection-container .single-selection-option input[type="radio"]:checked ~ .selection-option-title::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    width: 12px;
+    height: 6px;
+    transform: rotate(-45deg);
+}
+
+.horizontal.single-selection-container .single-selection-option input[type="radio"]:checked ~ .selection-option-title::after {
+    left: unset;
+    float: left;
+    margin-left: -6px;
+}
+
+.multi-selection-container .multi-selection-option .selection-option-title {
+    padding-left: 5px;
+}
+
+.multi-selection-container .multi-selection-option input[type="checkbox"]:checked ~ .selection-option-title::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    width: 12px;
+    height: 6px;
+    transform: rotate(-45deg);
+}
+
+.picture-single-selection .picture-container .thumbnail .caption .glyphicon,
+.picture-multiple-selection .picture-container .thumbnail .caption .glyphicon {
+    position: relative;
+    content: "";
+    display: inline-block;
+    width: 20px;
+}
+
+.picture-single-selection .picture-container .thumbnail .caption .glyphicon:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: -15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin-top: -2px;
+}
+
+.picture-single-selection .picture-container .thumbnail input[type="radio"]:checked ~ .caption .glyphicon:after {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 4px;
+    width: 12px;
+    height: 6px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    transform: rotate(-45deg);
+}
+
+.picture-multiple-selection .picture-container .thumbnail .caption .glyphicon:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: -15px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    margin-top: -2px;
+}
+
+.picture-multiple-selection .picture-container .thumbnail input[type="checkbox"]:checked ~ .caption .glyphicon:after {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 4px;
+    width: 12px;
+    height: 6px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    transform: rotate(-45deg);
+}
+
+.container .horizontal .liker-heading .heading.selected {
+    border: 2px solid;
+    opacity: 0.85;
+}
+
+.container .single-selection-container .single-selection-option span:before,
+.container .multi-selection-container .multi-selection-option span:before {
+    border: 2px solid;
+}
+
+.container .inputArea .active-option:after {
+    content: "";
+    position: absolute;
+
+}
+
+[question-type=SingleSelectionGridQuestion] .inputArea td input[type=radio] + span::before,
+[question-type=MultipleSelectionGridQuestion] .inputArea td input[type=checkbox] ~ span::before,
+[question-type=MultipleSelectionQuestion] .inputArea .horizontal input[type=checkbox] ~ span::before,
+[question-type=ScaleGridQuestion] .inputArea td input[type=radio] + span::before {
+    border: 2px solid;
+}
+
+[question-type=SingleSelectionGridQuestion] .inputArea td input[type=radio]:checked + span::after,
+[question-type=MultipleSelectionGridQuestion] .inputArea td input[type=checkbox]:checked ~ span::after,
+[question-type=ScaleGridQuestion] .inputArea td input[type=radio]:checked + span::after {
+    position: absolute;
+    content: "";
+    top: 6px;
+    left: 3px;
+    width: 12px;
+    height: 6px;
+    transform: rotate(-45deg);
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+}
+
+.container .thumbnail .caption .selection-option-title {
+    padding-left: 6px;
+}

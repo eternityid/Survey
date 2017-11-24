@@ -1,0 +1,160 @@
+<div class="add-btn-container">
+    <div class="btn-group dropdown"
+         ng-show="pageObj.nodeType !== 'ThankYouPage'">
+        <button class="btn btn-primary btn-add-question dropdown-toggle" ng-click="clickDropdown($event)"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            &nbsp;Add&nbsp;
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu multiple-column">
+            <li>
+                <div class="container">
+                    <div class="standard-questions">
+                        <div class="column-dropdown-title">
+                            Standard Questions
+                        </div>
+                        <div class="column-dropdown-from-library">
+                            <a href="" data-ng-click="pageCtrl.getReadyToImportFromLibrary($event, pageObj)" svt-stop-event>
+                                Add from library
+                            </a>
+                        </div>
+                        <div class="separated-line"></div>
+                        <div class="row">
+                            <ul class="multiple-column-dropdown col-sm-6 column">
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.singleSelection)" svt-stop-event>
+                                        <span class="glyphicon glyphicon-record"></span>&nbsp;Single Selection
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.multipleSelection)"  svt-stop-event>
+                                        <span class="glyphicon glyphicon-check"></span>&nbsp;Multiple Selection
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.rating)" svt-stop-event>
+                                        <span class="glyphicon glyphicon-star"></span>&nbsp;Rating
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.scale)" svt-stop-event>
+                                        <span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;Scale
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.netPromoterScore)" svt-stop-event>
+                                        <span class="glyphicon icon--net-promoter-score-question"></span>&nbsp;Net Promoter Score
+                                        &reg;
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="multiple-column-dropdown col-sm-6 column">
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.numeric)" svt-stop-event>
+                                        <span class="glyphicon icon--numeric-question"></span>&nbsp;Numeric
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.shortText)" svt-stop-event>
+                                        <span class="glyphicon glyphicon-font"></span>&nbsp;Short Text
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.longText)" svt-stop-event>
+                                        <span class="glyphicon icon--long-text-question"></span>&nbsp;Long Text
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.date)" svt-stop-event>
+                                        <span class="glyphicon icon--date-question"></span>&nbsp;Date
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.shortTextList)" svt-stop-event>
+                                        <span class="glyphicon icon--short-text-list-question"></span>&nbsp;Short Text List
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.longTextList)" svt-stop-event>
+                                        <span class="glyphicon icon--long-text-list-question"></span>&nbsp;Long Text List
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="column-dropdown-title">
+                        Grid Questions
+                    </div>
+                    <div class="separated-line"></div>
+                    <div class="row">
+                        <ul class="multiple-column-dropdown col-sm-6 column">
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.singleSelectionGrid)" svt-stop-event>
+                                    <span class="glyphicon icon--single-selection-grid-question"></span>&nbsp;Single Selection Grid
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.multipleSelectionGrid)" svt-stop-event>
+                                    <span class="glyphicon icon--multiple-selection-grid-question"></span>&nbsp;Multiple Selection Grid
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="multiple-column-dropdown col-sm-6 column">
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.ratingGrid)" svt-stop-event>
+                                    <span class="glyphicon icon--rating-grid-question"></span>&nbsp;Rating Grid
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.scaleGrid)" svt-stop-event>
+                                    <span class="glyphicon icon--scale-grid-question"></span>&nbsp;Scale Grid
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column-dropdown-title">
+                        Other
+                    </div>
+                    <div class="separated-line"></div>
+                    <div class="row">
+                        <ul class="multiple-column-dropdown col-sm-6 column">
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.pictureSingleSelection)" svt-stop-event>
+                                    <span class="glyphicon icon--single-selection-picture-question"></span>&nbsp;Picture Single
+                                    Selection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.pictureMultipleSelection)" svt-stop-event>
+                                    <span class="glyphicon icon--multiple-selection-picture-question"></span>&nbsp;Picture Multiple
+                                    Selection
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="multiple-column-dropdown col-sm-6 column">
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateQuestion(pageObj, pageCtrl.questionTypes.information)" svt-stop-event>
+                                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Information
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column-dropdown-title">Actions</div>
+                    <div class="separated-line"></div>
+                    <div class="row">
+                        <ul class="multiple-column-dropdown col-sm-6 column">
+                            <li>
+                                <a href="" data-ng-click="pageCtrl.getReadyToCreateSkipAction(pageObj.id)" svt-stop-event>
+                                    <span class="glyphicon glyphicon-fast-forward"></span>&nbsp;Skip Action
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

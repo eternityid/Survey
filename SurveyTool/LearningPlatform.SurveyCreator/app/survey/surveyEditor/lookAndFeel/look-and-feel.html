@@ -1,0 +1,13 @@
+﻿<div class="row svt-row-eq-height" ng-if="!vm.dataLoading">
+    <form name="form" class="svt-push-down__form col-sm-12 col-md-5" id="lookandfeel-form">
+        <look-and-feel-settings page="null"></look-and-feel-settings>
+        <div class="form-group pull-right svt-button-group">
+            <button id="lookandfeel-cancel-btn" type="button" class="btn svt-button--cancel" title="Cancel"
+                    ng-click="vm.close()">Cancel</button>
+            <button id="lookandfeel-save-btn" type="button" ng-click="vm.saveSetting()" class="btn svt-button--done"
+                    title="Save">Save</button>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    <look-and-feel-previewer class="hidden-xs hidden-sm col-md-7 clear-padding look-and-feel__previewer-container"></look-and-feel-previewer>
+</div>

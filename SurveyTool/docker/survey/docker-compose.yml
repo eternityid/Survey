@@ -1,0 +1,47 @@
+version: '3'
+# This file is used for local development. See docker-cloud.yml for deployment to (Azure) swarm.
+services:
+  # Elasticsearch, head plugin, and nginx configured for elasticsearch auth
+  elasticsearch:
+    image: elasticsearch:latest
+    ports:
+      - "9300:9300"
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data
+    environment:
+    # This is to allow running with little memory
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+  
+  headplugin:
+    image: mobz/elasticsearch-head:5-alpine
+    depends_on:
+      - elasticsearch    
+
+  nginx:
+    image: oyvindf/nginx
+    build:
+      context: ./nginx/
+      dockerfile: nginx.dockerfile
+    env_file: ./nginx/nginx.env 
+    depends_on:
+      - elasticsearch
+      - headplugin
+    ports:
+    - "9200:9200"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    env_file: mongo/mongo-local.env 
+    volumes:
+      - mongo1data-db:/data/db
+      - mongo1data-configdb:/data/configdb
+      - ./mongo/entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  
+
+# Define volumes so that if we remove a container, the data will not be removed.
+volumes:
+  mongo1data-db: {}
+  mongo1data-configdb: {}
+  elasticsearchdata: {}

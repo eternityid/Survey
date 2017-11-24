@@ -1,0 +1,59 @@
+﻿<div class="row library-picker-wrapper">
+    <div class="col-xs-12">
+        <div class="file-library-picker__searchbar col-xs-7">
+            <div class="form-group col-xs-6">
+                <label>Search</label>
+                <input type="text" class="form-control" placeholder="Search" ng-model="model.fileLibraryFilter">
+            </div>
+            <div class="form-group col-xs-6">
+                <label>Folder</label>
+                <select class="form-control" ng-model="model.selectedDirectoryName"
+                        ng-options="directoryName for directoryName in vm.directoryNames"
+                        ng-change="vm.onDirectoryChange()"></select>
+            </div>
+        </div>
+
+        <div class="col-xs-12 file-library-picker__container">
+            <div class="col-xs-7 file-library-picker__container--list">
+                <div class="file-library-picker__directory-list">
+                    <div ng-repeat="directory in displayedDirectories = (library.directories | directoryContainFileFilter:model.selectedDirectoryName:model.fileLibraryFilter)">
+                        <div class="file-library-picker__directory-header">
+                            <span>{{directory.name}}</span>
+                        </div>
+                        <div class="file-library-picker__file-list">
+                            <div ng-repeat="blobItem in directory.blobs | filter:{fileName:model.fileLibraryFilter}">
+                                <div class="file-library-picker__file-item" ng-click="vm.selectBlob(blobItem)"
+                                     ng-dblclick="vm.selectBlob(blobItem);onSave();"
+                                     ng-class="{active: vm.activeBlob && vm.activeBlob.name === blobItem.name}">
+                                    <div class="file-library-picker__image">
+                                        <div class="file-library-picker__image--render" style="background-image: url('{{blobItem.uri}}');"></div>
+                                        <div class="file-library-picker__image--overlay" ng-if="vm.activeBlob && vm.activeBlob.name === blobItem.name"></div>
+                                        <i class="file-library-picker__image--icon fa fa-caret-checked"
+                                           ng-if="vm.activeBlob && vm.activeBlob.name === blobItem.name"></i>
+                                    </div>
+                                    <div class="file-library-picker__file-name">{{blobItem.fileName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="displayedDirectories.length == 0" class="file-library-picker__directory-list--no-data">
+                        No images found. You can upload your images.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5 file-library-picker__container--preview">
+                <library-image-previewer allow-change-image-dimension="{{config.allowChangeImageDimension}}"
+                                         image-url="selectedImageUrl"
+                                         image-size="model.imageSize"></library-image-previewer>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="text-right svt-button-group">
+            <button type="button" ng-click="onCancel()" class="btn btn-default">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-click="onSave()" ng-disabled="!selectedImageUrl">Add</button>
+        </div>
+    </div>
+</div>
+

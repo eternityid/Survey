@@ -1,0 +1,22 @@
+﻿<div class="uploader">
+    <div ng-if="isDefault">
+        <input type="file" accept="{{accept}}" />
+    </div>
+    <div ng-if="!isDefault">
+        <div class="uploader__file-action-info-group">
+            <div class="uploader__file-action">
+                <input type="file" accept="{{accept}}" />
+                <input type="button" class="btn btn-default" ng-click="openUploadFileDialog()" value="{{buttonTitle}}" />
+            </div>
+            <div class="uploader__file-info">
+                <div class="uploader__file-name" title="{{fileName}}" ng-show="!invalidFile">{{displayedName}}</div>
+                <div class="uploader__message {{messageCss}}" title="{{message}}" ng-bind-html="message" ng-show="invalidFile"></div>
+            </div>
+        </div>
+        <div class="uploader__file-command">
+            <i class="glyphicon icon--remove-option uploader__delete-file" ng-click="deleteFileUploadSelected()"
+               title="{{deletedTitle}}" ng-show="alwaysShowRemove || (!invalidFile && (removeIf === true))"></i>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

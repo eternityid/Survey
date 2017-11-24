@@ -1,0 +1,56 @@
+@using System.Web.Mvc.Html
+@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+
+@helper RenderUserInputArea(System.Web.Mvc.HtmlHelper html, IPictureSelectionQuestion question)
+{
+    var multipleSelectionQuestion = question as MultipleSelectionQuestion;
+    bool isMultipleSelection = multipleSelectionQuestion!=null;
+
+    <div class="form-group picture-@(isMultipleSelection?"multiple":"single")-selection">
+        @{
+            var gridColumns = QuestionRenderer.GetCssPictureOptions(question.MaxPicturesInGrid);
+        }
+        <div class="@question.Alias picture-container @(isMultipleSelection?"":"picture-row")">
+            @{
+                var optionIndex = 0;
+                var pictureCss = "max-height: 124px;";
+                if (question.IsScalePictureToFitContainer)
+                {
+                    pictureCss = pictureCss + "min-width:70%;width: 100%;";
+                }
+            }
+            @foreach (Option option in question.Options)
+            {
+                var pictureUrl = QuestionRenderer.GetPictureUrl(html.ViewBag.ApiUrl, html.ViewBag.Survey.Id, question.PictureFolderId, option.PictureName, html.ViewBag.TemporaryPictures);
+                var optionsClass = "options_" + question.Alias;
+                var thumbnailAlias = "thumbnail_" + question.Alias;
+                var optionClass = "option_" + question.Alias + "_" + ++optionIndex;
+                var id = question.Alias + "_" + optionIndex;
+                var optionCheckedClass = question.IsChecked(option) ? "selected" : "";
+                var oddOrEven = optionIndex % 2 == 1 ? "odd" : "even";
+
+                <div class="@optionsClass @gridColumns picture-option @oddOrEven" id="@optionClass">
+                    <div class="thumbnail @thumbnailAlias @optionCheckedClass">
+                        @if (isMultipleSelection)
+                        {
+                            @html.CheckBox(multipleSelectionQuestion.GetFieldName(option), question.IsChecked(option))
+                        }
+                        else
+                        {
+                            @html.RadioButton(HttpUtility.HtmlDecode(question.Alias), option.Alias,
+                            question.IsChecked(option) ? new { id, @checked = "checked" } : (object)new { id })
+                        }
+                        <img src="@pictureUrl" alt="No Image" class="picture" style="@pictureCss" picture-id="@(question.Alias + option.Id)" />
+                        <div class="caption @(question.IsPictureShowLabel ? "" : "no-picture-label")">
+                            <span class="picture-hot-key"></span>
+                            <span class="tick glyphicon @(isMultipleSelection ? "glyphicon-unchecked": "icon-single-selection-unchecked")"></span>
+                            <span style="@(question.IsPictureShowLabel ? "" : "display : none;")" class="text selection-option-title" title-id="@(question.Alias + option.Id)">@(new HtmlString(option.Text))</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearfix"></div>
+}

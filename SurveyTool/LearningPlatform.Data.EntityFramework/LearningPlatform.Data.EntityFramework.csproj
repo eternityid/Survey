@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{823E12FE-A041-4F4A-A3E9-179AFF32BCE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.Data.EntityFramework</RootNamespace>
+    <AssemblyName>LearningPlatform.Data.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClearScript, Version=5.4.7.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClearScript.V8.5.4.7\lib\net40\ClearScript.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LegacyEntityFrameworkDataModule.cs" />
+    <Compile Include="EntityFrameworkDataModule.cs" />
+    <Compile Include="DemoData\AlphabeticalOptionOrderingSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\CarryOverOptionsSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\ComplexSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\ConditionSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\CustomNavigationTextSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\E2eSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\LanguageSelectionSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\LoopSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\NestedLoopSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\OptionGroupSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\QuestionExpressionMaskDemo.cs" />
+    <Compile Include="DemoData\RegexValidationSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\SimpleSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\SkipSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\TextListSurveyDefinitionDemo.cs" />
+    <Compile Include="DemoData\UITestKeyboardSurveyDefinitionDemo.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\PictureMultipleSelectionQuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\PictureSingleSelectionQuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\DecimalPlaceNumberValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\RangeNumberValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\SurveyVersionsMap.cs" />
+    <Compile Include="Mapping\ResponsesContext\RespondentMap.cs" />
+    <Compile Include="Mapping\ResponsesContext\ResponseRowMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\LoopDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\SkipCommandMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mapping\SurveysContext\OptionGroupMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\SingleSelectionQuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\GridQuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\ExpressionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\RegularExpressionValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Reports\ReportEditedLabelDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Reports\ReportElementHasQuestionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Reports\ReportElementDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Reports\ReportPageDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Reports\ReportDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\ResourceStringItemMap.cs" />
+    <Compile Include="Mapping\SurveysContext\ResourceStringMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\MinMaxValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\OptionListMap.cs" />
+    <Compile Include="Mapping\SurveysContext\OptionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\LayoutMap.cs" />
+    <Compile Include="Mapping\SurveysContext\SurveySettingsMap.cs" />
+    <Compile Include="Mapping\SurveysContext\TemplateMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\ConditionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\FolderMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\NodeMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\GoToFolderMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\MatrixQuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\LanguageStringItemMap.cs" />
+    <Compile Include="Mapping\SurveysContext\LanguageStringMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\PageDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\QuestionDefinitionWithOptionsMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Questions\QuestionDefinitionMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\QuestionValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\QuestionValidators\RequiredValidationMap.cs" />
+    <Compile Include="Mapping\SurveysContext\Nodes\ScriptMap.cs" />
+    <Compile Include="Mapping\SurveysContext\SurveyMap.cs" />
+    <Compile Include="Mapping\SurveysContext\ThemeMap.cs" />
+    <Compile Include="Repositories\ContextService.cs" />
+    <Compile Include="Repositories\SkipCommandRepository.cs" />
+    <Compile Include="Repositories\ExpressionRepository.cs" />
+    <Compile Include="Repositories\ReportDefinitionSqlRepository.cs" />
+    <Compile Include="Repositories\ReportEditedLabelDefinitionSqlRepository.cs" />
+    <Compile Include="Repositories\ReportElementDefinitionSqlRepository.cs" />
+    <Compile Include="Repositories\ResourceStringRepository.cs" />
+    <Compile Include="Repositories\ResponsesContextProvider.cs" />
+    <Compile Include="Repositories\LayoutRepository.cs" />
+    <Compile Include="Repositories\ReportPageDefinitionSqlRepository.cs" />
+    <Compile Include="Repositories\ThemeSqlRepository.cs" />
+    <Compile Include="Repositories\SurveyVersionRepository.cs" />
+    <Compile Include="ResponsesDb\Migrations\201605160341278_Initial.cs" />
+    <Compile Include="Repositories\UnitOfWorkFactory.cs" />
+    <Compile Include="ResponsesDb\Migrations\201605160341278_Initial.Designer.cs">
+      <DependentUpon>201605160341278_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201605160354333_ChangeTracking.cs" />
+    <Compile Include="ResponsesDb\Migrations\201605160354333_ChangeTracking.Designer.cs">
+      <DependentUpon>201605160354333_ChangeTracking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201605160410237_AnswersType.cs" />
+    <Compile Include="ResponsesDb\Migrations\201605160410237_AnswersType.Designer.cs">
+      <DependentUpon>201605160410237_AnswersType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201608090728233_AddCustomColumnsFieldForRespondent.cs" />
+    <Compile Include="ResponsesDb\Migrations\201608090728233_AddCustomColumnsFieldForRespondent.Designer.cs">
+      <DependentUpon>201608090728233_AddCustomColumnsFieldForRespondent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201703220624561_ExternalId.cs" />
+    <Compile Include="ResponsesDb\Migrations\201703220624561_ExternalId.Designer.cs">
+      <DependentUpon>201703220624561_ExternalId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201704030938584_ExternalIdTestRespondents.cs" />
+    <Compile Include="ResponsesDb\Migrations\201704030938584_ExternalIdTestRespondents.Designer.cs">
+      <DependentUpon>201704030938584_ExternalIdTestRespondents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201704240843474_IdFieldsAsString.cs" />
+    <Compile Include="ResponsesDb\Migrations\201704240843474_IdFieldsAsString.Designer.cs">
+      <DependentUpon>201704240843474_IdFieldsAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201704250435148_UpdateAnswersTypeWithSurveyIdAsString.cs" />
+    <Compile Include="ResponsesDb\Migrations\201704250435148_UpdateAnswersTypeWithSurveyIdAsString.Designer.cs">
+      <DependentUpon>201704250435148_UpdateAnswersTypeWithSurveyIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\Migrations\201704260308485_IdFieldAsStringForTestDb.cs" />
+    <Compile Include="ResponsesDb\Migrations\201704260308485_IdFieldAsStringForTestDb.Designer.cs">
+      <DependentUpon>201704260308485_IdFieldAsStringForTestDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDb\TestResponsesContext.cs" />
+    <Compile Include="ResponsesDb\ResponsesContextInitializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\OptionListRepository.cs" />
+    <Compile Include="Repositories\LanguageStringRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\PageDefinitionRepository.cs" />
+    <Compile Include="Repositories\QuestionDefinitionRepository.cs" />
+    <Compile Include="Repositories\QuestionValidationRepository.cs" />
+    <Compile Include="Repositories\RespondentSqlRepository.cs" />
+    <Compile Include="ResponsesDb\ResponsesContext.cs" />
+    <Compile Include="SurveysDb\Migrations\201605160301539_Initial.cs" />
+    <Compile Include="SurveysDb\Migrations\201605160301539_Initial.Designer.cs">
+      <DependentUpon>201605160301539_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201605161028425_OptionGroups.cs" />
+    <Compile Include="SurveysDb\Migrations\201605161028425_OptionGroups.Designer.cs">
+      <DependentUpon>201605161028425_OptionGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201605210249156_NodeAliasAndTitleDescriptionForPage.cs" />
+    <Compile Include="SurveysDb\Migrations\201605210249156_NodeAliasAndTitleDescriptionForPage.Designer.cs">
+      <DependentUpon>201605210249156_NodeAliasAndTitleDescriptionForPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201605250154267_ExclusiveAndNAOptions.cs" />
+    <Compile Include="SurveysDb\Migrations\201605250154267_ExclusiveAndNAOptions.Designer.cs">
+      <DependentUpon>201605250154267_ExclusiveAndNAOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606030332256_ChangeGridQuestionToMatrixQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201606030332256_ChangeGridQuestionToMatrixQuestion.Designer.cs">
+      <DependentUpon>201606030332256_ChangeGridQuestionToMatrixQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606030516040_ChangeListQuestionToGridQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201606030516040_ChangeListQuestionToGridQuestion.Designer.cs">
+      <DependentUpon>201606030516040_ChangeListQuestionToGridQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606031401218_ConvertFakeType.cs" />
+    <Compile Include="SurveysDb\Migrations\201606031401218_ConvertFakeType.Designer.cs">
+      <DependentUpon>201606031401218_ConvertFakeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606031413577_RemoveFakeTypeColumn.cs" />
+    <Compile Include="SurveysDb\Migrations\201606031413577_RemoveFakeTypeColumn.Designer.cs">
+      <DependentUpon>201606031413577_RemoveFakeTypeColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606060101413_ConvertPictureSelection.cs" />
+    <Compile Include="SurveysDb\Migrations\201606060101413_ConvertPictureSelection.Designer.cs">
+      <DependentUpon>201606060101413_ConvertPictureSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606060831522_RemovePictureSelection.cs" />
+    <Compile Include="SurveysDb\Migrations\201606060831522_RemovePictureSelection.Designer.cs">
+      <DependentUpon>201606060831522_RemovePictureSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606061006022_ConvertOpenEndedTextQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201606061006022_ConvertOpenEndedTextQuestion.Designer.cs">
+      <DependentUpon>201606061006022_ConvertOpenEndedTextQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606140640403_AddIndices.cs" />
+    <Compile Include="SurveysDb\Migrations\201606140640403_AddIndices.Designer.cs">
+      <DependentUpon>201606140640403_AddIndices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606161002378_ChangeUserId.cs" />
+    <Compile Include="SurveysDb\Migrations\201606161002378_ChangeUserId.Designer.cs">
+      <DependentUpon>201606161002378_ChangeUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201606161017558_SurveyIdIndexOnReportDefinition.cs" />
+    <Compile Include="SurveysDb\Migrations\201606161017558_SurveyIdIndexOnReportDefinition.Designer.cs">
+      <DependentUpon>201606161017558_SurveyIdIndexOnReportDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201608090721188_AddCustomColumnsFieldForSurvey.cs" />
+    <Compile Include="SurveysDb\Migrations\201608090721188_AddCustomColumnsFieldForSurvey.Designer.cs">
+      <DependentUpon>201608090721188_AddCustomColumnsFieldForSurvey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201608170732399_AddColumnIsAlwaysHiddenToQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201608170732399_AddColumnIsAlwaysHiddenToQuestion.Designer.cs">
+      <DependentUpon>201608170732399_AddColumnIsAlwaysHiddenToQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201608290727360_AddColumnIsDeletedToSurveyTable.cs" />
+    <Compile Include="SurveysDb\Migrations\201608290727360_AddColumnIsDeletedToSurveyTable.Designer.cs">
+      <DependentUpon>201608290727360_AddColumnIsDeletedToSurveyTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609220355106_AddColumnErrorBackgroundAndButtonTextAndInputFieldBackgroundColor.cs" />
+    <Compile Include="SurveysDb\Migrations\201609220355106_AddColumnErrorBackgroundAndButtonTextAndInputFieldBackgroundColor.Designer.cs">
+      <DependentUpon>201609220355106_AddColumnErrorBackgroundAndButtonTextAndInputFieldBackgroundColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609220358408_AddValueErrorBackgroundColorButtonTextColorInputFieldBackgroundColor.cs" />
+    <Compile Include="SurveysDb\Migrations\201609220358408_AddValueErrorBackgroundColorButtonTextColorInputFieldBackgroundColor.Designer.cs">
+      <DependentUpon>201609220358408_AddValueErrorBackgroundColorButtonTextColorInputFieldBackgroundColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609230804421_RenameIsFixBackgroundColumnToIsRepeatBackgroundAndAddInputFieldColumn.cs" />
+    <Compile Include="SurveysDb\Migrations\201609230804421_RenameIsFixBackgroundColumnToIsRepeatBackgroundAndAddInputFieldColumn.Designer.cs">
+      <DependentUpon>201609230804421_RenameIsFixBackgroundColumnToIsRepeatBackgroundAndAddInputFieldColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609230824043_AddValueForInputColorAndIsRepeatBackGroundColumn.cs" />
+    <Compile Include="SurveysDb\Migrations\201609230824043_AddValueForInputColorAndIsRepeatBackGroundColumn.Designer.cs">
+      <DependentUpon>201609230824043_AddValueForInputColorAndIsRepeatBackGroundColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609260703184_SetDefaultErrorColorAndBackgroundColorAndInputFieldBackgroundForFiveDefaultThemes.cs" />
+    <Compile Include="SurveysDb\Migrations\201609260703184_SetDefaultErrorColorAndBackgroundColorAndInputFieldBackgroundForFiveDefaultThemes.Designer.cs">
+      <DependentUpon>201609260703184_SetDefaultErrorColorAndBackgroundColorAndInputFieldBackgroundForFiveDefaultThemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609260813530_FinishButtonInSurvey.cs" />
+    <Compile Include="SurveysDb\Migrations\201609260813530_FinishButtonInSurvey.Designer.cs">
+      <DependentUpon>201609260813530_FinishButtonInSurvey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201609270655284_ChangeInputFieldColorToWhiteInSystemThemes.cs" />
+    <Compile Include="SurveysDb\Migrations\201609270655284_ChangeInputFieldColorToWhiteInSystemThemes.Designer.cs">
+      <DependentUpon>201609270655284_ChangeInputFieldColorToWhiteInSystemThemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610031035534_TemplateChanges.cs" />
+    <Compile Include="SurveysDb\Migrations\201610031035534_TemplateChanges.Designer.cs">
+      <DependentUpon>201610031035534_TemplateChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610031131044_RemoveExistingTemplates.cs" />
+    <Compile Include="SurveysDb\Migrations\201610031131044_RemoveExistingTemplates.Designer.cs">
+      <DependentUpon>201610031131044_RemoveExistingTemplates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610041048241_AddColumnPageContainerBackgroundColorAndPageContainerBackgroundOpacityToThemesTable.cs" />
+    <Compile Include="SurveysDb\Migrations\201610041048241_AddColumnPageContainerBackgroundColorAndPageContainerBackgroundOpacityToThemesTable.Designer.cs">
+      <DependentUpon>201610041048241_AddColumnPageContainerBackgroundColorAndPageContainerBackgroundOpacityToThemesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610041058278_AddLayoutWithContainerToDatabase.cs" />
+    <Compile Include="SurveysDb\Migrations\201610041058278_AddLayoutWithContainerToDatabase.Designer.cs">
+      <DependentUpon>201610041058278_AddLayoutWithContainerToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610050744034_UpdateValueOfSystemThemesToLowerCase.cs" />
+    <Compile Include="SurveysDb\Migrations\201610050744034_UpdateValueOfSystemThemesToLowerCase.Designer.cs">
+      <DependentUpon>201610050744034_UpdateValueOfSystemThemesToLowerCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610132009226_RemoveLayoutAndTemplates.cs" />
+    <Compile Include="SurveysDb\Migrations\201610132009226_RemoveLayoutAndTemplates.Designer.cs">
+      <DependentUpon>201610132009226_RemoveLayoutAndTemplates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610140259556_UpdateBackgroundColorAndOpacityOfPageContainerOfCustomThemesAndUserThemes.cs" />
+    <Compile Include="SurveysDb\Migrations\201610140259556_UpdateBackgroundColorAndOpacityOfPageContainerOfCustomThemesAndUserThemes.Designer.cs">
+      <DependentUpon>201610140259556_UpdateBackgroundColorAndOpacityOfPageContainerOfCustomThemesAndUserThemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610210634202_UpdatePageContainerOpacityType.cs" />
+    <Compile Include="SurveysDb\Migrations\201610210634202_UpdatePageContainerOpacityType.Designer.cs">
+      <DependentUpon>201610210634202_UpdatePageContainerOpacityType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201610210758137_CheckEnsureSystemThemes.cs" />
+    <Compile Include="SurveysDb\Migrations\201610210758137_CheckEnsureSystemThemes.Designer.cs">
+      <DependentUpon>201610210758137_CheckEnsureSystemThemes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201611291524135_LoopDefinitionNoLongerANode.cs" />
+    <Compile Include="SurveysDb\Migrations\201611291524135_LoopDefinitionNoLongerANode.Designer.cs">
+      <DependentUpon>201611291524135_LoopDefinitionNoLongerANode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201612010936274_PagesLookAndFeel.cs" />
+    <Compile Include="SurveysDb\Migrations\201612010936274_PagesLookAndFeel.Designer.cs">
+      <DependentUpon>201612010936274_PagesLookAndFeel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201612300653012_AddLayouts.cs" />
+    <Compile Include="SurveysDb\Migrations\201612300653012_AddLayouts.Designer.cs">
+      <DependentUpon>201612300653012_AddLayouts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201612300703045_AddTemplates.cs" />
+    <Compile Include="SurveysDb\Migrations\201612300703045_AddTemplates.Designer.cs">
+      <DependentUpon>201612300703045_AddTemplates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201612300718114_AddResources.cs" />
+    <Compile Include="SurveysDb\Migrations\201612300718114_AddResources.Designer.cs">
+      <DependentUpon>201612300718114_AddResources.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705090140084_AddStepAndDecimalPlacesValidationForNumericQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201705090140084_AddStepAndDecimalPlacesValidationForNumericQuestion.Designer.cs">
+      <DependentUpon>201705090140084_AddStepAndDecimalPlacesValidationForNumericQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705090145502_AddValueInValidationQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201705090145502_AddValueInValidationQuestion.Designer.cs">
+      <DependentUpon>201705090145502_AddValueInValidationQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150205294_SurveyIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150205294_SurveyIdAsString.Designer.cs">
+      <DependentUpon>201705150205294_SurveyIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150208500_QuestionDefinitionIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150208500_QuestionDefinitionIdAsString.Designer.cs">
+      <DependentUpon>201705150208500_QuestionDefinitionIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150209585_NodeIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150209585_NodeIdAsString.Designer.cs">
+      <DependentUpon>201705150209585_NodeIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150210421_LayoutIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150210421_LayoutIdAsString.Designer.cs">
+      <DependentUpon>201705150210421_LayoutIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150211396_ThemeIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150211396_ThemeIdAsString.Designer.cs">
+      <DependentUpon>201705150211396_ThemeIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150212339_OptionListIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150212339_OptionListIdAsString.Designer.cs">
+      <DependentUpon>201705150212339_OptionListIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150214216_OptionIdAndOptionGroupIdAsString.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150214216_OptionIdAndOptionGroupIdAsString.Designer.cs">
+      <DependentUpon>201705150214216_OptionIdAndOptionGroupIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150215319_RemoveSurveyVersionsForeignKey.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150215319_RemoveSurveyVersionsForeignKey.Designer.cs">
+      <DependentUpon>201705150215319_RemoveSurveyVersionsForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150216375_RemoveReportForeignKey.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150216375_RemoveReportForeignKey.Designer.cs">
+      <DependentUpon>201705150216375_RemoveReportForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201705150217125_MoveSurveyTitleToSurveySettingAndReturnBackTemplateIdWithTypeLong.cs" />
+    <Compile Include="SurveysDb\Migrations\201705150217125_MoveSurveyTitleToSurveySettingAndReturnBackTemplateIdWithTypeLong.Designer.cs">
+      <DependentUpon>201705150217125_MoveSurveyTitleToSurveySettingAndReturnBackTemplateIdWithTypeLong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201706020426583_AddCustomThemeIdToSurvey.cs" />
+    <Compile Include="SurveysDb\Migrations\201706020426583_AddCustomThemeIdToSurvey.Designer.cs">
+      <DependentUpon>201706020426583_AddCustomThemeIdToSurvey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201706070244143_AddVersionToSurveyNodeQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201706070244143_AddVersionToSurveyNodeQuestion.Designer.cs">
+      <DependentUpon>201706070244143_AddVersionToSurveyNodeQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201706190305295_AddLibraryIdToSurveyPageQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201706190305295_AddLibraryIdToSurveyPageQuestion.Designer.cs">
+      <DependentUpon>201706190305295_AddLibraryIdToSurveyPageQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201707170931532_AddBackgroundStyleFieldIntoTheme.cs" />
+    <Compile Include="SurveysDb\Migrations\201707170931532_AddBackgroundStyleFieldIntoTheme.Designer.cs">
+      <DependentUpon>201707170931532_AddBackgroundStyleFieldIntoTheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201711220605110_RemoveColsPropertyInLongTextAndLongTextListQuestion.cs" />
+    <Compile Include="SurveysDb\Migrations\201711220605110_RemoveColsPropertyInLongTextAndLongTextListQuestion.Designer.cs">
+      <DependentUpon>201711220605110_RemoveColsPropertyInLongTextAndLongTextListQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\DbMigrationExtended.cs" />
+    <Compile Include="SurveysDb\Migrations\201701181114411_AddPositionToOptionGroupHeader.cs" />
+    <Compile Include="SurveysDb\Migrations\201701181114411_AddPositionToOptionGroupHeader.Designer.cs">
+      <DependentUpon>201701181114411_AddPositionToOptionGroupHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201703100422515_AddColumnWidthForReport.cs" />
+    <Compile Include="SurveysDb\Migrations\201703100422515_AddColumnWidthForReport.Designer.cs">
+      <DependentUpon>201703100422515_AddColumnWidthForReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201703101010280_AddDisplaySummaryTabular.cs" />
+    <Compile Include="SurveysDb\Migrations\201703101010280_AddDisplaySummaryTabular.Designer.cs">
+      <DependentUpon>201703101010280_AddDisplaySummaryTabular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201703170907020_AddSurveySettingOneQuestionOnScreen.cs" />
+    <Compile Include="SurveysDb\Migrations\201703170907020_AddSurveySettingOneQuestionOnScreen.Designer.cs">
+      <DependentUpon>201703170907020_AddSurveySettingOneQuestionOnScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201703230916429_SetNullableForColumnWidthResultElement.cs" />
+    <Compile Include="SurveysDb\Migrations\201703230916429_SetNullableForColumnWidthResultElement.Designer.cs">
+      <DependentUpon>201703230916429_SetNullableForColumnWidthResultElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201703270700558_UpdateDiscriminatorAndRemoveUnusedElementForReportElement.cs" />
+    <Compile Include="SurveysDb\Migrations\201703270700558_UpdateDiscriminatorAndRemoveUnusedElementForReportElement.Designer.cs">
+      <DependentUpon>201703270700558_UpdateDiscriminatorAndRemoveUnusedElementForReportElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\Migrations\201704030057272_SurveySettingForSso.cs" />
+    <Compile Include="SurveysDb\Migrations\201704030057272_SurveySettingForSso.Designer.cs">
+      <DependentUpon>201704030057272_SurveySettingForSso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SurveysDb\SurveysContext.cs" />
+    <Compile Include="Repositories\SurveySqlRepository.cs" />
+    <Compile Include="Repositories\SurveysContextProvider.cs" />
+    <Compile Include="ResponsesDb\ResponsesContextConfiguration.cs" />
+    <Compile Include="SurveysDb\SurveysContextConfiguration.cs" />
+    <Compile Include="SurveysDb\SurveysContextInitializer.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LearningPlatform.Domain\LearningPlatform.Domain.csproj">
+      <Project>{87d97e61-b3ca-4457-8c1a-2061edcc24ea}</Project>
+      <Name>LearningPlatform.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningPlatform.SurveyExecution.Data\LearningPlatform.SurveyExecution.Data.csproj">
+      <Project>{f23890ff-fa70-4e4a-a5c7-1d17e4d6d10e}</Project>
+      <Name>LearningPlatform.SurveyExecution.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LearningPlatform.Data.EntityFramework.DotSettings" />
+    <None Include="Licenses\ClearScript.main.license" />
+    <None Include="Licenses\v8.main.license" />
+    <None Include="Licenses\v8.strongtalk.license" />
+    <None Include="Licenses\v8.v8.license" />
+    <None Include="Licenses\v8.valgrind.license" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201605160341278_Initial.resx">
+      <DependentUpon>201605160341278_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201605160354333_ChangeTracking.resx">
+      <DependentUpon>201605160354333_ChangeTracking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201605160410237_AnswersType.resx">
+      <DependentUpon>201605160410237_AnswersType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201608090728233_AddCustomColumnsFieldForRespondent.resx">
+      <DependentUpon>201608090728233_AddCustomColumnsFieldForRespondent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201703220624561_ExternalId.resx">
+      <DependentUpon>201703220624561_ExternalId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201704030938584_ExternalIdTestRespondents.resx">
+      <DependentUpon>201704030938584_ExternalIdTestRespondents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201704240843474_IdFieldsAsString.resx">
+      <DependentUpon>201704240843474_IdFieldsAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201704250435148_UpdateAnswersTypeWithSurveyIdAsString.resx">
+      <DependentUpon>201704250435148_UpdateAnswersTypeWithSurveyIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResponsesDb\Migrations\201704260308485_IdFieldAsStringForTestDb.resx">
+      <DependentUpon>201704260308485_IdFieldAsStringForTestDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201605160301539_Initial.resx">
+      <DependentUpon>201605160301539_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201605161028425_OptionGroups.resx">
+      <DependentUpon>201605161028425_OptionGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201605210249156_NodeAliasAndTitleDescriptionForPage.resx">
+      <DependentUpon>201605210249156_NodeAliasAndTitleDescriptionForPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201605250154267_ExclusiveAndNAOptions.resx">
+      <DependentUpon>201605250154267_ExclusiveAndNAOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606030332256_ChangeGridQuestionToMatrixQuestion.resx">
+      <DependentUpon>201606030332256_ChangeGridQuestionToMatrixQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606030516040_ChangeListQuestionToGridQuestion.resx">
+      <DependentUpon>201606030516040_ChangeListQuestionToGridQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606031401218_ConvertFakeType.resx">
+      <DependentUpon>201606031401218_ConvertFakeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606031413577_RemoveFakeTypeColumn.resx">
+      <DependentUpon>201606031413577_RemoveFakeTypeColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606060101413_ConvertPictureSelection.resx">
+      <DependentUpon>201606060101413_ConvertPictureSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606060831522_RemovePictureSelection.resx">
+      <DependentUpon>201606060831522_RemovePictureSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606061006022_ConvertOpenEndedTextQuestion.resx">
+      <DependentUpon>201606061006022_ConvertOpenEndedTextQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606140640403_AddIndices.resx">
+      <DependentUpon>201606140640403_AddIndices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606161002378_ChangeUserId.resx">
+      <DependentUpon>201606161002378_ChangeUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201606161017558_SurveyIdIndexOnReportDefinition.resx">
+      <DependentUpon>201606161017558_SurveyIdIndexOnReportDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201608090721188_AddCustomColumnsFieldForSurvey.resx">
+      <DependentUpon>201608090721188_AddCustomColumnsFieldForSurvey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201608170732399_AddColumnIsAlwaysHiddenToQuestion.resx">
+      <DependentUpon>201608170732399_AddColumnIsAlwaysHiddenToQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201608290727360_AddColumnIsDeletedToSurveyTable.resx">
+      <DependentUpon>201608290727360_AddColumnIsDeletedToSurveyTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609220355106_AddColumnErrorBackgroundAndButtonTextAndInputFieldBackgroundColor.resx">
+      <DependentUpon>201609220355106_AddColumnErrorBackgroundAndButtonTextAndInputFieldBackgroundColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609220358408_AddValueErrorBackgroundColorButtonTextColorInputFieldBackgroundColor.resx">
+      <DependentUpon>201609220358408_AddValueErrorBackgroundColorButtonTextColorInputFieldBackgroundColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609230804421_RenameIsFixBackgroundColumnToIsRepeatBackgroundAndAddInputFieldColumn.resx">
+      <DependentUpon>201609230804421_RenameIsFixBackgroundColumnToIsRepeatBackgroundAndAddInputFieldColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609230824043_AddValueForInputColorAndIsRepeatBackGroundColumn.resx">
+      <DependentUpon>201609230824043_AddValueForInputColorAndIsRepeatBackGroundColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609260703184_SetDefaultErrorColorAndBackgroundColorAndInputFieldBackgroundForFiveDefaultThemes.resx">
+      <DependentUpon>201609260703184_SetDefaultErrorColorAndBackgroundColorAndInputFieldBackgroundForFiveDefaultThemes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609260813530_FinishButtonInSurvey.resx">
+      <DependentUpon>201609260813530_FinishButtonInSurvey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201609270655284_ChangeInputFieldColorToWhiteInSystemThemes.resx">
+      <DependentUpon>201609270655284_ChangeInputFieldColorToWhiteInSystemThemes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610031035534_TemplateChanges.resx">
+      <DependentUpon>201610031035534_TemplateChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610031131044_RemoveExistingTemplates.resx">
+      <DependentUpon>201610031131044_RemoveExistingTemplates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610041048241_AddColumnPageContainerBackgroundColorAndPageContainerBackgroundOpacityToThemesTable.resx">
+      <DependentUpon>201610041048241_AddColumnPageContainerBackgroundColorAndPageContainerBackgroundOpacityToThemesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610041058278_AddLayoutWithContainerToDatabase.resx">
+      <DependentUpon>201610041058278_AddLayoutWithContainerToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610050744034_UpdateValueOfSystemThemesToLowerCase.resx">
+      <DependentUpon>201610050744034_UpdateValueOfSystemThemesToLowerCase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610132009226_RemoveLayoutAndTemplates.resx">
+      <DependentUpon>201610132009226_RemoveLayoutAndTemplates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610140259556_UpdateBackgroundColorAndOpacityOfPageContainerOfCustomThemesAndUserThemes.resx">
+      <DependentUpon>201610140259556_UpdateBackgroundColorAndOpacityOfPageContainerOfCustomThemesAndUserThemes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610210634202_UpdatePageContainerOpacityType.resx">
+      <DependentUpon>201610210634202_UpdatePageContainerOpacityType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201610210758137_CheckEnsureSystemThemes.resx">
+      <DependentUpon>201610210758137_CheckEnsureSystemThemes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201611291524135_LoopDefinitionNoLongerANode.resx">
+      <DependentUpon>201611291524135_LoopDefinitionNoLongerANode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201612010936274_PagesLookAndFeel.resx">
+      <DependentUpon>201612010936274_PagesLookAndFeel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201612300653012_AddLayouts.resx">
+      <DependentUpon>201612300653012_AddLayouts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201612300703045_AddTemplates.resx">
+      <DependentUpon>201612300703045_AddTemplates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201612300718114_AddResources.resx">
+      <DependentUpon>201612300718114_AddResources.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201701181114411_AddPositionToOptionGroupHeader.resx">
+      <DependentUpon>201701181114411_AddPositionToOptionGroupHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201703100422515_AddColumnWidthForReport.resx">
+      <DependentUpon>201703100422515_AddColumnWidthForReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201703101010280_AddDisplaySummaryTabular.resx">
+      <DependentUpon>201703101010280_AddDisplaySummaryTabular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201703170907020_AddSurveySettingOneQuestionOnScreen.resx">
+      <DependentUpon>201703170907020_AddSurveySettingOneQuestionOnScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201703230916429_SetNullableForColumnWidthResultElement.resx">
+      <DependentUpon>201703230916429_SetNullableForColumnWidthResultElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201703270700558_UpdateDiscriminatorAndRemoveUnusedElementForReportElement.resx">
+      <DependentUpon>201703270700558_UpdateDiscriminatorAndRemoveUnusedElementForReportElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201704030057272_SurveySettingForSso.resx">
+      <DependentUpon>201704030057272_SurveySettingForSso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705090140084_AddStepAndDecimalPlacesValidationForNumericQuestion.resx">
+      <DependentUpon>201705090140084_AddStepAndDecimalPlacesValidationForNumericQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705090145502_AddValueInValidationQuestion.resx">
+      <DependentUpon>201705090145502_AddValueInValidationQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150205294_SurveyIdAsString.resx">
+      <DependentUpon>201705150205294_SurveyIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150208500_QuestionDefinitionIdAsString.resx">
+      <DependentUpon>201705150208500_QuestionDefinitionIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150209585_NodeIdAsString.resx">
+      <DependentUpon>201705150209585_NodeIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150210421_LayoutIdAsString.resx">
+      <DependentUpon>201705150210421_LayoutIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150211396_ThemeIdAsString.resx">
+      <DependentUpon>201705150211396_ThemeIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150212339_OptionListIdAsString.resx">
+      <DependentUpon>201705150212339_OptionListIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150214216_OptionIdAndOptionGroupIdAsString.resx">
+      <DependentUpon>201705150214216_OptionIdAndOptionGroupIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150215319_RemoveSurveyVersionsForeignKey.resx">
+      <DependentUpon>201705150215319_RemoveSurveyVersionsForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150216375_RemoveReportForeignKey.resx">
+      <DependentUpon>201705150216375_RemoveReportForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201705150217125_MoveSurveyTitleToSurveySettingAndReturnBackTemplateIdWithTypeLong.resx">
+      <DependentUpon>201705150217125_MoveSurveyTitleToSurveySettingAndReturnBackTemplateIdWithTypeLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201706020426583_AddCustomThemeIdToSurvey.resx">
+      <DependentUpon>201706020426583_AddCustomThemeIdToSurvey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201706070244143_AddVersionToSurveyNodeQuestion.resx">
+      <DependentUpon>201706070244143_AddVersionToSurveyNodeQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201706190305295_AddLibraryIdToSurveyPageQuestion.resx">
+      <DependentUpon>201706190305295_AddLibraryIdToSurveyPageQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201707170931532_AddBackgroundStyleFieldIntoTheme.resx">
+      <DependentUpon>201707170931532_AddBackgroundStyleFieldIntoTheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SurveysDb\Migrations\201711220605110_RemoveColsPropertyInLongTextAndLongTextListQuestion.resx">
+      <DependentUpon>201711220605110_RemoveColsPropertyInLongTextAndLongTextListQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\x86\*.*" "$(TargetDir)"
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\amd64\*.*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

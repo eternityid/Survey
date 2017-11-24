@@ -1,0 +1,53 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<div class="scale-grid-question__content">
+    <table class="table">
+        <tbody>
+        <tr>
+            <td></td>
+            <td colspan="{{gridCtrl.columnTitles.length - 1}}">
+                <div class="row-fluid">
+                    <div class="col-xs-4 scale-grid__likert-text--left"
+                         ng-bind-html="question.subQuestionDefinition.likertLeftText.items[0].text"></div>
+                    <div class="col-xs-4 scale-grid__likert-text--center"
+                         ng-bind-html="question.subQuestionDefinition.likertCenterText.items[0].text"></div>
+                    <div class="col-xs-4 scale-grid__likert-text--right"
+                         ng-bind-html="question.subQuestionDefinition.likertRightText.items[0].text"></div>
+                </div>
+            </td>
+        </tr>
+        <tr ng-if="!question.subQuestionDefinition.renderOptionByButton">
+            <td></td>
+            <td colspan="{{gridCtrl.columnTitles.length - 1}}">
+                <ul class="list-inline">
+                    <li ng-repeat="columnTitle in gridCtrl.columnTitles" ng-if="$index" class="text-center" ng-style="{'width': 100/(gridCtrl.columnTitles.length - 1) + '%'}">
+                        <span ng-bind-html="columnTitle.value"></span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr ng-repeat="rowTitle in gridCtrl.rowTitles">
+            <td>
+                <span ng-if="!rowTitle.carryOver" ng-bind-html="rowTitle.value"></span>
+                <span ng-if="rowTitle.carryOver && !rowTitle.isCarryOverError">
+                    Carry Over from <strong>{{rowTitle.value | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+                <span ng-if="rowTitle.carryOver && rowTitle.isCarryOverError" class="question-view__content--error">
+                    Carry Over from <strong>{{rowTitle.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+            </td>
+            <td colspan="{{gridCtrl.columnTitles.length - 1}}">
+                <ul class="list-inline" ng-if="!question.subQuestionDefinition.renderOptionByButton">
+                    <li ng-repeat="index in gridCtrl.columnTitles" ng-if="$index" class="text-center" ng-style="{'width': 100/(gridCtrl.columnTitles.length - 1) + '%'}">
+                        <input type="radio" readonly />
+                    </li>
+                </ul>
+                <ul class="list-inline" ng-if="question.subQuestionDefinition.renderOptionByButton">
+                    <li ng-repeat="index in gridCtrl.columnTitles" ng-if="$index" class="scale-grid-question__option--button" ng-style="{'width': 100/(gridCtrl.columnTitles.length - 1) + '%'}">
+                        {{index.value}}
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

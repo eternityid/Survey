@@ -1,0 +1,30 @@
+﻿
+<div ng-controller="pageCtrl as pageCtrl">
+    <div class="page__icon-toggle">
+        <i class="page__header-caret-position fa fa-caret-right" ng-click="pageCtrl.toggleCollapsePage(pageCtrl.page.id)"
+           title="Expand page"></i>
+    </div>
+    <div class="page__header-content-column">
+        <div class="page__header-page-number-group">
+            <div class="page__header-page-number-collapsed">
+                <em>page <b>{{index + 1}}</b> of <b>{{pageCtrl.pages.length}}</b></em>
+            </div>
+            <div ng-show="pageCtrl.page.orderType === 1" class="page--randomizes">
+                <span class="icon--randomizes"></span>
+                <span class="text--randomizes"><em>Randomized</em></span>
+            </div>
+            <span class="page__icon--preview icon--preview" ng-click="pageCtrl.showPreviewDialog($event);"
+                  title="Preview page" svt-stop-event></span>
+        </div>
+        <div class="page__header-content-title">
+            <span class="page-title" ng-bind-html="pageTitle | trustAsHtmlFilter"></span>
+            <span class="page-question-number">
+                <data-ng-pluralize count="pageCtrl.page.questionDefinitions.length"
+                                   when="{'0': '(0 Question)',
+                                        'one': '(1 Question)',
+                                        'other': '({} Questions)'}">
+                </data-ng-pluralize>
+            </span>
+        </div>
+    </div>
+</div>

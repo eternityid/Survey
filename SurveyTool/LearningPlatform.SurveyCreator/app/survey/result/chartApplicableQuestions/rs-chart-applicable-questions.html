@@ -1,0 +1,62 @@
+﻿<div class="chart-type-wrapper">
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" id="settingQuestionContainer" data-toggle="dropdown" title="Settings">
+                <span class="glyphicon glyphicon-cog"></span>
+            </button>
+            <ul class="dropdown-menu result-element-settings">
+                <li>
+                    <ul class="result-element-settings__display-type">
+                        <li>Display Type</li>
+                        <li ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType.id)">
+                            <span ng-class="{'active-check-box': vm.checkChartTypeSelected(chartType.id), 'disactive-check-box': !vm.checkChartTypeSelected(chartType.id)}"></span>
+                            <span class="fa" ng-class="vm.getChartTypeIcon(chartType.id)"></span>
+                            <a>{{chartType.title}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="result-element-settings__display-type">
+                        <li>Size</li>
+                        <li ng-click="vm.displayReportByWidth(33)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(33), 'disactive-check-box': !vm.checkColumnWidthSelected(33)}"></span>
+                            <span class="fa rs-33-width" />
+                            <a>1/3 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(50)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(50), 'disactive-check-box': !vm.checkColumnWidthSelected(50)}"></span>
+                            <span class="fa rs-50-width" />
+                            <a>1/2 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(66)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(66), 'disactive-check-box': !vm.checkColumnWidthSelected(66)}"></span>
+                            <span class="fa rs-66-width" />
+                            <a>2/3 of width</a>
+                        </li>
+                        <li ng-click="vm.displayReportByWidth(100)">
+                            <span ng-class="{'active-check-box': vm.checkColumnWidthSelected(100), 'disactive-check-box': !vm.checkColumnWidthSelected(100)}"></span>
+                            <span class="fa rs-100-width" />
+                            <a>Full width</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </span>
+    </div>
+</div>
+<div class="report-chart__container">
+    <div class="chart-wrapper">
+        <div class="chart-inner">
+            <highchart config="vm.chart" class="full-chart"></highchart>
+        </div>
+    </div>
+</div>
+
+<div ng-if="aggregatedQuestion.questionSetting.displaySummaryTabular">
+    <div ng-if="chartQuestionGroup === vm.chartQuestionGroups.likert || chartQuestionGroup === vm.chartQuestionGroups.selection">
+        <ng-include src="'survey/result/summaryTabular/rs-question-without-sub-questions.html'"></ng-include>
+    </div>
+    <div ng-if="chartQuestionGroup === vm.chartQuestionGroups.gridSelection">
+        <ng-include src="'survey/result/summaryTabular/rs-question-with-sub-questions.html'"></ng-include>
+    </div>
+</div>

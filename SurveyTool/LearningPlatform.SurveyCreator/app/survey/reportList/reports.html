@@ -1,0 +1,56 @@
+﻿<div>
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.createReport}">
+            <a id="add-report-button" ng-click="vm.createReport()" title="Create new report">
+                <div class="action-menu__icon"><span class="glyphicon icon--add"></span></div><label class="action-menu__label">Create</label>
+            </a>
+        </div>
+        <div class="action-menu__clear"></div>
+        <div class="action-menu__search-box">
+            <div class="input-group">
+                <input id="search-survey-input" class="form-control search-survey-input" type="text" placeholder="Report name" ng-model="vm.searchString" ng-keypress="vm.searchByEnter($event)">
+                <div class="search-button">
+                    <button ng-click="vm.search()" title="Search"><span class="fa icon--search"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row svt-row" ng-if="vm.pushDownSettings.isActive">
+        <push-down>
+            <create-report ng-if="vm.pushDownSettings.mode.createReport"
+                           editor="vm.editor" handle-after-save="vm.handleAfterCreateReport()"></create-report>
+        </push-down>
+    </div>
+    <div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr class="svt-grid__header">
+                        <th>ID</th>
+                        <th>REPORT NAME</th>
+                        <th>MODIFIED</th>
+                        <th>CREATED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="report in vm.reports.data | filter:{name: searchString}">
+                        <td>{{report.reportId}}</td>
+                        <td class="col-md-6 breakword">
+                            <a href="#/reports/{{report.reportId}}/designer/{{report.surveyId}}" class="title" ng-if="vm.isNotDeletedSurveyById(report.surveyId)">{{report.name}}</a>
+                            <span ng-if="!vm.isNotDeletedSurveyById(report.surveyId)">{{report.name}}</span>
+                        </td>
+                        <td>{{report.modifiedDate}}</td>
+                        <td>{{report.createdDate}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <span>{{vm.reportsFound}} report(s) found.</span>
+                            <span ng-show="vm.reportsFound > 0"> Displaying {{vm.reports.data.length}}/{{vm.reportsFound}} report(s).</span>
+                            <a ng-show="vm.paging.hashNext" class="svt-grid__load-more" ng-click="vm.loadMoreReports()" title="Load more reports">Load More</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

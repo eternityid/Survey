@@ -1,0 +1,134 @@
+﻿<div class="table-chart " ng-if="show === 'true'">
+    <div class="table-container"
+         ng-if="questionType == vm.questionTypes.OpenEndedShortTextQuestionDefinition.code ||
+         questionType == vm.questionTypes.OpenEndedLongTextQuestionDefinition.code">
+        <table class="table table-responsive table-bordered table-striped breakword">
+            <thead>
+                <tr class="info">
+                    <th ng-class="{'edited-cell': editableLabels.order.isChanged}"><editable-label label="editableLabels.order"/></th>
+                    <th ng-class="{'edited-cell': editableLabels.answer.isChanged}"><editable-label label="editableLabels.answer" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="answer in vm.displayedAnswers track by $index">
+                    <td class="col-xs-3">{{$index + 1}}</td>
+                    <td class="col-xs-6">{{answer}}</td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.totalRespondents.isChanged}"><editable-label label="editableLabels.totalRespondents"/></td>
+                    <td class="col-xs-6">{{vm.table.totalRespondents}}</td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.totalResponses.isChanged}"><editable-label label="editableLabels.totalResponses"/></td>
+                    <td class="col-xs-6">{{vm.table.totalResponses}}</td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <span>Displaying {{vm.displayedAnswers.length}} answer(s).</span>
+                        <br />
+                        <span>Display:</span>
+                        <a ng-show="vm.table.totalResponses > 10" class="btn btn-link" ng-click="vm.loadResponses(50)" title="Click to show 50 answers">50</a>
+                        <a ng-show="vm.table.totalResponses > 50" class="btn btn-link" ng-click="vm.loadResponses(100)" title="Click to show 100 answers">100</a>
+                        <a ng-show="vm.table.totalResponses > 100" class="btn btn-link" ng-click="vm.loadResponses(200)" title="Click to show 200 answers">200</a>
+                        <a ng-show="vm.table.totalResponses > 0" class="btn btn-link" ng-click="vm.loadResponses(vm.table.totalResponses)" title="Click to show all answers">All</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-if="questionType == vm.questionTypes.NumericQuestionDefinition.code">
+        <table class="table table-bordered table-striped breakword">
+            <tbody>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.average.isChanged}"><editable-label label="editableLabels.average"/></td>
+                    <td ng-bind="vm.table.avgSelections"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.min.isChanged}"><editable-label label="editableLabels.min"/></td>
+                    <td ng-bind="vm.table.minSelections"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.max.isChanged}"><editable-label label="editableLabels.max"/></td>
+                    <td ng-bind="vm.table.maxSelections"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-if="questionType == vm.questionTypes.SingleSelectionQuestionDefinition.code
+            || questionType == vm.questionTypes.MultipleSelectionQuestionDefinition.code
+            || questionType == vm.questionTypes.NetPromoterScoreQuestionDefinition.code
+            || questionType == vm.questionTypes.ScaleQuestionDefinition.code
+            || questionType == vm.questionTypes.RatingQuestionDefinition.code">
+        <table class="table table-responsive table-bordered table-striped breakword">
+            <thead>
+            <tr class="info">
+                <th ng-class="{'edited-cell': editableLabels.optionHeading.isChanged}"><editable-label label="editableLabels.optionHeading"/></th>
+                <th ng-class="{'edited-cell': editableLabels.response.isChanged}"><editable-label label="editableLabels.response"/></th>
+                <th ng-class="{'edited-cell': editableLabels.percentage.isChanged}"><editable-label label="editableLabels.percentage" /></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in vm.table.rows track by $index">
+                <td ng-class="{'edited-cell': editableLabels.options[$index].isChanged}"><editable-label label="editableLabels.options[$index]"/></td>
+                <td ng-bind="row.count"></td>
+                <td ng-bind-template="{{row.percentage}}%"></td>
+            </tr>
+            <tr>
+                <td ng-class="{'edited-cell': editableLabels.totalRespondents.isChanged}"><editable-label label="editableLabels.totalRespondents"/></td>
+                <td ng-bind="vm.table.totalRespondents" colspan="2"></td>
+            </tr>
+            <tr>
+                <td ng-class="{'edited-cell': editableLabels.totalResponses.isChanged}"><editable-label label="editableLabels.totalResponses"/></td>
+                <td ng-bind="vm.table.totalResponses" colspan="2"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-if="questionType == vm.questionTypes.SingleSelectionGridQuestionDefinition.code ||
+         questionType == vm.questionTypes.MultipleSelectionGridQuestionDefinition.code ||
+         questionType == vm.questionTypes.ScaleGridQuestionDefinition.code ||
+         questionType == vm.questionTypes.RatingGridQuestionDefinition.code">
+        <table class="table table-responsive table-bordered table-striped breakword">
+            <thead>
+                <tr class="info">
+                    <th colspan="2" ng-class="{'edited-cell': editableLabels.topicHeading.isChanged}"><editable-label label="editableLabels.topicHeading"/></th>
+                    <th ng-class="{'edited-cell': editableLabels.response.isChanged}"><editable-label label="editableLabels.response"/></th>
+                    <th ng-class="{'edited-cell': editableLabels.percentage.isChanged}"><editable-label label="editableLabels.percentage"/></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="row in vm.table.rows" ng-init="$topicIndex = $index">
+            <tr>
+                <td rowspan="{{row.subRows.length + 3}}" ng-class="{'edited-cell': editableLabels.topics[$topicIndex].isChanged}">
+                    <editable-label label="editableLabels.topics[$topicIndex]"/>
+                </td>
+            </tr>
+                <tr ng-repeat="subRow in row.subRows track by $index">
+                    <td ng-class="{'edited-cell': editableLabels.options[$index].isChanged}"><editable-label label="editableLabels.options[$index]"/></td>
+                    <td ng-bind="subRow.count"></td>
+                    <td ng-bind-template="{{subRow.percentage}}%"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.totalTopicRespondents[$topicIndex].isChanged}"><editable-label label="editableLabels.totalTopicRespondents[$topicIndex]"/></td>
+                    <td ng-bind="row.numberOfRespondents.value" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{'edited-cell': editableLabels.totalTopicResponses[$topicIndex].isChanged}"><editable-label label="editableLabels.totalTopicResponses[$topicIndex]"/></td>
+                    <td ng-bind="row.numberOfResponses.value" colspan="2"></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="2" ng-class="{'edited-cell': editableLabels.totalRespondents.isChanged}"><editable-label label="editableLabels.totalRespondents"/></td>
+                    <td ng-bind="vm.table.numberOfRespondents.value" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" ng-class="{'edited-cell': editableLabels.totalResponses.isChanged}"><editable-label label="editableLabels.totalResponses"/></td>
+                    <td ng-bind="vm.table.numberOfResponses.value" colspan="2"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

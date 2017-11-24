@@ -1,0 +1,28 @@
+﻿<div class="skip-question-title" ng-if="!expanded" ng-click="expanded = !expanded">
+    WHEN ... SKIP TO QUESTION: {{vm.skipQuestionTitle | htmlToPlainTextFilter}}
+</div>
+<div id="question-title" ng-if="expanded">
+    <div class="skip-command-view">
+        <div class="row">
+            <div class="col-xs-12 title">
+                Skip Action
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-7 col skip-condition-col">
+                <div ng-repeat="item in vm.expressionMessages track by $index" class="expression-message-item"
+                     ng-class="{'expression-message-item--start-group' : item.positionInGroup == 0}">
+                    <div class="group-condition-item">{{item.positionInGroup == 0 ? item.parent.message : ''}}</div>
+                    <div class="condition-item" ng-bind-html="item.indent !== 0 ? item.message : ''"></div>
+                </div>
+            </div>
+            <div class="col-xs-5 col skip-result-col">
+                <div class="keyword-result-clause">THEN</div>
+                <span class="sentence-bold">Jump</span> to question
+                <span class="question-title" ng-if="!vm.isSkipToError">{{vm.skipQuestionTitle | htmlToPlainTextFilter}}.</span>
+                <span class="question-view__content--error sentence-bold" ng-if="vm.isSkipToError">{{vm.skipQuestionTitle | htmlToPlainTextFilter}}.</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@import (reference) "../../theme/default/variables.less";
+
+
+.response-status {
+    &--total {
+        background-color: @response-status-total-color;
+    }
+
+    &--inprogress {
+        background-color: @response-status-inprogress-color;
+    }
+
+    &--started {
+        background-color: @response-status-started-color;
+    }
+
+    &--completed {
+        background-color: @response-status-completed-color;
+    }
+
+    &--dropout-rate {
+        background-color: @response-status-dropout-color;
+    }
+}
+
+.respondent-status {
+    text-transform: capitalize;
+    color: @base-main-font-color;
+    text-align: center;
+
+    &--not-taken {
+        background-color: @response-status-not-taken;
+    }
+
+    &--in-progress {
+        background-color: @survey-status-new-color;
+    }
+
+    &--completed {
+        background-color: @survey-status-open-color;
+    }
+}

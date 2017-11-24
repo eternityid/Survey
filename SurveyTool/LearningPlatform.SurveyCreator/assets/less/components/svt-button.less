@@ -1,0 +1,31 @@
+﻿@import (reference) "../theme/default/variables.less";
+
+.svt-button-group {
+    .btn + .btn {
+        margin-left: 15px;
+    }
+}
+
+.svt-button--done {
+    background-color: @base-main-color;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: @base-main-color;
+
+    &:hover, &:focus, &.focus {
+        background-color: #286090;
+        color: #ffffff;
+    }
+}
+
+.svt-button--cancel {
+    background-color: transparent;
+    font-weight: bold;
+    color: @base-main-color;
+    border-color: @base-main-color;
+
+    &:hover {
+        background-color: #EFEFEF;
+        color: @base-main-color;
+    }
+}

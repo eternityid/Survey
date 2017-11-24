@@ -1,0 +1,13 @@
+﻿@using LearningPlatform.Helpers
+@model LearningPlatform.Domain.SurveyExecution.Questions.MatrixQuestion
+
+@helper RenderUserInputArea()
+{
+    <div>
+        <table>
+            @Html.GridTable(Model)
+        </table>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

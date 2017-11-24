@@ -1,0 +1,235 @@
+﻿{
+  "topFolder": {
+    "alias": "topFolder",
+    //"position": 1,
+    "childNodes": [
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "OpenEndedShortTextQuestionDefinition",
+            "alias": "name",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            //"position": 1,
+            "validations": []
+          }
+        ],
+        "skipCommands": [
+          {
+            "expression": {
+              "expressionItems": [
+                {
+                  "operator": "IsEqual",
+                  "value": "'Oeyvind'",
+                  "questionAlias": "name"
+                }
+              ]
+            },
+            "skipToQuestion": "Completed"
+          },
+          {
+            "expression": {
+              "expressionItems": [
+                {
+                  "operator": "IsEqual",
+                  "value": "'John'",
+                  "questionAlias": "name"
+                }
+              ]
+            },
+            "skipToQuestion": "alsoNotForOeyvind"
+          }
+        ],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 1"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page1",
+        //"position": 1,
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "OpenEndedShortTextQuestionDefinition",
+            "alias": "notForOeyvind",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            //"position": 1,
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 2"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page2",
+        //"position": 2,
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "OpenEndedShortTextQuestionDefinition",
+            "alias": "alsoNotForOeyvind",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            //"position": 1,
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 3"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page3",
+        //"position": 3,
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "InformationDefinition",
+            "alias": "Completed",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            //"position": 1,
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 4"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page4",
+        //"position": 4,
+        "childNodes": []
+      }
+    ]
+  },
+  "surveySettings": {
+    "surveyTitle": "New Survey",
+    "enableBackButton": true,
+    "keyboardSupport": true,
+    "languages": [
+      "en"
+    ],
+    "defaultLanguage": "en",
+    "displayProgressBar": true,
+    "displayOneQuestionOnScreen": true
+  },
+  "createdDate": "N/A",
+  "modifiedDate": "N/A",
+  "lastPublishedDate": "N/A"
+}

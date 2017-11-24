@@ -1,0 +1,140 @@
+<div>
+    <div class="test-mode__message" ng-if="vm.testModeSettings.isActive">
+        <test-mode-button test-mode-settings="vm.testModeSettings" is-default="true"></test-mode-button>
+    </div>
+    <div class="action-menu">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.addRespondent}">
+            <a id="add-icon" ng-click="vm.showAddRespondent()" title="Add new respondents">
+                <div class="action-menu__icon"><span class="glyphicon icon--add"></span></div><label class="action-menu__label">Add New</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.importRespondent}">
+            <a id="import-icon" ng-click="vm.showUploadRespondent()" title="Import respondents">
+                <div class="action-menu__icon"><span class="glyphicon icon--import"></span></div><label class="action-menu__label">Import</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.exportResponses}">
+            <a id="export-icon" ng-click="vm.showExportResponses()" title="Export responses data to file">
+                <div class="action-menu__icon"><span class="glyphicon icon--export"></span></div><label class="action-menu__label">Export</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.emailRespondent}">
+            <a id="email-icon" ng-click="vm.showEmailEditor()" title="Email to all respondents that match the filter">
+                <div class="action-menu__icon"><span class="glyphicon icon--email"></span></div><label class="action-menu__label">Email</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--inactive" ng-class="vm.removableRespondentIds.length == 0 ? 'action-menu__item--inactive' : 'action-menu__item--active'">
+            <a ng-click="(vm.removableRespondentIds.length == 0) || vm.deleteRespondents()" title="Delete respondent(s)">
+                <div class="action-menu__icon"><span class="glyphicon glyphicon-trash"></span></div><label class="action-menu__label">Delete</label>
+            </a>
+        </div>
+    </div>
+    <div class="row svt-row" ng-if="vm.pushDownSettings.isActive">
+        <push-down>
+            <import-respondent ng-if="vm.pushDownSettings.mode.importRespondent" survey-id="{{vm.surveyId}}"
+                               handle-after-save="vm.handleAfterImportRespondent()"></import-respondent>
+            <export-responses ng-if="vm.pushDownSettings.mode.exportResponses"
+                              survey-id="{{ vm.surveyId }}" survey-name="{{ vm.surveyName }}"></export-responses>
+            <email-respondent ng-if="vm.pushDownSettings.mode.emailRespondent" email-data="vm.emailData"
+                              handle-after-send="vm.handleAfterEmailRespondent()"></email-respondent>
+            <add-respondent ng-if="vm.pushDownSettings.mode.addRespondent" survey-id="{{vm.surveyId}}"
+                            handle-after-save="vm.handleAfterAddRespondent()"></add-respondent>
+        </push-down>
+    </div>
+    <div class="row svt-row">
+        <survey-title-and-status survey-id="vm.surveyId"></survey-title-and-status>
+        <div class="filter-responses clearfix">
+            <div class="col-xs-12 clear-padding filter-responses__transparent" ng-class="{'filter-responses__container--transparent': vm.filterResponseCollapsed, 'filter-responses__container': !vm.filterResponseCollapsed}">
+                <div class="filter-responses__head clearfix" ng-class="{'filter-responses__head--collapsed': vm.filterResponseCollapsed, 'filter-responses__head--expanded': !vm.filterResponseCollapsed}">
+                    <div class="toogle-icon-helper">
+                        <span id="expand-icon" class="filter-responses__toggle--down fa-caret-right" ng-class="{'collapsed': vm.filterResponseCollapsed}" ng-click="vm.filterResponseCollapsed = !vm.filterResponseCollapsed" title="Search"></span>
+                        <span id="collapse-icon" class="filter-responses__toggle--up fa-caret-down" ng-class="{'collapsed': vm.filterResponseCollapsed}" ng-click="vm.filterResponseCollapsed = !vm.filterResponseCollapsed" title="Search"></span>
+                        <span class="filter-responses__title" ng-click="vm.filterResponseCollapsed = !vm.filterResponseCollapsed">Filter Responses</span>
+                    </div>
+                    <section ng-hide="vm.filterResponseCollapsed">
+                        <div class="filter-responses__condition-panel">
+                            <form>
+                                <div class="row form-horizontal">
+                                    <div class="form-group col-xs-6 col-md-4">
+                                        <div class="col-xs-12 form-group pull-right clear-padding">
+                                            <label for="response-email" class="svt-label__ontop">Email</label>
+                                            <input id="response-email" type="text" ng-keypress="vm.searchPanelOnKeyPress($event)" class="form-control" ng-model="vm.searchModel.email" />
+                                        </div>
+                                        <div class="col-xs-12 form-group pull-right clear-padding">
+                                            <label for="response-status" class="svt-label__ontop">Response Status</label>
+                                            <select id="response-status" class="form-control" data-ng-model="vm.searchModel.status">
+                                                <option value="" selected="selected">All</option>
+                                                <option value="NotTaken">Not taken</option>
+                                                <option value="InProgress">In progress</option>
+                                                <option value="Completed">Completed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-8 pull-right clear-padding">
+                                        <number-range-selector class="col-xs-12"
+                                                               element-id="number-sent-dropdown"
+                                                               select-condition-label="Number Sent"
+                                                               n-selector-model="vm.searchModel.numberSent"
+                                                               n-textbox-key-press="vm.searchPanelOnKeyPress(event)"></number-range-selector>
+                                        <svt-datetime class="col-xs-12" label="Last Sent Date" data="vm.searchModel.lastTimeSent" on-key-press="vm.searchPanelOnKeyPress(event, true)"></svt-datetime>
+                                        <svt-datetime class="col-xs-12" label="Completed Date" data="vm.searchModel.completedTimeSent" on-key-press="vm.searchPanelOnKeyPress(event, true)"></svt-datetime>
+                                    </div>
+                                </div>
+                                <div class="form-group pull-right svt-button-group">
+                                    <button id="respondent-clear-btn" class="btn svt-button--cancel" ng-click="vm.clear()">Clear</button>
+                                    <button id="respondent-search-btn" class="btn svt-button--done" ng-click="vm.search()">Search</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="svt-grid__header svt-grid__row">
+                            <th>
+                                <label>
+                                    <input class="checkbox-list" id="masterCheckbox" type="checkbox"
+                                           ng-model="vm.masterCheckboxStatus"
+                                           ng-change="vm.changeRespondentMasterCheckbox()"> All
+                                </label>
+                            </th>
+                            <th class="text-center">ID </th>
+                            <th class="text-center">EMAIL</th>
+                            <th class="text-center">NUMBER SENT</th>
+                            <th class="text-center">LAST SENT DATE</th>
+                            <th class="text-center">COMPLETED DATE</th>
+                            <th class="text-center">RESPONSE STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="respondent in vm.respondents" class="svt-grid__row">
+                            <td class="col-xs-1">
+                                <input class="text-center checkbox-list" type="checkbox"
+                                       ng-model="respondent.isSelected"
+                                       ng-change="vm.changeRespondentCheckboxValue(respondent.id)">
+                            </td>
+                            <td class="text-center col-xs-1 respondent-detail__link">
+                                <a ng-click="vm.showRespondentDetailDialog(respondent.id)" title="Show respondent detail" ng-bind="respondent.id"></a>
+                            </td>
+                            <td class="col-xs-2">{{respondent.email}}</td>
+                            <td class="text-center col-xs-2 respondent-list__number-sent">{{respondent.numberSent | number}}</td>
+                            <td class="text-center col-xs-2">{{respondent.dateLastSent | dateTimeFormatFilter}}</td>
+                            <td class="text-center col-xs-2">{{respondent.completedDateString | dateTimeFormatFilter}}</td>
+                            <td class="text-center col-xs-2 respondent-column-center respondent-status" ng-class="{'respondent-status--not-taken': respondent.status == 'NotTaken', 'respondent-status--in-progress': respondent.status == 'InProgress', 'respondent-status--completed': respondent.status == 'Completed'}">{{respondent.statusDisplay}}</td>
+                        </tr>
+                        <tr class="svt-grid__row">
+                            <td colspan="9">
+                                <span>{{vm.respondentsFound}} respondent(s) found.</span>
+                                <span ng-show="vm.respondentsFound > 0"> Displaying {{vm.respondents.length}}/{{vm.respondentsFound}} respondent(s).</span>
+                                <a ng-show="vm.searchModel.paging.hashNext" class="svt-grid__load-more" ng-click="vm.loadMore()" title="Click to see more respondents">Load More</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

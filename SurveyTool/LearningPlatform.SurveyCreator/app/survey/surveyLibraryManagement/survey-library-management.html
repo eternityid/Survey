@@ -1,0 +1,46 @@
+﻿<div class="survey-library-management__container">
+    <form class="form-inline survey-library-management__settings-form">
+        <div class="form-group">
+            <select class="form-control library-selector">
+                <option value="" selected="">My Default Library</option>
+            </select>
+        </div>
+        <div class="form-group search-area" ng-if="vm.selectedDisplayMode === vm.displayModes.surveys">
+            <input type="text" class="form-control" placeholder="Search..." ng-model="vm.surveysSearchTerm" ng-keypress="vm.onSearchTermControlKeyPress($event)" />
+            <span class="glyphicon glyphicon-search" ng-click="vm.broadcastSearchEvent()"></span>
+        </div>
+        <div class="form-group search-area" ng-if="vm.selectedDisplayMode === vm.displayModes.pages">
+            <input type="text" class="form-control" placeholder="Search..." ng-model="vm.pagesSearchTerm" ng-keypress="vm.onSearchTermControlKeyPress($event)" />
+            <span class="glyphicon glyphicon-search" ng-click="vm.broadcastSearchEvent()"></span>
+        </div>
+        <div class="form-group search-area" ng-if="vm.selectedDisplayMode === vm.displayModes.questions">
+            <input type="text" class="form-control" placeholder="Search..." ng-model="vm.questionsSearchTerm" ng-keypress="vm.onSearchTermControlKeyPress($event)" />
+            <span class="glyphicon glyphicon-search" ng-click="vm.broadcastSearchEvent()"></span>
+        </div>
+        <div class="form-group">
+            <ul class="list-inline">
+                <li>
+                    <label class="radio-inline" for="surveyLibraryManagementSettingsFormDisplaySurveys">
+                        <input type="radio" id="surveyLibraryManagementSettingsFormDisplaySurveys" ng-model="vm.selectedDisplayMode" value="{{vm.displayModes.surveys}}" />
+                        Surveys
+                    </label>
+                </li>
+                <li>
+                    <label class="radio-inline" for="surveyLibraryManagementSettingsFormDisplayPages">
+                        <input type="radio" id="surveyLibraryManagementSettingsFormDisplayPages" ng-model="vm.selectedDisplayMode" value="{{vm.displayModes.pages}}" />
+                        Pages
+                    </label>
+                </li>
+                <li>
+                    <label class="radio-inline" for="surveyLibraryManagementSettingsFormDisplayQuestions">
+                        <input type="radio" id="surveyLibraryManagementSettingsFormDisplayQuestions" ng-model="vm.selectedDisplayMode" value="{{vm.displayModes.questions}}" />
+                        Questions
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <library-survey-list search-term="vm.surveysSearchTerm" ng-if="vm.selectedDisplayMode === vm.displayModes.surveys"></library-survey-list>
+    <library-page-list search-term="vm.pagesSearchTerm" ng-if="vm.selectedDisplayMode === vm.displayModes.pages"></library-page-list>
+    <library-question-list search-term="vm.questionsSearchTerm" ng-if="vm.selectedDisplayMode === vm.displayModes.questions"></library-question-list>
+</div>

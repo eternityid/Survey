@@ -1,0 +1,52 @@
+﻿<table class="table table-striped library-question-list__table" ng-if="vm.questions.length">
+    <thead>
+        <tr class="svt-grid__row">
+            <th>ALIAS</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>TYPE</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="question in vm.questions" class="svt-grid__row">
+            <td class="text--middle question-alias-column">
+                <span class="label label-info library-question-list__question-alias">{{question.alias | truncateFilter:30:'...'}}</span>
+            </td>
+            <td class="text--middle question-title-column library-question-list__truncate-question-title-cell">
+                <a title="{{question.title.items[0].text | rawTextInListCellFilter}}" ng-click="vm.openQuestionEditor(question)"
+                   ng-bind-html="question.title.items[0].text | rawTextInListCellFilter | trustAsHtmlFilter"></a>
+            </td>
+            <td class="text--middle question-description-column library-question-list__truncate-question-description-cell">
+                <span title="{{question.description.items[0].text | rawTextInListCellFilter}}"
+                      ng-bind-html="question.description.items[0].text | rawTextInListCellFilter | trustAsHtmlFilter"></span>
+            </td>
+            <td class="text--middle question-type-column">
+                {{ vm.getQuestionTypeName(question.$type) }}
+            </td>
+            <td class="text-center question-action-menu-column text--middle">
+                <div class="btn-group">
+                    <span class="btn btn-default survey-list__action-button" data-toggle="dropdown" title="Action menu"></span>
+                    <ul class="dropdown-menu survey-list__dropdown-menu" role="menu">
+                        <li>
+                            <a ng-click="vm.openQuestionEditor(question)" title="Edit question"><span class="glyphicon icon--edit survey-list__action-button-icon"></span>Edit</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.duplicateQuestion(question)" title="Duplicate question"><span class="glyphicon icon--duplicate survey-list__action-button-icon"></span>Duplicate</a>
+                        </li>
+                        <li>
+                            <a ng-click="vm.deleteQuestion(question, $index)" title="Delete question"><span class="glyphicon icon--delete survey-list__action-button-icon"></span>Delete</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="survey-library-management__paging-row">
+    <span>{{vm.totalQuestions}} question(s) found.</span>
+    <span ng-show="vm.totalQuestions">
+        &nbsp;Displaying {{vm.questions.length}}/{{vm.totalQuestions}} question(s). <a href="" class="svt-grid__load-more" ng-click="vm.loadMoreQuestions()" ng-if="vm.totalQuestions && vm.questions.length < vm.totalQuestions">Load more</a>
+    </span>
+</p>

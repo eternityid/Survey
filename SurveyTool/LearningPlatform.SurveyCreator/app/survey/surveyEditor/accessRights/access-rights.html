@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-md-9 col-lg-6">
+        <form name="form" class="form-horizontal svt-push-down__form">
+            <div class="form-group">
+                <div class="col-xs-12 svt-push-down__form-heading">
+                    <h4>Access rights</h4>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'access-rights__content': !vm.isAccessRightsEmpty, 'access-rights__content--empty': vm.isAccessRightsEmpty}">
+                <div class="col-xs-12">
+                    <div class="row access-rights__label">
+                        <div class="col-xs-4 access-rights__label-without-padding">Company users</div>
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">Access rights</div>
+                    </div>
+                </div>
+                <div class="col-xs-12 access-rights__row-content" ng-repeat="user in vm.accessRightsUsersInCompany">
+                    <div class="row">
+                        <div class="col-xs-4 access-rights__item-label">{{user.fullName}}</div>
+                        <div class="col-xs-4 access-rights__item-label">{{user.email}}</div>
+                        <div class="col-xs-4">
+                            <dropdown-list items="vm.accessRightsTypes"
+                                           selected-value="user.accessRights"
+                                           column-value="id"
+                                           column-name="name"
+                                           default-text="Select access rights"
+                                           default-class="access-rights__dropdown">
+                            </dropdown-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <select-two place-holder="Select user"
+                                        on-selected-item="vm.onSelectedUserInCompany"
+                                        selected-value="vm.newUserAccessRights.id"
+                                        items="vm.usersInCompany"
+                                        column-value="id"
+                                        column-name="fullNameAndEmail">
+                            </select-two>
+                        </div>
+                        <div class="col-xs-4 access-rights__action-dropdown">
+                            <label class="access-rights__action-dropdown-placeholder" ng-if="!vm.newUserAccessRights.accessRights">
+                                Set right
+                            </label>
+                            <select id="dropdown-user-rights"
+                                    class="form-control"
+                                    title="Set right"
+                                    data-ng-model="vm.newUserAccessRights.accessRights"
+                                    data-ng-options="item.id as item.name for item in vm.accessRightsTypesWithoutNoAccess"
+                                    ng-change="vm.onSelectedAccessRightsTypesChange()"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="pull-right svt-button-group">
+                    <button type="button" class="btn svt-button--cancel" title="Cancel" ng-click="vm.close()">
+                        Cancel
+                    </button>
+                    <button type="button" ng-click="vm.updateAccessRights()"
+                            ng-disabled="!vm.hasAnyChanges"
+                            class="btn svt-button--done" title="Save access rights">
+                        Save
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

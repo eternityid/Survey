@@ -1,0 +1,56 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title" ng-if="editor.isAdd">Add {{editor.element.typeName}}</h4>
+    <h4 class="modal-title" ng-if="!editor.isAdd">Edit {{editor.element.typeName}}</h4>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-horizontal" novalidate>
+        <div ng-if="editor.elementType !== elementType.text">
+            <div class="form-group">
+                <label class="col-sm-3 control-label label-required">Question</label>
+                <div class="col-sm-9" ng-if="editor.elementType === elementType.chart">
+                    <select id="addtable-question-dropdown" data-ng-model="editor.element.questionId" class="form-control"
+                            data-ng-change="changeQuestion()"
+                            data-ng-options="value.id as (value.name | htmlToPlainTextFilter) for value in editor.page.chartQuestions"
+                            required name="question" ng-class="(form.question.$invalid && !requiredValidation.question.valid) ? 'input-required' : ''">
+                        <option value="">Choose a question</option>
+                    </select>
+                </div>
+                <div class="col-sm-9 combobox-control" ng-if="editor.elementType === elementType.table">
+                    <select id="addchart-question-dropdown" data-ng-model="editor.element.questionId" class="form-control"
+                            data-ng-options="value.id as (value.name | htmlToPlainTextFilter) for value in editor.page.tableQuestions"
+                            required name="question"
+                            ng-class="(form.question.$invalid && !requiredValidation.question.valid) ? 'input-required' : ''">
+                        <option value="">Choose a question</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-if="editor.elementType === elementType.chart">
+                <label class="col-sm-3 control-label" ng-class="{'label-required': editor.element.questionId}">Chart Type</label>
+                <div class="col-sm-9">
+                    <select id="addchart-charttype-dropdown" data-ng-model="editor.element.chartType" class="form-control"
+                            data-ng-options="value.id as value.name for value in chartTypes"
+                            required name="chart"
+                            ng-class="(form.chart.$invalid && !requiredValidation.chart.valid && !editor.element.chartType) ? 'input-required' : ''"
+                            ng-disabled="!editor.element.questionId">
+                        <option value="">Choose a chart type</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div ng-if="editor.elementType === elementType.text">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div contenteditable="true" rich-text-input="ckeditorConfig"
+                         ng-model="editor.element.text" class="form-control"></div>
+                    <div class="message--invalid-free-text" ng-if="validationMessageForFreeText" ng-bind="validationMessageForFreeText"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button id="addelement-cancelbtn" type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button id="addelement-savebtn" type="button" ng-click="save()" class="btn btn-primary">Save</button>
+</div>

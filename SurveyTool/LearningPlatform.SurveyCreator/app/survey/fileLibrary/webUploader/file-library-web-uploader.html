@@ -1,0 +1,54 @@
+﻿<div class="file-library-picker-uploader__upload-image-container">
+    <form novalidate name="formData" class="col-xs-7">
+        <div class="form-group">
+            <label for="formDataSourceUri" class="label-required">File location URL</label>
+            <input type="url" class="form-control" id="formDataSourceUri"
+                   name="formDataSourceUri" placeholder="File location URL"
+                   ng-model="model.sourceUri" ng-change="vm.onChangeUri()" required>
+            <span class="svt-helper-text"><em>The maximum file size of image is {{config.maxFileSize | byteToMbKbFilter}}</em></span>
+        </div>
+        <div class="form-group">
+            <label class="label-required" for="name-no-extension">File name</label>
+            <input type="text" class="form-control" id="name-no-extension" required
+                   placeholder="File name" ng-model="model.fileNameWithoutExtension">
+        </div>
+        <div class="form-group">
+            <label for="web-folder" class="label-required">Folder</label>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="model.directory" id="web-folder" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li ng-repeat="directory in vm.selectedLibrary.directories">
+                            <a ng-click="vm.onChangeDirectory(directory)">{{directory.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="web-file-description">Description</label>
+            <textarea class="form-control" rows="6" id="web-file-description"
+                      placeholder="File description" ng-model="model.description"></textarea>
+        </div>
+    </form>
+
+    <div class="file-library-picker__container--preview col-xs-5">
+        <library-image-previewer allow-change-image-dimension="{{config.allowChangeImageDimension}}"
+                                 form-data-source-uri-valid="{{formData.formDataSourceUri.$valid}}"
+                                 image-url="model.sourceUri"
+                                 image-size="model.imageSize"></library-image-previewer>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 text-right svt-button-group">
+        <button type="button" ng-click="onCancel()" class="btn btn-default">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.onUploadWebFile()"
+                ng-disabled="formData.$invalid">
+            Add
+        </button>
+    </div>
+</div>

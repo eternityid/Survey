@@ -1,0 +1,102 @@
+﻿@import "../../theme/default/variables.less";
+
+#respondent-search-section {
+    margin-bottom: 6px;
+}
+
+.filter-responses__condition-panel {
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-left: 40px;
+    margin-right: 32px;
+
+    & input, select {
+        font-size: 14px !important;
+        color: black;
+        height: 34px;
+    }
+}
+
+.filter-responses {
+    &__container {
+        background-color: @filter-responses-container-background-color;
+    }
+
+    &__container--transparent {
+        background-color: transparent;
+    }
+
+    &:hover .filter-responses__toggle--up {
+        visibility: visible;
+    }
+
+    &__title {
+        display: block;
+        font-size: 16px;
+        height: 40px;
+        line-height: 40px;
+        font-weight: bold;
+        color: @base-main-link-color;
+        cursor: pointer;
+    }
+
+    &__head {
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--collapsed {
+            border-top: none;
+        }
+
+        &--expanded {
+            border-top: 1px solid @base-main-link-color;
+            border-bottom: 2px solid @base-main-link-color;
+        }
+    }
+
+    &__toggle {
+        &--down {
+            display: none;
+            float: left;
+        }
+
+        &--up {
+            float: left;
+        }
+
+        &--down.collapsed {
+            display: block;
+        }
+
+        &--up.collapsed {
+            display: none;
+        }
+    }
+}
+
+.filter-responses .toogle-icon-helper {
+    height: 40px;
+    width: 100%;
+}
+
+.filter-responses .toogle-icon-helper .fa-caret-right {
+    background-image: url('../../assets/images/sprite_icons.png');
+    font-size: 0 !important;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-position: -120px -27px;
+    margin-right: 10px;
+}
+
+.filter-responses .toogle-icon-helper .fa-caret-down {
+    background-image: url('../../assets/images/sprite_icons_hover.png');
+    font-size: 0 !important;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-position: -150px -30px;
+    background-color: @base-icons-background-color;
+    margin-right: 10px;
+}

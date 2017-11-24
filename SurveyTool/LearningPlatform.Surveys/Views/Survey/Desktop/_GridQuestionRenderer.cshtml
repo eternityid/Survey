@@ -1,0 +1,70 @@
+﻿@using LearningPlatform.Domain.SurveyExecution.Questions
+@using LearningPlatform.Helpers
+@model GridQuestion
+
+@helper RenderUserInputArea()
+{
+    if (Model.ShowAsList)
+    {
+        @RenderAsList()
+    }
+    else
+    {
+        @RenderAsTable()
+    }
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())
+
+@helper RenderAsTable() {
+var firstQuestion = Model.Questions.First() as ScaleQuestion;
+var isRenderAsButton = firstQuestion != null && firstQuestion.IsRenderOptionByButton;
+int optionItemCountSeparatePoint = 6;
+string quantitativeClass = firstQuestion != null && firstQuestion.Options.Count < optionItemCountSeparatePoint ? "some" : "";
+    <table id="@Model.Alias-selection-grid-horizontal" class="grid-selection @SetCssClassForQuestionType() @(isRenderAsButton ? "render-as-button" : "")@quantitativeClass">
+        @if (Model is ScaleGridQuestion)
+        {
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="@firstQuestion.Options.Count" class="likert-table__likert-text-container">
+                        <div class="col-xs-4 text-left">@Html.Raw(firstQuestion.LikertLeftText)</div>
+                        <div class="col-xs-4 text-center">@Html.Raw(firstQuestion.LikertCenterText)</div>
+                        <div class="col-xs-4 text-right">@Html.Raw(firstQuestion.LikertRightText)</div>
+                    </th>
+                </tr>
+            </thead>
+        }
+        @Html.GridTable(Model)
+    </table>
+}
+
+@functions {
+    string SetCssClassForQuestionType()
+    {
+        var cssClass = string.Empty;
+        if (Model is ShortTextListQuestion)
+            cssClass = "short-text-list";
+        else if (Model is ScaleGridQuestion)
+            cssClass = "likert-table";
+        else if (Model is RatingGridQuestion)
+            cssClass = "rating-table";
+        else if (Model is LongTextListQuestion)
+            cssClass = "long-text-list";
+
+        return cssClass;
+    }
+}
+
+@helper RenderAsList() {
+    for (var i = 0; i < Model.Options.Count; i++)
+    {
+        var question = Model.Questions[i];
+        <div>
+            <span>@Html.Raw(Model.Options[i].Text)</span>
+            @{
+                Html.RenderPartial(string.Format("~/Views/Survey/Desktop/_{0}Renderer.cshtml", question.GetType().Name), question, ViewData);
+            }
+        </div>
+    }
+}

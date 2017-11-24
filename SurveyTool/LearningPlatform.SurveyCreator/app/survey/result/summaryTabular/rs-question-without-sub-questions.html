@@ -1,0 +1,26 @@
+﻿﻿<div class="col-xs-12 col-sm-12 col-md-12 table-without-sub-question">
+    <table class="table table-responsive table-striped table-sub-question-content">
+        <thead>
+            <tr class="info">
+                <th>Topic</th>
+                <th>Response</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in vm.table.rows">
+                <td class="table-body-content">{{row.optionText | htmlToPlainTextFilter}}</td>
+                <td class="table-body-content" ng-bind="row.count"></td>
+                <td class="table-body-content" ng-bind-template="{{row.percentage}}%"></td>
+            </tr>
+            <tr>
+                <td class="table-body-content__total">Total Respondents</td>
+                <td class="table-body-content__respondents" ng-bind="vm.totalRespondents" colspan="2"></td>
+            </tr>
+            <tr>
+                <td class="table-body-content__total">Total Responses</td>
+                <td class="table-body-content__respondents" ng-bind="vm.totalResponses" colspan="2"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

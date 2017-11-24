@@ -1,0 +1,132 @@
+﻿<div id="{{'surveyQuestion-' + index}}" class="page-container-item" as-sortable="pageCtrl.sortableOptionsQuestion" ng-model="pageCtrl.questionsInPage">
+    <div class="drag-handle survey-question"
+         ng-repeat-start="question in pageCtrl.questionsInPage" id="question-{{question.id}}"
+         ng-class="pageCtrl.getQuestionContainerClasses(question)"
+         as-sortable-item>
+        <div id="create-question-container-{{question.id}}" class="create-question-container"></div>
+        <div ng-class="pageCtrl.getQuestionViewClass(question)" class="question-container">
+            <span class="fa icon--drag-drop drag-icon" as-sortable-item-handle title="Click and hold here to move question"
+                  ng-if="pageCtrl.canClickToMoveQuestion(question.id) || pageCtrl.isCollapsedQuestion(question.id)"></span>
+            <div class="plus-position-control-in-page" ng-if="pageCtrl.isSelectingQuestion(question.id)">
+                <a data-ng-click="pageCtrl.createAboveQuestion(question)" ng-if="!pageCtrl.isThankYouPage">
+                    <span class="glyphicon icon-plus"></span>
+                </a>
+            </div>
+
+            <div class="button-position-control-in-page" ng-if="pageCtrl.isSelectingQuestion(question.id) || pageCtrl.isCollapsedQuestion(question.id)">
+                <span ng-if="pageCtrl.isCollapsedQuestion(question.id)" class="question-header__alias">{{question.alias}}</span>
+                <span ng-if="pageCtrl.isCollapsedQuestion(question.id)" class="question-header__type">{{pageCtrl.getQuestionType(question.$type) | lowercase}}</span>
+                <span class="glyphicon icon--edit" title="Edit question" ng-show="pageCtrl.isSelectingQuestion(question.id)"
+                      ng-click="pageCtrl.getReadyToEditQuestion(question)"></span>
+                <span class="glyphicon icon--move-up" title="Move question up"
+                      ng-click="pageCtrl.moveQuestionUp(question, $index)"
+                      ng-if="pageCtrl.canClickToMoveQuestionUp($index) && pageCtrl.isShowQuestionMovingIcon(question.id)"></span>
+                <span class="glyphicon icon--move-up disable-icon" title="Move question up"
+                      ng-if="!pageCtrl.canClickToMoveQuestionUp($index) && !pageCtrl.isThankYouPage && pageCtrl.isShowQuestionMovingIcon(question.id)"></span>
+                <span class="glyphicon icon--move-down" title="Move question down"
+                      ng-click="pageCtrl.moveQuestionDown(question, $index)"
+                      ng-if="pageCtrl.canClickToMoveQuestionDown($index) && pageCtrl.isShowQuestionMovingIcon(question.id)"></span>
+                <span class="glyphicon icon--move-down disable-icon" title="Move question down"
+                      ng-if="!pageCtrl.canClickToMoveQuestionDown($index) && !pageCtrl.isThankYouPage && pageCtrl.isShowQuestionMovingIcon(question.id)"></span>
+                <span class="btn btn-default page-operations__action-button" data-toggle="dropdown"></span>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ng-show="pageCtrl.isSelectingQuestion(question.id)" ng-if="!pageCtrl.isThankYouPage" href=""
+                           ng-click="pageCtrl.duplicateQuestion(question, $index)">
+                            <span class="glyphicon icon--duplicate" title="Duplicate question"></span>
+                            Duplicate
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="pageCtrl.addQuestionToLibrary(question.id)" href="" title="Add quesiton to library">
+                            <span class="glyphicon glyphicon-copy button-position-control-in-page__action-button-icon"></span>
+                            Add question to library
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-show="pageCtrl.isSelectingQuestion(question.id)" ng-if="!pageCtrl.isThankYouPage" href=""
+                           ng-click="pageCtrl.removeQuestion($event, question)" svt-stop-event>
+                           <span class="glyphicon icon--delete" title="Delete question"></span>
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-container" ng-class="pageCtrl.getQuestionContentClasses(question)"
+                 ng-click="pageCtrl.selectQuestionByStep(question)"
+                 ng-if="!pageCtrl.isEditingQuestion(question.id)" id="Question{{question.id}}">
+                <div class="question-collapse">
+                    <div class="collapse-icon" ng-click="pageCtrl.toggleCollapseQuestion(question.id);" svt-stop-event>
+                        <i class="question-page-down fa fa-caret-down" ng-if="!pageCtrl.isCollapsedQuestion(question.id)" title="Collapse question"></i>
+                        <i class="question-page-right fa fa-caret-right" ng-if="pageCtrl.isCollapsedQuestion(question.id)" title="Expand question"></i>
+                    </div>
+                    <div class="question-content">
+                        <div class="markers-layout">
+                            <div class="marker-box" ng-repeat="skippedQuestion in pageCtrl.summarySkipCommandsInSurvey">
+                                <div class="skip-marker-arrow" ng-if="skippedQuestion.skipToQuestionId === question.id"
+                                     title="Go to source page"
+                                     ng-click="pageCtrl.clickMarkedQuestion(skippedQuestion.pageId,skippedQuestion.pageIndex)"
+                                     svt-stop-event></div>
+                            </div>
+                            <div class="icon--always-hidden" ng-if="question.isAlwaysHidden" title="This question will not be displayed in the survey"></div>
+                        </div>
+                        <div class="question-header">
+                            <div class="question-view__position-in-survey" ng-if="question.$type !== pageCtrl.questionTypes.information">
+                                <div class="question-view__position-in-survey--border">{{question.positionInSurvey}}</div>
+                            </div>
+                            <div class="question-view__position-in-survey--empty" ng-if="question.$type === pageCtrl.questionTypes.information">&nbsp;</div>
+                            <div class="question-header__title-container" ng-if="pageCtrl.collapsedQuestionIds.indexOf(question.id) >= 0">
+                                <span class="question-header__title" id="question-title" ng-bind-html="(question.title.items[0].text | htmlToPlainTextFilter | truncateFilter:50: '...')"></span>
+                            </div>
+                            <div class="question-header__title-container" ng-if="pageCtrl.collapsedQuestionIds.indexOf(question.id) < 0">
+                                <span class="required-mark" ng-if="pageCtrl.isRequiredQuestion(question);">*</span>
+                                <span class="question-header__alias">{{question.alias}}</span>
+                                <div ng-show="question.orderType === 1" class="question-header__ramdomizes">
+                                    <span class="icon--randomizes"></span>
+                                    Randomized
+                                </div>
+                                <span class="question-header__title expanded" id="question-title" ng-bind-html="question.title.items[0].text | trustAsHtmlFilter"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question-view__container" title="Edit question" collapse="pageCtrl.collapsedQuestionIds.indexOf(question.id) >= 0">
+                    <text-question ng-if="question.$type === pageCtrl.questionTypes.shortText ||
+                                      question.$type === pageCtrl.questionTypes.longText" question="question" class="text-question-view"></text-question>
+                    <date-question ng-if="question.$type === pageCtrl.questionTypes.date" question="question" class="date-question-view"></date-question>
+                    <single-selection-question ng-if="question.$type === pageCtrl.questionTypes.singleSelection" question="question"></single-selection-question>
+                    <multiple-selection-question ng-if="question.$type === pageCtrl.questionTypes.multipleSelection" question="question"></multiple-selection-question>
+                    <information-question ng-if="question.$type === pageCtrl.questionTypes.information" question="question"></information-question>
+                    <numeric-question ng-if="question.$type === pageCtrl.questionTypes.numeric" question="question" class="numeric-question-view"></numeric-question>
+                    <scale-question ng-if="question.$type === pageCtrl.questionTypes.netPromoterScore" question="question"></scale-question>
+                    <scale-question ng-if="question.$type === pageCtrl.questionTypes.scale" question="question"></scale-question>
+                    <rating-question ng-if="question.$type === pageCtrl.questionTypes.rating" question="question"></rating-question>
+                    <selection-grid-question ng-if="question.$type === pageCtrl.questionTypes.singleSelectionGrid ||
+                                                question.$type === pageCtrl.questionTypes.multipleSelectionGrid" question="question"
+                                             class="single-selection"></selection-grid-question>
+                    <picture-selection-question ng-if="question.$type === pageCtrl.questionTypes.pictureSingleSelection ||
+                                                   question.$type === pageCtrl.questionTypes.pictureMultipleSelection" question="question"
+                                                class="single-selection"></picture-selection-question>
+                    <text-list-question ng-if="question.$type === pageCtrl.questionTypes.shortTextList" question="question" class="single-selection"></text-list-question>
+                    <text-list-question ng-if="question.$type === pageCtrl.questionTypes.longTextList" question="question" class="single-selection"></text-list-question>
+                    <rating-grid-question ng-if="question.$type === pageCtrl.questionTypes.ratingGrid" question="question" class="single-selection"></rating-grid-question>
+                    <scale-grid-question ng-if="question.$type === pageCtrl.questionTypes.scaleGrid" question="question" class="single-selection"></scale-grid-question>
+                </div>
+                <div ng-if="question.questionMaskExpression != null && pageCtrl.collapsedQuestionIds.indexOf(question.id) < 0" ng-init="isExpansed = true">
+                    <conditionally-display question="question" click-to-edit="pageCtrl.getReadyToEditQuestion(question)"></conditionally-display>
+                </div>
+            </div>
+            <div class="plus-position-control-in-page" ng-if="pageCtrl.isSelectingQuestion(question.id)">
+                <a data-ng-click="pageCtrl.createBelowQuestion(question)" ng-if="!pageCtrl.isThankYouPage">
+                    <span class="glyphicon icon-plus icon-plus--bottom"></span>
+                </a>
+            </div>
+        </div>
+        <div id="edit-question-container-{{question.id}}"></div>
+    </div>
+    <section ng-repeat-end class="question-page-break" ng-if="pageCtrl.isShowInsertPageBreak(question)">
+        <div class="line-text">
+            <a class="question-page-break__text" ng-click="pageCtrl.onBreakPage($index + 1)">Insert Page Break</a>
+        </div>
+    </section>
+</div>

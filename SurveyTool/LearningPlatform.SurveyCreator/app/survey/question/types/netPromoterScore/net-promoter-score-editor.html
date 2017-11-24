@@ -1,0 +1,22 @@
+﻿<div class="row question-editor__question-value">
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">Left Scale Text</label>
+            <div>
+                <div id="likertLeftText" contenteditable="true" ng-model="vm.question.likertLeftText.items[0].text" class="form-control"
+                     ng-change="vm.onLikertTextChange()"
+                     rich-text-input="vm.ckeditorLikertTextConfig"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">Right Scale Text</label>
+            <div>
+                <div id="likertRightText" contenteditable="true" ng-model="vm.question.likertRightText.items[0].text" class="form-control"
+                     ng-change="vm.onLikertTextChange()"
+                     rich-text-input="vm.ckeditorLikertTextConfig"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿<div class="row question-editor__question-value">
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">Start</label>
+            <div>
+                <input id="min-score" type="number" class="form-control" data-ng-model="vm.min" ng-change="vm.onScoreChange()" />
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label svt-label__ontop">End</label>
+            <div>
+                <input id="max-score" type="number" class="form-control" data-ng-model="vm.max" ng-change="vm.onScoreChange()" />
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group" ng-if="vm.validationResult.valid === false">
+            <div class="help-block h6"> {{vm.validationResult.message}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group question-editor__question-value">
+    <label class="control-label svt-label__ontop">Left Scale Text</label>
+    <div>
+        <div id="likertLeftText" contenteditable="true" ng-model="vm.question.likertLeftText.items[0].text" class="form-control"
+             ng-change="vm.onLikertTextChange()"
+             rich-text-input="vm.ckeditorLikertTextConfig"></div>
+    </div>
+</div>
+<div class="form-group question-editor__question-value">
+    <label class="control-label svt-label__ontop">Center Scale Text</label>
+    <div>
+        <div id="likertCenterText" contenteditable="true" ng-model="vm.question.likertCenterText.items[0].text" class="form-control"
+             ng-change="vm.onLikertTextChange()"
+             rich-text-input="vm.ckeditorLikertTextConfig"></div>
+    </div>
+</div>
+<div class="form-group question-editor__question-value">
+    <label class="control-label svt-label__ontop">Right Scale Text</label>
+    <div>
+        <div id="likertRightText" contenteditable="true" ng-model="vm.question.likertRightText.items[0].text" class="form-control"
+             ng-change="vm.onLikertTextChange()"
+             rich-text-input="vm.ckeditorLikertTextConfig"></div>
+    </div>
+</div>

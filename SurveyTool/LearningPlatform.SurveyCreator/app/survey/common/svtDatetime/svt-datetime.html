@@ -1,0 +1,32 @@
+﻿<div class="form-group">
+    <div class="col-sm-6 col-md-4 col-xs-12 datepicker__control--custom-space">
+        <label for="{{vm.comparisionOperatorElmentId}}" class="svt-label__ontop">{{label}}</label>
+        <select id="{{vm.comparisionOperatorElmentId}}" class="form-control"
+                data-ng-model="data.conditionOperator"
+                data-ng-options="operator.value as operator.name for operator in vm.comparisionOperators"
+                ng-change="vm.onSelectComparisionOperator()"></select>
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12 datepicker__control--custom-space">
+        <label ng-if="(data.conditionOperator !== vm.comparisionOperatorType.between.value)" for="{{vm.datetimeFromElementId}}-text" class="svt-label__ontop">&nbsp;</label>
+        <label ng-if="(data.conditionOperator === vm.comparisionOperatorType.between.value)" for="{{vm.datetimeFromElementId}}-text" class="svt-label__ontop">From</label>
+        <div class="input-group date" id="{{vm.datetimeFromElementId}}">
+            <input id="{{vm.datetimeFromElementId}}-text" ng-keypress="onKeyPress({event: $event})"
+                   ng-disabled="!data.conditionOperator" placeholder="mm/dd/yyyy"
+                   ng-model="data.datetimeFrom" type="text" class="form-control" />
+            <span class="input-group-addon" ng-class="{'respondent-list__hidden-calendar': !data.conditionOperator}"><span class="glyphicon-calendar glyphicon"></span></span>
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12 pull-right datepicker__control--custom-space">
+        <label ng-if="(data.conditionOperator !== vm.comparisionOperatorType.between.value)" for="{{vm.datetimeToElementId}}-text" class="svt-label__ontop">&nbsp;</label>
+        <label ng-if="(data.conditionOperator === vm.comparisionOperatorType.between.value)" for="{{vm.datetimeToElementId}}-text" class="svt-label__ontop">To</label>
+        <div class="input-group date" id="{{vm.datetimeToElementId}}">
+            <input id="{{vm.datetimeToElementId}}-text" ng-keypress="onKeyPress({event: $event})"
+                   ng-disabled="(data.conditionOperator !== vm.comparisionOperatorType.between.value)" placeholder="mm/dd/yyyy"
+                   ng-model="data.datetimeTo" type="text" class="form-control" />
+            <span class="input-group-addon" ng-class="{'respondent-list__hidden-calendar': (data.conditionOperator !== vm.comparisionOperatorType.between.value)}"><span class="glyphicon-calendar glyphicon"></span></span>
+        </div>
+    </div>
+</div>

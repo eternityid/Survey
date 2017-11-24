@@ -1,0 +1,29 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.NumericQuestion
+
+@helper RenderUserInputArea()
+{
+    var rangeNumberValidator = QuestionRenderer.GetRangeNumberValidator(Model.Validators.ToList());
+    var stepValue = QuestionRenderer.GetStepValueByDecimalPlace(Model.Validators.ToList(), Model.Step ?? 1);
+
+    if (rangeNumberValidator != null)
+    {
+        <div class="numeric-text">
+            <input class="form-control number" pattern="[0-9]*" id="@Model.Alias" name="@Model.Alias" type="number"
+                   value="@Model.Answer"
+                   min="@rangeNumberValidator.Min"
+                   max="@rangeNumberValidator.Max"
+                   step="@stepValue" />
+        </div>
+    }
+    else
+    {
+        <div class="numeric-text">
+            <input class="form-control number" pattern="[0-9]*" id="@Model.Alias" name="@Model.Alias" type="number"
+                   value="@Model.Answer"
+                   step="@stepValue" />
+        </div>
+    }
+
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

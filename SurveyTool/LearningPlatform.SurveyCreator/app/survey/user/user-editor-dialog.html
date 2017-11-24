@@ -1,0 +1,46 @@
+﻿<form id="createUserForm" name="userEditorForm" class="form-horizontal" novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Edit User</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Username</label>
+            <div class="col-xs-8">
+                <input autofocus name="username" type="text" class="form-control"
+                       ng-class="(userEditorForm.username.$invalid && userEditorForm.username.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.username" required placeholder="Enter username" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">First Name</label>
+            <div class="col-xs-8">
+                <input autofocus type="text" name="firstName" class="form-control"
+                       ng-class="(userEditorForm.firstName.$invalid && userEditorForm.firstName.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.firstName" required placeholder="Enter first name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Last Name</label>
+            <div class="col-xs-8">
+                <input autofocus type="text" name="lastName" class="form-control"
+                       ng-class="(userEditorForm.lastName.$invalid && userEditorForm.lastName.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.lastName" required placeholder="Enter last name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-3 control-label label-required">Email Address</label>
+            <div class="col-xs-8">
+                <input autofocus type="email" name="emailAddress" class="form-control"
+                       ng-class="(userEditorForm.emailAddress.$invalid && userEditorForm.emailAddress.$dirty) ? 'input-required' : ''"
+                       data-ng-model="user.emailAddress" required placeholder="Enter email address" />
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()" title="Cancel">Cancel</button>
+        <input type="submit" ng-disabled="userEditorForm.$invalid" ng-click="save()" class="btn btn-primary" title="Save User" value="Save" />
+    </div>
+</form>

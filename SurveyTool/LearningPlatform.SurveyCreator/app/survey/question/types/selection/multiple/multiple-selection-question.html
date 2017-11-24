@@ -1,0 +1,65 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<ul class="answer-question" ng-if="question.displayOrientation === vm.displayOrientationValues.vertical">
+    <li ng-repeat="answer in vm.answers | filter: {'groupAlias' : '' || null}:true">
+        <div class="checkbox">
+            <label ng-class="{'question-view__content--error': answer.isCarryOver && answer.isCarryOverError}">
+                <input type="checkbox" name="name" disabled />
+                <span ng-if="!answer.isCarryOver" ng-bind-html="answer.text.items[0].text"></span>
+                <span ng-if="answer.isCarryOver && !answer.isCarryOverError">
+                    Carry Over from <strong>{{answer.carryOverFromQuestionName | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+                <span ng-if="answer.isCarryOver && answer.isCarryOverError">
+                    Carry Over from <strong>{{answer.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                </span>
+                <input type="text" class="otherOption" disabled placeholder="Their Answer!" title="Other" ng-show="answer.otherQuestionDefinition" />
+            </label>
+        </div>
+    </li>
+
+    <li ng-repeat="optionGroup in vm.optionGroups" class="answer-question__group-options">
+        <div class="question-viewer-group-end" ng-if="optionGroup.hideHeading">
+            <hr class="group-end-viewmode-margin" />
+            <div class="group-end-position">
+                <span class="hidden-group-end">---------</span>
+            </div>
+        </div>
+        <span class="question-viewer-group-header-text" ng-bind-html="optionGroup.heading.items[0].text" ng-if="!optionGroup.hideHeading"></span>
+        <div class="answer-question__group-options__option" ng-repeat="answer in vm.answers | filter: {'groupAlias' : optionGroup.alias}:true">
+            <div class="checkbox">
+                <label ng-class="{'question-view__content--error': answer.isCarryOver && answer.isCarryOverError}">
+                    <input type="checkbox" name="name" disabled />
+                    <span ng-if="!answer.isCarryOver" ng-bind-html="answer.text.items[0].text"></span>
+                    <span ng-if="answer.isCarryOver && !answer.isCarryOverError">
+                        Carry Over from <strong>{{answer.carryOverFromQuestionName | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                    <span ng-if="answer.isCarryOver && answer.isCarryOverError">
+                        Carry Over from <strong>{{answer.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                    <input type="text" class="otherOption" disabled placeholder="Their Answer!" title="Other" ng-show="answer.otherQuestionDefinition" />
+                </label>
+            </div>
+        </div>
+    </li>
+</ul>
+<div ng-if="question.displayOrientation === vm.displayOrientationValues.horizontal">
+    <ul class="question-options">
+        <li class="question-options-option" ng-repeat="answer in vm.answers" ng-class="{'question-view__content--error': answer.isCarryOver && answer.isCarryOverError}">
+            <ul>
+                <li>
+                    <span ng-if="!answer.isCarryOver" ng-bind-html="answer.text.items[0].text"></span>
+                    <span ng-if="answer.isCarryOver && !answer.isCarryOverError">
+                        Carry Over from <strong>{{answer.carryOverFromQuestionName | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                    <span ng-if="answer.isCarryOver && answer.isCarryOverError">
+                        Carry Over from <strong>{{answer.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                </li>
+                <li>
+                    <input type="checkbox" disabled>
+                    <input type="text" class="otherOption" disabled placeholder="Their Answer!" title="Other" ng-show="answer.otherQuestionDefinition" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="clean"></div>

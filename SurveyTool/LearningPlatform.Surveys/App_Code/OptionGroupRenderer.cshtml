@@ -1,0 +1,40 @@
+﻿@using LearningPlatform.Domain.Common
+@using LearningPlatform.Domain.SurveyExecution.Options
+
+@helper RenderGroup(Option option, Reference<OptionGroup> currentGroup)
+{
+    if (currentGroup.Value != option.OptionGroup)
+    {
+        if (currentGroup.Value != null)
+        {
+            @:</div>
+        }
+        currentGroup.Value = option.OptionGroup;
+        if (currentGroup.Value != null)
+        {
+
+            if(currentGroup.Value.HideHeading)
+            {
+                <div class="option-group-break-line-container">
+                    <hr class="option-group-break-line" />
+                </div>
+            }
+            else
+            {
+                <div>
+                    <label class="option-group">@(currentGroup.Value.Heading.ToString())</label>
+                </div>
+            }
+
+            @:<div class="grouped-options @option.OptionGroup.Alias">
+        }
+    }
+}
+
+@helper RenderGroupClosingTag(Reference<OptionGroup> currentGroup)
+{
+    if (currentGroup.Value != null)
+    {
+        @:</div>
+    }
+}

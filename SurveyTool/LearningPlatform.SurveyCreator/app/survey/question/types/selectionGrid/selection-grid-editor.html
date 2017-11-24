@@ -1,0 +1,15 @@
+﻿<selection-option-list id="topic-list"
+                       question="question"
+                       preview-question="question"
+                       option-list="question.optionList"
+                       openning-option="vm.openningOption"
+                       display-logic="vm.displayLogicForTopics"
+                       on-option-title-change="vm.onOptionTitleChange()"></selection-option-list>
+
+<selection-option-list id="option-list"
+                       question="question.subQuestionDefinition"
+                       preview-question="question"
+                       option-list="question.subQuestionDefinition.optionList"
+                       openning-option="vm.openningOption"
+                       display-logic="vm.displayLogicForOptions"
+                       on-option-title-change="vm.onOptionTitleChange()"></selection-option-list>

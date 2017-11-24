@@ -1,0 +1,38 @@
+﻿<div class="option-editor__head clearfix" ng-class="option.isOpened ? 'option-editor__head--expanded' : 'option-editor__head--collapsed'">
+    <div class="toogle-icon-helper">
+        <span id="expand-icon" class="option-editor__toggle option-editor__toggle--down fa-caret-right"
+              ng-class="{'collapsed': !option.isOpened}"
+              ng-click="onClickToggleIcon()" title="Expand"></span>
+        <span id="collapse-icon" class="option-editor__toggle option-editor__toggle--up fa-caret-down fa-caret-down__icon-color--white"
+              ng-class="{'collapsed': !option.isOpened}"
+              ng-click="onClickToggleIcon()" title="Collapse"></span>
+        <div class="option-editor__title">
+            <i class="glyphicon icon--remove-option" title="Remove this option group" ng-click="onRemoveGroupHeader()" ></i>
+            <div class="option-editor__title__content">
+                <div class="form-group row">
+                    <div class="col-xs-12 container-text-option container-text-option__option-group">
+                        <div contenteditable="true"
+                             ng-model="option.heading.items[0].text"
+                             class="form-control option-title__ckeditor option-editor__group-option--header"
+                             one-line-mode
+                             ng-change="onTitleChange()"
+                             rich-text-input="editorConfig"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-body none-padding-top-bottom option-editor__condition-panel" ng-if="option.isOpened">
+    <form class="form-horizontal">
+        <div class="form-group" novalidate ng-form name="optionSettingForm">
+            <div class="option-editor__order-option-group">
+                <label class="control-label svt-label__ontop ">Options Order</label>
+                <select data-ng-model="option.orderType" class="form-control dropdown option-editor__order-option-group"
+                        data-ng-options="value.code as value.name for value in questionOrders"
+                        ng-change="onOrderOptionChange();"
+                        title="Choose option order"></select>
+            </div>
+        </div>
+    </form>
+</div>

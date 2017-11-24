@@ -1,0 +1,10 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<div class="row answer-question" id="pictures-container">
+    <div ng-repeat="answer in vm.model.question.optionList.options" class="{{vm.model.numberOfColsByCss}} image-border">
+        <div class="thumbnail" ng-style="{{vm.model.pictureContainerStyles}}">
+            <img ng-src="{{answer.imagePath}}" class="center-block" ng-style="{{answer.height > 0 ? 'max-height:' + answer.height + 'px' : ''}}" />
+        </div>
+        <span ng-show="question.isPictureShowLabel" ng-bind-html="answer.value"></span>
+    </div>
+</div>
+<div class="clean"></div>

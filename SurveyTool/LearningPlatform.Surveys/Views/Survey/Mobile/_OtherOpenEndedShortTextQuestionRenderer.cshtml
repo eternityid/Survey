@@ -1,0 +1,12 @@
+﻿@using LearningPlatform.Domain.SurveyLayout
+@model LearningPlatform.Domain.SurveyExecution.Questions.OpenEndedTextQuestion
+
+@helper RenderUserInputArea()
+{
+    <div class="other-text">
+        <input class="form-control" type="text" id="@Model.Alias" name="@Model.Alias" value="@Model.Answer" />
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea(), ViewBag.Layout.GetDefault<OtherQuestionTemplate>().GetTemplateItems())
+

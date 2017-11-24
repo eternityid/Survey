@@ -1,0 +1,115 @@
+﻿<!--group: WHEN/AND WHEN-->
+<div class="form-group expression-group" ng-if="item.indent === 0">
+    <div class="expression__dropdown-logical-operator-for-group" ng-style="{'background-color': '{{backgroundOverrideColor}}', 'border-left': '1px solid {{backgroundOverrideColor}}', 'border-right': '1px solid {{backgroundOverrideColor}}'}" ng-if="item.logicalOperator !== null">
+        <div class="expression__dropdown-logical-operator-for-group--before-after">
+            <dropdown-list selected-value="item.logicalOperator" items="builder.logicalOperators"
+                           column-value="value" column-name="name"
+                           default-class="svt-dropdown-logical-operator" default-text="Select Operator"></dropdown-list>
+        </div>
+    </div>
+</div>
+
+<div class="form-group expression-group" ng-if="item.indent === 0">
+    <div class="expression-group__button">
+        <div class="expression-group__button-add-remove">
+            <a ng-click="builder.addGroupItem(item.position)" class="expression-item__button--general icon-edit-group--add"
+               title="Add expression item group">
+            </a>
+            <a ng-click="builder.removeGroupItem(item.position)" class="expression-item__button--general icon-edit-group--remove"
+               title="Remove expression item group" ng-if="builder.summary.totalOfLevel0Groups > 1">
+            </a>
+        </div>
+        <div class="expression-item__button">
+            <a ng-click="builder.addItem(item.position)" class="expression-item__button--plus expression-item__button--general"
+               title="Add expression item"></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group expression-item" ng-if="item.indent !== 0" ng-class="{'expression-item__border--bottom': item.isLastExpressionInGroup}">
+    <div class="expression-item__direction--left">
+        &nbsp;
+    </div>
+    <div class="expression-item__direction" ng-if="!(previousItem.logicalOperator !== null && previousItem.logicalOperator >= 0)">
+        <span class="expression-item__logical-operator-text">WHEN</span>
+    </div>
+    <div class="expression-item__direction" ng-if="previousItem.logicalOperator !== null && previousItem.logicalOperator >= 0">
+        <dropdown-list selected-value="previousItem.logicalOperator" items="builder.logicalOperators"
+                       column-value="value" column-name="name"
+                       default-class="svt-dropdown-logical-operator" default-text="Select Operator"></dropdown-list>
+    </div>
+
+    <div class="expression-item__direction">
+        <dropdown-list selected-value="item.questionId" on-item-changed="vm.onQuestionChange(item, true)"
+                       items="builder.questions" column-value="id" column-name="title" default-class="svt-dropdown-question"
+                       alias-column-name="alias" default-text="Select Question"></dropdown-list>
+    </div>
+
+    <div class="expression-item__direction" ng-if="item.questionId">
+        <div ng-if="item.isQuestionHasOptions">
+            <div class="expression-item__block-operator" ng-if="!vm.isQuestionTypeNPSLikertRating(item.questionType)">
+                <div class="expression-item__direction">
+                    <dropdown-list selected-value="item.optionId" items="item.selectedQuestion.options" column-value="id"
+                                   on-item-changed="vm.onOptionChanged()"
+                                   column-name="text" default-class="svt-dropdown-option" alias-column-name="alias"
+                                   default-text="Select Option"></dropdown-list>
+                </div>
+                <div class="expression-item__direction" ng-if="item !== null">
+                    <dropdown-list selected-value="item.operator" items="builder.operators.forSelectionQuestion"
+                                   on-item-changed="vm.onOperatorChanged()"
+                                   column-value="value" column-name="name" default-class="svt-dropdown-operator"
+                                   default-text="Select Operator"></dropdown-list>
+                </div>
+            </div>
+            <div class="expression-item__block-operator" ng-if="vm.isQuestionTypeNPSLikertRating(item.questionType)">
+                <div class="expression-item__direction">
+                    <dropdown-list selected-value="item.operator" items="builder.operators.forNumericQuestion"
+                                   on-item-changed="vm.onOperatorChanged()"
+                                   column-value="value" column-name="name" default-class="svt-dropdown-operator"
+                                   default-text="Select Operator"></dropdown-list>
+                </div>
+                <div class="expression-item__direction" ng-if="item.operator !== ''">
+                    <dropdown-list selected-value="item.value" items="item.selectedQuestion.options"
+                                   on-item-changed="vm.onOptionValueChange(item.value)"
+                                   column-value="text" column-name="text" default-class="svt-dropdown-option" alias-column-name="alias"
+                                   default-text="Select value"></dropdown-list>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="item.questionType === vm.questionTypesConst.NumericQuestionDefinition.value">
+            <div class="expression-item__direction">
+                <dropdown-list selected-value="item.operator" items="builder.operators.forNumericQuestion"
+                               on-item-changed="vm.onOperatorChanged()"
+                               column-value="value" column-name="name" default-class="svt-dropdown-operator"
+                               default-text="Select Operator"></dropdown-list>
+            </div>
+            <div class="expression-item__direction" ng-if="item.operator !== ''">
+                <input type="text" class="form-control" ng-model="item.value"/>
+            </div>
+        </div>
+
+        <div ng-if="item.questionType === vm.questionTypesConst.OpenEndedShortTextQuestionDefinition.value
+             || item.questionType === vm.questionTypesConst.OpenEndedLongTextQuestionDefinition.value">
+            <div class="expression-item__direction">
+                <dropdown-list selected-value="item.operator" items="builder.operators.forOpenTextQuestion"
+                               on-item-changed="vm.onOperatorChanged()"
+                               column-value="value" column-name="name" default-class="svt-dropdown-operator"
+                               default-text="Select Operator"></dropdown-list>
+            </div>
+            <div class="expression-item__direction" ng-if="item.operator !== ''">
+                <input type="text" class="form-control" ng-model="item.value"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="expression-item__button">
+        <a ng-click="builder.addItem(item.position)" class="expression-item__button--plus expression-item__button--general"
+           title="Add expression item"></a>
+        <a ng-click="builder.removeItem(item.position)" class="expression-item__button--remove expression-item__button--general"
+           title="Remove expression item" ng-if="builder.summary.totalOfItems > 2"></a>
+
+        <div class="expression-group__required" ng-if="item.isLastExpressionInFirstGroup">(*)</div>
+    </div>
+</div>

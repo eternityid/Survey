@@ -1,0 +1,94 @@
+﻿<div class="row svt-row dashboard">
+    <div class="col-md-12 col-sm-12 col-xs-12" ng-if="vm.testModeSettings.isActive">
+        <div class="test-mode__message">
+            <test-mode-button test-mode-settings="vm.testModeSettings" is-default="true"></test-mode-button>
+        </div>
+    </div>
+    <survey-title-and-status survey-id="vm.surveyId"></survey-title-and-status>
+    <div class="col-md-12 col-sm-12 col-xs-12 dashboard__status-container">
+        <div class="col-md-6 col-sm-12 col-xs-12 dashboard__custom-column">
+            <div class="dashboard-report__title"></div>
+            <div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column">
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard__custom-column dashboard-survey-info__title">Created Date</span>
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard-survey-info__value">{{vm.createdDate | dateTimeFormatFilter}}</span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column">
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard__custom-column dashboard-survey-info__title">Modified Date</span>
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard-survey-info__value">{{vm.modifiedDate | dateTimeFormatFilter}}</span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column">
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard__custom-column dashboard-survey-info__title">Last Published Date</span>
+                    <span class="col-md-6 col-sm-6 col-xs-12 dashboard-survey-info__value">{{vm.lastPublishedDate | dateTimeFormatFilter}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12 dashboard__response-status-container">
+            <div class="dashboard-report__title">RESPONSES STATUS</div>
+            <div class="col-md-6 col-sm-6 col-xs-12 dashboard__custom-column">
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column dashboard-report-status">
+                    <span ng-bind="vm.responsesStatus.total.value" class="label label-primary dashboard-report-status__value response-status--inprogress"
+                          ng-style="{'min-width': vm.minResponseNumberWidth}"></span>
+                    <span class="dashboard-report-status__title" ng-bind="vm.responsesStatus.total.title"></span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column dashboard-report-status">
+                    <span ng-bind="vm.responsesStatus.inprogress.value" class="label label-primary dashboard-report-status__value response-status--total"
+                          ng-style="{'min-width': vm.minResponseNumberWidth}"></span>
+                    <span class="dashboard-report-status__title" ng-bind="vm.responsesStatus.inprogress.title"></span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column dashboard-report-status">
+                    <span ng-bind-template="{{vm.responsesStatus.dropoutRate.value}}%" class="label label-primary dashboard-report-status__value response-status--dropout-rate"
+                          ng-style="{'min-width': vm.minResponseNumberWidth}"></span>
+                    <span class="dashboard-report-status__title" ng-bind="vm.responsesStatus.dropoutRate.title"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 dashboard__custom-column">
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column dashboard-report-status">
+                    <span ng-bind="vm.responsesStatus.started.value" class="label label-primary dashboard-report-status__value response-status--started"
+                          ng-style="{'min-width': vm.minResponseNumberWidth}"></span>
+                    <span class="dashboard-report-status__title" ng-bind="vm.responsesStatus.started.title"></span>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 dashboard__custom-column dashboard-report-status">
+                    <span ng-bind="vm.responsesStatus.completed.value" class="label label-primary dashboard-report-status__value response-status--completed"
+                          ng-style="{'min-width': vm.minResponseNumberWidth}"></span>
+                    <span class="dashboard-report-status__title" ng-bind="vm.responsesStatus.completed.title"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="highcharts__title--dashboard">RESPONSES</div>
+        <ul class="list-inline">
+            <li class="highcharts__legend--dashboard">
+                <span class="highcharts__legend__square--dashboard highcharts__legend__square--total--dashboard"></span>
+                <span ng-bind="vm.responsesStatus.total.title"></span>
+            </li>
+            <li class="highcharts__legend--dashboard">
+                <span class="highcharts__legend__square--dashboard highcharts__legend__square--started--dashboard"></span>
+                <span ng-bind="vm.responsesStatus.started.title"></span>
+            </li>
+            <li class="highcharts__legend--dashboard">
+                <span class="highcharts__legend__square--dashboard highcharts__legend__square--completed--dashboard"></span>
+                <span ng-bind="vm.responsesStatus.completed.title"></span>
+            </li>
+        </ul>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <highchart id="barChart" class="highcharts__bar-chart--dashboard" config="vm.barChart"></highchart>
+        </div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <highchart id="lineChart" class="highcharts__line-chart--dashboard" config="vm.lineChart"></highchart>
+            <table class="highcharts__line-chart__xAxis--dashboard">
+                <tbody>
+                <tr class="list-inline">
+                    <td class="text-left">2 Weeks Ago</td>
+                    <td class="text-left">A Week Ago</td>
+                    <td class="text-right">Today</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

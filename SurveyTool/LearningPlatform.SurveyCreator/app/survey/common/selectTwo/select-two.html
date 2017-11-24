@@ -1,0 +1,19 @@
+﻿<div class="select2">
+    <div class="btn dropdown-toggle select2__dropdown-toggle" type="button" id="select2-dropdown-custom" data-toggle="dropdown">
+        <span class='select2__selected-item-text' ng-class="{'select2__place-holder': vm.isPlaceHolder}">{{ vm.selectedItemText }}</span>
+        &nbsp;<span class="caret select2__selected-item-caret"></span>
+    </div>
+    <ul class="dropdown-menu select2__dropdown-menu" role="menu" aria-labelledby="select2-dropdown-custom">
+        <li role="presentation">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="search" class="form-control" placeholder="Search" ng-model="vm.searchText[columnName]" />
+            </div>
+        </li>
+        <li role="presentation" class="select2__dropdown-item" ng-repeat="item in items | filter: vm.searchText:strict">
+            <a role="menuitem" ng-click="vm.onSelectedItem(item)">{{ item[columnName] }}</a>
+        </li>
+    </ul>
+</div>

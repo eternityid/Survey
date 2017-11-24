@@ -1,0 +1,28 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+
+<div class="scale-question">
+    <div class="likert-horizontal">
+        <div class="likert-row">
+            <div class="likert-left" ng-bind-html="question.likertLeftText.items[0].text"></div>
+            <div class="likert-center" ng-bind-html="question.likertCenterText.items[0].text"></div>
+            <div class="likert-right" ng-bind-html="question.likertRightText.items[0].text"></div>
+        </div>
+    </div>
+    <div class="likert-horizontal"  ng-if="!question.renderOptionByButton">
+        <div class="likert-row">
+            <div class="likert-heading" ng-repeat="item in question.optionList.options">{{item.text.items[0].text}}</div>
+        </div>
+        <div class="likert-row">
+            <div class="likert-cell" ng-repeat="item in question.optionList.options">
+                <input name="scale" type="radio" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="likert-horizontal" ng-if="question.renderOptionByButton">
+        <div class="scale-question__option-list">
+            <ul class="list-inline">
+                <li class="scale-question__option--button" ng-style="{'width': 100/question.optionList.options.length + '%'}" ng-repeat="option in question.optionList.options">{{option.text.items[0].text}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿<form id="createReportForm" name="form" class="form-horizontal svt-push-down__form">
+    <div class="form-group">
+        <div class="col-xs-4 svt-push-down__form-heading">
+            <h4 id="report-creator-title" ng-show="vm.editor.isAdd">Create New Report</h4>
+            <h4 id="report-editor-title" ng-show="!vm.editor.isAdd">Report Settings</h4>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-4">
+            <label for="reportName" class="svt-label__ontop label-required">Report Name</label>
+            <input autofocus type="text" name="reportName" id="reportName" class="form-control" ng-keypress="vm.onReportKeypress($event)"
+                   ng-class="(form.reportName.$invalid && !vm.placeHolders.reportName.valid) ? 'input-required' : ''"
+                   data-ng-model="vm.editor.report.name" placeholder="{{vm.placeHolders.reportName.value}}" required />
+        </div>
+        <div class="col-xs-4" ng-show="vm.editor.isAdd">
+            <label class="svt-label__ontop label-required">Survey</label>
+            <div class="survey-dropdown">
+                <input class="form-control" data-ng-model="vm.editor.report.surveyId" type="hidden" name="surveyId" id="surveyId" required />
+                <div class="btn dropdown-toggle select-survey__dropdown-toggle" type="button" id="surveyDropdown" data-toggle="dropdown" ng-class="(form.surveyId.$invalid && !vm.placeHolders.surveyId.valid) ? 'input-required' : ''">
+                    <span class='select-survey__display' ng-if="vm.editor.report.surveyId != ''">{{vm.editor.report.surveyName}}</span>
+                    <span ng-if="(form.surveyId.$invalid && !vm.placeHolders.surveyId.valid)" class="input-required dropdown">Survey is required</span>
+                    <span class='select-survey__display' ng-if="vm.editor.report.surveyId == '' && !(form.surveyId.$invalid && !vm.placeHolders.surveyId.valid)">Choose a survey</span>
+                    &nbsp;<span class="caret select-survey__caret"></span>
+                </div>
+                <ul class="col-xs-11 dropdown-menu select-list__dropdown-menu" role="menu" aria-labelledby="surveyDropdown">
+                    <li role="presentation">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="search" class="form-control" placeholder="Search" ng-model="vm.surveyFilter" />
+                        </div>
+                    </li>
+                    <li role="presentation" class="survey-dropdown-item" ng-repeat="survey in vm.surveys | filter: vm.surveyFilter">
+                        <a role="menuitem" ng-click="vm.selectSurvey(survey)">{{survey.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-8">
+            <div class="pull-right svt-button-group">
+                <button id="report-setting-cancel" type="button" class="btn svt-button--cancel" title="Cancel" ng-click="vm.close()">Cancel</button>
+                <button id="report-setting-save" type="button" ng-click="vm.save()" class="btn svt-button--done" title="Save">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</form>

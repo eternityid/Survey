@@ -1,0 +1,7 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.Information
+
+@helper RenderUserInputArea()
+{
+    <div class="information" tabindex="0"></div>
+}
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

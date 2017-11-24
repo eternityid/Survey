@@ -1,0 +1,8 @@
+﻿<div class="survey-info__title" id="survey-title">
+    {{vm.titleAndStatus.title}}
+    <span id="survey-info-status" ng-bind="vm.titleAndStatus.status" class="badge survey-info__status"
+          ng-class="{'survey-status--new': vm.titleAndStatus.statusCode === vm.surveyStatuses.NEW,
+                     'survey-status--open': vm.titleAndStatus.statusCode === vm.surveyStatuses.OPEN,
+                     'survey-status--close': vm.titleAndStatus.statusCode === vm.surveyStatuses.CLOSED,
+                     'survey-status--temporary-close': vm.titleAndStatus.statusCode === vm.surveyStatuses.TEMPORARILY_CLOSED}"></span>
+</div>

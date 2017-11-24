@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="svt">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive Insight</title>
+
+    <!-- build:css assets/css/combined.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/ui-select/dist/select.css" rel="stylesheet" />
+    <link href="../bower_components/ng-sortable/dist/ng-sortable.css" rel="stylesheet" />
+    <link href="../bower_components/ng-sortable/dist/ng-sortable.style.css" rel="stylesheet" />
+    <link href="../bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../bower_components/toastr/toastr.css" rel="stylesheet" />
+    <link href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="../bower_components/angular-bootstrap-colorpicker/css/colorpicker.min.css" rel="stylesheet" />
+    <link href="../assets/css/index.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <!-- CDN -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <!-- build:js ckeditor/combinedCkeditor.js -->
+    <script src="../scripts/ckeditor/ckeditorConfigPath.js"></script>
+    <script src="../thirdParties/ckeditor/ckeditor.js"></script>
+    <script src="../thirdParties/ckeditor/lang/en.js"></script>
+    <!-- endbuild -->
+    <!-- build:js combined.js -->
+    <script src="../bower_components/toastr/toastr.min.js"></script>
+    <script src="../bower_components/moment/min/moment.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
+    <script src="../bower_components/ng-sortable/dist/ng-sortable.min.js"></script>
+    <script src="../bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
+    <script src="../bower_components/spin.js/spin.js"></script>
+    <script src="../bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="../bower_components/highcharts-release/highcharts.js"></script>
+    <script src="../bower_components/highcharts-ng/dist/highcharts-ng.min.js"></script>
+    <script src="../bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="../bower_components/angular-clipboard/angular-clipboard.js"></script>
+    <script src="../bower_components/Custom-Events/customEvents.js"></script>
+    <script src="../bower_components/ui-select/dist/select.min.js"></script>
+    <script src="../bower_components/oidc-token-manager/dist/oidc-token-manager.js"></script>
+    <script src="../bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js surveyCreator.js -->
+    <script src="survey/surveyModule.js"></script>
+
+    <script src="survey/auth/oidcTokenManager.js"></script>
+    <script src="survey/auth/authInterceptorSvc.js"></script>
+    <script src="survey/auth/authSvc.js"></script>
+    <script src="survey/auth/loginCtrl.js"></script>
+
+    <script src="survey/common/exceptionHandler.js"></script>
+    <script src="survey/common/services/errorHandlingSvc.js"></script>
+    <script src="survey/common/services/fileUtilSvc.js"></script>
+    <script src="survey/common/services/stringUtilSvc.js"></script>
+    <script src="survey/common/services/numberUtilSvc.js"></script>
+    <script src="survey/common/services/arrayUtilSvc.js"></script>
+    <script src="survey/common/services/colorUtilSvc.js"></script>
+    <script src="survey/common/services/domUtilSvc.js"></script>
+    <script src="survey/common/services/dateUtilSvc.js"></script>
+    <script src="survey/common/services/spinnerUtilSvc.js"></script>
+    <script src="survey/common/services/objectUtilSvc.js"></script>
+    <script src="survey/common/services/angularScopeUtilSvc.js"></script>
+    <script src="survey/common/services/animateSvc.js"></script>
+    <script src="survey/common/services/dialogSvc.js"></script>
+    <script src="survey/common/services/constantSvc.js"></script>
+    <script src="survey/common/services/stringUtilSvc.js"></script>
+    <script src="survey/common/services/urlUtilSvc.js"></script>
+
+    <script src="survey/common/constants/libraryConst.js"></script>
+    <script src="survey/common/constants/questionConst.js"></script>
+    <script src="survey/common/constants/navigationRouteConst.js"></script>
+    <script src="survey/common/constants/surveyErrorConst.js"></script>
+    <script src="survey/common/constants/reportConst.js"></script>
+
+    <script src="indexCtrl.js"></script>
+    <script src="indexSvc.js"></script>
+    <script src="welcomeCtrl.js"></script>
+
+    <script src="survey/deletedSurveyValidator/deletedSurveyValidatorCtrl.js"></script>
+
+    <script src="survey/page/errorPage/errorPageCtrl.js"></script>
+    <script src="survey/page/movePageSvc.js"></script>
+    <script src="survey/page/pageDataSvc.js"></script>
+    <script src="survey/page/pageSvc.js"></script>
+    <script src="survey/page/pageValidationSvc.js"></script>
+    <script src="survey/page/pageCtrl.js"></script>
+    <script src="survey/page/page-container.js"></script>
+    <script src="survey/page/previewDialog/preview-dialog.js"></script>
+    <script src="survey/page/previewDialog/previewDialogCtrl.js"></script>
+    <script src="survey/page/pageEditor/page-editor.js"></script>
+    <script src="survey/page/pageEditor/pageEditorCtrl.js"></script>
+    <script src="survey/page/addButton/add-button.js"></script>
+    <script src="survey/page/outliningButton/outlining-button.js"></script>
+
+    <script src="survey/question/moveQuestionSvc.js"></script>
+    <script src="survey/question/questionDataSvc.js"></script>
+    <script src="survey/question/questionEditorSvc.js"></script>
+    <script src="survey/question/questionSvc.js"></script>
+    <script src="survey/question/questionTypeSvc.js"></script>
+    <script src="survey/question/questionValidationSvc.js"></script>
+    <script src="survey/question/questionCarryOverSvc.js"></script>
+    <script src="survey/question/questionHistoryManagerSvc.js"></script>
+
+    <script src="survey/question/createQuestion/create-question.js"></script>
+    <script src="survey/question/createQuestion/createQuestionCtrl.js"></script>
+
+    <script src="survey/question/generalSetting/general-setting.js"></script>
+    <script src="survey/question/generalSetting/generalSettingCtrl.js"></script>
+
+    <script src="survey/question/validationSetting/validation-setting.js"></script>
+    <script src="survey/question/validationSetting/validationSettingCtrl.js"></script>
+
+    <script src="survey/question/editQuestion/edit-question.js"></script>
+    <script src="survey/question/editQuestion/editQuestionCtrl.js"></script>
+    <script src="survey/question/editQuestion/editQuestionSvc.js"></script>
+
+    <script src="survey/question/displaySetting/question-display-setting.js"></script>
+    <script src="survey/question/displaySetting/questionDisplaySettingCtrl.js"></script>
+
+    <script src="survey/question/questionAdvanceSettingSvc.js"></script>
+    <script src="survey/question/serverValidationSvc.js"></script>
+    <script src="survey/question/questionPreviewer/questionPreviewerSvc.js"></script>
+    <script src="survey/question/questionPreviewer/questionPreviewerDataSvc.js"></script>
+    <script src="survey/question/questionPreviewer/question-previewer.js"></script>
+    <script src="survey/question/questionPreviewer/questionPreviewerCtrl.js"></script>
+
+    <script src="survey/question/conditionallyDisplay/conditionally-display.js"></script>
+    <script src="survey/question/conditionallyDisplay/conditionallyDisplayCtrl.js"></script>
+    <script src="survey/question/editConditionDialog/editConditionDialogCtrl.js"></script>
+
+    <script src="survey/question/types/date/date-question.js"></script>
+    <script src="survey/question/types/date/dateQuestionCtrl.js"></script>
+    <script src="survey/question/types/date/date-editor.js"></script>
+    <script src="survey/question/types/date/dateEditorCtrl.js"></script>
+
+    <script src="survey/question/types/text/text-question.js"></script>
+    <script src="survey/question/types/text/textQuestionCtrl.js"></script>
+    <script src="survey/question/types/text/text-editor.js"></script>
+    <script src="survey/question/types/text/textEditorCtrl.js"></script>
+    <script src="survey/question/types/text/textQuestionSvc.js"></script>
+
+    <script src="survey/question/types/information/information-question.js"></script>
+    <script src="survey/question/types/information/information-editor.js"></script>
+    <script src="survey/question/types/information/informationEditorCtrl.js"></script>
+
+    <script src="survey/question/types/numeric/numeric-question.js"></script>
+    <script src="survey/question/types/numeric/numeric-editor.js"></script>
+    <script src="survey/question/types/numeric/numericEditorSvc.js"></script>
+    <script src="survey/question/types/numeric/numericEditorCtrl.js"></script>
+
+    <script src="survey/question/types/selectionGrid/selectionGridQuestionSvc.js"></script>
+    <script src="survey/question/types/selectionGrid/selection-grid-editor.js"></script>
+    <script src="survey/question/types/selectionGrid/selectionGridEditorCtrl.js"></script>
+    <script src="survey/question/types/selectionGrid/selection-grid-question.js"></script>
+    <script src="survey/question/types/selectionGrid/selectionGridQuestionCtrl.js"></script>
+
+    <script src="survey/question/types/selection/deleteOptionAndGroupSvc.js"></script>
+    <script src="survey/question/types/selection/selection-option.js"></script>
+    <script src="survey/question/types/selection/header-option.js"></script>
+    <script src="survey/question/types/selection/moveGroupHeaderSvc.js"></script>
+    <script src="survey/question/types/selection/moveOptionAndGroupSvc.js"></script>
+    <script src="survey/question/types/selection/moveOptionSvc.js"></script>
+    <script src="survey/question/types/selection/selectionOptionCtrl.js"></script>
+    <script src="survey/question/types/selection/selection-option-list.js"></script>
+    <script src="survey/question/types/selection/selectionOptionListCtrl.js"></script>
+    <script src="survey/question/types/selection/selectionOptionListSvc.js"></script>
+    <script src="survey/question/types/selection/selection-editor.js"></script>
+    <script src="survey/question/types/selection/selectionEditorCtrl.js"></script>
+    <script src="survey/question/types/selection/selectionEditorSvc.js"></script>
+    <script src="survey/question/types/selection/single/single-selection-question.js"></script>
+    <script src="survey/question/types/selection/single/singleSelectionQuestionCtrl.js"></script>
+    <script src="survey/question/types/selection/multiple/multiple-selection-question.js"></script>
+    <script src="survey/question/types/selection/multiple/multipleSelectionQuestionCtrl.js"></script>
+
+    <script src="survey/question/types/pictureSelection/pictureOptionListSvc.js"></script>
+    <script src="survey/question/types/pictureSelection/picture-option-list.js"></script>
+    <script src="survey/question/types/pictureSelection/pictureOptionListCtrl.js"></script>
+    <script src="survey/question/types/pictureSelection/picture-option.js"></script>
+    <script src="survey/question/types/pictureSelection/pictureOptionCtrl.js"></script>
+    <script src="survey/question/types/pictureSelection/picture-selection-editor.js"></script>
+    <script src="survey/question/types/pictureSelection/pictureSelectionEditorCtrl.js"></script>
+    <script src="survey/question/types/pictureSelection/picture-selection-question.js"></script>
+    <script src="survey/question/types/pictureSelection/pictureSelectionQuestionCtrl.js"></script>
+
+    <script src="survey/question/types/netPromoterScore/netPromoterScoreQuestionSvc.js"></script>
+    <script src="survey/question/types/netPromoterScore/net-promoter-score-editor.js"></script>
+    <script src="survey/question/types/netPromoterScore/netPromoterScoreEditorCtrl.js"></script>
+
+    <script src="survey/question/types/questionWithOptionsSvc.js"></script>
+
+    <script src="survey/question/types/scale/scaleQuestionSvc.js"></script>
+    <script src="survey/question/types/scale/scale-question.js"></script>
+    <script src="survey/question/types/scale/scaleQuestionCtrl.js"></script>
+    <script src="survey/question/types/scale/scale-editor.js"></script>
+    <script src="survey/question/types/scale/scaleEditorCtrl.js"></script>
+    <script src="survey/question/types/scale/scale-grid-editor.js"></script>
+    <script src="survey/question/types/scale/scaleGridEditorCtrl.js"></script>
+    <script src="survey/question/types/scale/scale-grid-question.js"></script>
+    <script src="survey/question/types/scale/scaleGridQuestionCtrl.js"></script>
+
+    <script src="survey/question/types/rating/rating-editor.js"></script>
+    <script src="survey/question/types/rating/ratingEditorCtrl.js"></script>
+    <script src="survey/question/types/rating/rating-question.js"></script>
+    <script src="survey/question/types/rating/ratingQuestionSvc.js"></script>
+    <script src="survey/question/types/rating/rating-grid-editor.js"></script>
+    <script src="survey/question/types/rating/ratingGridEditorCtrl.js"></script>
+    <script src="survey/question/types/rating/rating-grid-question.js"></script>
+    <script src="survey/question/types/rating/ratingGridQuestionCtrl.js"></script>
+
+    <script src="survey/question/types/textList/text-list-editor.js"></script>
+    <script src="survey/question/types/textList/textListEditorCtrl.js"></script>
+    <script src="survey/question/types/textList/text-list-question.js"></script>
+    <script src="survey/question/types/textList/textListQuestionCtrl.js"></script>
+    <script src="survey/question/types/textList/textListQuestionSvc.js"></script>
+
+    <script src="survey/question/expressionBuilder/expression-builder.js"></script>
+    <script src="survey/question/expressionBuilder/expression-item.js"></script>
+    <script src="survey/question/expressionBuilder/expressionBuilderCtrl.js"></script>
+    <script src="survey/question/expressionBuilder/expressionBuilderSvc.js"></script>
+    <script src="survey/question/expressionBuilder/expressionItemCtrl.js"></script>
+    <script src="survey/question/expressionBuilder/expressionItemSvc.js"></script>
+
+    <script src="survey/common/deleteDialog/deleteDialogCtrl.js"></script>
+    <script src="survey/common/deleteGroupHeaderDialog/deleteGroupHeaderDialogCtrl.js"></script>
+    <script src="survey/common/config.js"></script>
+    <script src="survey/common/errorCode.js"></script>
+    <script src="survey/common/keyCode.js"></script>
+    <script src="survey/common/prototypes.js"></script>
+
+    <script src="survey/common/customValidators/svt-match-with.js"></script>
+
+    <script src="survey/common/filters/htmlToPlainTextFilter.js"></script>
+    <script src="survey/common/filters/trustAsHtmlFilter.js"></script>
+    <script src="survey/common/filters/byteToKbFilter.js"></script>
+    <script src="survey/common/filters/byteToMbFilter.js"></script>
+    <script src="survey/common/filters/byteToMbKbFilter.js"></script>
+    <script src="survey/common/filters/dateFormatFilter.js"></script>
+    <script src="survey/common/filters/dateTimeFormatFilter.js"></script>
+    <script src="survey/common/filters/fileNameFilter.js"></script>
+    <script src="survey/common/filters/truncateFilter.js"></script>
+
+    <script src="survey/common/fontSelector/font-selector.js"></script>
+    <script src="survey/common/fontSelector/fontSelectorCtrl.js"></script>
+    <script src="survey/common/fontSelector/fontSelectorSvc.js"></script>
+
+    <script src="survey/common/uploadFile/uploadFileDataSvc.js"></script>
+    <script src="survey/common/uploadFile/upload.js"></script>
+
+    <script src="survey/common/fileBase/fileBase.js"></script>
+    <script src="survey/common/fileBase/fileBaseValidation.js"></script>
+
+    <script src="survey/common/svtDatetime/svt-datetime.js"></script>
+    <script src="survey/common/svtDatetime/svtDatetimeCtrl.js"></script>
+
+    <script src="survey/common/numberRangeSelector/number-range-selector.js"></script>
+    <script src="survey/common/numberRangeSelector/numberRangeSelectorCtrl.js"></script>
+
+    <script src="survey/common/dropdownList/dropdown-list.js"></script>
+    <script src="survey/common/dropdownList/dropdownListCtrl.js"></script>
+
+    <script src="survey/common/selectTwo/select-two.js"></script>
+    <script src="survey/common/selectTwo/selectTwoCtrl.js"></script>
+
+    <script src="survey/common/questionTypeDropdownList/questionTypeDropdownList.js"></script>
+    <script src="survey/common/questionTypeDropdownList/questionTypeDropdownListCtrl.js"></script>
+
+    <script src="survey/common/richTextInput/rich-text-input.js"></script>
+    <script src="survey/common/svtCkeditor/svt-ckeditor.js"></script>
+    <script src="survey/common/svtStopEvent/svtStopEvent.js"></script>
+    <script src="survey/common/rzslider/rzslider.js"></script>
+
+    <script src="survey/surveyList/surveysCtrl.js"></script>
+    <script src="survey/surveyList/surveyListSvc.js"></script>
+    <script src="survey/surveyList/surveyDataSvc.js"></script>
+
+    <script src="survey/surveyList/createNewSurvey/createNewSurveySvc.js"></script>
+    <script src="survey/surveyList/createNewSurvey/createNewSurveyCtrl.js"></script>
+    <script src="survey/surveyList/createNewSurvey/create-new-survey.js"></script>
+    <script src="survey/surveyList/createNewSurvey/emptySurvey/new-empty-survey.js"></script>
+    <script src="survey/surveyList/createNewSurvey/emptySurvey/newEmptySurveyCtrl.js"></script>
+    <script src="survey/surveyList/createNewSurvey/existingSurvey/new-existing-survey.js"></script>
+    <script src="survey/surveyList/createNewSurvey/existingSurvey/newExistingSurveyCtrl.js"></script>
+    <script src="survey/surveyList/createNewSurvey/librarySurvey/new-library-survey.js"></script>
+    <script src="survey/surveyList/createNewSurvey/librarySurvey/newLibrarySurveyCtrl.js"></script>
+    <script src="survey/surveyList/createNewSurvey/previewSurvey/preview-survey.js"></script>
+    <script src="survey/surveyList/createNewSurvey/previewSurvey/previewSurveyCtrl.js"></script>
+
+    <script src="survey/surveyList/importSurvey/importSurveyCtrl.js"></script>
+    <script src="survey/surveyList/importSurvey/importSurveySvc.js"></script>
+    <script src="survey/surveyList/importSurvey/import-survey.js"></script>
+
+    <script src="survey/layout/layoutDataSvc.js"></script>
+
+    <script src="survey/dashboard/surveyDashboardCtrl.js"></script>
+    <script src="survey/dashboard/survey-dashboard.js"></script>
+    <script src="survey/dashboard/surveyDashboardDataSvc.js"></script>
+    <script src="survey/dashboard/surveyDashboardSvc.js"></script>
+
+    <script src="survey/surveyEditor/surveyEditorSvc.js"></script>
+    <script src="survey/surveyEditor/surveyEditorMessageSvc.js"></script>
+    <script src="survey/surveyEditor/surveyEditorPageSvc.js"></script>
+    <script src="survey/surveyEditor/surveyEditorQuestionSvc.js"></script>
+    <script src="survey/surveyEditor/surveyEditorValidationSvc.js"></script>
+    <script src="survey/surveyEditor/surveyEditorCtrl.js"></script>
+    <script src="survey/surveyEditor/survey-editor.js"></script>
+    <script src="survey/surveyEditor/surveyEditorDataSvc.js"></script>
+
+    <script src="survey/surveyEditor/exportSurvey/exportSurveyCtrl.js"></script>
+    <script src="survey/surveyEditor/exportSurvey/exportSurveySvc.js"></script>
+    <script src="survey/surveyEditor/exportSurvey/export-survey.js"></script>
+
+    <script src="survey/surveyEditor/accessRights/accessRightsSvc.js"></script>
+    <script src="survey/surveyEditor/accessRights/accessRightsDataSvc.js"></script>
+    <script src="survey/surveyEditor/accessRights/accessRightsCtrl.js"></script>
+    <script src="survey/surveyEditor/accessRights/access-rights.js"></script>
+
+    <script src="survey/surveyEditor/expression/expressionOperatorSvc.js"></script>
+    <script src="survey/surveyEditor/filters/getPageOnlyFilter.js"></script>
+    <script src="survey/surveyEditor/validation/surveyContentValidation.js"></script>
+    <script src="survey/surveyEditor/validation/surveyContentValidationHelperSvc.js"></script>
+
+    <script src="survey/reportEditor/reportEditorSvc.js"></script>
+    <script src="survey/reportEditor/reportEditorCtrl.js"></script>
+    <script src="survey/reportEditor/report-editor.js"></script>
+    <script src="survey/reportEditor/reportElementDataSvc.js"></script>
+
+    <script src="survey/reportEditor/editableLabel/editable-label.js"></script>
+    <script src="survey/reportEditor/editableLabel/editableLabelCtrl.js"></script>
+    <script src="survey/reportEditor/editableLabel/labelEditorDialogCtrl.js"></script>
+    <script src="survey/reportEditor/editableLabel/editableLabelSvc.js"></script>
+    <script src="survey/reportEditor/editableLabel/editedLabelDataSvc.js"></script>
+
+    <script src="survey/reportEditor/page/reportPageDataSvc.js"></script>
+    <script src="survey/reportEditor/page/reportPageSvc.js"></script>
+    <script src="survey/reportEditor/page/reportPageCtrl.js"></script>
+    <script src="survey/reportEditor/page/reportPage.js"></script>
+    <script src="survey/reportEditor/page/elementEditor/element-interactome.js"></script>
+    <script src="survey/reportEditor/page/elementEditor/rpElementEditorSvc.js"></script>
+    <script src="survey/reportEditor/elementDialog/elementDialogCtrl.js"></script>
+    <script src="survey/reportEditor/elementDialog/elementDialogSvc.js"></script>
+
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelCtrl.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/look-and-feel.js"></script>
+
+    <script src="survey/surveyEditor/lookAndFeel/look-and-feel-settings.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelSettingsCtrl.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelSettingsSvc.js"></script>
+
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelPreviewerCtrl.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelPreviewerSvc.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/look-and-feel-previewer.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelSvc.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/lookAndFeelDataSvc.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/themeDataSvc.js"></script>
+
+    <script src="survey/surveyEditor/lookAndFeel/settings/pageLookAndFeelSettingsSvc.js"></script>
+    <script src="survey/surveyEditor/lookAndFeel/settings/surveyLookAndFeelSettingsSvc.js"></script>
+
+    <script src="survey/surveyEditor/surveySettings/survey-settings.js"></script>
+    <script src="survey/surveyEditor/surveySettings/surveySettingsCtrl.js"></script>
+    <script src="survey/surveyEditor/surveySettings/surveySettingsSvc.js"></script>
+
+    <script src="survey/launch/launchDataSvc.js"></script>
+    <script src="survey/launch/launchSvc.js"></script>
+    <script src="survey/launch/launchCtrl.js"></script>
+    <script src="survey/launch/launch.js"></script>
+    <script src="survey/launch/updateSurveyStatusDialog/updateSurveyStatusDialogCtrl.js"></script>
+    <script src="survey/surveySvc.js"></script>
+    <script src="survey/surveyMenuSvc.js"></script>
+
+    <script src="survey/testSurvey/testSurveyCtrl.js"></script>
+
+    <script src="survey/respondentList/respondentListSvc.js"></script>
+    <script src="survey/respondentList/respondentListCtrl.js"></script>
+    <script src="survey/respondentList/respondent-list.js"></script>
+    <script src="survey/respondentList/respondentListDataSvc.js"></script>
+    <script src="survey/respondentList/importRespondent/importRespondentCtrl.js"></script>
+    <script src="survey/respondentList/importRespondent/importRespondentSvc.js"></script>
+    <script src="survey/respondentList/importRespondent/import-respondent.js"></script>
+    <script src="survey/respondentList/emailRespondent/email-respondent.js"></script>
+    <script src="survey/respondentList/emailRespondent/emailRespondentSvc.js"></script>
+    <script src="survey/respondentList/emailRespondent/emailRespondentCtrl.js"></script>
+    <script src="survey/respondentList/exportResponses/exportResponsesCtrl.js"></script>
+    <script src="survey/respondentList/exportResponses/exportResponsesDataSvc.js"></script>
+    <script src="survey/respondentList/exportResponses/exportResponsesSvc.js"></script>
+    <script src="survey/respondentList/exportResponses/export-responses.js"></script>
+    <script src="survey/respondentList/addRespondent/addRespondentCtrl.js"></script>
+    <script src="survey/respondentList/addRespondent/addRespondentSvc.js"></script>
+    <script src="survey/respondentList/addRespondent/add-respondent.js"></script>
+
+    <script src="survey/respondentDetailDialog/respondentDetailDialogDataSvc.js"></script>
+    <script src="survey/respondentDetailDialog/respondentDetailDialogCtrl.js"></script>
+
+    <script src="survey/result/report/reportSvc.js"></script>
+    <script src="survey/result/report/reportDataSvc.js"></script>
+    <script src="survey/result/report/reportCtrl.js"></script>
+    <script src="survey/result/report/report.js"></script>
+    <script src="survey/result/report/report-table.js"></script>
+    <script src="survey/result/report/reportTableCtrl.js"></script>
+    <script src="survey/result/report/reportTableSvc.js"></script>
+    <script src="survey/result/report/rpSelectionQuestionSvc.js"></script>
+    <script src="survey/result/report/rpSelectionGridQuestionSvc.js"></script>
+    <script src="survey/result/chartApplicableQuestions/rs-chart-applicable-questions.js"></script>
+    <script src="survey/result/chartApplicableQuestions/rsChartApplicableQuestionsCtrl.js"></script>
+    <script src="survey/result/chartApplicableQuestions/rsChartApplicableQuestionsSvc.js"></script>
+    <script src="survey/result/numericQuestion/rs-numeric-question.js"></script>
+    <script src="survey/result/numericQuestion/rsNumericQuestionCtrl.js"></script>
+    <script src="survey/result/numericQuestion/rsNumericQuestionSvc.js"></script>
+    <script src="survey/result/openTextQuestion/rs-open-text-question.js"></script>
+    <script src="survey/result/openTextQuestion/rsOpenTextQuestionCtrl.js"></script>
+    <script src="survey/result/openTextQuestion/rsOpenTextQuestionSvc.js"></script>
+    <script src="survey/result/resultStatusSummary/result-status-summary.js"></script>
+    <script src="survey/result/resultSettings/resultSettingsCtrl.js"></script>
+    <script src="survey/result/resultSettings/result-settings.js"></script>
+
+    <script src="survey/user/usersCtrl.js"></script>
+    <script src="survey/user/userManagementDataSvc.js"></script>
+    <script src="survey/user/userCreatorDialogCtrl.js"></script>
+    <script src="survey/user/userEditorDialogCtrl.js"></script>
+    <script src="survey/user/userEditorCompanyDialogCtrl.js"></script>
+    <script src="survey/user/createUserSvc.js"></script>
+    <script src="survey/user/companyDataSvc.js"></script>
+    <script src="survey/user/userDataSvc.js"></script>
+    <script src="survey/user/userSvc.js"></script>
+
+    <script src="survey/account/changePasswordCtrl.js"></script>
+    <script src="survey/account/changePasswordDataSvc.js"></script>
+
+    <script src="survey/reportList/reportsCtrl.js"></script>
+    <script src="survey/reportList/reportListSvc.js"></script>
+    <script src="survey/reportList/reportListDataSvc.js"></script>
+    <script src="survey/reportList/createReport/createReportCtrl.js"></script>
+    <script src="survey/reportList/createReport/createReportSvc.js"></script>
+    <script src="survey/reportList/createReport/create-report.js"></script>
+
+    <script src="survey/skipCommand/skipCommandEditorSvc.js"></script>
+    <script src="survey/skipCommand/skipCommandEditorCtrl.js"></script>
+    <script src="survey/skipCommand/skip-command-editor.js"></script>
+
+    <script src="survey/skipCommand/skipCommandCtrl.js"></script>
+    <script src="survey/skipCommand/skip-command.js"></script>
+    <script src="survey/skipCommand/skipCommandSvc.js"></script>
+
+    <script src="survey/surveyTitleAndStatus/surveyTitleAndStatusSvc.js"></script>
+    <script src="survey/surveyTitleAndStatus/surveyTitleAndStatusCtrl.js"></script>
+    <script src="survey/surveyTitleAndStatus/survey-title-and-status.js"></script>
+
+    <script src="survey/surveyErrorList/surveyErrorListSvc.js"></script>
+    <script src="survey/surveyErrorList/surveyErrorListCtrl.js"></script>
+    <script src="survey/surveyErrorList/survey-error-list.js"></script>
+
+    <script src="survey/pushDown/pushDownCtrl.js"></script>
+    <script src="survey/pushDown/push-down.js"></script>
+    <script src="survey/pushDown/pushDownSvc.js"></script>
+
+    <script src="survey/surveyLibrary/libraryDataSvc.js"></script>
+
+    <script src="survey/surveyLibrary/filters/pageTitleDescriptionFilter.js"></script>
+    <script src="survey/surveyLibrary/filters/questionTitleDescriptionFilter.js"></script>
+
+    <script src="survey/surveyLibrary/fromLibrary/from-library.js"></script>
+    <script src="survey/surveyLibrary/fromLibrary/fromLibraryDataSvc.js"></script>
+    <script src="survey/surveyLibrary/fromLibrary/fromLibraryCtrl.js"></script>
+    <script src="survey/surveyLibrary/fromLibrary/fromLibraryDialogCtrl.js"></script>
+
+    <script src="survey/fileLibrary/fileLibraryDataSvc.js"></script>
+    <script src="survey/fileLibrary/fileLibrarySvc.js"></script>
+    <script src="survey/fileLibrary/fileLibraryConstants.js"></script>
+
+    <script src="survey/fileLibrary/filters/directoryContainFileFilter.js"></script>
+    <script src="survey/fileLibrary/filters/libraryByDisplayModeFilter.js"></script>
+    <script src="survey/fileLibrary/hardDiskUploader/file-library-hard-disk-uploader.js"></script>
+    <script src="survey/fileLibrary/hardDiskUploader/fileLibraryHardDiskUploaderSvc.js"></script>
+    <script src="survey/fileLibrary/hardDiskUploader/fileLibraryHardDiskUploaderCtrl.js"></script>
+    <script src="survey/fileLibrary/hardDiskUploader/hard-disk-uploader.js"></script>
+    <script src="survey/fileLibrary/hardDiskUploader/hardDiskUploaderCtrl.js"></script>
+    <script src="survey/fileLibrary/picker/file-library-picker.js"></script>
+    <script src="survey/fileLibrary/picker/fileLibraryPickerCtrl.js"></script>
+    <script src="survey/fileLibrary/picker/fileLibraryPickerSvc.js"></script>
+    <script src="survey/fileLibrary/pickerUploader/fileLibraryPickerUploaderDialogCtrl.js"></script>
+    <script src="survey/fileLibrary/pickerUploader/fileLibraryPickerUploaderDialogSvc.js"></script>
+    <script src="survey/fileLibrary/pickerUploader/pickerUploaderDialogCtrl.js"></script>
+    <script src="survey/fileLibrary/webUploader/file-library-web-uploader.js"></script>
+    <script src="survey/fileLibrary/webUploader/fileLibraryWebUploaderCtrl.js"></script>
+    <script src="survey/fileLibrary/webUploader/fileLibraryWebUploaderSvc.js"></script>
+    <script src="survey/fileLibrary/webUploader/web-uploader.js"></script>
+    <script src="survey/fileLibrary/webUploader/webUploaderCtrl.js"></script>
+
+    <script src="survey/fileLibrary/libraryImagePreviewer/library-image-previewer.js"></script>
+    <script src="survey/fileLibrary/libraryImagePreviewer/libraryImagePreviewerCtrl.js"></script>
+    <script src="survey/fileLibrary/libraryImagePreviewer/libraryImagePreviewerSvc.js"></script>
+
+    <script src="survey/testMode/testModeSvc.js"></script>
+    <script src="survey/testMode/testModeEditorCtrl.js"></script>
+    <script src="survey/testMode/test-mode-editor.js"></script>
+    <script src="survey/testMode/generateRandomData/generateRandomDataCtrl.js"></script>
+    <script src="survey/testMode/generateRandomData/generateRandomDataSvc.js"></script>
+    <script src="survey/testMode/generateRandomData/generate-random-data.js"></script>
+    <script src="survey/testMode/generateRandomData/generateRandomResponsesDataSvc.js"></script>
+    <script src="survey/testMode/testModeButton/testModeButtonCtrl.js"></script>
+    <script src="survey/testMode/testModeButton/test-mode-button.js"></script>
+
+    <script src="survey/fileLibraryManagement/fileLibraryManagementSvc.js"></script>
+    <script src="survey/fileLibraryManagement/fileLibraryManagementCtrl.js"></script>
+    <script src="survey/fileLibraryManagement/editBlobModal/editBlobModalCtrl.js"></script>
+    <script src="survey/fileLibraryManagement/createDirectoryModal/createDirectoryModalCtrl.js"></script>
+
+    <script src="survey/surveyLibraryManagement/surveyLibraryManagementSvc.js"></script>
+    <script src="survey/surveyLibraryManagement/surveyLibraryManagementCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/filters/rawTextInListCellFilter.js"></script>
+    <script src="survey/surveyLibraryManagement/librarySurveyList/librarySurveyListCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/librarySurveyList/library-survey-list.js"></script>
+    <script src="survey/surveyLibraryManagement/libraryPageList/libraryPageListCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/libraryPageList/library-page-list.js"></script>
+    <script src="survey/surveyLibraryManagement/libraryQuestionList/libraryQuestionListCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/libraryQuestionList/library-question-list.js"></script>
+    <script src="survey/surveyLibraryManagement/editLibrarySurveyModal/editLibrarySurveyModalCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/editLibraryPageModal/editLibraryPageModalCtrl.js"></script>
+    <script src="survey/surveyLibraryManagement/editLibraryQuestionModal/editLibraryQuestionModalCtrl.js"></script>
+
+    <script src="survey/shared/languageStringUtilSvc.js"></script>
+    <script src="survey/shared/guidUtilSvc.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div id="applicationHost" ng-controller="indexCtrl as vm">
+        <div class="main-menu">
+            <div class="container navigation" id="main-navigation" ng-if="vm.userLoggedIn.isAuthenticated">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <a id="mainmenu-link" class="navbar-brand" href="#/">
+                            <img src="../../assets/images/logo-survey.png">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-menu-navbar-collapse">
+                        <div id="sso-bar">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a class="user-profile__username" data-toggle="dropdown">{{vm.userLoggedIn.userName}}</a>
+                                    <ul class="dropdown-menu dropdown-menu__change-password">
+                                        <li><a href="#/change-password">Change password</a></li>
+                                    </ul>
+                                </li>
+                                <li ng-if="vm.userLoggedIn.isAdmin">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" tabindex="1" data-target="#" title="Setting">
+                                        <img class="management-menu--shadow" src="../../assets/images/setting.png" />
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu__admin-config">
+                                        <li>
+                                            <a href="#/users">User Management</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="vm.logout()" title="Logout">
+                                        <img class="management-menu--shadow" src="../../assets/images/logout.png">
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="main-menu">
+                        <ul id="nav-main-menu" class="nav navbar-nav navbar-right">
+                            <li ng-repeat="topLevelMenuItem in vm.menuStatus.topLevelMenuItems">
+                                <a ng-class="{'active': topLevelMenuItem.id === vm.menuStatus.activeTopLevelMenuItemId }" href={{topLevelMenuItem.route}} ng-bind="topLevelMenuItem.name"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="sub-menu" ng-if="vm.userLoggedIn.isAuthenticated">
+            <nav class="container sub-menu__navbar navbar navbar-default">
+                <div class="collapse navbar-collapse" id="sub-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-repeat="subMenuItem in vm.menuStatus.subMenuItems">
+                            <a ng-class="{'active': subMenuItem.id === vm.menuStatus.activeSubMenuItemId }" href={{subMenuItem.route}}>{{subMenuItem.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <main class="container" role="main" ng-class="{'result-extend-width': vm.menuStatus.expandContainerWidth}">
+            <div ng-view></div>
+        </main>
+
+        <div class="svt-overlay" id="svtOverlay">
+            <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="svtSpinner" spinner-start-active="false"></span>
+        </div>
+        <div class="overlay" ng-if="vm.isShowOverlay" ng-click="vm.onClickOverlay()"></div>
+    </div>
+    <div style="display:none;visibility:hidden;" id="ck-editor-init"></div>
+</body>
+
+</html>

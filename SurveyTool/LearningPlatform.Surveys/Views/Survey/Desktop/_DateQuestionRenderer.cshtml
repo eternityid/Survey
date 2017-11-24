@@ -1,0 +1,11 @@
+﻿@model LearningPlatform.Domain.SurveyExecution.Questions.DateQuestion
+
+@helper RenderUserInputArea()
+{
+    <div class="date">
+        <input type="text" class="form-control" autocomplete="off" id="@Model.Alias" name="@Model.Alias" value="@Model.Answer" readonly />
+        <span class="glyphicon glyphicon-calendar"></span>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, RenderUserInputArea())

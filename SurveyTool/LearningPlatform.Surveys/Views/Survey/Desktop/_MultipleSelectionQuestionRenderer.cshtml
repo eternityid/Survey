@@ -1,0 +1,62 @@
+﻿@using LearningPlatform.Domain.Common
+@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@model MultipleSelectionQuestion
+
+@functions {
+    readonly Reference<OptionGroup> _currentGroup = new Reference<OptionGroup>(null);
+
+    private string GetOptionClass(Option option)
+    {
+        if (option.IsExclusive) return "exclusive";
+        if (option.IsNotApplicable) return "na";
+        return "";
+    }
+}
+
+@helper RenderUserInputAreaVertical()
+{
+    <div id="@Model.Alias-multi-selection-vertical" class="multi-selection-container">
+        @foreach (Option option in Model.Options)
+        {
+            @OptionGroupRenderer.RenderGroup(option, _currentGroup)
+            <label class="multi-selection  @(option.OtherQuestion != null ? "other" : "") @(Model.IsChecked(option) ? "selected" : "")">
+                <span class="multi-selection-option deactive-option @GetOptionClass(option)">
+                    @Html.CheckBox(Model.GetFieldName(option), Model.IsChecked(option))
+                    <span class="selection-option-title" title-id="@(Model.Alias + option.Id)">@Html.Raw(option.Text)</span>
+                </span>
+                @if (option.OtherQuestion != null)
+                {
+                    @Html.Partial(
+                        string.Format("~/Views/Survey/Desktop/_Other{0}Renderer.cshtml", option.OtherQuestion.GetType().Name),
+                        option.OtherQuestion, ViewData)
+                }
+            </label>
+            <br />
+        }
+        @OptionGroupRenderer.RenderGroupClosingTag(_currentGroup)
+    </div>
+}
+
+@helper RenderUserInputAreaHorizonal()
+{
+    <div id="@Model.Alias-multi-selection-horizontal" class="horizontal">
+        <div class="hrow">
+            @foreach (Option option in Model.Options)
+            {
+                <div class="heading"><label for="@Model.GetFieldName(option)" class="selection-option-title" title-id="@(Model.Alias + option.Id)">@(new HtmlString(option.Text))</label></div>
+            }
+        </div>
+        <div class="hrow multi-selection">
+            @foreach (var option in Model.Options)
+            {
+                <label class="cell multi-selection-option">
+                    @Html.CheckBox(Model.GetFieldName(option), Model.IsChecked(option))
+                    <span></span>
+                </label>
+            }
+        </div>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, Model.DisplayOrientation == DisplayOrientation.Vertical ? RenderUserInputAreaVertical() : RenderUserInputAreaHorizonal())

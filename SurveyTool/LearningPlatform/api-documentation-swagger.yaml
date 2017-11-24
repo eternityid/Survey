@@ -1,0 +1,364 @@
+---
+## This file should be opened in Swagger Editor: http://editor.swagger.io/#!/
+## Use File, Import file. 
+swagger: '2.0'
+info:
+  version: v1
+  title: ResponsiveInsight API
+  description: |
+    This API will be used both internally for the application, and externally for integration. 
+    
+    Each path below will have ETAGs. The /surveys/ and /surveydefintions/ will have different ETAGS. 
+    
+host: api-surveytool.orientsoftware.asia
+basePath: /api
+schemes:
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+
+tags:
+  - name: survey
+  - name: folder
+  - name: page
+  - name: question
+  - name: option list
+  - name: library
+
+parameters:
+  surveyId:
+    name: surveyId
+    in: path
+    description: The survey identifier
+    type: string
+    required: true
+  folderId:
+    name: folderId
+    in: path
+    description: The folder identifier
+    type: string
+    required: true
+  pageId:
+    name: pageId
+    in: path
+    description: The page identifier
+    type: string
+    required: true
+  questionId:
+    name: questionId
+    in: path
+    description: The question identifier
+    type: string
+    required: true
+  optionListId:
+    name: optionListId
+    in: path
+    description: The option list identifier
+    type: string
+    required: true
+    
+paths:
+  /surveys/:
+    get:
+      description: Get the survey list.
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+    post:
+      description: Create a new survey
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+
+  /surveys/search/:
+    post:
+      description: Get surveys based on filters.
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+          
+  /surveys/duplicate/:
+    post:
+      description: Duplicate survey from existing surveys or survey library
+      tags: [survey]
+      responses:
+        200:
+          description: OK, return new survey object id
+
+  /surveydefinitions/{surveyId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get the full survey definition will all child objects.
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+          
+  /surveys/{surveyId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get the shallow survey object (not including survey settings). It will include the surveydefinition etag. The polling for changes should call this resource. If modified, the code will check if the surveydefinition etag matches the survey definition etag in the model. If not match, the code will fetch the survey definition. 
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+        304:
+          description: Not modified
+    put:
+      description: Update the survey object.
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/settings/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get the survey settings
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+    put:
+      description: Update the survey settings.
+      responses:
+        200:
+          description: OK
+          
+  /surveys/{surveyId}/information/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get the shallow survey
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/latest-published-version/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+    get:
+      description: Get survey latest published version
+      tags: [survey]
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/folders/{folderId}/pages/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+    post:
+      description: Add a page to a folder.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/duplicate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+    post:
+      description: Add page/pages from page library
+      tags: [page, folder]
+      responses:
+        200:
+          description: Return new page/pages with object ids
+
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    get:
+      description: Get a page.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK
+    put:
+      description: Update a page.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK
+    delete:
+      description: Delete a page.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/move/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      description: Move a page.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK
+          
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/split/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      description: Split a page into 2 small pages.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK        
+
+  /surveys/{surveyId}/folders/{folderId}/pages/{pageId}/merge/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/folderId'
+      - $ref: '#/parameters/pageId'
+    post:
+      description: Merge 2 pages into 1 page.
+      tags: [page, folder]
+      responses:
+        200:
+          description: OK             
+
+  /surveys/{surveyId}/pages/{pageId}/questions/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+    post:
+      description: Add a question to a page. This method will also add a new option list with options.
+      tags: [page, question]
+      responses:
+        200:
+          description: Return the new question with object ids.
+          
+  /surveys/{surveyId}/pages/{pageId}/questions/duplicate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+    post:
+      description: Add question/questions from question library.
+      tags: [page, question]
+      responses:
+        200:
+          description: Return the new question/questions with object ids.
+
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    get:
+      description: Get a question.
+      tags: [question, page]
+      responses:
+        200:
+          description: OK
+    put:
+      description: Update a question.
+      tags: [question, page]
+      responses:
+        200:
+          description: OK
+    delete:
+      description: Delete a question.
+      tags: [question, page]
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/duplicate/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    post:
+      description: Duplicate a question.
+      tags: [question, page]
+      responses:
+        200:
+          description: OK
+
+  /surveys/{surveyId}/pages/{pageId}/questions/{questionId}/move/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/pageId'
+      - $ref: '#/parameters/questionId'
+    post:
+      description: Move a question (both inside the page and to another page).
+      tags: [question]
+      responses:
+        200:
+          description: OK
+          
+  /surveys/{surveyId}/optionlists/{optionListId}/:
+    parameters:
+      - $ref: '#/parameters/surveyId'
+      - $ref: '#/parameters/optionListId'
+    get:
+      description: Get an option list.
+      tags: [option list]
+      responses:
+        200:
+          description: OK
+    put:
+      description: Update an option list.
+      tags: [option list]
+      responses:
+        200:
+          description: OK
+          
+  /library/surveys/:
+    get:
+      description: Get all surveys from library
+      tags: [library, survey]
+      responses:
+        200:
+          description: OK
+    post:
+      description: Add survey to library
+      tags: [library, survey]
+      responses:
+        200:
+          description: OK
+          
+  /library/pages/:
+    get:
+      description: Get all pages from library
+      tags: [library, page]
+      responses:
+        200:
+          description: OK
+    post:
+      description: Add page to library
+      tags: [library, page]
+      responses:
+        200:
+          description: OK
+          
+  /library/questions/:
+    get:
+      description: Get all questions from library
+      tags: [library, question]
+      responses:
+        200:
+          description: OK
+    post:
+      description: Add question to library
+      tags: [library, question]
+      responses:
+        200:
+          description: OK

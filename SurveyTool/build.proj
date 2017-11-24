@@ -1,0 +1,99 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <serverName>iis16</serverName>
+    <appName>app-surveytool-e2e.orientsoftware.net</appName>
+    <apiName>api-surveytool-e2e.orientsoftware.net</apiName>
+    <surveysName>surveys-surveytool-e2e.orientsoftware.net</surveysName>
+    <SurveyCreatorFolder>LearningPlatform.SurveyCreator</SurveyCreatorFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionFile Include="LearningPlatform.sln">
+      <Properties>Configuration=Debug</Properties>
+    </SolutionFile>
+    <ApiProject Include="LearningPlatform\LearningPlatform.Api.csproj">
+      <Properties>Configuration=Debug;SolutionDir=$(MSBuildProjectDirectory)\;DeployOnBuild=True;PublishProfile=SurveyTool.e2e.pubxml;WebPublishMethod=Package;DesktopBuildPackageLocation=WebPackage\e2e;PackageAsSingleFile=true;EnableMSDeployAppOffline=true;MSDeployUseChecksum=true</Properties>
+    </ApiProject>
+    <SurveysProject Include="LearningPlatform.Surveys\LearningPlatform.Surveys.csproj">
+      <Properties>Configuration=Debug;SolutionDir=$(MSBuildProjectDirectory)\;DeployOnBuild=True;PublishProfile=SurveyTool.e2e.pubxml;WebPublishMethod=Package;DesktopBuildPackageLocation=WebPackage\e2e;PackageAsSingleFile=true;EnableMSDeployAppOffline=true;MSDeployUseChecksum=true</Properties>
+    </SurveysProject>
+    <SurveyCreatorProject Include="$(SurveyCreatorFolder)\LearningPlatform.SurveyCreator.csproj">
+    </SurveyCreatorProject>
+    <apiDeployScript Include="LearningPlatform\WebPackage\e2e\LearningPlatform.Api.deploy.cmd">
+    </apiDeployScript>
+    <surveysDeployScript Include="LearningPlatform.Surveys\WebPackage\e2e\LearningPlatform.Surveys.deploy.cmd">
+    </surveysDeployScript>
+
+  </ItemGroup>
+
+  <Target Name="Build" DependsOnTargets="BuildDotNet;NpmInstall;BuildJavascript">
+  </Target>
+
+  <Target Name="Test" DependsOnTargets="TestDotNet;TestJavascript">
+  </Target>
+
+  <!-- To be run from Jenkins build server-->
+  <Target Name="ci" DependsOnTargets="Build;Test;Cpd;CreatePackages;RecycleAppPool;Deploy;WarmupServer;E2eTests">
+  </Target>
+
+  <!-- .NET targets -->
+  <Target Name="BuildDotNet">
+    <MSBuild Projects="@(SolutionFile)" Targets="Build"/>
+  </Target>
+
+  <Target Name="TestDotNet">
+    <Exec Command="del VisualStudio.coverage*"/>
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe&quot; collect /output:VisualStudio.coverage &quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe&quot; &quot;LearningPlatform.Domain.Tests\bin\Debug\LearningPlatform.Domain.Tests.dll&quot; &quot;LearningPlatform.Specs\bin\Debug\LearningPlatform.Specs.dll&quot;"/>
+  </Target>
+
+    <!-- Javascript targets -->
+  <Target Name="Cpd">
+    <!-- Download from https://pmd.github.io/ . Unpack and add bin folder to path. -->
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)\" Command="cpd --minimum-tokens 75 --files .\app --language js --format xml  1>cpdreport.xml" IgnoreExitCode="True" />
+  </Target>
+
+  <Target Name="NpmInstall">
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)" Command="&quot;C:\Program Files\nodejs\npm&quot; install"/>
+  </Target>
+
+  <Target Name="BuildJavascript">
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)" Command="gulp clean --production"/>
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)" Command="gulp build --production"/>
+  </Target>
+
+  <Target Name="TestJavascript">
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)" Command="gulp karma"/>
+  </Target>
+
+  <!-- Create Packages targets -->
+  <Target Name="CreatePackages" DependsOnTargets="SurveyCreatorPackage" >
+    <MSBuild Projects="@(ApiProject)" Targets="Build"/>
+    <MSBuild Projects="@(SurveysProject)" Targets="Build"/>
+  </Target>
+
+  <Target Name="SurveyCreatorPackage">
+    <MSBuild Projects="@(SurveyCreatorProject)" Targets="TransformWebConfigE2E;CopyBinariesToDest "/>
+  </Target>
+
+
+  <!-- Deploy targets -->
+  <Target Name="RecycleAppPool">
+    <Exec Command="&quot;C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe&quot; -verb:sync -source:recycleApp -dest:recycleApp=&quot;$(appServerName)&quot;,wmsvc=&quot;$(serverName)&quot;,recycleMode=&quot;RecycleAppPool&quot;,authType=&quot;NTLM&quot;,userName=&quot;&quot; -allowUntrusted=true"/>
+  </Target>
+
+  <Target Name="deploy">
+    <Exec Command="%(apiDeployScript.Identity) /y &quot;/m:https://$(serverName):8172/msdeploy.axd?site=$(apiName)&quot; -allowUntrusted &quot;-skip:Directory='Logs'&quot; /a:NTLM "/>
+    <Exec Command="%(surveysDeployScript.Identity) /y &quot;/m:https://$(serverName):8172/msdeploy.axd?site=$(apiName)&quot; -allowUntrusted &quot;-skip:Directory='Logs'&quot; /a:NTLM "/>
+  </Target>
+
+  <Target Name="WarmupServer">
+    <Exec Command="curl -L https://$(appName)/  1>nul"/>
+    <Exec Command="curl -H &quot;Accept-Language: en&quot; https://$(surveysName)/survey/6  1>nul"/>
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)\e2e-tests" Command="protractor protractor.conf.js --specs tests/app/survey/warmup.spec.js"/>
+  </Target>
+
+  <!-- E2e targets -->
+  <Target Name="E2eTests">
+    <Exec WorkingDirectory="$(SurveyCreatorFolder)\e2e-tests" Command="protractor protractor.conf.js --suite all"/>
+  </Target>
+</Project>

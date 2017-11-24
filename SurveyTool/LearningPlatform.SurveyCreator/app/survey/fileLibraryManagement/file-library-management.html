@@ -1,0 +1,82 @@
+﻿<div class="file-library-management__container">
+    <nav class="file-library-management__directory-tree" data-spy="affix" data-offset-top="125">
+        <ul class="directory-list">
+            <li class="display-all-files-link">
+                <div ng-class="{'active': !vm.selectedDirectory.name}" ng-click="vm.displayAllBlobs()">
+                    <i class="fa fa-list-ul" aria-hidden="true"></i>Display all
+                </div>
+            </li>
+            <li ng-class="{'active': directory.name === vm.selectedDirectory.name}" ng-click="vm.selectDirectory(directory)" ng-repeat="directory in vm.selectFileLibrary.directories | orderBy: 'name'">
+                    <i class="fa fa-folder-o" aria-hidden="true"></i>{{directory.name}}
+            </li>
+        </ul>
+        <div class="add-directory-button-container">
+            <button class="btn" ng-click="vm.onCreateDirectory()">
+                <span class="icon--create-directory" aria-hidden="true"></span>
+                <span>Add folder</span>
+            </button>
+        </div>
+    </nav>
+
+    <article class="file-library-management__file-list">
+        <form class="form-inline settings-form" data-spy="affix" data-offset-top="145">
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.selectFileLibrary"
+                        ng-change="vm.onFileLibraryChange()"
+                        ng-options="library.name for library in vm.fileLibraries"></select>
+            </div>
+            <button class="btn file-library-management__upload-file-button" ng-click="vm.pickImageFile()">
+                <i class="fa fa-upload" aria-hidden="true"></i>Upload file
+            </button>
+        </form>
+
+        <table class="table table-striped file-library-management__file-table" ng-if="vm.selectedDirectory.blobs.length">
+            <thead>
+            <tr class="svt-grid__row">
+                <th class="file-name-column" colspan="2">NAME</th>
+                <th class="file-description-column">DESCRIPTION</th>
+                <th class="file-type-column">TYPE</th>
+                <th class="file-size-column">SIZE</th>
+                <th class="file-last-modified-column">LAST MODIFIED</th>
+                <th class="file-action-menu-column">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="blob in vm.selectedDirectory.blobs | orderBy: '-lastModified'" class="svt-grid__row">
+                <td class="image-cell">
+                    <img ng-src="{{blob.uri}}" />
+                </td>
+                <td class="text--middle beakword">
+                    <a ng-click="vm.editBlob(blob)" title="{{blob.fileNameWithoutExtension}}">{{blob.fileNameWithoutExtension | truncateFilter:50:'...'}}</a>
+                </td>
+                <td class="text--middle">
+                    <p title="{{blob.description}}">{{blob.description | truncateFilter:50:'...'}}</p>
+                </td>
+                <td class="text--middle">{{blob.fileExtension}}</td>
+                <td class="text--middle text-left">{{blob.size | byteToKbFilter | number}} KB</td>
+                <td class="text--middle">{{blob.lastModified | dateTimeFormatFilter}}</td>
+                <td class="text-center text--middle">
+                    <div class="btn-group" id="survey-list-action-btn">
+                        <span class="btn btn-default survey-list__action-button" title="Action menu" data-toggle="dropdown"></span>
+                        <ul class="dropdown-menu survey-list__dropdown-menu file-library-management__dropdown-menu" role="menu">
+                            <li>
+                                <a ng-click="vm.editBlob(blob)" title="Edit file"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
+                            </li>
+                            <li>
+                                <a clipboard text="blob.uri" title="Copy file url to clipboard"><i class="fa fa-link" aria-hidden="true"></i>Copy URL</a>
+                            </li>
+                            <li>
+                                <a ng-click="vm.deleteBlob(blob)" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="file-library-management__empty-directory-information" ng-if="vm.fileLibraries.length && !vm.selectedDirectory.blobs.length">
+            <img src="" alt="Empty folder image"/>
+            <p>This folder is empty</p>
+        </div>
+    </article>
+</div>

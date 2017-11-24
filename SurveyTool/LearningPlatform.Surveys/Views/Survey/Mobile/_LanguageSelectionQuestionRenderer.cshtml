@@ -1,0 +1,94 @@
+﻿@using LearningPlatform.Domain.Common
+@using LearningPlatform.Domain.SurveyExecution.Options
+@using LearningPlatform.Domain.SurveyExecution.Questions
+@model LanguageSelectionQuestion
+
+@functions {
+    private string GetId(Option option)
+    {
+        return Model.Alias + "_" + option.Alias;
+    }
+
+    HelperResult GetRenderUserInputArea(DisplayOrientation displayOrientation)
+    {
+        HelperResult helperResult = null;
+        switch (displayOrientation)
+        {
+            case DisplayOrientation.Vertical:
+                helperResult = RenderUserInputArea();
+                break;
+            case DisplayOrientation.Horizontal:
+                helperResult = RenderUserInputAreaHorizonal();
+                break;
+            case DisplayOrientation.Dropdown:
+                helperResult = RenderUserInputAreaDropdown();
+                break;
+        }
+        return helperResult;
+    }
+
+}
+
+@helper RenderUserInputArea()
+{
+    foreach (Option option in Model.Options)
+    {
+        <label class="single-selection @(Model.IsChecked(option) ? "selected" : "")">
+            <div class="single-selection-option">
+
+                @Html.RadioButton(Model.Alias, option.Alias, (Model.IsChecked(option) ? new {@checked = "checked"} : (object) new {id = GetId(option)}))
+
+                <span class="selection-option-title" title-id="@(Model.Alias + option.Id)">@Html.Raw(option.Text)</span>
+            </div>
+        </label><br/>
+    }
+}
+
+@helper RenderUserInputAreaHorizonal()
+{
+    @RenderSingleSelectionQuestionForHorizonalModel()
+}
+
+
+@helper RenderSingleSelectionQuestionForHorizonalModel()
+{
+    <div class="horizontal">
+        <div class="hrow">
+            @foreach (var option in Model.Options)
+            {
+                var id = GetId(option);
+                <div class="heading @(Model.IsChecked(option) ? "selected" : "")" position="@option.Position">
+                    <label for="@id" class="selection-option-title" title-id="@(Model.Alias + option.Id)">@(new HtmlString(option.Text))</label>
+                </div>
+            }
+        </div>
+        <div class="hrow single-selection">
+            @foreach (var option in Model.Options)
+            {
+                var id = GetId(option);
+                <div class="cell single-selection-option @(Model.IsRenderOptionByButton ? "invisible" : "")">
+                    @Html.RadioButton(HttpUtility.HtmlDecode(Model.Alias), option.Alias,
+                        Model.IsChecked(option) ? new { id, position = option.Position, title = option.Text, @checked = "checked" } : (object)new { id, position = option.Position, title = option.Text })
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+@helper RenderUserInputAreaDropdown()
+{
+    <div class="form-group single-selection-dropdown">
+        <select class="form-control" name="@Model.Alias">
+            <option value=""></option>
+            @foreach (Option option in Model.Options)
+            {
+                var selected = Equals(Model.Answer, option.Alias) ? "selected" : "";
+                <option @selected value="@option.Alias" class="selection-option-title" title-id="@(Model.Alias + option.Id)">@option.Text </option>
+            }
+        </select>
+    </div>
+}
+
+@QuestionRenderer.RenderQuestion(Html, Model, GetRenderUserInputArea(Model.DisplayOrientation))

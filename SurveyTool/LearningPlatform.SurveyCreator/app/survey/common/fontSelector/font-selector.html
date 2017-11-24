@@ -1,0 +1,21 @@
+﻿<div class="survey-dropdown font-selector col-xs-12 col-sm-12 col-md-12">
+    <div class="dropdown-toggle" data-toggle="dropdown">
+        <div class="font-selector__font-display">
+            <span ng-style="{'font-family': vm.ngModel.font}">{{vm.model.displayedFontName}}</span>
+        </div>
+        <div class="font-selector__caret"><span class="caret"></span></div>
+    </div>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="surveyDropdown">
+        <li role="presentation">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="search" class="form-control" placeholder="Search" ng-model="fontFilter" />
+            </div>
+        </li>
+        <li role="presentation" class="survey-dropdown-item" ng-repeat="font in vm.model.availableFonts | filter: {name: fontFilter} ">
+            <a role="menuitem" ng-style="{'font-family': font.stack}" ng-click="vm.selectFont(font);">{{font.name}}</a>
+        </li>
+    </ul>
+</div>

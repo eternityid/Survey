@@ -1,0 +1,127 @@
+﻿<div>
+    <survey-error-list></survey-error-list>
+    <div class="action-menu survey-editor">
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.lookAndFeel}">
+            <a id="look-and-feel-button" ng-click="vm.showLookAndFeelSetting()" title="Edit Look and Feel">
+                <div class="action-menu__icon"><span class="glyphicon icon--look-and-feel"></span></div><label class="action-menu__label">Look and Feel</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.surveySettings}">
+            <a id="survey-setting-button" ng-click="vm.showSurveyEditor()" title="Edit survey settings">
+                <div class="action-menu__icon"><span class="glyphicon icon--configure"></span></div><label class="action-menu__label">Survey Settings</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active">
+            <a id="survey-testing-button" ng-click="vm.showPreviewDialog()" title="Preview survey">
+                <div class="action-menu__icon"><span class="glyphicon icon--preview"></span></div><label class="action-menu__label">Preview</label>
+            </a>
+        </div>
+        <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected': vm.pushDownSettings.mode.accessRights}" ng-if="vm.hasAccessRights">
+            <a id="survey-testing-button" ng-click="vm.showAccessRights()" title="Access rights">
+                <div class="action-menu__icon"><span class="glyphicon icon--access-rights"></span></div><label class="action-menu__label">Access Rights</label>
+            </a>
+        </div>
+        <div class="action-menu__dots">
+            <span class="btn btn-default survey-list__action-button" data-toggle="dropdown"></span>
+            <ul ng-if="!survey.isDeleted" class="dropdown-menu" role="menu">
+                <li>
+                    <div class="action-menu__item action-menu__item--active">
+                        <a id="duplicate-icon" href="" ng-click="vm.duplicateSurvey()" title="Duplicate survey">
+                            <div class="action-menu__icon">
+                                <span class="glyphicon icon--duplicate"></span>
+                            </div>
+                            <label class="action-menu__label">Duplicate</label>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="action-menu__item action-menu__item--active">
+                        <a id="library-icon" ng-click="vm.addSurveyToLibrary()" href="" title="Add survey to library">
+                            <div class="action-menu__icon">
+                                <span class="glyphicon icon--library"></span>
+                            </div>
+                            <label class="action-menu__label">Add survey to library</label>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="action-menu__item action-menu__item--active" ng-class="{'action-menu__item--selected':vm.pushDownSettings.mode.exportSurvey}">
+                        <a id="export-icon" ng-click="vm.showExportSurvey()" href="" title="Export Survey">
+                            <div class="action-menu__icon">
+                                <span class="glyphicon icon--export"></span>
+                            </div>
+                            <label class="action-menu__label">Export</label>
+                        </a>
+                    </div>
+                </li>
+                <li ng-if="vm.survey.isUserHaveFullPermission">
+                    <div class="action-menu__item action-menu__item--active">
+                        <a id="delete-button" ng-click="vm.deleteSurvey()" href="" title="Delete Survey">
+                            <div class="action-menu__icon">
+                                <span class="glyphicon icon--remove"></span>
+                            </div>
+                            <label class="action-menu__label">Delete</label>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row svt-row">
+        <push-down ng-if="vm.pushDownSettings.isActive">
+            <survey-settings ng-if="vm.pushDownSettings.mode.surveySettings" survey-id="{{ vm.surveyId }}"
+                           handle-after-save="vm.handleAfterUpdateSurveySetting()"></survey-settings>
+            <look-and-feel ng-if="vm.pushDownSettings.mode.lookAndFeel" data="vm.lookAndFeelData" handle-after-save="vm.handleAfterEditLookAndFeel()"></look-and-feel>
+            <export-survey ng-if="vm.pushDownSettings.mode.exportSurvey"
+                           survey-id="{{ vm.surveyId }}" survey-name="{{ vm.surveyName }}"></export-survey>
+            <access-rights ng-if="!vm.isFreeUserAccount && vm.pushDownSettings.mode.accessRights"
+                           survey-id="{{ vm.surveyId }}" survey-name="{{ vm.surveyName }}"></access-rights>
+        </push-down>
+        <survey-title-and-status survey-id="vm.surveyId"></survey-title-and-status>
+        <div class="btn-group outlining-survey__btn-group">
+            <button class="btn btn-default dropdown-toggle survey-title__dropdown-btn svt-dropdown-option-mask-display__button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon icon--outlining"></span>
+                Outlining
+            </button>
+            <ul class="dropdown-menu">
+                <li><a ng-click="vm.collapseAllPages()">Collapse all pages</a></li>
+                <li><a ng-click="vm.collapseAllQuestions()">Collapse all questions</a></li>
+                <li><a ng-click="vm.expandAll()">Expand all</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row svt-row">
+        <div class="col-xs-12">
+            <div as-sortable="vm.sortableOptions" ng-model="vm.pages">
+                <div ng-repeat="page in vm.pages | getPageOnlyFilter" class="survey__page__view" as-sortable-item>
+                    <div class="margin-bottom-md" ng-if="vm.showAddPage($index, page)">
+                        <div id="add-new-page-link" class="text-center" ng-if="$first || $last">
+                            <a ng-click="vm.onAddPage($index)" class="add-new-page-link__btn">Add Page</a>
+                        </div>
+                        <div ng-if="!$first && !$last">
+                            <div class="line-text">
+                                <a id="add-new-page-link" class="line-text__description add-new-page-link__btn"
+                                   ng-click="vm.onAddPage($index)">Add Page</a>
+                                <span class="line-text__description line-text__description--right removed-page-break"
+                                      ng-click="vm.onMergePages($index, page)">
+                                    <i class="line-text__icon glyphicon icon--delete"></i> Remove Page Break
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <main class="survey-page__view-container">
+                        <div class="survey-page__dragHandle">
+                            <span class="fa icon--drag-drop dragIcon" as-sortable-item-handle title="Click and Hold me to move page" ng-if="vm.showMovePageButton(page)"></span>
+                            <page-container index="$index" page-obj="page"
+                                            is-collapsed-all-page="vm.isCollapsedAllPage()"
+                                            page-title="page.title.items[0].text"
+                                            page-description="page.description.items[0].text"></page-container>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

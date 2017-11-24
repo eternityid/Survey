@@ -1,0 +1,9 @@
+﻿<div ng-if="vm.surveyInfo && !vm.surveyInfo.IsDeleted">
+    <svt-survey-dashboard ng-if="vm.currentOriginalPath === vm.navigationRoutes.dashboard"></svt-survey-dashboard>
+    <svt-survey-editor ng-if="vm.currentOriginalPath === vm.navigationRoutes.designer"></svt-survey-editor>
+    <svt-test-mode-editor ng-if="vm.currentOriginalPath === vm.navigationRoutes.test"></svt-test-mode-editor>
+    <svt-respondent-list ng-if="vm.currentOriginalPath === vm.navigationRoutes.responses"></svt-respondent-list>
+    <svt-launch ng-if="vm.currentOriginalPath === vm.navigationRoutes.launch"></svt-launch>
+    <svt-report ng-if="vm.currentOriginalPath === vm.navigationRoutes.results"></svt-report>
+    <svt-report-editor ng-if="vm.currentOriginalPath === vm.navigationRoutes.reportDesigner"></svt-report-editor>
+</div>

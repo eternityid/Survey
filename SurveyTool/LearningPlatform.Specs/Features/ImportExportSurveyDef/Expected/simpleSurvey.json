@@ -1,0 +1,234 @@
+﻿{
+  "topFolder": {
+    "alias": "topFolder",
+    "childNodes": [
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "SingleSelectionQuestionDefinition",
+            "optionList": {
+              "options": [
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": "male"
+                      }
+                    ]
+                  },
+                  "alias": "1",
+                  "position": 1,
+                  "optionsMask": {}
+                },
+                {
+                  "text": {
+                    "items": [
+                      {
+                        "language": "en",
+                        "text": "female"
+                      }
+                    ]
+                  },
+                  "alias": "2",
+                  "position": 2,
+                  "optionsMask": {}
+                }
+              ],
+              "optionGroups": []
+            },
+            "optionsMask": {},
+            "alias": "gender",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 1"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page1",
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "NumericQuestionDefinition",
+            "alias": "age",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 2"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page2",
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "InformationDefinition",
+            "alias": "information",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 3"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page3",
+        "childNodes": []
+      },
+      {
+        "type": "PageDefinition",
+        "questionDefinitions": [
+          {
+            "type": "InformationDefinition",
+            "alias": "Completed",
+            "title": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "description": {
+              "items": [
+                {
+                  "language": "en",
+                  "text": ""
+                }
+              ]
+            },
+            "validations": []
+          }
+        ],
+        "skipCommands": [],
+        "navigationButtonSettings": "None",
+        "title": {
+          "items": [
+            {
+              "language": "en",
+              "text": "Page 4"
+            }
+          ]
+        },
+        "description": {
+          "items": [
+            {
+              "language": "en",
+              "text": ""
+            }
+          ]
+        },
+        "alias": "Page4",
+        "childNodes": []
+      }
+    ]
+  },
+  "surveySettings": {
+    "surveyTitle": "New Survey",
+    "enableBackButton": true,
+    "keyboardSupport": true,
+    "languages": [
+      "en"
+    ],
+    "defaultLanguage": "en",
+    "displayProgressBar": true,
+    "displayOneQuestionOnScreen": true
+  },
+  "createdDate": "N/A",
+  "modifiedDate": "N/A",
+  "lastPublishedDate": "N/A"
+}

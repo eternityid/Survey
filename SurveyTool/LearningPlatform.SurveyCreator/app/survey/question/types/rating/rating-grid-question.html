@@ -1,0 +1,26 @@
+﻿<p class="description-question" ng-bind-html="question.description.items[0].text | trustAsHtmlFilter"></p>
+<div class="rating-grid-question__container--view-mode">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td ng-repeat="columnTitle in gridCtrl.columnTitles">
+                    <span ng-bind-html="columnTitle.value"></span>
+                </td>
+            </tr>
+            <tr ng-repeat="rowTitle in gridCtrl.rowTitles">
+                <td>
+                    <span ng-if="!rowTitle.carryOver" ng-bind-html="rowTitle.value"></span>
+                    <span ng-if="rowTitle.carryOver && !rowTitle.isCarryOverError">
+                        Carry Over from <strong>{{rowTitle.value | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                    <span ng-if="rowTitle.carryOver && rowTitle.isCarryOverError" class="question-view__content--error">
+                        Carry Over from <strong>{{rowTitle.errorMessage | htmlToPlainTextFilter | truncateFilter:30:'...'}}</strong>
+                    </span>
+                </td>
+                <td ng-repeat="index in gridCtrl.columnTitles | limitTo: gridCtrl.columnTitles.length - 1">
+                    <span class="{{question.subQuestionDefinition.shapeName}}-empty"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

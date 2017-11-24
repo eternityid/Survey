@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87D97E61-B3CA-4457-8C1A-2061EDCC24EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LearningPlatform.Domain</RootNamespace>
+    <AssemblyName>LearningPlatform.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClearScript, Version=5.4.7.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClearScript.V8.5.4.7\lib\net40\ClearScript.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.2.4.6\lib\net46\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LearningPlatform.Data.MongoDb">
+      <HintPath>..\LearningPlatform\Bin\LearningPlatform.Data.MongoDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.0\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=7.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.7.1.2\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.4.1.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.1\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessControl\Company.cs" />
+    <Compile Include="Common\AzureStorageBlobContainerFactory.cs" />
+    <Compile Include="Common\AzureStorageService.cs" />
+    <Compile Include="Common\FileService.cs" />
+    <Compile Include="AccessControl\User.cs" />
+    <Compile Include="Common\DeepCopyByExpressionTreesExtension.cs" />
+    <Compile Include="Common\QuestionError.cs" />
+    <Compile Include="Constants\LanguageConstants.cs" />
+    <Compile Include="Constants\QuestionTypeConstants.cs" />
+    <Compile Include="Constants\QuestionValidationTypeConstants.cs" />
+    <Compile Include="DefaultData\Layouts\DefaultLayoutDefinitionFactory.cs" />
+    <Compile Include="Common\IDataSeeder.cs" />
+    <Compile Include="Libraries\FileLibrary.cs" />
+    <Compile Include="Libraries\FileLibraryBlob.cs" />
+    <Compile Include="Libraries\FileLibraryDirectory.cs" />
+    <Compile Include="Libraries\FileLibraryService.cs" />
+    <Compile Include="Libraries\Library.cs" />
+    <Compile Include="Libraries\LibraryType.cs" />
+    <Compile Include="Reporting\EsQuestionNameHelper.cs" />
+    <Compile Include="SampleData\AlphabeticalOptionOrderingSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\CarryOverOptionsSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\ComplexSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\ConditionSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\CustomNavigationTextSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\E2ESurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\LanguageSelectionSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\LoopSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\NestedLoopSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\OptionGroupSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\QuestionExpressionMaskSample.cs" />
+    <Compile Include="SampleData\RegexValidationSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\SimpleSurveyDefinitionSample.cs" />
+    <Compile Include="Exceptions\InvalidPageExeption.cs" />
+    <Compile Include="Exceptions\InvalidQuestionExeption.cs" />
+    <Compile Include="Helpers\ObjectIdHelper.cs" />
+    <Compile Include="Results\ResultElement.cs" />
+    <Compile Include="Reporting\Respondents\SurveyResultAggregatedRespondents.cs" />
+    <Compile Include="Reporting\Respondents\RespondentsReportingService.cs" />
+    <Compile Include="SampleData\SkipSurveyDefinitionSample.cs" />
+    <Compile Include="DefaultData\Templates\TemplatesForDefaultLayout.cs" />
+    <Compile Include="DefaultData\Templates\TemplatesForLayoutWithContainer.cs" />
+    <Compile Include="SampleData\TextListSurveyDefinitionSample.cs" />
+    <Compile Include="SampleData\UiTestKeyboardSurveyDefinitionSample.cs" />
+    <Compile Include="SurveyDesign\Libraries\LayoutThemeAndSurveyModel.cs" />
+    <Compile Include="SurveyDesign\LookAndFeelService.cs" />
+    <Compile Include="Common\IBulkCopyResponses.cs" />
+    <Compile Include="Common\ILanguageString.cs" />
+    <Compile Include="Common\ILanguageStringItem.cs" />
+    <Compile Include="Common\IDataMemoryAccessModule.cs" />
+    <Compile Include="Common\IUnitOfWorkFactory.cs" />
+    <Compile Include="Common\LanguageCodes.cs" />
+    <Compile Include="Common\LanguageService.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\IUnitOfWork.cs" />
+    <Compile Include="Common\MapperService.cs" />
+    <Compile Include="Common\NodeServiceMemoryCache.cs" />
+    <Compile Include="Common\Reference.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="DomainMemoryAccessModule.cs" />
+    <Compile Include="Exceptions\ConcurrencyException.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\SurveyClosedException.cs" />
+    <Compile Include="Respondents\RespondentEmailingService.cs" />
+    <Compile Include="Respondents\RespondentImportService.cs" />
+    <Compile Include="Respondents\RespondentSearchFilter.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesHelper.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\DeferredPropertyUpdates.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\ExportService.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\ImportJsonConverter.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\JsonSerializerSettingsFactory.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\ImportContractResolver.cs" />
+    <Compile Include="Common\IThreadSafeRandom.cs" />
+    <Compile Include="Common\ThreadSafeRandom.cs" />
+    <Compile Include="Common\IVersionable.cs" />
+    <Compile Include="Exceptions\InvalidDataException.cs" />
+    <Compile Include="Constants\UploadFileConstants.cs" />
+    <Compile Include="Exceptions\SurveyNotFoundException.cs" />
+    <Compile Include="ReportDesign\ElementPosition.cs" />
+    <Compile Include="ReportDesign\ElementSize.cs" />
+    <Compile Include="ReportDesign\IReportDefinitionRepository.cs" />
+    <Compile Include="ReportDesign\IReportElementDefinitionRepository.cs" />
+    <Compile Include="ReportDesign\ReportEditedLabel\IReportEditedLabelDefinitionRepository.cs" />
+    <Compile Include="ReportDesign\ReportEditedLabel\ReportEditedLabelDefinition.cs" />
+    <Compile Include="ReportDesign\ReportEditedLabel\ReportEditedLabelType.cs" />
+    <Compile Include="ReportDesign\ReportElementDefinitionService.cs" />
+    <Compile Include="ReportDesign\ReportElements\ReportChartElement.cs" />
+    <Compile Include="ReportDesign\ReportEditedLabel\ReportEditedLabelDefinitionService.cs" />
+    <Compile Include="ReportDesign\ReportElements\ReportElementHasQuestion.cs" />
+    <Compile Include="ReportDesign\ReportElements\ReportTableElement.cs" />
+    <Compile Include="ReportDesign\ReportElements\ReportTextElement.cs" />
+    <Compile Include="ReportDesign\ReportType.cs" />
+    <Compile Include="ReportDesign\ReportDefinitionService.cs" />
+    <Compile Include="ReportDesign\ReportChartType.cs" />
+    <Compile Include="ReportDesign\ReportElementDefinition.cs" />
+    <Compile Include="ReportDesign\ReportDefinition.cs" />
+    <Compile Include="ReportDesign\ReportPageDefinition.cs" />
+    <Compile Include="Reporting\IElasticSearchReportingClient.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedOpenQuestionFactory.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedNumericQuestionFactory.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedOptionQuestionFactory.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedQuestionSetting.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedSelectionGridQuestion.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedSelectionGridQuestionFactory.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedQuestionFactory.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedNumericQuestion.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedOption.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedOpenQuestion.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedOptionQuestion.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedQuestion.cs" />
+    <Compile Include="Reporting\Respondents\QuestionType.cs" />
+    <Compile Include="Reporting\Respondents\AggregatedRespondents.cs" />
+    <Compile Include="Respondents\RespondentUrlService.cs" />
+    <Compile Include="SurveyDesign\FileUpload.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\ExportJsonConverter.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\TypeTokenUpdater.cs" />
+    <Compile Include="SurveyDesign\IUploadFileService.cs" />
+    <Compile Include="SurveyDashboard\SurveyDashboardService.cs" />
+    <Compile Include="SurveyDashboard\SurveyDashboard.cs" />
+    <Compile Include="SurveyDashboard\ResponsesTrend.cs" />
+    <Compile Include="SurveyDashboard\ResponsesPoint.cs" />
+    <Compile Include="SurveyDesign\MoveReportPage.cs" />
+    <Compile Include="SurveyDesign\Pages\PageType.cs" />
+    <Compile Include="SurveyDesign\ProgressService.cs" />
+    <Compile Include="SurveyDesign\Questions\IPictureSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\LanguageSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\ScaleGridQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\ScaleQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\LongTextListQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\OptionGroupService.cs" />
+    <Compile Include="SurveyDesign\Questions\Services\PictureQuestionService.cs" />
+    <Compile Include="SurveyDesign\Questions\QuestionAlias.cs" />
+    <Compile Include="SurveyDesign\Questions\MultipleSelectionGridQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\NetPromoterScoreQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\OpenEndedLongTextQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\OpenEndedShortTextQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\OptionGroup.cs" />
+    <Compile Include="SurveyDesign\Questions\PictureMultipleSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\PictureSingleSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\RatingGridQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\RatingQuestionDefinition.cs" />
+    <Compile Include="ReportDesign\IReportPageDefinitionRepository.cs" />
+    <Compile Include="SurveyDesign\Questions\ShortTextListQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\SingleSelectionGridQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ICompanyRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ILibraryNodeRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ILibraryQuestionRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ILibraryRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ILibrarySurveyRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\INodeRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ISkipCommandRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IExpressionRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IThemeRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IUserRepository.cs" />
+    <Compile Include="SurveyDesign\Services\Folders\ReadFolderService.cs" />
+    <Compile Include="SurveyDesign\Services\Libraries\ReadLibraryService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\DeleteLibraryPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\DeletePageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\DuplicateLibraryPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\DuplicatePageFromLibraryService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\DynamicPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\InsertLibraryPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\InsertPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\MergePageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\MovePageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\ReadPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\SplitPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\UpdatePageService.cs" />
+    <Compile Include="SurveyDesign\Services\Page\ValidatePageService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\AliasQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\QuestionWithOptionsService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\InsertLibraryQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\InsertQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\DeleteQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\MoveQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\ReadQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\UpdateQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Question\ValidateQuestionService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\DeleteSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\DuplicateSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\ExportSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\ImportSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\IReadSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\EnsureSurveyObjectIdsService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\InsertSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\LibraryPreviewerService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\LibraryPageService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\LibrarySurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\NodeHierarchyBuilder.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\MapSurveyObjectIdsService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\OverrideSurveyObjectIdsService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\ReadSurveyMemoryService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\ReadSurveyService.cs" />
+    <Compile Include="SurveyDesign\Services\Survey\ValidateSurveyService.cs" />
+    <Compile Include="SurveyDesign\SurveyAccessRights.cs" />
+    <Compile Include="SurveyDesign\Surveys\SurveyStatusFilter.cs" />
+    <Compile Include="SurveyDesign\Surveys\SurveySearchFilter.cs" />
+    <Compile Include="Resources\IResourceManager.cs" />
+    <Compile Include="Common\JsonSerializerSettingsFactory.cs" />
+    <Compile Include="Common\DummyRequestObjectProvider.cs" />
+    <Compile Include="SurveyDesign\ImportExportSurveyDefinition\ExportContractResolver.cs" />
+    <Compile Include="Resources\SurveyResourceManager.cs" />
+    <Compile Include="Common\SurveyConstants.cs" />
+    <Compile Include="SurveyDesign\Surveys\SurveyStatus.cs" />
+    <Compile Include="Common\TypeNameSerializationBinder.cs" />
+    <Compile Include="Constants\ValidationConstants.cs" />
+    <Compile Include="Resources\ResourceStringItem.cs" />
+    <Compile Include="Resources\ResourceString.cs" />
+    <Compile Include="Common\DisplayOrientation.cs" />
+    <Compile Include="SurveyDesign\Expressions\Expression.cs" />
+    <Compile Include="SurveyDesign\Expressions\ExpressionItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SurveyDesign\Expressions\ExpressionLogicalOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SurveyDesign\Expressions\ExpressionOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SurveyDesign\Expressions\ExpressionFactory.cs" />
+    <Compile Include="SurveyDesign\UploadFileService.cs" />
+    <Compile Include="SurveyDesign\UploadThemeService.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesSeparator.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesGeneralFields.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesInclude.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesReadingMode.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesSettings.cs" />
+    <Compile Include="SurveyDesign\ExportResponses\ExportResponsesService.cs" />
+    <Compile Include="SurveyDesign\ValidationResult.cs" />
+    <Compile Include="SurveyDesign\Validation\MinMaxValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\DecimalPlacesNumberValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\RegularExpressionValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\RangeNumberValidation.cs" />
+    <Compile Include="SurveyExecution\Engine\NavigationButtonService.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\AnswerGeneratorService.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\RandomDataGeneratorHelper.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\IAnswerGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\DateQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\NumericQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\OpenEndedTextQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\GridQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\RandomDataGeneratorService.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\RandomDataGeneratorSettings.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\SingleSelectionQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\MultipleSelectionQuestionGenerator.cs" />
+    <Compile Include="SurveyExecution\Engine\RandomDataGenerator\RandomDataGenerator.cs" />
+    <Compile Include="Respondents\RespondentDetail.cs" />
+    <Compile Include="SurveyExecution\Engine\RequestInitializer.cs" />
+    <Compile Include="SurveyExecution\Engine\RespondentService.cs" />
+    <Compile Include="SurveyExecution\Engine\SingleSignOnService.cs" />
+    <Compile Include="SurveyExecution\Options\OptionGroup.cs" />
+    <Compile Include="SurveyExecution\Options\OptionGroupService.cs" />
+    <Compile Include="SurveyExecution\ProgressState.cs" />
+    <Compile Include="SurveyExecution\Questions\IPictureSelectionQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\LanguageSelectionQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\ScaleGridQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\ScaleQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\LongTextListQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\MultipleSelectionGridQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\NetPromoterScoreQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\OpenEndedLongTextQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\OpenEndedShortTextQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\PictureMultipleSelectionQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\PictureSingleSelectionQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\QuestionAnswerService.cs" />
+    <Compile Include="SurveyExecution\Questions\QuestionMapperService.cs" />
+    <Compile Include="SurveyExecution\Questions\RatingGridQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\ShortTextListQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\SingleSelectionGridQuestion.cs" />
+    <Compile Include="SurveyExecution\Request\RequestContextFactory.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\LanguageResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\Scripting\ExpressionBuilderState.cs" />
+    <Compile Include="SurveyExecution\Scripting\LoopHostObject.cs" />
+    <Compile Include="SurveyExecution\Scripting\QuestionHostObject.cs" />
+    <Compile Include="SurveyExecution\Scripting\JavascriptPropertyBag.cs" />
+    <Compile Include="SurveyExecution\Scripting\RespondentHostObject.cs" />
+    <Compile Include="SurveyExecution\Scripting\StringListConverter.cs" />
+    <Compile Include="SurveyExecution\StandardPageFactory.cs" />
+    <Compile Include="SurveyExecution\Scripting\IExpressionBuilder.cs" />
+    <Compile Include="SurveyExecution\Scripting\JavascriptExpressionBuilder.cs" />
+    <Compile Include="SurveyExecution\TableLayout\ListButtonCell.cs" />
+    <Compile Include="SurveyExecution\TableLayout\RatingCell.cs" />
+    <Compile Include="SurveyExecution\TableLayout\OpenEndedTextCell.cs" />
+    <Compile Include="SurveyExecution\Validators\DecimalPlacesNumberValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\RangeNumberValidator.cs" />
+    <Compile Include="SurveyLayout\SurveyProgressTemplate.cs" />
+    <Compile Include="SurveyThemes\ThemeAdvance.cs" />
+    <Compile Include="SurveyThemes\Theme.cs" />
+    <Compile Include="SurveyDesign\NavigationButtonSettings.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\IHasOptions.cs" />
+    <Compile Include="Resources\IResourceStringRepository.cs" />
+    <Compile Include="SurveyDesign\INodeService.cs" />
+    <Compile Include="SurveyDesign\FlowLogic\LoopDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\OptionsMaskType.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\OptionsMask.cs" />
+    <Compile Include="SurveyDesign\Questions\Services\ReadQuestionService.cs" />
+    <Compile Include="SurveyDesign\FlowLogic\SkipCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SurveyDesign\SurveyInfo.cs" />
+    <Compile Include="SurveyDesign\Validation\LengthValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\SelectionValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\WordsAmountValidation.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IRespondentRepository.cs" />
+    <Compile Include="SurveyExecution\Engine\PageService.cs" />
+    <Compile Include="SurveyExecution\Questions\RatingQuestion.cs" />
+    <Compile Include="SurveyExecution\Request\IRequestContext.cs" />
+    <Compile Include="SurveyExecution\Engine\LoopService.cs" />
+    <Compile Include="SurveyExecution\Options\OptionsService.cs" />
+    <Compile Include="Mappings\DomainAutoMapperProfile.cs" />
+    <Compile Include="Common\IPosition.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\Option.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IOptionListRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ILanguageStringRepository.cs" />
+    <Compile Include="SurveyDesign\SurveyDesign.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IQuestionDefinitionRepository.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IQuestionValidationRepository.cs" />
+    <Compile Include="SurveyDesign\LanguageStrings\LanguageString.cs" />
+    <Compile Include="SurveyDesign\LanguageStrings\LanguageStringItem.cs" />
+    <Compile Include="SurveyDesign\NodeService.cs" />
+    <Compile Include="Respondents\ResponseStatus.cs" />
+    <Compile Include="SurveyDesign\SurveySettings.cs" />
+    <Compile Include="SurveyDesign\Validation\RequiredValidation.cs" />
+    <Compile Include="SurveyDesign\Validation\QuestionValidation.cs" />
+    <Compile Include="SurveyExecution\Engine\ExecuteCommands\ConditionExecuteCommand.cs" />
+    <Compile Include="SurveyExecution\Questions\IQuestionFactory.cs" />
+    <Compile Include="SurveyExecution\Engine\INodeServiceCache.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\IPageDefinitionRepository.cs" />
+    <Compile Include="SurveyExecution\Engine\NodeServiceCache.cs" />
+    <Compile Include="Respondents\SearchCondition.cs" />
+    <Compile Include="SurveyExecution\Scripting\ExpressionQueryBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SurveyExecution\Questions\ISelectableQuestion.cs" />
+    <Compile Include="SurveyExecution\Questions\MultipleSelectionAnswer.cs" />
+    <Compile Include="SurveyExecution\Questions\OtherQuestion.cs" />
+    <Compile Include="SurveyExecution\TableLayout\Row.cs" />
+    <Compile Include="SurveyExecution\TableLayout\RadioButton.cs" />
+    <Compile Include="SurveyExecution\Validators\WordsAmountValidator.cs" />
+    <Compile Include="SurveyExecution\Request\RequestContextWrapper.cs" />
+    <Compile Include="Respondents\RespondentService.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\IResponseRowFactory.cs" />
+    <Compile Include="SurveyExecution\Questions\QuestionFactory.cs" />
+    <Compile Include="SurveyExecution\Engine\INodeExecutor.cs" />
+    <Compile Include="SurveyExecution\Engine\NodeExecutor.cs" />
+    <Compile Include="SurveyExecution\Engine\ExecuteCommands\FolderExecuteCommand.cs" />
+    <Compile Include="SurveyExecution\Engine\ExecuteCommands\GoToFolderExecuteCommand.cs" />
+    <Compile Include="SurveyExecution\Engine\ExecuteCommands\IExecuteCommand.cs" />
+    <Compile Include="SurveyExecution\Engine\ExecuteCommands\ScriptExecuteCommand.cs" />
+    <Compile Include="SurveyExecution\Engine\NodeCursor.cs" />
+    <Compile Include="SurveyExecution\NavigationButtons.cs" />
+    <Compile Include="SurveyExecution\Direction.cs" />
+    <Compile Include="SurveyExecution\Request\RequestContext.cs" />
+    <Compile Include="Respondents\Respondent.cs" />
+    <Compile Include="SurveyExecution\OrderedList.cs" />
+    <Compile Include="SurveyExecution\Options\Option.cs" />
+    <Compile Include="SurveyDesign\FlowLogic\Condition.cs" />
+    <Compile Include="SurveyDesign\Folder.cs" />
+    <Compile Include="SurveyDesign\Node.cs" />
+    <Compile Include="SurveyDesign\FlowLogic\GoToFolder.cs" />
+    <Compile Include="Common\IFixedPosition.cs" />
+    <Compile Include="SurveyExecution\EvaluationString.cs" />
+    <Compile Include="Common\OrderType.cs" />
+    <Compile Include="SurveyDesign\Pages\PageDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\QuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Survey.cs" />
+    <Compile Include="SurveyExecution\Validators\EqualToValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\ExclusiveValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\IPageValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\LengthValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\NumberValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\PageValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\QuestionValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\RegularExpressionValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\RequiredValidator.cs" />
+    <Compile Include="SurveyExecution\Validators\SelectionValidator.cs" />
+    <Compile Include="SurveyExecution\TableLayout\ITableRenderer.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\LoopState.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\LoopStateItem.cs" />
+    <Compile Include="SurveyExecution\Scripting\IHostObject.cs" />
+    <Compile Include="SurveyExecution\Scripting\NoOperationHostObject.cs" />
+    <Compile Include="SurveyExecution\Security\CredentialGenerator.cs" />
+    <Compile Include="SurveyExecution\RepositoryContracts\IResponseRowRepository.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\ResponseRowFactory.cs" />
+    <Compile Include="SurveyExecution\Request\RequestState.cs" />
+    <Compile Include="SurveyDesign\Questions\Options\OptionList.cs" />
+    <Compile Include="SurveyExecution\PageFactory.cs" />
+    <Compile Include="SurveyExecution\Questions\IQuestionService.cs" />
+    <Compile Include="SurveyDesign\RepositoryContracts\ISurveyRepository.cs" />
+    <Compile Include="SurveyExecution\RepositoryContracts\IRespondentSurveyExecutionRepository.cs" />
+    <Compile Include="SurveyExecution\Questions\QuestionService.cs" />
+    <Compile Include="SurveyExecution\Scripting\StringListExtensionMethods.cs" />
+    <Compile Include="SurveyExecution\Scripting\IScriptCodeReader.cs" />
+    <Compile Include="SurveyExecution\Scripting\IScriptExecutor.cs" />
+    <Compile Include="SurveyExecution\Scripting\ScriptCodeReader.cs" />
+    <Compile Include="SurveyExecution\Scripting\ScriptExecutor.cs" />
+    <Compile Include="DomainModule.cs" />
+    <Compile Include="SurveyExecution\Scripting\HostObject.cs" />
+    <Compile Include="SurveyExecution\Engine\SkipService.cs" />
+    <Compile Include="SurveyExecution\Request\SkipStack.cs" />
+    <Compile Include="SurveyExecution\Request\SkipPoint.cs" />
+    <Compile Include="SurveyExecution\Engine\StateRestorer.cs" />
+    <Compile Include="SurveyDesign\Questions\DateQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Questions\MatrixQuestionDefinition.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\NumberResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\GridResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\DateResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\OpenResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\AnswerType.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\MultiResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\ResponseRow.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\ResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\MatrixResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\ResponseRows\SingleResponseRowFactoryCommand.cs" />
+    <Compile Include="SurveyExecution\TableLayout\CheckBox.cs" />
+    <Compile Include="SurveyExecution\TableLayout\DateCell.cs" />
+    <Compile Include="SurveyExecution\TableLayout\Table.cs" />
+    <Compile Include="SurveyExecution\Questions\MatrixQuestion.cs" />
+    <Compile Include="SurveyExecution\TableLayout\ITableCell.cs" />
+    <Compile Include="SurveyExecution\TableLayout\LabelCell.cs" />
+    <Compile Include="SurveyExecution\Questions\GridQuestion.cs" />
+    <Compile Include="SurveyDesign\Questions\GridQuestionDefinition.cs" />
+    <Compile Include="SurveyDesign\Script.cs" />
+    <Compile Include="SurveyExecution\Options\IOptions.cs" />
+    <Compile Include="SurveyExecution\Questions\DateQuestion.cs" />
+    <Compile Include="SurveyExecution\TableLayout\NumberCell.cs" />
+    <Compile Include="SurveyExecution\Questions\Question.cs" />
+    <Compile Include="SurveyExecution\Questions\QuestionWithOptions.cs" />
+    <Compile Include="SurveyExecution\TableLayout\CheckedItem.cs" />
+    <Compile Include="SurveyExecution\TableLayout\TextCell.cs" />
+    <Compile Include="SurveyExecution\Security\ProtectedVariables.cs" />
+    <Compile Include="SurveyExecution\Security\VariablesProtector.cs" />
+    <Compile Include="SurveyDesign\LanguageStrings\LanguageStringFactory.cs" />
+    <Compile Include="SurveyExecution\Questions\Information.cs" />
+    <Compile Include="SurveyDesign\Questions\InformationDefinition.cs" />
+    <Compile Include="SurveyExecution\Page.cs" />
+    <Compile Include="SurveyExecution\Engine\IPageExecutor.cs" />
+    <Compile Include="Common\Enumerator.cs" />
+    <Compile Include="Common\IRequestObjectProvider.cs" />
+    <Compile Include="SurveyDesign\Questions\MultipleSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyExecution\Questions\MultipleSelectionQuestion.cs" />
+    <Compile Include="SurveyDesign\Questions\NumericQuestionDefinition.cs" />
+    <Compile Include="SurveyExecution\Questions\NumericQuestion.cs" />
+    <Compile Include="SurveyDesign\Questions\OpenEndedTextQuestionDefinition.cs" />
+    <Compile Include="SurveyExecution\Questions\OpenEndedTextQuestion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurveyDesign\Questions\QuestionWithOptionsDefinition.cs" />
+    <Compile Include="SurveyExecution\Questions\SingleSelectionQuestion.cs" />
+    <Compile Include="SurveyDesign\Questions\SingleSelectionQuestionDefinition.cs" />
+    <Compile Include="SurveyExecution\Engine\PageExecutor.cs" />
+    <Compile Include="SurveyExecution\Request\GoToFolderStack.cs" />
+    <Compile Include="SurveyExecution\Engine\SurveyExecutor.cs" />
+    <Compile Include="Common\RequestObjectProvider.cs" />
+    <Compile Include="SurveyLayout\BodyTemplate.cs" />
+    <Compile Include="SurveyLayout\ILayoutRepository.cs" />
+    <Compile Include="SurveyLayout\Layout.cs" />
+    <Compile Include="SurveyLayout\PageErrorAreaTemplate.cs" />
+    <Compile Include="SurveyLayout\PageErrorTemplate.cs" />
+    <Compile Include="SurveyLayout\QuestionErrorAreaTemplate.cs" />
+    <Compile Include="SurveyLayout\QuestionErrorTemplate.cs" />
+    <Compile Include="SurveyLayout\TemplateItem.cs" />
+    <Compile Include="SurveyLayout\ItemType.cs" />
+    <Compile Include="SurveyLayout\OtherQuestionTemplate.cs" />
+    <Compile Include="SurveyLayout\PageTemplate.cs" />
+    <Compile Include="SurveyLayout\QuestionTemplate.cs" />
+    <Compile Include="SurveyLayout\Template.cs" />
+    <Compile Include="SurveyPublishing\ISurveyVersionRepository.cs" />
+    <Compile Include="SurveyPublishing\SurveyAndLayout.cs" />
+    <Compile Include="SurveyPublishing\PublishingService.cs" />
+    <Compile Include="SurveyPublishing\SurveyVersion.cs" />
+    <Compile Include="SurveyThemes\ThemeService.cs" />
+    <Compile Include="SurveyThemes\ThemeType.cs" />
+    <Compile Include="UtilServices\CalculatingService.cs" />
+    <Compile Include="UtilServices\ColorUtilService.cs" />
+    <Compile Include="UtilServices\CsvService.cs" />
+    <Compile Include="UtilServices\EmailService.cs" />
+    <Compile Include="ValueObjects\CsvData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Licenses\ClearScript.main.license" />
+    <None Include="Licenses\v8.main.license" />
+    <None Include="Licenses\v8.strongtalk.license" />
+    <None Include="Licenses\v8.v8.license" />
+    <None Include="Licenses\v8.valgrind.license" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SurveyExecution\Scripting\javascriptGlobalFunctions.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SampleData\Layouts\" />
+    <Folder Include="SurveyDesign\Services\Page\Models\" />
+    <Folder Include="SurveyDesign\Themes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\x86\*.*" "$(TargetDir)"
+if not exist "$(TargetDir)" md "$(TargetDir)"
+xcopy /s /y "$(SolutionDir)packages\ClearScript.V8.5.4.7\tools\native\amd64\*.*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
