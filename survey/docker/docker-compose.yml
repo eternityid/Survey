@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  analyze.service:
+    image: analyze.service
+    build:
+      context: ../Analyze
+      dockerfile: ./Analyze.Service/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  analyze.mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    env_file: ./mongo/.env
+    volumes:
+      - analyze-mongo-db:/data/db
+      - analyze-mongo-configdb:/data/configdb
+
+  analyze.nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    links:
+      - analyze.service
+
+
+volumes:
+  analyze-mongo-db:
+  analyze-mongo-configdb:
